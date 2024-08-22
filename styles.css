@@ -1,0 +1,171 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 5px;
+    text-align: center;
+}
+
+.banner-content {
+    text-align: center;
+}
+
+.banner .logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 0px;
+  
+}
+
+.banner-text h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.banner-text h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.banner-text p {
+    margin: 5px 0 0;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.categorias {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    flex-wrap: wrap; /* Permite que los botones se acomoden en múltiples filas si es necesario */
+}
+
+.categorias button {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 15px 20px;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.5s ease;
+    flex: 1; /* Permite que los botones crezcan para llenar el espacio disponible */
+    max-width: 200px; /* Limita el ancho máximo de los botones */
+}
+
+.categorias button:hover {
+    background-color: #202020;
+    color: #f7d700;
+}
+ 
+/* Estilos para la disposición del catálogo */
+.catalogo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Por defecto, dos columnas */
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.producto {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.producto img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.producto img:hover {
+    transform: scale(1.05);
+}
+
+.titulo-producto {
+    color: #333;
+    font-size: 1.2rem;
+    margin: 15px 0 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.titulo-producto:hover {
+    color: #007BFF;
+}
+
+.producto p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Estilo para el precio */
+.precio {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: red !important;
+    margin-top: 10px;
+}
+
+/* Media queries para dispositivos pequeños */
+@media (max-width: 768px) {
+    .catalogo {
+        grid-template-columns: repeat(1, 1fr); /* Dos columnas en dispositivos pequeños */
+    }
+
+    .categorias {
+        flex-direction: row; /* Las categorías se apilan verticalmente en pantallas pequeñas */
+    }
+
+    .categorias button {
+        max-width: 25%; /* Los botones ocupan todo el ancho disponible en pantallas pequeñas */
+    }
+}
+
+/* Media queries para pantallas grandes */
+@media (min-width: 769px) {
+    .catalogo {
+        grid-template-columns: repeat(3, 1fr); /* Cuatro columnas en pantallas grandes */
+    }
+
+    .categorias {
+        flex-direction: row; /* Las categorías se alinean horizontalmente en pantallas grandes */
+    }
+
+    .categorias button {
+        max-width: 150px; /* Los botones tienen un ancho máximo fijo en pantallas grandes */
+    }
+}
+
+/* Estilos para las imágenes de productos */
+.producto img {
+    width: 100%; /* El ancho de la imagen ocupa el 100% del contenedor */
+    height: 300px; /* Ajusta la altura fija de la imagen */
+    object-fit: cover; /* Mantiene la relación de aspecto de la imagen y cubre el área del contenedor */
+    border-radius: 15px;
+    margin: 5px; /* Espaciado entre imágenes */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.producto img:hover {
+    transform: scale(1.05);
+}
+
