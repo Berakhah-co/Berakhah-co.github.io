@@ -1,15 +1,18 @@
+/* Importar la fuente Roboto Slab desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto Slab', serif; /* Aplicar la fuente Roboto Slab */
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #faf6f6;
 }
 
 .banner {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #333;
+    background-color: #000000;
     color: white;
     padding: 5px;
     text-align: center;
@@ -20,15 +23,16 @@ body {
 }
 
 .banner .logo {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    margin-bottom: 0px;
+    margin-bottom: -30px;
+    margin-top: -25px;
   
 }
 
 .banner-buttons {
-    margin-top: 2px; /* Espacio entre el texto y los botones */
+    margin-top: 0px; /* Espacio entre el texto y los botones */
 }
 
 .button {
