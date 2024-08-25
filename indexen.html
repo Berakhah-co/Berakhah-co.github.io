@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" href="Logo.jpg" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Productos - Berakhah</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Banner -->
+    <header class="banner">
+        <div class="banner-content">
+            <img src="Logo.jpg" alt="Logo de Berakhah" class="logo">
+            <div class="banner-text">
+                <h1>Berakhah</h1>
+                <h2>Valley of Blessing</h2>
+                <p>In Berakhah, you'll find accessories with meaning and purpose. 💖 Do you have yours yet?</p>
+            </div>
+            <div class="banner-buttons">
+                <a href="indexen.html" class="button">English</a>
+                <a href="index.html" class="button">Español</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Categorías -->
+    <div class="categorias">
+        <button onclick="mostrarCategoria('todo')">All</button>
+        <button onclick="mostrarCategoria('collares')">Necklaces</button>
+        <button onclick="mostrarCategoria('pulseras')">Bracelets</button>
+        <button onclick="mostrarCategoria('anillos')">Rings</button>
+        <button onclick="mostrarCategoria('tendrils')">Tendrils</button>
+        <button onclick="mostrarCategoria('caballeros')">Men</button>
+    </div>
+
+    <!-- Catálogo de Productos -->
+    <main class="catalogo" id="catalogo">
+
+
+        <!-- Ejemplo de producto - Categoria Collares -->
+
+        <div class="producto" data-categoria="collares">
+            <a href="Collares\Jesus.jpg" target="_blank">
+                <img src="Collares\Jesus.jpg" alt="Berakhah B-11">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-11')">Berakhah B-11</h3>
+            <p>John 3:17 "For God did not send His Son into the world to condemn the world, but that the world through Him might be saved."</p>
+            <p class="precio">6$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-11')">¡I want it!</h3>
+        </div>
+
+
+        <div class="producto" data-categoria="collares">
+            <a href="Collares\FeCorazon.jpg" target="_blank">
+                <img src="Collares\FeCorazon.jpg" alt="Berakhah B-6">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-6')">Berakhah B-6</h3>
+            <p>Hebrews 11:1 "Now faith is the substance of things hoped for, the evidence of things not seen." </p>
+            <p class="precio">5$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-6')">¡I want it!</h3>
+        </div> 
+
+        <div class="producto" data-categoria="collares">
+            <a href="Collares\Vida.jpg" target="_blank">
+                <img src="Collares\Vida.jpg" alt="Berakhah B-4">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-4')">Berakhah B-4</h3>
+            <p>John 14:6 "Jesus said to him, 'I am the way, the truth, and the life. No one comes to the Father except through Me.'".</p>
+            <p class="precio">7$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-4')">¡I want it!</h3>
+        </div> 
+
+        <div class="producto" data-categoria="collares">
+            <a href="Collares\Fe.jpg" target="_blank">
+                <img src="Collares\Fe.jpg" alt="Berakhah B-5">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-5')">Berakhah B-5</h3>
+            <p>Hebrews "By faith Sarah herself also received strength to conceive seed, and she bore a child when she was past the age, because she judged Him faithful who had promised."</p>
+            <p class="precio">5$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-5')">¡I want it!</h3>
+        </div> 
+
+        <div class="producto" data-categoria="collares">
+            <a href="Collares\Oso.jpg" target="_blank">
+                <img src="Collares\Oso.jpg" alt="Berakhah B-15">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-15')">Berakhah B-15</h3>
+            <p>Isaiah  41:13 "For I, the LORD your God, will hold your right hand, saying to you, 'Fear not, I will help you."</p>
+            <p class="precio">6$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-15')">¡I want it!</h3>
+        </div> 
+
+        <div class="producto" data-categoria="collares">
+            <a href="Collares\Paz.jpg" target="_blank">
+                <img src="Collares\Paz.jpg" alt="Berakhah B-10">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-10')">Berakhah B-10</h3>
+            <p>John 14:27 "Peace I leave with you, My peace I give to you; not as the world gives do I give to you. Let not your heart be troubled, neither let it be afraid."</p>
+            <p class="precio">5$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-10')">¡I want it!</h3>
+        </div> 
+
+        <div class="producto" data-categoria="collares">
+            <a href="Collares\Dios.jpg" target="_blank">
+                <img src="Collares\Dios.jpg" alt="Berakhah B-2">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-2')">Berakhah B-2</h3>
+            <p>John 3:16 "For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life."</p>
+            <p class="precio">5$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-2')">¡I want it!</h3>
+        </div> 
+
+        <div class="producto" data-categoria="collares">
+            <a href="Collares\Maranatha.jpg" target="_blank">
+                <img src="Collares\Maranatha.jpg" alt="Berakhah B-24">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-24')">Berakhah B-24</h3>
+            <p>Revelation 22:17 "And the Spirit and the bride say, 'Come!' And let him who hears say, 'Come!' And let him who thirsts come. Whoever desires, let him take the water of life freely."</p>
+            <p class="precio">8$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-24')">¡I want it!</h3>
+        </div> 
+
+        <div class="producto" data-categoria="collares">
+            <a href="Collares\Vida2.jpg" target="_blank">
+                <img src="Collares\Vida2.jpg" alt="Berakhah B-">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-4')">Berakhah B-4</h3>
+            <p>John 14:6 "Jesus said to him, 'I am the way, and the truth, and the life. No one comes to the Father except through me."</p>
+            <p class="precio">7$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-4')">¡I want it!</h3>
+        </div> 
+
+        <!-- Ejemplo de producto - Categoria Pulseras -->
+
+        <div class="producto" data-categoria="pulseras">
+            <a href="Pulseras\Cruz-1.jpg" target="_blank">
+                <img src="Pulseras\Cruz-1.jpg" alt="Berakhah B-12">
+            </a>
+            <a href="Pulseras\Cruz1.jpg" target="_blank">
+                <img src="Pulseras\Cruz1.jpg" alt="Berakhah B-12">
+            </a>
+            
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-12')">Berakhah B-12</h3>
+            <p>Mark  16:15 "And He said to them, 'Go into all the world and preach the gospel to every creature."</p>
+            <p class="precio">6$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-12')">¡I want it!</h3>
+        </div>
+
+        
+        <div class="producto" data-categoria="pulseras">
+            <a href="Pulseras\Corazon-2.jpg" target="_blank">
+                <img src="Pulseras\Corazon-2.jpg" alt="Berakhah B-3">
+            </a>
+            <a href="Pulseras\Corazon2.jpg" target="_blank">
+                <img src="Pulseras\Corazon2.jpg" alt="Berakhah B-3">
+            </a>
+            
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-3')">Berakhah B-3</h3>
+            <p>Isaiah 1:18 "'Come now, and let us reason together,' says the LORD, 'Though your sins are like scarlet, they shall be as white as snow; though they are red like crimson, they shall be as wool."</p>
+            <p class="precio">5$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-3')">¡I want it!</h3>
+        </div>
+
+
+        <div class="producto" data-categoria="pulseras">
+            <a href="Pulseras\Arbol-1.jpg" target="_blank">
+                <img src="Pulseras\Arbol-1.jpg" alt="Berakhah B-1">
+            </a>
+            <a href="Pulseras\Arbol1.jpg" target="_blank">
+                <img src="Pulseras\Arbol1.jpg" alt="Berakhah B-1">
+            </a>
+            
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-1')">Berakhah B-1</h3>
+            <p>Psalm  1:3 "He shall be like a tree planted by the rivers of water, that brings forth its fruit in its season, whose leaf also shall not wither; and whatever he does shall prosper."</p>
+            <p class="precio">5$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-1')">¡I want it!</h3>
+        </div>
+
+
+        <div class="producto" data-categoria="pulseras">
+            <a href="Pulseras\Corazon-1.jpg" target="_blank">
+                <img src="Pulseras\Corazon-1.jpg" alt="Berakhah B-8">
+            </a>
+            <a href="Pulseras\Corazon1.jpg" target="_blank">
+                <img src="Pulseras\Corazon1.jpg" alt="Berakhah B-8">
+            </a>
+            
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-8')">Berakhah B-8</h3>
+            <p>Proverbs  4:23 "Keep your heart with all diligence, for out of it spring the issues of life."</p>
+            <p class="precio">5$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-8')">¡I want it!</h3>
+        </div>
+
+
+        <div class="producto" data-categoria="pulseras">
+            <a href="Pulseras\Fe-1.jpg" target="_blank">
+                <img src="Pulseras\Fe-1.jpg" alt="Berakhah B-7">
+            </a>
+            <a href="Pulseras\Fe1.jpg" target="_blank">
+                <img src="Pulseras\Fe1.jpg" alt="Berakhah B-7">
+            </a>
+            
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-7')">Berakhah B-7</h3>
+            <p>Mark  11:24 "Therefore I say to you, whatever things you ask when you pray, believe that you receive them, and you will have them."</p>
+            <p class="precio">6$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-7')">¡I want it!</h3>
+        </div>
+
+        <div class="producto" data-categoria="pulseras">
+            <a href="Pulseras\Cruz-3.jpg" target="_blank">
+                <img src="Pulseras\Cruz-3.jpg" alt="Berakhah B-9">
+            </a>
+            <a href="Pulseras\Cruz3.jpg" target="_blank">
+                <img src="Pulseras\Cruz3.jpg" alt="Berakhah B-9">
+            </a>
+            
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-9')">Berakhah B-9</h3>
+            <p>Romans  1:16 "For I am not ashamed of the gospel of Christ, for it is the power of God to salvation for everyone who believes, for the Jew first and also for the Greek."</p>
+            <p class="precio">6$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-9')">¡I want it!</h3>
+        </div>
+
+        <div class="producto" data-categoria="pulseras">
+            <a href="Pulseras\Dios1.jpg" target="_blank">
+                <img src="Pulseras\Dios1.jpg" alt="Berakhah B-25">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-25')">Berakhah B-25</h3>
+            <p>Isaiah 41:13 "For I, the Lord your God, hold your right hand; it is I who say to you, 'Fear not, I am the one who helps you."</p>
+            <p class="precio">5$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-25')">¡I want it!</h3>
+        </div>
+
+
+        <!-- Ejemplo de producto - Categoria Anillos -->
+
+        <div class="producto" data-categoria="anillos">
+            <a href="Anillos\Corazon-1.jpg"" target="_blank">
+                <img src="Anillos\Corazon-1.jpg" alt="Berakhah B-16">
+            </a>
+            <a href="Anillos\Corazon1.jpg" target="_blank">
+                <img src="Anillos\Corazon1.jpg" alt="Berakhah B-16">
+            </a>
+            <a href="Anillos\Corazon2.jpg" target="_blank">
+                <img src="Anillos\Corazon2.jpg" alt="Berakhah B-16">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-16')">Berakhah B-16</h3>
+            <p>Song of Solomon 8:6 "Set me as a seal upon your heart, as a seal upon your arm, for love is as strong as death."</p>
+            <p class="precio">6$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-16')">¡I want it!</h3>
+        </div>
+
+
+        <div class="producto" data-categoria="anillos">
+            <a href="Anillos\hojas1.jpg"" target="_blank">
+                <img src="Anillos\hojas1.jpg" alt="Berakhah B-17">
+            </a>
+            <a href="Anillos\Hojas12.jpg" target="_blank">
+                <img src="Anillos\Hojas12.jpg" alt="Berakhah B-17">
+            </a>
+            <a href="Anillos\Holas-1.jpg" target="_blank">
+                <img src="Anillos\Holas-1.jpg" alt="Berakhah B-17">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-17')">Berakhah B-17</h3>
+            <p>Psalm 92:2 "The righteous will flourish like a palm tree, they will grow like a cedar of Lebanon.".</p>
+            <p class="precio">6$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-17')">¡I want it!</h3>
+        </div>
+
+        <div class="producto" data-categoria="anillos">
+            <a href="Anillos\Cruz1.jpg"" target="_blank">
+                <img src="Anillos\Cruz1.jpg" alt="Berakhah B-18">
+            </a>
+            <a href="Anillos\Cruz-1.jpg"" target="_blank">
+                <img src="Anillos\Cruz-1.jpg" alt="Berakhah B-18">
+            </a>
+            <a href="Anillos\Cruz.jpg"" target="_blank">
+                <img src="Anillos\Cruz.jpg" alt="Berakhah B-18">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-18')">Berakhah B-18</h3>
+            <p>Psalm 56:3 "When I am afraid, I put my trust in you."</p>
+            <p class="precio">6$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-18')">¡I want it!</h3>
+        </div>
+
+
+        <div class="producto" data-categoria="anillos">
+            <a href="Lazo1.jpg"" target="_blank">
+                <img src="Lazo1.jpg" alt="Berakhah B-19">
+            </a>
+            <a href="Lazo.jpg"" target="_blank">
+                <img src="Lazo.jpg" alt="Berakhah B-19">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-')">Berakhah B-19</h3>
+            <p>Colossians 3:14 "And over all these virtues put on love, which binds them all together in perfect unity."</p>
+            <p class="precio">6$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-19')">¡I want it!</h3>
+        </div> 
+
+        <!-- Ejemplo de producto - Categoria Zarcillos -->
+         
+        <div class="producto" data-categoria="tendrils">
+            <a href="Zarcillos\Corazones.jpg" target="_blank">
+                <img src="Zarcillos\Corazones.jpg" alt="Berakhah B-20">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-20')">Berakhah B-20</h3>
+            <p> Proverbs 27:19 "Water reflects the face; the heart reflects the person."</p>
+            <p class="precio">6$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-14')">¡I want it!</h3>
+        </div>
+
+
+        <div class="producto" data-categoria="tendrils">
+            <a href="Zarcillos\Agolla2.jpg" target="_blank">
+                <img src="Zarcillos\Agolla2.jpg" alt="Berakhah B-29">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-29')">Berakhah B-29</h3>
+            <p>Psalm 20:4 May he grant you the desire of your heart and make all your plans succeed.</p>
+            <p> Size 1cm. </p>
+            <p class="precio">5$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-29')">¡I want it!</h3>
+        </div>
+
+
+        <div class="producto" data-categoria="tendrils">
+            <a href="Zarcillos\Agolla3.jpg" target="_blank">
+                <img src="Zarcillos\Agolla3.jpg" alt="Berakhah B-30">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-30')">Berakhah B-30</h3>
+            <p> Proverbs 3:3 Let not mercy and truth forsake you; bind them around your neck, write them on the tablet of your heart.</p>
+            <p> Size 1.5cm. </p>
+            <p class="precio">5$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-30')">¡I want it!</h3>
+        </div>
+
+        <div class="producto" data-categoria="tendrils">
+            <a href="Zarcillos\Agolla1.jpg" target="_blank">
+                <img src="Zarcillos\Agolla1.jpg" alt="Berakhah B-31">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-31')">Berakhah B-31</h3>
+            <p> Matthew 6:21 For where your treasure is, there your heart will be also.</p>
+            <p> Size 1.8cm. </p>
+            <p class="precio">5$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-31')">¡I want it!</h3>
+        </div>
+
+
+        <!-- Ejemplo de producto - Categoria Caballeros -->
+        <div class="producto" data-categoria="caballeros">
+
+            <a href="Caballeros\Cruz1.jpg" target="_blank">
+                <img src="Caballeros\Cruz1.jpg" alt="Berakhah B-14">
+            </a>
+            <a href="Caballeros\Cruz-1.jpg" target="_blank">
+                <img src="Caballeros\Cruz-1.jpg" alt="Berakhah B-14">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-14')">Berakhah B-14</h3>
+            <p>"Jesus said to her, 'I am the resurrection and the life. The one who believes in me will live, even though they die; and whoever lives by believing in me will never die eternally."</p>
+            <p class="precio">6$</p>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-14')">¡I want it!</h3>
+        </div>
+
+        <!-- Repite los divs de "producto" para más productos -->
+    </main>
+
+    <script>
+        function enviarWhatsApp(producto) {
+            const mensaje = `HI!! I would like to purchase the "${producto}"`;
+            const numeroWhatsApp = "+573184818218"; // Reemplaza con tu número de WhatsApp
+            const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+        }
+
+        function mostrarCategoria(categoria) {
+            const productos = document.querySelectorAll('.producto');
+            productos.forEach(producto => {
+                if (categoria === 'todo' || producto.getAttribute('data-categoria') === categoria) {
+                    producto.style.display = 'block';
+                } else {
+                    producto.style.display = 'none';
+                }
+            });
+        }
+
+        // Mostrar todos los productos al cargar la página
+        mostrarCategoria('todo');
+    </script>
+</body>
+</html>
