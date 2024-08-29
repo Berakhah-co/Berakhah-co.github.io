@@ -109,21 +109,3 @@ function filtrarCategoria(categoria) {
     });
 }
 
-// Esperar 3 segundos y luego ocultar la animación
-setTimeout(function() {
-    const animacion = document.getElementById('nuevos-productos');
-    animacion.style.opacity = 0;
-    setTimeout(function() {
-        animacion.style.display = 'none';
-    }, 1000); // Espera la duración de la transición antes de eliminar
-}, 3000); // 3 segundos de espera antes de ocultar la animación
-
-
-
-
-
-
-
-
-
-
