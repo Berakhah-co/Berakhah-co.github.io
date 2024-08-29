@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Productos - Berakhah</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap">
 </head>
 <body>
     <!-- Banner -->
@@ -40,6 +41,27 @@
 
         <!-- Ejemplo de producto - Categoria Collares -->
 
+        
+        <div class="producto" data-categoria="collares">
+            <a href="Collares\Perlas.jpg" target="_blank">
+                <img src="Collares\Perlas.jpg" alt="Berakhah B-36">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-36')">Berakhah B-36</h3>
+            <p>Jeremiah 29:13 You will seek me and find me when you search for me with all your heart.</p>
+            <p class="precio">7$</p>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-36', 7)">¡I want it!</button>
+        </div>
+
+        <div class="producto" data-categoria="collares">
+            <a href="Collares\B37.jpg" target="_blank">
+                <img src="Collares\B37.jpg" alt="Berakhah B-37">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-37')">Berakhah B-37</h3>
+            <p> 2 Samuel 7:22 How great you are, my Lord and God! We ourselves have learned that there is no one like you, and that apart from you there is no God.</p>
+            <p class="precio">7$</p>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-37', 7)">¡I want it!</button>
+        </div>
+
         <div class="producto" data-categoria="collares">
             <a href="Collares\Jesus.jpg" target="_blank">
                 <img src="Collares\Jesus.jpg" alt="Berakhah B-11">
@@ -47,7 +69,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-11')">Berakhah B-11</h3>
             <p>John 3:17 "For God did not send His Son into the world to condemn the world, but that the world through Him might be saved."</p>
             <p class="precio">6$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-11')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-11', 6)">¡I want it!</button>
         </div>
 
 
@@ -58,7 +80,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-6')">Berakhah B-6</h3>
             <p>Hebrews 11:1 "Now faith is the substance of things hoped for, the evidence of things not seen." </p>
             <p class="precio">5$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-6')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-6', 5)">¡I want it!</button>
         </div> 
 
         <div class="producto" data-categoria="collares">
@@ -68,7 +90,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-4')">Berakhah B-4</h3>
             <p>John 14:6 "Jesus said to him, 'I am the way, the truth, and the life. No one comes to the Father except through Me.'".</p>
             <p class="precio">7$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-4')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-4', 7)">¡I want it!</button>
         </div> 
 
         <div class="producto" data-categoria="collares">
@@ -78,7 +100,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-5')">Berakhah B-5</h3>
             <p>Hebrews "By faith Sarah herself also received strength to conceive seed, and she bore a child when she was past the age, because she judged Him faithful who had promised."</p>
             <p class="precio">5$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-5')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-5', 5)">¡I want it!</button>
         </div> 
 
         <div class="producto" data-categoria="collares">
@@ -88,7 +110,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-15')">Berakhah B-15</h3>
             <p>Isaiah  41:13 "For I, the LORD your God, will hold your right hand, saying to you, 'Fear not, I will help you."</p>
             <p class="precio">6$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-15')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-15', 6)">¡I want it!</button>
         </div> 
 
         <div class="producto" data-categoria="collares">
@@ -98,7 +120,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-10')">Berakhah B-10</h3>
             <p>John 14:27 "Peace I leave with you, My peace I give to you; not as the world gives do I give to you. Let not your heart be troubled, neither let it be afraid."</p>
             <p class="precio">5$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-10')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-10', 5)">¡I want it!</button>
         </div> 
 
         <div class="producto" data-categoria="collares">
@@ -108,7 +130,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-2')">Berakhah B-2</h3>
             <p>John 3:16 "For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life."</p>
             <p class="precio">5$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-2')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-2', 5)">¡I want it!</button>
         </div> 
 
         <div class="producto" data-categoria="collares">
@@ -118,7 +140,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-24')">Berakhah B-24</h3>
             <p>Revelation 22:17 "And the Spirit and the bride say, 'Come!' And let him who hears say, 'Come!' And let him who thirsts come. Whoever desires, let him take the water of life freely."</p>
             <p class="precio">8$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-24')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-24', 8)">¡I want it!</button>
         </div> 
 
         <div class="producto" data-categoria="collares">
@@ -128,7 +150,17 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-4')">Berakhah B-4</h3>
             <p>John 14:6 "Jesus said to him, 'I am the way, and the truth, and the life. No one comes to the Father except through me."</p>
             <p class="precio">7$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-4')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-4', 7)">¡I want it!</button>
+        </div> 
+
+        <div class="producto" data-categoria="collares">
+            <a href="Collares\FeCruz.jpg" target="_blank">
+                <img src="Collares\FeCruz.jpg" alt="Berakhah B-26">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-26')">Berakhah B-26</h3>
+            <p>2 Reyes 6:15-16 No tengas miedo, porque más son los que están con nosotros que los que están con ellos.</p>
+            <p class="precio">7$</p>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-26', 7)">¡I want it!</button>
         </div> 
 
         <!-- Ejemplo de producto - Categoria Pulseras -->
@@ -144,7 +176,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-12')">Berakhah B-12</h3>
             <p>Mark  16:15 "And He said to them, 'Go into all the world and preach the gospel to every creature."</p>
             <p class="precio">6$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-12')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-12', 6)">¡I want it!</button>
         </div>
 
         
@@ -159,7 +191,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-3')">Berakhah B-3</h3>
             <p>Isaiah 1:18 "'Come now, and let us reason together,' says the LORD, 'Though your sins are like scarlet, they shall be as white as snow; though they are red like crimson, they shall be as wool."</p>
             <p class="precio">5$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-3')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-3', 5)">¡I want it!</button>
         </div>
 
 
@@ -174,7 +206,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-1')">Berakhah B-1</h3>
             <p>Psalm  1:3 "He shall be like a tree planted by the rivers of water, that brings forth its fruit in its season, whose leaf also shall not wither; and whatever he does shall prosper."</p>
             <p class="precio">5$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-1')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-1', 5)">¡I want it!</button>
         </div>
 
 
@@ -189,7 +221,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-8')">Berakhah B-8</h3>
             <p>Proverbs  4:23 "Keep your heart with all diligence, for out of it spring the issues of life."</p>
             <p class="precio">5$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-8')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-8', 5)">¡I want it!</button>
         </div>
 
 
@@ -204,7 +236,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-7')">Berakhah B-7</h3>
             <p>Mark  11:24 "Therefore I say to you, whatever things you ask when you pray, believe that you receive them, and you will have them."</p>
             <p class="precio">6$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-7')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-7', 5)">¡I want it!</button>
         </div>
 
         <div class="producto" data-categoria="pulseras">
@@ -218,7 +250,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-9')">Berakhah B-9</h3>
             <p>Romans  1:16 "For I am not ashamed of the gospel of Christ, for it is the power of God to salvation for everyone who believes, for the Jew first and also for the Greek."</p>
             <p class="precio">6$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-9')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-9', 6)">¡I want it!</button>
         </div>
 
         <div class="producto" data-categoria="pulseras">
@@ -234,7 +266,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-23')">Berakhah B-23</h3>
             <p>Acts 13:47 For so the Lord has commanded us: "I have made you a light for the Gentiles, that you may bring salvation to the ends of the earth."</p>
             <p class="precio">6$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-23')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-23', 6)">¡I want it!</button>
         </div>
 
         <div class="producto" data-categoria="pulseras">
@@ -244,11 +276,27 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-25')">Berakhah B-25</h3>
             <p>Isaiah 41:13 "For I, the Lord your God, hold your right hand; it is I who say to you, 'Fear not, I am the one who helps you."</p>
             <p class="precio">5$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-25')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-25', 5)">¡I want it!</button>
         </div>
 
 
         <!-- Ejemplo de producto - Categoria Anillos -->
+
+        <div class="producto" data-categoria="anillos">
+            <a href="Anillos\Corazonesmeralda1.jpg"" target="_blank">
+                <img src="Anillos\Corazonesmeralda1.jpg" alt="Berakhah B-32">
+            </a>
+            <a href="Anillos\Corazonesmeralda2.jpg" target="_blank">
+                <img src="Anillos\Corazonesmeralda2.jpg" alt="Berakhah B-32">
+            </a>
+            <a href="Anillos\Corazonesmeralda.jpg" target="_blank">
+                <img src="Anillos\Corazonesmeralda.jpg" alt="Berakhah B-32">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-32')">Berakhah B-32</h3>
+            <p>Psalms 31:3 Lead me, for you are my rock and my fortress; direct me for your name's sake.</p>
+            <p class="precio">$6</p>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-32', 6)">¡I want it!</button>
+        </div>
 
         <div class="producto" data-categoria="anillos">
             <a href="Anillos\Corazon-1.jpg"" target="_blank">
@@ -263,7 +311,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-16')">Berakhah B-16</h3>
             <p>Song of Solomon 8:6 "Set me as a seal upon your heart, as a seal upon your arm, for love is as strong as death."</p>
             <p class="precio">6$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-16')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-16', 6)">¡I want it!</button>
         </div>
 
 
@@ -280,7 +328,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-17')">Berakhah B-17</h3>
             <p>Psalm 92:2 "The righteous will flourish like a palm tree, they will grow like a cedar of Lebanon.".</p>
             <p class="precio">6$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-17')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-17', 6)">¡I want it!</button>
         </div>
 
         <div class="producto" data-categoria="anillos">
@@ -296,7 +344,7 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-18')">Berakhah B-18</h3>
             <p>Psalm 56:3 "When I am afraid, I put my trust in you."</p>
             <p class="precio">6$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-18')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-18', 6)">¡I want it!</button>
         </div>
 
 
@@ -307,10 +355,10 @@
             <a href="Lazo.jpg"" target="_blank">
                 <img src="Lazo.jpg" alt="Berakhah B-19">
             </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-')">Berakhah B-19</h3>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-9')">Berakhah B-19</h3>
             <p>Colossians 3:14 "And over all these virtues put on love, which binds them all together in perfect unity."</p>
             <p class="precio">6$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-19')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-19', 6)">¡I want it!</button>
         </div> 
 
         <!-- Ejemplo de producto - Categoria Zarcillos -->
@@ -322,7 +370,8 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-20')">Berakhah B-20</h3>
             <p> Proverbs 27:19 "Water reflects the face; the heart reflects the person."</p>
             <p class="precio">6$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-14')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-20', 6)">¡I want it!</button>
+        </div>
         </div>
 
 
@@ -334,7 +383,7 @@
             <p>Psalm 20:4 May he grant you the desire of your heart and make all your plans succeed.</p>
             <p> Size 1cm. </p>
             <p class="precio">5$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-29')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-29', 17.999)">¡I want it!</button>
         </div>
 
 
@@ -346,7 +395,7 @@
             <p> Proverbs 3:3 Let not mercy and truth forsake you; bind them around your neck, write them on the tablet of your heart.</p>
             <p> Size 1.5cm. </p>
             <p class="precio">5$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-30')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-30', 17.999)">¡I want it!</button>
         </div>
 
         <div class="producto" data-categoria="tendrils">
@@ -357,13 +406,13 @@
             <p> Matthew 6:21 For where your treasure is, there your heart will be also.</p>
             <p> Size 1.8cm. </p>
             <p class="precio">5$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-31')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-31', 17.999)">¡I want it!</button>
         </div>
 
 
         <!-- Ejemplo de producto - Categoria Caballeros -->
-        <div class="producto" data-categoria="caballeros">
 
+        <div class="producto" data-categoria="caballeros">
             <a href="Caballeros\Cruz1.jpg" target="_blank">
                 <img src="Caballeros\Cruz1.jpg" alt="Berakhah B-14">
             </a>
@@ -373,33 +422,35 @@
             <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-14')">Berakhah B-14</h3>
             <p>"Jesus said to her, 'I am the resurrection and the life. The one who believes in me will live, even though they die; and whoever lives by believing in me will never die eternally."</p>
             <p class="precio">6$</p>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-14')">¡I want it!</h3>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-14', 6)">¡I want it!</button>
         </div>
+
+        <div class="producto" data-categoria="caballeros">
+            <a href="Collares\Perlas.jpg" target="_blank">
+                <img src="Collares\Perlas.jpg" alt="Berakhah B-36">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-36')">Berakhah B-36</h3>
+            <p>Jeremiah 29:13 You will seek me and find me when you search for me with all your heart.</p>
+            <p class="precio">$7</p>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-36', 6)">¡I want it!</button>
+        </div>
+
 
         <!-- Repite los divs de "producto" para más productos -->
     </main>
 
-    <script>
-        function enviarWhatsApp(producto) {
-            const mensaje = `HI!! I would like to purchase the "${producto}"`;
-            const numeroWhatsApp = "+573184818218"; // Reemplaza con tu número de WhatsApp
-            const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
-            window.open(url, '_blank');
-        }
+   <!-- Carrito de compras -->
+   <div id="carrito" style="display: none;">
+    <h2>Tu carrito</h2>
+    <ul id="lista-carrito"></ul>
+    <p>Total: $<span id="total-carrito">0</span></p>
+    <button id="btn-pedir" class="button">Enviar pedido</button>
+</div>
 
-        function mostrarCategoria(categoria) {
-            const productos = document.querySelectorAll('.producto');
-            productos.forEach(producto => {
-                if (categoria === 'todo' || producto.getAttribute('data-categoria') === categoria) {
-                    producto.style.display = 'block';
-                } else {
-                    producto.style.display = 'none';
-                }
-            });
-        }
+ <!-- Botón flotante para abrir el carrito -->
+ <button id="btn-ver-carrito" class="boton-flotante" onclick="toggleCarrito()">🛒 <span id="contador-carrito">0</span></button>
 
-        // Mostrar todos los productos al cargar la página
-        mostrarCategoria('todo');
-    </script>
+
+<script src="scripts.js"></script>
 </body>
 </html>
