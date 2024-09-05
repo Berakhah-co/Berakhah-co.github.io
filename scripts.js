@@ -65,7 +65,6 @@ function actualizarContadorCarrito() {
 }
 
 
-// Función para enviar el pedido por WhatsApp
 function enviarPedido() {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     if (carrito.length === 0) {
@@ -85,9 +84,15 @@ function enviarPedido() {
     const numeroWhatsApp = "+573184818218"; // Reemplaza con tu número de WhatsApp
     const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
     window.open(urlWhatsApp, '_blank');
-    localStorage.removeItem('carrito');
-    mostrarCarrito();
+    mostrarCarrito(); // Actualiza el carrito después de enviar el pedido
 }
+
+function vaciarCarrito() {
+    localStorage.removeItem('carrito');
+    mostrarCarrito(); // Actualiza el carrito después de vaciarlo
+}
+
+document.getElementById('btn-vaciar-carrito').addEventListener('click', vaciarCarrito);
 
 // Función para mostrar u ocultar el carrito
 function toggleCarrito() {
@@ -109,3 +114,27 @@ function filtrarCategoria(categoria) {
     });
 }
 
+// Función para filtrar productos por nombre
+function buscarProducto() {
+    const terminoBusqueda = document.getElementById('campo-busqueda').value.toLowerCase();
+    const productos = document.querySelectorAll('.producto');
+    
+    productos.forEach(producto => {
+        const nombreProducto = producto.querySelector('.titulo-producto').textContent.toLowerCase();
+        if (nombreProducto.includes(terminoBusqueda)) {
+            producto.style.display = 'block'; // Mostrar el producto si coincide
+        } else {
+            producto.style.display = 'none'; // Ocultar el producto si no coincide
+        }
+    });
+}
+
+// Añadir el evento al botón de búsqueda
+document.getElementById('btn-buscar').addEventListener('click', buscarProducto);
+
+// Opcional: permitir búsqueda al presionar "Enter" en el campo de búsqueda
+document.getElementById('campo-busqueda').addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        buscarProducto();
+    }
+});
