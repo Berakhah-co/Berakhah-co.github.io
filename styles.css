@@ -33,16 +33,17 @@ body {
 
 .banner-buttons {
     margin-top: 0px; /* Espacio entre el texto y los botones */
+    
 }
 
 .button {
     display: inline-block;
-    margin: 5px; /* Espacio entre los botones */
-    padding: 5px 10px;
-    font-size: 16px;
+    margin: 2px; /* Espacio entre los botones */
+    padding: 5px 5px;
+    font-size: 13px;
     text-decoration: none; /* Elimina el subrayado del enlace */
     color: white;
-    background-color: #000000; /* Ajusta el color según el diseño */
+    background-color: #282727; /* Ajusta el color según el diseño */
     border-radius: 5px; /* Opcional: redondea las esquinas del botón */
     cursor: pointer;
     transition: background-color 0.3s ease; /* Transición suave para el hover */
@@ -66,16 +67,49 @@ body {
 
 .banner-text p {
     margin: 5px 0 0;
-    font-size: 1rem;
+    font-size: 12px;
     font-weight: 300;
 }
 
 .categorias {
     display: flex;
     justify-content: center;
-    margin: 20px 0;
+    margin: -5px 0;
     flex-wrap: wrap; /* Permite que los botones se acomoden en múltiples filas si es necesario */
 }
+
+.buscador {
+    display: flex;
+    justify-content: center;
+    margin: 2px 0;
+}
+
+.buscador input {
+    padding: 10px;
+    font-size: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100px;
+    height: 5px;
+}
+
+.buscador button {
+    padding: 5px 10px;
+    font-size: 12px;
+    border: none;
+    background-color: #282727;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    
+}
+
+.buscador button:hover {
+    background-color: #555;
+}
+
+
 
 .categorias button {
     background-color: #000000;
@@ -239,12 +273,30 @@ body {
     width: 100%;
     background-color: #556B2F; /* Verde oliva */
     color: white;
-    padding: 10px;
+    padding: 5px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    margin-top: 10px;
+    margin-top: 0px;
 }
+#btn-pedir:hover {
+    background-color: #0c5011; /* verde mas oscuro */
+}
+
+#btn-vaciar-carrito {
+
+    width: 100%;
+    background-color: #d9534f; /* Rojo */
+    color: white;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 0px;
+    }
+    #btn-vaciar-carrito:hover {
+        background-color: #c9302c; /* Rojo más oscuro */
+    }
 
 /* Estilos para el botón flotante del carrito */
 .boton-flotante {
@@ -274,5 +326,4 @@ body {
     padding: 5px;
     font-size: 14px;
 }
-
 
