@@ -15,14 +15,18 @@
             <img src="Logo.jpg" alt="Logo de Berakhah" class="logo">
             <div class="banner-text">
                 <h1>Berakhah</h1>
-                <h2>Valley of Blessing</h2>
                 <p>En Berakhah encontrarás accesorios con significado y propósito. 💖 ¿Ya tienes el tuyo?</p>
             </div>
             <div class="banner-buttons">
                 <a href="indexen.html" class="button">English</a>
                 <a href="index.html" class="button">Español</a>
+                    <!-- Campo de búsqueda -->
+               
             </div>
-           
+            <div class="buscador">
+                <input type="text" id="campo-busqueda" placeholder="Buscar por codigo">
+                <button id="btn-buscar" class="button">Buscar</button>
+            </div>
         </div>
     </header>
 
@@ -34,6 +38,7 @@
         <button onclick="mostrarCategoria('anillos')">Anillos</button>
         <button onclick="mostrarCategoria('zarcillos')">Zarcillos</button>
         <button onclick="mostrarCategoria('caballeros')">Caballeros</button>
+        
     </div>
 
     <!-- Catálogo de Productos -->
@@ -480,6 +485,7 @@
         <ul id="lista-carrito"></ul>
         <p>Total: $<span id="total-carrito">0</span></p>
         <button id="btn-pedir" class="button">Enviar pedido</button>
+        <button id="btn-vaciar-carrito" class="button">Vaciar Carrito</button>
         <!-- Mensaje adicional debajo del botón -->
 <p id="mensaje-pedido" style="font-size: 14px; margin-top: 10px;">
     Si realizas el pedido desde un PC y no tienes enlazado el WhatsApp, puedes enviarnos una foto del pedido al 
