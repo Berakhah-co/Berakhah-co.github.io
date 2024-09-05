@@ -293,6 +293,38 @@
         <!-- Ejemplo de producto - Categoria Anillos -->
 
         <div class="producto" data-categoria="anillos">
+            <a href="Anillos\B-34.jpg"" target="_blank">
+                <img src="Anillos\B-34.jpg" alt="Berakhah B-34">
+            </a>
+            <a href="Anillos\B-34-1.jpg" target="_blank">
+                <img src="Anillos\B-34-1.jpg" alt="Berakhah B-34">
+            </a>
+            <a href="Anillos\B-34-2.jpg" target="_blank">
+                <img src="Anillos\B-34-2.jpg" alt="Berakhah B-34">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-34')">Berakhah B-34</h3>
+            <p> 1 Samuel 16:7 And the LORD said to Samuel, Look not at his appearance, nor at the height of his stature, for I desire it; because Jehovah does not see what man sees; For a man looks at what is before his eyes, but the Lord looks at the heart. </p>
+            <p class="precio">$21.999</p>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-34', 21.999)">¡Lo quiero!</button>
+        </div>
+
+        <div class="producto" data-categoria="anillos">
+            <a href="Anillos\B-35.jpg"" target="_blank">
+                <img src="Anillos\B-35.jpg" alt="Berakhah B-35">
+            </a>
+            <a href="Anillos\B-35-1.jpg" target="_blank">
+                <img src="Anillos\B-35-1.jpg" alt="Berakhah B-35">
+            </a>
+            <a href="Anillos\B-35-2.jpg" target="_blank">
+                <img src="Anillos\B-35-2.jpg" alt="Berakhah B-35">
+            </a>
+            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-35')">Berakhah B-35</h3>
+            <p> Psalm 51:10 Create in me a clean heart, God, and renew the righteousness of my spirit.</p>
+            <p class="precio">$21.999</p>
+            <button class="button" onclick="agregarAlCarrito('Berakhah B-35', 21.999)">¡I want it!</button>
+        </div>
+
+        <div class="producto" data-categoria="anillos">
             <a href="Anillos\Corazonesmeralda1.jpg"" target="_blank">
                 <img src="Anillos\Corazonesmeralda1.jpg" alt="Berakhah B-32">
             </a>
@@ -449,12 +481,17 @@
         <!-- Repite los divs de "producto" para más productos -->
     </main>
 
-   <!-- Carrito de compras -->
-   <div id="carrito" style="display: none;">
+ <!-- Carrito de compras -->
+ <div id="carrito" style="display: none;">
     <h2>Tu carrito</h2>
     <ul id="lista-carrito"></ul>
     <p>Total: $<span id="total-carrito">0</span></p>
     <button id="btn-pedir" class="button">Enviar pedido</button>
+    <!-- Mensaje adicional debajo del botón -->
+<p id="mensaje-pedido" style="font-size: 14px; margin-top: 10px;">
+    If you place the order from a PC and do not have WhatsApp linked, you can send us a photo of the order to 
+<strong>+57 318 4818 218</strong> or you can log in 
+<a href="https://web.whatsapp.com/" target="_blank">WhatsAppWeb</a>, send the order and click send chat, use WhatsApp web.
 </div>
 
  <!-- Botón flotante para abrir el carrito -->
