@@ -273,7 +273,7 @@ body {
     width: 100%;
     background-color: #556B2F; /* Verde oliva */
     color: white;
-    padding: 5px;
+    padding: 10px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
@@ -288,7 +288,7 @@ body {
     width: 100%;
     background-color: #d9534f; /* Rojo */
     color: white;
-    padding: 5px;
+    padding: 10px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
@@ -315,6 +315,10 @@ body {
     align-items: center;
     justify-content: center;
 }
+.boton-flotante:hover {
+    background-color: #ffffff; /* Efecto hover al pasar sobre el ícono */
+}
+
 
 .boton-flotante #contador-carrito {
     position: absolute;
@@ -326,4 +330,38 @@ body {
     padding: 5px;
     font-size: 14px;
 }
+
+/* Contenedor para los íconos sociales sobre el carrito */
+.rrss-icons {
+    position: fixed;
+    bottom: 85px; /* Colocado arriba del botón del carrito */
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px; /* Espacio entre los íconos */
+    z-index: 1000;
+}
+
+.rrss-icons a {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.rrss-icons a img {
+    width: 24px;
+    height: 24px;
+}
+
+.rrss-icons a:hover {
+    background-color: #ffffff; /* Efecto hover al pasar sobre el ícono */
+}
+
 
