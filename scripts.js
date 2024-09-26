@@ -25,29 +25,56 @@ function mostrarCarrito() {
     listaCarrito.innerHTML = '';
 
     carrito.forEach((producto, index) => {
-        totalCarrito += producto.precio;
+        // Convertir el precio a una cadena para evitar la eliminación de ceros significativos
+        totalCarrito += parseFloat(producto.precio);
         let li = document.createElement('li');
         li.innerHTML = `
-            ${producto.nombre} - $${producto.precio}
+            ${producto.nombre} - $${producto.precio.toFixed(3)}
             <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
         `;
         listaCarrito.appendChild(li);
     });
 
+    // Mostrar el total correctamente con los ceros significativos
     document.getElementById('total-carrito').textContent = totalCarrito.toFixed(3);
-    
     actualizarContadorCarrito();
 }
 
+// Función para mostrar una notificación con SweetAlert2
+function mostrarNotificacion(mensaje) {
+    // Mostrar alerta usando SweetAlert2
+    Swal.fire({
+        title: '¡Producto Agregado!',
+        text: mensaje,
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2000, // Duración de la notificación en milisegundos
+        position: 'center', // Mostrar en el centro de la pantalla
+        background: '#28a745', // Color de fondo para personalizar la alerta
+        color: '#ffffff', // Color del texto
+    });
+}
 
-// Función para agregar productos al carrito y actualizar el contador
+// Función para lanzar confeti desde el centro de la pantalla
+function lanzarConfeti() {
+    confetti({
+        particleCount: 100,
+        startVelocity: 30,
+        spread: 360,
+        origin: { x: 0.5, y: 0.5 } // Explota desde el centro de la pantalla
+    });
+}
+
+// Función para agregar productos al carrito y mostrar la notificación con confeti
 function agregarAlCarrito(nombre, precio) {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     carrito.push({ nombre, precio });
     localStorage.setItem('carrito', JSON.stringify(carrito));
     mostrarCarrito();
-    alert(`${nombre} ha sido añadido al carrito.`);
+    mostrarNotificacion(`${nombre} ha sido añadido al carrito.`); // Mostrar notificación con SweetAlert2
+    lanzarConfeti(); // Lanza confeti cuando se agrega el producto
 }
+
 
 // Función para eliminar un producto del carrito y actualizar el contador
 function eliminarDelCarrito(index) {
@@ -76,16 +103,22 @@ function enviarPedido() {
     let total = 0;
 
     carrito.forEach(producto => {
-        mensaje += `\n- ${producto.nombre}: $${producto.precio}`;
-        total += producto.precio;
+        // Formatear el precio con los ceros significativos
+        let precioFormateado = parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
+        mensaje += `\n- ${producto.nombre}: $${precioFormateado}`;
+        total += parseFloat(producto.precio);
     });
 
-    mensaje += `\nTotal: $${total}`;
+    // Formatear el total con los ceros significativos
+    let totalFormateado = total.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+    mensaje += `\nTotal: $${totalFormateado}`;
+
     const numeroWhatsApp = "+573184818218"; // Reemplaza con tu número de WhatsApp
     const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
     window.open(urlWhatsApp, '_blank');
     mostrarCarrito(); // Actualiza el carrito después de enviar el pedido
 }
+
 
 function vaciarCarrito() {
     localStorage.removeItem('carrito');
