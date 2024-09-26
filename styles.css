@@ -230,6 +230,23 @@ body {
     transform: scale(1.05);
 }
 
+/* Estilos para la notificación */
+/* Estilos personalizados para ajustar el tamaño de la alerta de SweetAlert2 */
+.swal2-small-popup {
+    width: 300px !important; /* Ajusta el ancho de la alerta */
+    padding: 15px !important; /* Reduce el padding interno */
+}
+
+.swal2-small-title {
+    font-size: 18px !important; /* Ajusta el tamaño del título */
+    margin-bottom: 10px !important; /* Ajusta el margen inferior del título */
+}
+
+.swal2-small-content {
+    font-size: 14px !important; /* Ajusta el tamaño del contenido */
+}
+
+
 /* Estilos del carrito */
 #carrito {
     position: fixed;
