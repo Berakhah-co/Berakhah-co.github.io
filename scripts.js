@@ -171,3 +171,88 @@ document.getElementById('campo-busqueda').addEventListener('keypress', (event) =
         buscarProducto();
     }
 });
+
+// JavaScript para cambiar las imágenes del carrusel de forma independiente
+function changeImage(step, carouselId) {
+    const carousel = document.getElementById(carouselId);
+    const images = carousel.querySelectorAll('.carousel-images img');
+    let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
+    
+    images[currentIndex].classList.remove('active');
+    currentIndex = (currentIndex + step + images.length) % images.length;
+    images[currentIndex].classList.add('active');
+}
+
+// Movimiento automatico en el carrusel
+document.addEventListener('DOMContentLoaded', function () {
+    // Selecciona todos los carruseles en la página
+    const carousels = document.querySelectorAll('.carousel-images');
+    const intervalTime = 7000; // Tiempo en milisegundos (7 segundos)
+
+    // Función para mostrar la siguiente imagen en cada carrusel
+    function showNextImage(carousel) {
+        const images = carousel.querySelectorAll('img');
+        let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
+
+        // Remueve la clase 'active' de la imagen actual
+        images[currentIndex].classList.remove('active');
+
+        // Incrementa el índice de la imagen, volviendo a 0 si llega al final
+        currentIndex = (currentIndex + 1) % images.length;
+
+        // Añade la clase 'active' a la nueva imagen
+        images[currentIndex].classList.add('active');
+    }
+
+    // Configura el intervalo para cambiar las imágenes automáticamente en todos los carruseles
+    setInterval(() => {
+        carousels.forEach(carousel => showNextImage(carousel));
+    }, intervalTime);
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const productos = document.querySelectorAll('.producto');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    productos.forEach(producto => {
+        observer.observe(producto);
+    });
+});
+
+window.addEventListener('scroll', function () {
+    const scrollButton = document.getElementById('btn-volver-inicio');
+    const rrssIcons = document.querySelector('.rrss-icons');
+
+    if (window.scrollY > 300) {
+        // Mostrar la flecha y ocultar los iconos de redes sociales
+        scrollButton.classList.add('show');
+        rrssIcons.classList.add('hide');
+    } else {
+        // Mostrar los iconos de redes sociales y ocultar la flecha
+        scrollButton.classList.remove('show');
+        rrssIcons.classList.remove('hide');
+    }
+});
+
+// Desplazar suavemente al inicio de la página al hacer clic en el botón
+document.getElementById('btn-volver-inicio').addEventListener('click', function () {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// Mostrar la barra de carga al iniciar la página
+window.addEventListener('load', function () {
+    // Simula una pequeña demora para la carga, ajusta según sea necesario
+    setTimeout(function() {
+        document.getElementById('barra-carga').style.display = 'none'; // Oculta la barra de carga
+    }, 3000); // Ajusta el tiempo de la animación al mismo que el CSS o según la carga real
+});
