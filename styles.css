@@ -26,32 +26,30 @@ body {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    margin-bottom: -30px;
-    margin-top: -25px;
-  
+    margin: -25px 0 -30px;
 }
 
 .banner-buttons {
-    margin-top: 0px; /* Espacio entre el texto y los botones */
-    
+    margin-top: 0px;
 }
 
 .button {
     display: inline-block;
-    margin: 2px; /* Espacio entre los botones */
+    margin: 2px;
     padding: 5px 5px;
-    font-size: 13px;
-    text-decoration: none; /* Elimina el subrayado del enlace */
+    font-size: 18px;
+    text-decoration: none;
     color: white;
-    background-color: #282727; /* Ajusta el color según el diseño */
-    border-radius: 5px; /* Opcional: redondea las esquinas del botón */
+    background-color: #0c0c0c;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Transición suave para el hover */
-    
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Añadir transiciones */
 }
 
 .button:hover {
-    background-color: #555554; /* Ajusta el color del hover según el diseño */
+    background-color: #555554;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .banner-text h1 {
@@ -75,7 +73,7 @@ body {
     display: flex;
     justify-content: center;
     margin: -5px 0;
-    flex-wrap: wrap; /* Permite que los botones se acomoden en múltiples filas si es necesario */
+    flex-wrap: wrap;
 }
 
 .buscador {
@@ -102,14 +100,14 @@ body {
     border-radius: 5px;
     cursor: pointer;
     margin-left: 10px;
-    
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .buscador button:hover {
     background-color: #555;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
-
-
 
 .categorias button {
     background-color: #000000;
@@ -119,20 +117,22 @@ body {
     margin: 10px;
     cursor: pointer;
     border-radius: 10px;
-    transition: background-color 0.5s ease;
-    flex: 1; /* Permite que los botones crezcan para llenar el espacio disponible */
-    max-width: 200px; /* Limita el ancho máximo de los botones */
+    transition: background-color 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 1;
+    max-width: 200px;
 }
 
 .categorias button:hover {
     background-color: #202020;
-    color: #f7d700;
+    color: #D4AF37;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
- 
+
 /* Estilos para la disposición del catálogo */
 .catalogo {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Por defecto, dos columnas */
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     padding: 20px;
     max-width: 1200px;
@@ -145,12 +145,22 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.producto.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .producto img {
     width: 100%;
-    height: auto;
-    border-radius: 10px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin: 5px;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
@@ -176,76 +186,57 @@ body {
     font-size: 0.9rem;
 }
 
-/* Estilo para el precio */
 .precio {
-    font-size: 1.5rem;
+    font-size: 1.4rem !important;
     font-weight: bold;
-    color: red !important;
-    margin-top: 10px;
+    color: #D4AF37 !important;
+    margin-top: 1px;
 }
 
 /* Media queries para dispositivos pequeños */
 @media (max-width: 768px) {
     .catalogo {
-        grid-template-columns: repeat(1, 1fr); /* Dos columnas en dispositivos pequeños */
+        grid-template-columns: repeat(1, 1fr);
     }
 
     .categorias {
-        flex-direction: row; /* Las categorías se apilan verticalmente en pantallas pequeñas */
+        flex-direction: row;
     }
 
     .categorias button {
-        max-width: 25%; /* Los botones ocupan todo el ancho disponible en pantallas pequeñas */
+        max-width: 25%;
     }
-    
 }
 
 /* Media queries para pantallas grandes */
 @media (min-width: 769px) {
     .catalogo {
-        grid-template-columns: repeat(3, 1fr); /* Cuatro columnas en pantallas grandes */
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .categorias {
-        flex-direction: row; /* Las categorías se alinean horizontalmente en pantallas grandes */
+        flex-direction: row;
     }
 
     .categorias button {
-        max-width: 150px; /* Los botones tienen un ancho máximo fijo en pantallas grandes */
+        max-width: 150px;
     }
 }
 
-/* Estilos para las imágenes de productos */
-.producto img {
-    width: 100%; /* El ancho de la imagen ocupa el 100% del contenedor */
-    height: 300px; /* Ajusta la altura fija de la imagen */
-    object-fit: cover; /* Mantiene la relación de aspecto de la imagen y cubre el área del contenedor */
-    border-radius: 15px;
-    margin: 5px; /* Espaciado entre imágenes */
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.producto img:hover {
-    transform: scale(1.05);
-}
-
-/* Estilos para la notificación */
 /* Estilos personalizados para ajustar el tamaño de la alerta de SweetAlert2 */
 .swal2-small-popup {
-    width: 300px !important; /* Ajusta el ancho de la alerta */
-    padding: 15px !important; /* Reduce el padding interno */
+    width: 300px !important;
+    padding: 15px !important;
 }
 
 .swal2-small-title {
-    font-size: 18px !important; /* Ajusta el tamaño del título */
-    margin-bottom: 10px !important; /* Ajusta el margen inferior del título */
+    font-size: 18px !important;
+    margin-bottom: 10px !important;
 }
 
 .swal2-small-content {
-    font-size: 14px !important; /* Ajusta el tamaño del contenido */
+    font-size: 14px !important;
 }
-
 
 /* Estilos del carrito */
 #carrito {
@@ -278,7 +269,7 @@ body {
 }
 
 #lista-carrito button {
-    background-color: #d9534f; /* Rojo */
+    background-color: #d9534f;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -288,7 +279,7 @@ body {
 
 #btn-pedir {
     width: 100%;
-    background-color: #556B2F; /* Verde oliva */
+    background-color: #556B2F;
     color: white;
     padding: 10px;
     border: none;
@@ -296,24 +287,25 @@ body {
     border-radius: 5px;
     margin-top: 0px;
 }
+
 #btn-pedir:hover {
-    background-color: #0c5011; /* verde mas oscuro */
+    background-color: #0c5011;
 }
 
 #btn-vaciar-carrito {
-
     width: 100%;
-    background-color: #d9534f; /* Rojo */
+    background-color: #d9534f;
     color: white;
     padding: 10px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
     margin-top: 0px;
-    }
-    #btn-vaciar-carrito:hover {
-        background-color: #c9302c; /* Rojo más oscuro */
-    }
+}
+
+#btn-vaciar-carrito:hover {
+    background-color: #c9302c;
+}
 
 /* Estilos para el botón flotante del carrito */
 .boton-flotante {
@@ -331,11 +323,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.boton-flotante:hover {
-    background-color: #ffffff; /* Efecto hover al pasar sobre el ícono */
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
+.boton-flotante:hover {
+    background-color: #ffffff;
+    transform: scale(1.1);
+}
 
 .boton-flotante #contador-carrito {
     position: absolute;
@@ -351,12 +345,12 @@ body {
 /* Contenedor para los íconos sociales sobre el carrito */
 .rrss-icons {
     position: fixed;
-    bottom: 85px; /* Colocado arriba del botón del carrito */
+    bottom: 85px;
     right: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px; /* Espacio entre los íconos */
+    gap: 5px;
     z-index: 1000;
 }
 
@@ -369,7 +363,7 @@ body {
     background-color: #000;
     border-radius: 50%;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .rrss-icons a img {
@@ -378,7 +372,139 @@ body {
 }
 
 .rrss-icons a:hover {
-    background-color: #ffffff; /* Efecto hover al pasar sobre el ícono */
+    background-color: #ffffff;
+    transform: scale(1.1);
 }
 
+.carousel {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+}
 
+.carousel-images {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-images img {
+    min-width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+    transform: scale(0.8) translateX(100%);
+}
+
+.carousel-images img.active {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+    position: relative;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.carousel-button.prev {
+    left: 0;
+}
+
+.carousel-button.next {
+    right: 0;
+}
+
+/* Scroll Suave */
+html {
+    scroll-behavior: smooth;
+}
+/* Estilos para los iconos de redes sociales */
+.rrss-icons {
+    position: fixed;
+    bottom: 85px; /* Ubicado justo arriba del carrito */
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    z-index: 1000;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Ocultar iconos de redes cuando se hace scroll */
+.rrss-icons.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Estilos ajustados para el botón de "Volver al Inicio" */
+.volver-inicio {
+    position: fixed;
+    bottom: 85px; /* Mismo lugar que los iconos de redes sociales */
+    right: 20px;
+    background-color: #D4AF37;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 15px;
+    width: 60px; /* Ajusta el ancho del botón para que coincida con los iconos de redes */
+    height: 60px; /* Ajusta la altura del botón para que coincida con los iconos de redes */
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.volver-inicio.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.volver-inicio:hover {
+    background-color: #aa8b27;
+    transform: scale(1.1);
+}
+/* Estilos de la barra de carga */
+#barra-carga {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px; /* Altura de la barra */
+    background-color: rgba(0, 0, 0, 0.1); /* Color de fondo tenue */
+    z-index: 9999; /* Asegura que esté siempre encima de otros elementos */
+}
+
+#barra-carga .carga {
+    width: 0;
+    height: 100%;
+    background-color: #D4AF37; /* Color de la barra de progreso */
+    animation: cargar 3s ease-out forwards; /* Animación de la barra */
+}
+
+/* Animación de la barra de carga */
+@keyframes cargar {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
