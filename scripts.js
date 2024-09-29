@@ -24,21 +24,31 @@ function mostrarCarrito() {
     let totalCarrito = 0;
     listaCarrito.innerHTML = '';
 
+    let bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
+
     carrito.forEach((producto, index) => {
-        // Convertir el precio a una cadena para evitar la eliminación de ceros significativos
         totalCarrito += parseFloat(producto.precio);
         let li = document.createElement('li');
+        
+        let precioFormateado = bodyClass === 'en' 
+            ? parseFloat(producto.precio).toLocaleString('en-US', { minimumFractionDigits: 0 }) 
+            : parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
+
         li.innerHTML = `
-            ${producto.nombre} - $${producto.precio.toFixed(3)}
+            ${producto.nombre} - $${precioFormateado}
             <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
         `;
         listaCarrito.appendChild(li);
     });
 
-    // Mostrar el total correctamente con los ceros significativos
-    document.getElementById('total-carrito').textContent = totalCarrito.toFixed(3);
+    let totalFormateado = bodyClass === 'en' 
+        ? totalCarrito.toLocaleString('en-US', { minimumFractionDigits: 0 })
+        : totalCarrito.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+
+    document.getElementById('total-carrito').textContent = totalFormateado;
     actualizarContadorCarrito();
 }
+
 
 // Función para mostrar una notificación con SweetAlert2
 function mostrarNotificacion(mensaje) {
@@ -67,22 +77,19 @@ function lanzarConfeti() {
 
 // Función para agregar productos al carrito y mostrar la notificación con confeti
 function agregarAlCarrito(nombre, precio) {
-    // Selecciona la primera imagen del producto usando el atributo alt que coincide con el nombre del producto
     const imagenProducto = document.querySelector(`[alt='${nombre}']`)?.src || '';
-    
-    // Si la ruta de la imagen es válida, extraer la parte relevante para formar la URL completa
     const rutaImagen = imagenProducto.split('/').slice(-2).join('/');
     const urlCompletaImagen = `https://berakhah.site/${rutaImagen}`;
 
-    // Obtiene el carrito del localStorage o crea uno nuevo si no existe
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    carrito.push({ nombre, precio, imagen: urlCompletaImagen }); // Añade el nombre, precio y la URL de la imagen
+    carrito.push({ nombre, precio, imagen: urlCompletaImagen });
     localStorage.setItem('carrito', JSON.stringify(carrito));
 
     mostrarCarrito();
-    mostrarNotificacion(`${nombre} ha sido añadido al carrito.`); // Mostrar notificación con SweetAlert2
-    lanzarConfeti(); // Lanza confeti cuando se agrega el producto
+    mostrarNotificacion(`${nombre} ha sido añadido al carrito.`);
+    lanzarConfeti();
 }
+
 
 
 // Función para eliminar un producto del carrito y actualizar el contador
@@ -110,12 +117,15 @@ function enviarPedido() {
 
     let mensaje = '🛒 *Pedido Realizado:*\n\n';
     let total = 0;
+    let bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
 
     carrito.forEach((producto, index) => {
-        let precioFormateado = parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
-        mensaje += `${index + 1}. *${producto.nombre}* - $${precioFormateado}\n`;
+        let precioFormateado = bodyClass === 'en'
+            ? parseFloat(producto.precio).toLocaleString('en-US', { minimumFractionDigits: 0 })
+            : parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
         
-        // Incluye el enlace de la imagen con un emoji para hacerlo más atractivo
+        mensaje += `${index + 1}. *${producto.nombre}* - $${precioFormateado}\n`;
+
         if (producto.imagen) {
             mensaje += `🔗 Imagen: ${producto.imagen}\n`;
         }
@@ -123,7 +133,10 @@ function enviarPedido() {
         total += parseFloat(producto.precio);
     });
 
-    let totalFormateado = total.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+    let totalFormateado = bodyClass === 'en'
+        ? total.toLocaleString('en-US', { minimumFractionDigits: 0 })
+        : total.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+
     mensaje += `\n🧾 *Total:* $${totalFormateado}`;
 
     const numeroWhatsApp = "+573184818218";
@@ -131,8 +144,6 @@ function enviarPedido() {
     window.open(urlWhatsApp, '_blank');
     mostrarCarrito();
 }
-
-
 
 
 function vaciarCarrito() {
