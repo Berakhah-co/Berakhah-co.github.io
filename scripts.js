@@ -67,9 +67,18 @@ function lanzarConfeti() {
 
 // Función para agregar productos al carrito y mostrar la notificación con confeti
 function agregarAlCarrito(nombre, precio) {
+    // Selecciona la primera imagen del producto usando el atributo alt que coincide con el nombre del producto
+    const imagenProducto = document.querySelector(`[alt='${nombre}']`)?.src || '';
+    
+    // Si la ruta de la imagen es válida, extraer la parte relevante para formar la URL completa
+    const rutaImagen = imagenProducto.split('/').slice(-2).join('/');
+    const urlCompletaImagen = `https://berakhah.site/${rutaImagen}`;
+
+    // Obtiene el carrito del localStorage o crea uno nuevo si no existe
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    carrito.push({ nombre, precio });
+    carrito.push({ nombre, precio, imagen: urlCompletaImagen }); // Añade el nombre, precio y la URL de la imagen
     localStorage.setItem('carrito', JSON.stringify(carrito));
+
     mostrarCarrito();
     mostrarNotificacion(`${nombre} ha sido añadido al carrito.`); // Mostrar notificación con SweetAlert2
     lanzarConfeti(); // Lanza confeti cuando se agrega el producto
@@ -99,25 +108,31 @@ function enviarPedido() {
         return;
     }
 
-    let mensaje = 'Pedido:';
+    let mensaje = '🛒 *Pedido Realizado:*\n\n';
     let total = 0;
 
-    carrito.forEach(producto => {
-        // Formatear el precio con los ceros significativos
+    carrito.forEach((producto, index) => {
         let precioFormateado = parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
-        mensaje += `\n- ${producto.nombre}: $${precioFormateado}`;
+        mensaje += `${index + 1}. *${producto.nombre}* - $${precioFormateado}\n`;
+        
+        // Incluye el enlace de la imagen con un emoji para hacerlo más atractivo
+        if (producto.imagen) {
+            mensaje += `🔗 Imagen: ${producto.imagen}\n`;
+        }
+
         total += parseFloat(producto.precio);
     });
 
-    // Formatear el total con los ceros significativos
     let totalFormateado = total.toLocaleString('es-CO', { minimumFractionDigits: 3 });
-    mensaje += `\nTotal: $${totalFormateado}`;
+    mensaje += `\n🧾 *Total:* $${totalFormateado}`;
 
-    const numeroWhatsApp = "+573184818218"; // Reemplaza con tu número de WhatsApp
+    const numeroWhatsApp = "+573184818218";
     const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
     window.open(urlWhatsApp, '_blank');
-    mostrarCarrito(); // Actualiza el carrito después de enviar el pedido
+    mostrarCarrito();
 }
+
+
 
 
 function vaciarCarrito() {
