@@ -1,508 +1,651 @@
 <!DOCTYPE html>
-<html lang="es">
+
+<html lang="en">
 <head>
-    <link rel="icon" href="Logo.jpg" type="image/png">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Productos - Berakhah</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap">
+<link href="Logo.jpg" rel="icon" type="image/png"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Product Catalog - Berakhah</title>
+<link href="styles.css" rel="stylesheet"/>
 </head>
 <body>
-    
-    <!-- Banner -->
-    <header class="banner">
-        <div class="banner-content">
-            <img src="Logo.jpg" alt="Logo de Berakhah" class="logo">
-            <div class="banner-text">
-                <h1>Berakhah</h1>
-                <h2>Valley of Blessing</h2>
-                <p>In Berakhah, you'll find accessories with meaning and purpose. 💖 Do you have yours yet?</p>
-            </div>
-            <div class="banner-buttons">
-                <a href="indexen.html" class="button">English</a>
-                <a href="index.html" class="button">Español</a>
-            </div>
-             <!-- Campo de búsqueda -->
-             <div class="buscador">
-                <input type="text" id="campo-busqueda" placeholder="Find for code">
-                <button id="btn-buscar" class="button">Find</button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Categorías -->
-    <div class="categorias">
-        <button onclick="mostrarCategoria('todo')">All</button>
-        <button onclick="mostrarCategoria('collares')">Necklaces</button>
-        <button onclick="mostrarCategoria('pulseras')">Bracelets</button>
-        <button onclick="mostrarCategoria('anillos')">Rings</button>
-        <button onclick="mostrarCategoria('tendrils')">Tendrils</button>
-        <button onclick="mostrarCategoria('caballeros')">Men</button>
-    </div>
-
-    <!-- Catálogo de Productos -->
-    <main class="catalogo" id="catalogo">
-
-
-        <!-- Ejemplo de producto - Categoria Collares -->
-
-        <div class="producto" data-categoria="collares">
-            <a href="Collares\Corazon B28.jpg" target="_blank">
-                <img src="Collares\Corazon B28.jpg" alt="Berakhah B-28">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-28')">Berakhah B-28</h3>
-            <p>Psalms 20:4 29:13 May He grant you the desires of your heart; may He fulfill all your plans.</p>
-            <p class="precio">9$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-28', 34.999)">¡I want it!</button>
-        </div>
-
-        <div class="producto" data-categoria="collares">
-            <a href="Collares\Perlas.jpg" target="_blank">
-                <img src="Collares\Perlas.jpg" alt="Berakhah B-36">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-36')">Berakhah B-36</h3>
-            <p>Jeremiah 29:13 You will seek me and find me when you search for me with all your heart.</p>
-            <p class="precio">7$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-36', 7)">¡I want it!</button>
-        </div>
-
-        <div class="producto" data-categoria="collares">
-            <a href="Collares\B37.jpg" target="_blank">
-                <img src="Collares\B37.jpg" alt="Berakhah B-37">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-37')">Berakhah B-37</h3>
-            <p> 2 Samuel 7:22 How great you are, my Lord and God! We ourselves have learned that there is no one like you, and that apart from you there is no God.</p>
-            <p class="precio">7$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-37', 7)">¡I want it!</button>
-        </div>
-
-        <div class="producto" data-categoria="collares">
-            <a href="Collares\Jesus.jpg" target="_blank">
-                <img src="Collares\Jesus.jpg" alt="Berakhah B-11">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-11')">Berakhah B-11</h3>
-            <p>John 3:17 "For God did not send His Son into the world to condemn the world, but that the world through Him might be saved."</p>
-            <p class="precio">6$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-11', 6)">¡I want it!</button>
-        </div>
-
-
-        <div class="producto" data-categoria="collares">
-            <a href="Collares\FeCorazon.jpg" target="_blank">
-                <img src="Collares\FeCorazon.jpg" alt="Berakhah B-6">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-6')">Berakhah B-6</h3>
-            <p>Hebrews 11:1 "Now faith is the substance of things hoped for, the evidence of things not seen." </p>
-            <p class="precio">5$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-6', 5)">¡I want it!</button>
-        </div> 
-
-        <div class="producto" data-categoria="collares">
-            <a href="Collares\Vida.jpg" target="_blank">
-                <img src="Collares\Vida.jpg" alt="Berakhah B-4">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-4')">Berakhah B-4</h3>
-            <p>John 14:6 "Jesus said to him, 'I am the way, the truth, and the life. No one comes to the Father except through Me.'".</p>
-            <p class="precio">7$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-4', 7)">¡I want it!</button>
-        </div> 
-
-        <div class="producto" data-categoria="collares">
-            <a href="Collares\Fe.jpg" target="_blank">
-                <img src="Collares\Fe.jpg" alt="Berakhah B-5">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-5')">Berakhah B-5</h3>
-            <p>Hebrews "By faith Sarah herself also received strength to conceive seed, and she bore a child when she was past the age, because she judged Him faithful who had promised."</p>
-            <p class="precio">5$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-5', 5)">¡I want it!</button>
-        </div> 
-
-        <div class="producto" data-categoria="collares">
-            <a href="Collares\Oso.jpg" target="_blank">
-                <img src="Collares\Oso.jpg" alt="Berakhah B-15">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-15')">Berakhah B-15</h3>
-            <p>Isaiah  41:13 "For I, the LORD your God, will hold your right hand, saying to you, 'Fear not, I will help you."</p>
-            <p class="precio">6$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-15', 6)">¡I want it!</button>
-        </div> 
-
-        <div class="producto" data-categoria="collares">
-            <a href="Collares\Paz.jpg" target="_blank">
-                <img src="Collares\Paz.jpg" alt="Berakhah B-10">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-10')">Berakhah B-10</h3>
-            <p>John 14:27 "Peace I leave with you, My peace I give to you; not as the world gives do I give to you. Let not your heart be troubled, neither let it be afraid."</p>
-            <p class="precio">5$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-10', 5)">¡I want it!</button>
-        </div> 
-
-        <div class="producto" data-categoria="collares">
-            <a href="Collares\Dios.jpg" target="_blank">
-                <img src="Collares\Dios.jpg" alt="Berakhah B-2">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-2')">Berakhah B-2</h3>
-            <p>John 3:16 "For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life."</p>
-            <p class="precio">5$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-2', 5)">¡I want it!</button>
-        </div> 
-
-        <div class="producto" data-categoria="collares">
-            <a href="Collares\Maranatha.jpg" target="_blank">
-                <img src="Collares\Maranatha.jpg" alt="Berakhah B-24">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-24')">Berakhah B-24</h3>
-            <p>Revelation 22:17 "And the Spirit and the bride say, 'Come!' And let him who hears say, 'Come!' And let him who thirsts come. Whoever desires, let him take the water of life freely."</p>
-            <p class="precio">8$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-24', 8)">¡I want it!</button>
-        </div> 
-
-        <div class="producto" data-categoria="collares">
-            <a href="Collares\Vida2.jpg" target="_blank">
-                <img src="Collares\Vida2.jpg" alt="Berakhah B-">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-4')">Berakhah B-4</h3>
-            <p>John 14:6 "Jesus said to him, 'I am the way, and the truth, and the life. No one comes to the Father except through me."</p>
-            <p class="precio">7$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-4', 7)">¡I want it!</button>
-        </div> 
-
-        <div class="producto" data-categoria="collares">
-            <a href="Collares\FeCruz.jpg" target="_blank">
-                <img src="Collares\FeCruz.jpg" alt="Berakhah B-26">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-26')">Berakhah B-26</h3>
-            <p>2 Reyes 6:15-16 No tengas miedo, porque más son los que están con nosotros que los que están con ellos.</p>
-            <p class="precio">7$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-26', 7)">¡I want it!</button>
-        </div> 
-
-        <!-- Ejemplo de producto - Categoria Pulseras -->
-
-        <div class="producto" data-categoria="pulseras">
-            <a href="Pulseras\Cruz-1.jpg" target="_blank">
-                <img src="Pulseras\Cruz-1.jpg" alt="Berakhah B-12">
-            </a>
-            <a href="Pulseras\Cruz1.jpg" target="_blank">
-                <img src="Pulseras\Cruz1.jpg" alt="Berakhah B-12">
-            </a>
-            
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-12')">Berakhah B-12</h3>
-            <p>Mark  16:15 "And He said to them, 'Go into all the world and preach the gospel to every creature."</p>
-            <p class="precio">6$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-12', 6)">¡I want it!</button>
-        </div>
-
-        
-        <div class="producto" data-categoria="pulseras">
-            <a href="Pulseras\Corazon-2.jpg" target="_blank">
-                <img src="Pulseras\Corazon-2.jpg" alt="Berakhah B-3">
-            </a>
-            <a href="Pulseras\Corazon2.jpg" target="_blank">
-                <img src="Pulseras\Corazon2.jpg" alt="Berakhah B-3">
-            </a>
-            
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-3')">Berakhah B-3</h3>
-            <p>Isaiah 1:18 "'Come now, and let us reason together,' says the LORD, 'Though your sins are like scarlet, they shall be as white as snow; though they are red like crimson, they shall be as wool."</p>
-            <p class="precio">5$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-3', 5)">¡I want it!</button>
-        </div>
-
-
-        <div class="producto" data-categoria="pulseras">
-            <a href="Pulseras\Arbol-1.jpg" target="_blank">
-                <img src="Pulseras\Arbol-1.jpg" alt="Berakhah B-1">
-            </a>
-            <a href="Pulseras\Arbol1.jpg" target="_blank">
-                <img src="Pulseras\Arbol1.jpg" alt="Berakhah B-1">
-            </a>
-            
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-1')">Berakhah B-1</h3>
-            <p>Psalm  1:3 "He shall be like a tree planted by the rivers of water, that brings forth its fruit in its season, whose leaf also shall not wither; and whatever he does shall prosper."</p>
-            <p class="precio">5$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-1', 5)">¡I want it!</button>
-        </div>
-
-
-        <div class="producto" data-categoria="pulseras">
-            <a href="Pulseras\Corazon-1.jpg" target="_blank">
-                <img src="Pulseras\Corazon-1.jpg" alt="Berakhah B-8">
-            </a>
-            <a href="Pulseras\Corazon1.jpg" target="_blank">
-                <img src="Pulseras\Corazon1.jpg" alt="Berakhah B-8">
-            </a>
-            
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-8')">Berakhah B-8</h3>
-            <p>Proverbs  4:23 "Keep your heart with all diligence, for out of it spring the issues of life."</p>
-            <p class="precio">5$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-8', 5)">¡I want it!</button>
-        </div>
-
-
-        <div class="producto" data-categoria="pulseras">
-            <a href="Pulseras\Fe-1.jpg" target="_blank">
-                <img src="Pulseras\Fe-1.jpg" alt="Berakhah B-7">
-            </a>
-            <a href="Pulseras\Fe1.jpg" target="_blank">
-                <img src="Pulseras\Fe1.jpg" alt="Berakhah B-7">
-            </a>
-            
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-7')">Berakhah B-7</h3>
-            <p>Mark  11:24 "Therefore I say to you, whatever things you ask when you pray, believe that you receive them, and you will have them."</p>
-            <p class="precio">6$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-7', 5)">¡I want it!</button>
-        </div>
-
-        <div class="producto" data-categoria="pulseras">
-            <a href="Pulseras\Cruz-3.jpg" target="_blank">
-                <img src="Pulseras\Cruz-3.jpg" alt="Berakhah B-9">
-            </a>
-            <a href="Pulseras\Cruz3.jpg" target="_blank">
-                <img src="Pulseras\Cruz3.jpg" alt="Berakhah B-9">
-            </a>
-            
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-9')">Berakhah B-9</h3>
-            <p>Romans  1:16 "For I am not ashamed of the gospel of Christ, for it is the power of God to salvation for everyone who believes, for the Jew first and also for the Greek."</p>
-            <p class="precio">6$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-9', 6)">¡I want it!</button>
-        </div>
-
-        <div class="producto" data-categoria="pulseras">
-            <a href="Pulseras\Cruzb1.jpg" target="_blank">
-                <img src="Pulseras\Cruzb1.jpg" alt="Berakhah B-23">
-            </a>
-            <a href="Pulseras\Cruzb2.jpg" target="_blank">
-                <img src="Pulseras\Cruzb2.jpg" alt="Berakhah B-23">
-            </a>
-            <a href="Pulseras\Cruzb3.jpg" target="_blank">
-                <img src="Pulseras\Cruzb3.jpg" alt="Berakhah B-23">
-            </a>     
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-23')">Berakhah B-23</h3>
-            <p>Acts 13:47 For so the Lord has commanded us: "I have made you a light for the Gentiles, that you may bring salvation to the ends of the earth."</p>
-            <p class="precio">6$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-23', 6)">¡I want it!</button>
-        </div>
-
-        <div class="producto" data-categoria="pulseras">
-            <a href="Pulseras\Dios1.jpg" target="_blank">
-                <img src="Pulseras\Dios1.jpg" alt="Berakhah B-25">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-25')">Berakhah B-25</h3>
-            <p>Isaiah 41:13 "For I, the Lord your God, hold your right hand; it is I who say to you, 'Fear not, I am the one who helps you."</p>
-            <p class="precio">5$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-25', 5)">¡I want it!</button>
-        </div>
-
-
-        <!-- Ejemplo de producto - Categoria Anillos -->
-
-        <div class="producto" data-categoria="anillos">
-            <a href="Anillos\B-34.jpg"" target="_blank">
-                <img src="Anillos\B-34.jpg" alt="Berakhah B-34">
-            </a>
-            <a href="Anillos\B-34-1.jpg" target="_blank">
-                <img src="Anillos\B-34-1.jpg" alt="Berakhah B-34">
-            </a>
-            <a href="Anillos\B-34-2.jpg" target="_blank">
-                <img src="Anillos\B-34-2.jpg" alt="Berakhah B-34">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-34')">Berakhah B-34</h3>
-            <p> 1 Samuel 16:7 And the LORD said to Samuel, Look not at his appearance, nor at the height of his stature, for I desire it; because Jehovah does not see what man sees; For a man looks at what is before his eyes, but the Lord looks at the heart. </p>
-            <p class="precio">$21.999</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-34', 21.999)">¡Lo quiero!</button>
-        </div>
-
-        <div class="producto" data-categoria="anillos">
-            <a href="Anillos\B-35.jpg"" target="_blank">
-                <img src="Anillos\B-35.jpg" alt="Berakhah B-35">
-            </a>
-            <a href="Anillos\B-35-1.jpg" target="_blank">
-                <img src="Anillos\B-35-1.jpg" alt="Berakhah B-35">
-            </a>
-            <a href="Anillos\B-35-2.jpg" target="_blank">
-                <img src="Anillos\B-35-2.jpg" alt="Berakhah B-35">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-35')">Berakhah B-35</h3>
-            <p> Psalm 51:10 Create in me a clean heart, God, and renew the righteousness of my spirit.</p>
-            <p class="precio">$21.999</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-35', 21.999)">¡I want it!</button>
-        </div>
-
-        <div class="producto" data-categoria="anillos">
-            <a href="Anillos\Corazonesmeralda1.jpg"" target="_blank">
-                <img src="Anillos\Corazonesmeralda1.jpg" alt="Berakhah B-32">
-            </a>
-            <a href="Anillos\Corazonesmeralda2.jpg" target="_blank">
-                <img src="Anillos\Corazonesmeralda2.jpg" alt="Berakhah B-32">
-            </a>
-            <a href="Anillos\Corazonesmeralda.jpg" target="_blank">
-                <img src="Anillos\Corazonesmeralda.jpg" alt="Berakhah B-32">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-32')">Berakhah B-32</h3>
-            <p>Psalms 31:3 Lead me, for you are my rock and my fortress; direct me for your name's sake.</p>
-            <p class="precio">$6</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-32', 6)">¡I want it!</button>
-        </div>
-
-        <div class="producto" data-categoria="anillos">
-            <a href="Anillos\Corazon-1.jpg"" target="_blank">
-                <img src="Anillos\Corazon-1.jpg" alt="Berakhah B-16">
-            </a>
-            <a href="Anillos\Corazon1.jpg" target="_blank">
-                <img src="Anillos\Corazon1.jpg" alt="Berakhah B-16">
-            </a>
-            <a href="Anillos\Corazon2.jpg" target="_blank">
-                <img src="Anillos\Corazon2.jpg" alt="Berakhah B-16">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-16')">Berakhah B-16</h3>
-            <p>Song of Solomon 8:6 "Set me as a seal upon your heart, as a seal upon your arm, for love is as strong as death."</p>
-            <p class="precio">6$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-16', 6)">¡I want it!</button>
-        </div>
-
-
-        <div class="producto" data-categoria="anillos">
-            <a href="Anillos\hojas1.jpg"" target="_blank">
-                <img src="Anillos\hojas1.jpg" alt="Berakhah B-17">
-            </a>
-            <a href="Anillos\Hojas12.jpg" target="_blank">
-                <img src="Anillos\Hojas12.jpg" alt="Berakhah B-17">
-            </a>
-            <a href="Anillos\Holas-1.jpg" target="_blank">
-                <img src="Anillos\Holas-1.jpg" alt="Berakhah B-17">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-17')">Berakhah B-17</h3>
-            <p>Psalm 92:2 "The righteous will flourish like a palm tree, they will grow like a cedar of Lebanon.".</p>
-            <p class="precio">6$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-17', 6)">¡I want it!</button>
-        </div>
-
-        <div class="producto" data-categoria="anillos">
-            <a href="Anillos\Cruz1.jpg"" target="_blank">
-                <img src="Anillos\Cruz1.jpg" alt="Berakhah B-18">
-            </a>
-            <a href="Anillos\Cruz-1.jpg"" target="_blank">
-                <img src="Anillos\Cruz-1.jpg" alt="Berakhah B-18">
-            </a>
-            <a href="Anillos\Cruz.jpg"" target="_blank">
-                <img src="Anillos\Cruz.jpg" alt="Berakhah B-18">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-18')">Berakhah B-18</h3>
-            <p>Psalm 56:3 "When I am afraid, I put my trust in you."</p>
-            <p class="precio">6$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-18', 6)">¡I want it!</button>
-        </div>
-
-
-        <div class="producto" data-categoria="anillos">
-            <a href="Lazo1.jpg"" target="_blank">
-                <img src="Lazo1.jpg" alt="Berakhah B-19">
-            </a>
-            <a href="Lazo.jpg"" target="_blank">
-                <img src="Lazo.jpg" alt="Berakhah B-19">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-9')">Berakhah B-19</h3>
-            <p>Colossians 3:14 "And over all these virtues put on love, which binds them all together in perfect unity."</p>
-            <p class="precio">6$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-19', 6)">¡I want it!</button>
-        </div> 
-
-        <!-- Ejemplo de producto - Categoria Zarcillos -->
-         
-        <div class="producto" data-categoria="tendrils">
-            <a href="Zarcillos\Corazones.jpg" target="_blank">
-                <img src="Zarcillos\Corazones.jpg" alt="Berakhah B-20">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-20')">Berakhah B-20</h3>
-            <p> Proverbs 27:19 "Water reflects the face; the heart reflects the person."</p>
-            <p class="precio">6$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-20', 6)">¡I want it!</button>
-        </div>
-        </div>
-
-
-        <div class="producto" data-categoria="tendrils">
-            <a href="Zarcillos\Agolla2.jpg" target="_blank">
-                <img src="Zarcillos\Agolla2.jpg" alt="Berakhah B-29">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-29')">Berakhah B-29</h3>
-            <p>Psalm 20:4 May he grant you the desire of your heart and make all your plans succeed.</p>
-            <p> Size 1cm. </p>
-            <p class="precio">5$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-29', 17.999)">¡I want it!</button>
-        </div>
-
-
-        <div class="producto" data-categoria="tendrils">
-            <a href="Zarcillos\Agolla3.jpg" target="_blank">
-                <img src="Zarcillos\Agolla3.jpg" alt="Berakhah B-30">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-30')">Berakhah B-30</h3>
-            <p> Proverbs 3:3 Let not mercy and truth forsake you; bind them around your neck, write them on the tablet of your heart.</p>
-            <p> Size 1.5cm. </p>
-            <p class="precio">5$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-30', 17.999)">¡I want it!</button>
-        </div>
-
-        <div class="producto" data-categoria="tendrils">
-            <a href="Zarcillos\Agolla1.jpg" target="_blank">
-                <img src="Zarcillos\Agolla1.jpg" alt="Berakhah B-31">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-31')">Berakhah B-31</h3>
-            <p> Matthew 6:21 For where your treasure is, there your heart will be also.</p>
-            <p> Size 1.8cm. </p>
-            <p class="precio">5$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-31', 17.999)">¡I want it!</button>
-        </div>
-
-
-        <!-- Ejemplo de producto - Categoria Caballeros -->
-
-        <div class="producto" data-categoria="caballeros">
-            <a href="Caballeros\Cruz1.jpg" target="_blank">
-                <img src="Caballeros\Cruz1.jpg" alt="Berakhah B-14">
-            </a>
-            <a href="Caballeros\Cruz-1.jpg" target="_blank">
-                <img src="Caballeros\Cruz-1.jpg" alt="Berakhah B-14">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-14')">Berakhah B-14</h3>
-            <p>"Jesus said to her, 'I am the resurrection and the life. The one who believes in me will live, even though they die; and whoever lives by believing in me will never die eternally."</p>
-            <p class="precio">6$</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-14', 6)">¡I want it!</button>
-        </div>
-
-        <div class="producto" data-categoria="caballeros">
-            <a href="Collares\Perlas.jpg" target="_blank">
-                <img src="Collares\Perlas.jpg" alt="Berakhah B-36">
-            </a>
-            <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-36')">Berakhah B-36</h3>
-            <p>Jeremiah 29:13 You will seek me and find me when you search for me with all your heart.</p>
-            <p class="precio">$7</p>
-            <button class="button" onclick="agregarAlCarrito('Berakhah B-36', 6)">¡I want it!</button>
-        </div>
-
-
-        <!-- Repite los divs de "producto" para más productos -->
-    </main>
-
- <!-- Carrito de compras -->
- <div id="carrito" style="display: none;">
-    <h2>Tu carrito</h2>
-    <ul id="lista-carrito"></ul>
-    <p>Total: $<span id="total-carrito">0</span></p>
-    <button id="btn-pedir" class="button">Enviar pedido</button>
-    <!-- Mensaje adicional debajo del botón -->
-<p id="mensaje-pedido" style="font-size: 14px; margin-top: 10px;">
-    If you place the order from a PC and do not have WhatsApp linked, you can send us a photo of the order to 
-<strong>+57 318 4818 218</strong> or you can log in 
-<a href="https://web.whatsapp.com/" target="_blank">WhatsAppWeb</a>, send the order and click send chat, use WhatsApp web.
+<!-- Banner -->
+<header class="banner">
+<div class="banner-content">
+<img alt="Berakhah Logo" class="logo" src="Logo.jpg"/>
+<div class="banner-text">
+<h1>Berakhah</h1>
+<p>At Berakhah, you'll find meaningful and purposeful accessories. 💖 Do you have yours yet?</p>
 </div>
-
- <!-- Botón flotante para abrir el carrito -->
- <button id="btn-ver-carrito" class="boton-flotante" onclick="toggleCarrito()">🛒 <span id="contador-carrito">0</span></button>
-
-
+<div class="banner-buttons">
+<a class="button" href="indexen.html">English</a>
+<a class="button" href="index.html">Español</a>
+</div>
+<!-- Search field -->
+<div class="buscador">
+<input id="campo-busqueda" placeholder="Search by code" type="text"/>
+<button class="button" id="btn-buscar">Search</button>
+</div>
+</div>
+</header>
+<!-- Categories -->
+<div class="categorias">
+<button onclick="mostrarCategoria('todo')">All</button>
+<button onclick="mostrarCategoria('collares')">Necklaces</button>
+<button onclick="mostrarCategoria('pulseras')">Bracelets</button>
+<button onclick="mostrarCategoria('anillos')">Rings</button>
+<button onclick="mostrarCategoria('zarcillos')">Earrings</button>
+<button onclick="mostrarCategoria('caballeros')">Men's</button>
+</div>
+<!-- Product Catalog -->
+<main class="catalogo" id="catalogo">
+<!-- Categoria: collares - Producto: Berakhah B-38 -->
+<div class="producto" data-categoria="collares">
+<div class="carousel" id="carousel-B38">
+<div class="carousel-images"><img alt="Berakhah B-38" class="active" onclick="window.open(this.src, '_blank')" src="Collares/B38.jpg"/><img alt="Berakhah B-38" onclick="window.open(this.src, '_blank')" src="Collares/B38-1.jpg"/></div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B38')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B38')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-38')">Berakhah B-38</h3>
+<p>Isaiah 53:4 Surely he has borne our griefs and carried our sorrows, but we consider him stricken, smitten by God, and afflicted.</p>
+<p class="precio">$9.000</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-38', 9.000)">I want it!</button>
+</div>
+<!-- Categoria: collares - Producto: Berakhah B-49 -->
+<div class="producto" data-categoria="collares">
+<div class="carousel" id="carousel-B49">
+<div class="carousel-images"><img alt="Berakhah B-49" class="active" onclick="window.open(this.src, '_blank')" src="Joyero/B49.jpg"/></div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B49')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B49')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-49')">Berakhah B-49</h3>
+<p>Proverbs 31:30 Charm is deceptive, and beauty is fleeting; but a woman who fears the Lord is to be praised.</p>
+<p class="precio">$50</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-49', 50)">I want it!</button>
+</div>
+<!-- Categoria: collares - Producto: Berakhah B-48 -->
+<div class="producto" data-categoria="collares">
+<div class="carousel" id="carousel-B48">
+<div class="carousel-images"><img alt="Berakhah B-48" class="active" onclick="window.open(this.src, '_blank')" src="Joyero/B48.jpg"/></div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B48')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B48')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-48')">Berakhah B-48</h3>
+<p>Proverbs 31:30 Charm is deceptive, and beauty is fleeting; but a woman who fears the Lord is to be praised.</p>
+<p class="precio">$50</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-48', 50)">I want it!</button>
+</div>
+<!-- Categoria: collares - Producto: Berakhah B-28 -->
+<div class="producto" data-categoria="collares">
+<div class="carousel" id="carousel-B28">
+<div class="carousel-images"><img alt="Berakhah B-28" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Corazon B28.jpg"/></div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B28')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B28')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-28')">Berakhah B-28</h3>
+<p>Psalm 20:4 May he give you the desire of your heart and make all your plans succeed.</p>
+<p class="precio">$9</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-28', 9)">I want it!</button>
+</div>
+<!-- Categoria: collares - Producto: Berakhah B-36 -->
+<div class="producto" data-categoria="collares">
+<div class="carousel" id="carousel-B36">
+<div class="carousel-images"><img alt="Berakhah B-36" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Perlas.jpg"/></div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B36')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B36')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-36')">Berakhah B-36</h3>
+<p>Jeremiah 29:13 You will seek me and find me when you seek me with all your heart.</p>
+<p class="precio">$7</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-36', 7)">I want it!</button>
+</div>
+<!-- Categoria: collares - Producto: Berakhah B-37 -->
+<div class="producto" data-categoria="collares">
+<div class="carousel" id="carousel-B37">
+<div class="carousel-images"><img alt="Berakhah B-37" class="active" onclick="window.open(this.src, '_blank')" src="Collares/B37.jpg"/></div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B37')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B37')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-37')">Berakhah B-37</h3>
+<p>2 Samuel 7:22 How great you are, Sovereign Lord! There is no one like you, and there is no God but you, as we have heard with our own ears.</p>
+<p class="precio">$7</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-37', 7)">I want it!</button>
+</div>
+<!-- Categoria: collares - Producto: Berakhah B-11 -->
+<div class="producto" data-categoria="collares">
+<div class="carousel" id="carousel-B11">
+<div class="carousel-images"><img alt="Berakhah B-11" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Jesus.jpg"/></div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B11')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B11')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-11')">Berakhah B-11</h3>
+<p>John 3:17 For God did not send his Son into the world to condemn the world, but to save the world through him.</p>
+<p class="precio">$6</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-11', 6)">I want it!</button>
+</div>
+<!-- Categoria: collares - Producto: Berakhah B-6 -->
+<div class="producto" data-categoria="collares">
+<div class="carousel" id="carousel-B6">
+<div class="carousel-images"><img alt="Berakhah B-6" class="active" onclick="window.open(this.src, '_blank')" src="Collares/FeCorazon.jpg"/></div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B6')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B6')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-6')">Berakhah B-6</h3>
+<p>Hebrews 11:1 Now faith is confidence in what we hope for and assurance about what we do not see.</p>
+<p class="precio">$5</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-6', 5)">I want it!</button>
+</div>
+<!-- Categoria: collares - Producto: Berakhah B-4 -->
+<div class="producto" data-categoria="collares">
+<div class="carousel" id="carousel-B4">
+<div class="carousel-images"><img alt="Berakhah B-4" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Vida.jpg"/></div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B4')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B4')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-4')">Berakhah B-4</h3>
+<p>John 14:6 Jesus answered, "I am the way and the truth and the life. No one comes to the Father except through me."</p>
+<p class="precio">$7</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-4', 7)">I want it!</button>
+</div>
+<!-- Categoria: collares - Producto: Berakhah B-5 -->
+<div class="producto" data-categoria="collares">
+<div class="carousel" id="carousel-B5">
+<div class="carousel-images"><img alt="Berakhah B-5" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Fe.jpg"/></div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B5')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B5')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-5')">Berakhah B-5</h3>
+<p>Hebrews 11:11 By faith even Sarah, who was past childbearing age, was enabled to bear children because she considered him faithful who had made the promise...</p>
+<p class="precio">$5</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-5', 5)">I want it!</button>
+</div>
+<!-- Categoria: collares - Producto: Berakhah B-15 -->
+<div class="producto" data-categoria="collares">
+<div class="carousel" id="carousel-B15">
+<div class="carousel-images"><img alt="Berakhah B-15" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Oso.jpg"/></div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B15')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B15')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-15')">Berakhah B-15</h3>
+<p>Isaiah 41:13 For I am the Lord your God who takes hold of your right hand and says to you, Do not fear; I will help you.</p>
+<p class="precio">$6</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-15', 6)">I want it!</button>
+</div>
+<!-- Categoria: collares - Producto: Berakhah B-10 -->
+<div class="producto" data-categoria="collares">
+<div class="carousel" id="carousel-B10">
+<div class="carousel-images"><img alt="Berakhah B-10" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Paz.jpg"/></div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B10')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B10')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-10')">Berakhah B-10</h3>
+<p>John 14:27 Peace I leave with you; my peace I give you. I do not give to you as the world gives...</p>
+<p class="precio">$5</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-10', 5)">I want it!</button>
+</div>
+<!-- Categoria: collares - Producto: Berakhah B-2 -->
+<div class="producto" data-categoria="collares">
+<div class="carousel" id="carousel-B2">
+<div class="carousel-images"><img alt="Berakhah B-2" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Dios.jpg"/></div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B2')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B2')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-2')">Berakhah B-2</h3>
+<p>John 3:16 For God so loved the world that he gave his one and only Son...</p>
+<p class="precio">$5</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-2', 5)">I want it!</button>
+</div>
+<!-- Categoria: collares - Producto: Berakhah B-24 -->
+<div class="producto" data-categoria="collares">
+<div class="carousel" id="carousel-B24">
+<div class="carousel-images"><img alt="Berakhah B-24" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Maranatha.jpg"/></div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B24')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B24')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-24')">Berakhah B-24</h3>
+<p>Revelation 22:17 The Spirit and the bride say, "Come!"...</p>
+<p class="precio">$8</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-24', 8)">I want it!</button>
+</div>
+<!-- Categoria: collares - Producto: Berakhah B-26 -->
+<div class="producto" data-categoria="collares">
+<div class="carousel" id="carousel-B26">
+<div class="carousel-images"><img alt="Berakhah B-26" class="active" onclick="window.open(this.src, '_blank')" src="Collares/FeCruz.jpg"/></div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B26')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B26')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-26')">Berakhah B-26</h3>
+<p>2 Kings 6:15-16 "Don’t be afraid," the prophet answered. "Those who are with us are more than those who are with them."</p>
+<p class="precio">$6</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-26', 6)">I want it!</button>
+</div>
+<!-- Categoria: pulseras - Producto: Berakhah B-40 -->
+<div class="producto" data-categoria="pulseras">
+<div class="carousel" id="carousel-B40">
+<div class="carousel-images">
+<img alt="Berakhah B-40" class="active" onclick="window.open(this.src, '_blank')" src="Caballeros/B40.jpg"/>
+<img alt="Berakhah B-40" onclick="window.open(this.src, '_blank')" src="Caballeros/B40-1.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B40')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B40')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-40')">Berakhah B-40</h3>
+<p>Revelation 1:6 He has made us kings and priests to his God and Father; to him be glory and dominion forever and ever. Amen.</p>
+<p class="precio">$7</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-40', 7)">I want it!</button>
+</div>
+<!-- Categoria: pulseras - Producto: Berakhah B-41 -->
+<div class="producto" data-categoria="pulseras">
+<div class="carousel" id="carousel-B41">
+<div class="carousel-images">
+<img alt="Berakhah B-41" class="active" onclick="window.open(this.src, '_blank')" src="Caballeros/B41.jpg"/>
+<img alt="Berakhah B-41" onclick="window.open(this.src, '_blank')" src="Caballeros/B41-1.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B41')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B41')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-41')">Berakhah B-41</h3>
+<p>Revelation 1:6 He has made us kings and priests to his God and Father; to him be glory and dominion forever and ever. Amen.</p>
+<p class="precio">$7</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-41', 7)">I want it!</button>
+</div>
+<!-- Categoria: pulseras - Producto: Berakhah B-12 -->
+<div class="producto" data-categoria="pulseras">
+<div class="carousel" id="carousel-B12">
+<div class="carousel-images">
+<img alt="Berakhah B-12" class="active" onclick="window.open(this.src, '_blank')" src="Pulseras/Cruz-1.jpg"/>
+<img alt="Berakhah B-12" onclick="window.open(this.src, '_blank')" src="Pulseras/Cruz1.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B12')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B12')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-12')">Berakhah B-12</h3>
+<p>Mark 16:15 He said to them, "Go into all the world and preach the gospel to all creation."</p>
+<p class="precio">$6</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-12', 6)">I want it!</button>
+</div>
+<!-- Categoria: pulseras - Producto: Berakhah B-3 -->
+<div class="producto" data-categoria="pulseras">
+<div class="carousel" id="carousel-B3">
+<div class="carousel-images">
+<img alt="Berakhah B-3" class="active" onclick="window.open(this.src, '_blank')" src="Pulseras/Corazon-2.jpg"/>
+<img alt="Berakhah B-3" onclick="window.open(this.src, '_blank')" src="Pulseras/Corazon2.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B3')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B3')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-3')">Berakhah B-3</h3>
+<p>Isaiah 1:18 "Come now, let us settle the matter," says the Lord. "Though your sins are like scarlet, they shall be as white as snow."</p>
+<p class="precio">$5</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-3', 5)">I want it!</button>
+</div>
+<!-- Categoria: pulseras - Producto: Berakhah B-1 -->
+<div class="producto" data-categoria="pulseras">
+<div class="carousel" id="carousel-B1">
+<div class="carousel-images">
+<img alt="Berakhah B-1" class="active" onclick="window.open(this.src, '_blank')" src="Pulseras/Arbol-1.jpg"/>
+<img alt="Berakhah B-1" onclick="window.open(this.src, '_blank')" src="Pulseras/Arbol1.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B1')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B1')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-1')">Berakhah B-1</h3>
+<p>Psalm 1:3 That person is like a tree planted by streams of water, which yields its fruit in season...</p>
+<p class="precio">$5</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-1', 5)">I want it!</button>
+</div>
+<!-- Categoria: pulseras - Producto: Berakhah B-8 -->
+<div class="producto" data-categoria="pulseras">
+<div class="carousel" id="carousel-B8">
+<div class="carousel-images">
+<img alt="Berakhah B-8" class="active" onclick="window.open(this.src, '_blank')" src="Pulseras/Corazon-1.jpg"/>
+<img alt="Berakhah B-8" onclick="window.open(this.src, '_blank')" src="Pulseras/Corazon1.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B8')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B8')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-8')">Berakhah B-8</h3>
+<p>Proverbs 4:23 Above all else, guard your heart, for everything you do flows from it.</p>
+<p class="precio">$5</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-8', 5)">I want it!</button>
+</div>
+<!-- Categoria: pulseras - Producto: Berakhah B-7 -->
+<div class="producto" data-categoria="pulseras">
+<div class="carousel" id="carousel-B7">
+<div class="carousel-images">
+<img alt="Berakhah B-7" class="active" onclick="window.open(this.src, '_blank')" src="Pulseras/Fe-1.jpg"/>
+<img alt="Berakhah B-7" onclick="window.open(this.src, '_blank')" src="Pulseras/Fe1.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B7')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B7')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-7')">Berakhah B-7</h3>
+<p>Mark 11:24 Therefore I tell you, whatever you ask for in prayer, believe that you have received it, and it will be yours.</p>
+<p class="precio">$6</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-7', 6)">I want it!</button>
+</div>
+<!-- Categoria: pulseras - Producto: Berakhah B-9 -->
+<div class="producto" data-categoria="pulseras">
+<div class="carousel" id="carousel-B9">
+<div class="carousel-images">
+<img alt="Berakhah B-9" class="active" onclick="window.open(this.src, '_blank')" src="Pulseras/Cruz-3.jpg"/>
+<img alt="Berakhah B-9" onclick="window.open(this.src, '_blank')" src="Pulseras/Cruz3.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B9')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B9')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-9')">Berakhah B-9</h3>
+<p>Romans 1:16 For I am not ashamed of the gospel, because it is the power of God that brings salvation to everyone who believes...</p>
+<p class="precio">$6</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-9', 6)">I want it!</button>
+</div>
+<!-- Categoria: pulseras - Producto: Berakhah B-23 -->
+<div class="producto" data-categoria="pulseras">
+<div class="carousel" id="carousel-B23">
+<div class="carousel-images">
+<img alt="Berakhah B-23" class="active" onclick="window.open(this.src, '_blank')" src="Pulseras/Cruzb1.jpg"/>
+<img alt="Berakhah B-23" onclick="window.open(this.src, '_blank')" src="Pulseras/Cruzb2.jpg"/>
+<img alt="Berakhah B-23" onclick="window.open(this.src, '_blank')" src="Pulseras/Cruzb3.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B23')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B23')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-23')">Berakhah B-23</h3>
+<p>Acts 13:47 For this is what the Lord has commanded us: "I have made you a light for the Gentiles, that you may bring salvation to the ends of the earth."</p>
+<p class="precio">$6</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-23', 6)">I want it!</button>
+</div>
+<!-- Categoria: pulseras - Producto: Berakhah B-25 -->
+<div class="producto" data-categoria="pulseras">
+<div class="carousel" id="carousel-B25">
+<div class="carousel-images">
+<img alt="Berakhah B-25" class="active" onclick="window.open(this.src, '_blank')" src="Pulseras/Dios1.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B25')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B25')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-25')">Berakhah B-25</h3>
+<p>Isaiah 41:13 For I am the Lord your God who takes hold of your right hand and says to you, "Do not fear; I will help you."</p>
+<p class="precio">$5</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-25', 5)">I want it!</button>
+</div>
+<!-- Categoria: anillos - Producto: Berakhah B-34 -->
+<div class="producto" data-categoria="anillos">
+<div class="carousel" id="carousel-B34">
+<div class="carousel-images">
+<img alt="Berakhah B-34" class="active" onclick="window.open(this.src, '_blank')" src="Anillos/B-34.jpg"/>
+<img alt="Berakhah B-34" onclick="window.open(this.src, '_blank')" src="Anillos/B-34-1.jpg"/>
+<img alt="Berakhah B-34" onclick="window.open(this.src, '_blank')" src="Anillos/B-34-2.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B34')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B34')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-34')">Berakhah B-34</h3>
+<p>1 Samuel 16:7 But the Lord said to Samuel, "Do not consider his appearance or his height, for I have rejected him. The Lord does not look at the things people look at. People look at the outward appearance, but the Lord looks at the heart."</p>
+<p class="precio">$6</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-34', 6)">I want it!</button>
+</div>
+<!-- Categoria: anillos - Producto: Berakhah B-35 -->
+<div class="producto" data-categoria="anillos">
+<div class="carousel" id="carousel-B35">
+<div class="carousel-images">
+<img alt="Berakhah B-35" class="active" onclick="window.open(this.src, '_blank')" src="Anillos/B-35.jpg"/>
+<img alt="Berakhah B-35" onclick="window.open(this.src, '_blank')" src="Anillos/B-35-1.jpg"/>
+<img alt="Berakhah B-35" onclick="window.open(this.src, '_blank')" src="Anillos/B-35-2.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B35')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B35')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-35')">Berakhah B-35</h3>
+<p>Psalm 51:10 Create in me a pure heart, O God, and renew a steadfast spirit within me.</p>
+<p class="precio">$6</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-35', 6)">I want it!</button>
+</div>
+<!-- Categoria: anillos - Producto: Berakhah B-32 -->
+<div class="producto" data-categoria="anillos">
+<div class="carousel" id="carousel-B32">
+<div class="carousel-images">
+<img alt="Berakhah B-32" class="active" onclick="window.open(this.src, '_blank')" src="Anillos/Corazonesmeralda1.jpg"/>
+<img alt="Berakhah B-32" onclick="window.open(this.src, '_blank')" src="Anillos/Corazonesmeralda2.jpg"/>
+<img alt="Berakhah B-32" onclick="window.open(this.src, '_blank')" src="Anillos/Corazonesmeralda.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B32')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B32')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-32')">Berakhah B-32</h3>
+<p>Psalm 31:3 Since you are my rock and my fortress, for the sake of your name lead and guide me.</p>
+<p class="precio">$6</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-32', 6)">I want it!</button>
+</div>
+<!-- Categoria: anillos - Producto: Berakhah B-16 -->
+<div class="producto" data-categoria="anillos">
+<div class="carousel" id="carousel-B16">
+<div class="carousel-images">
+<img alt="Berakhah B-16" class="active" onclick="window.open(this.src, '_blank')" src="Anillos/Corazon-1.jpg"/>
+<img alt="Berakhah B-16" onclick="window.open(this.src, '_blank')" src="Anillos/Corazon1.jpg"/>
+<img alt="Berakhah B-16" onclick="window.open(this.src, '_blank')" src="Anillos/Corazon2.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B16')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B16')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-16')">Berakhah B-16</h3>
+<p>Song of Solomon 8:6 Place me like a seal over your heart, like a seal on your arm; for love is as strong as death.</p>
+<p class="precio">$6</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-16', 6)">I want it!</button>
+</div>
+<!-- Categoria: anillos - Producto: Berakhah B-17 -->
+<div class="producto" data-categoria="anillos">
+<div class="carousel" id="carousel-B17">
+<div class="carousel-images">
+<img alt="Berakhah B-17" class="active" onclick="window.open(this.src, '_blank')" src="Anillos/hojas1.jpg"/>
+<img alt="Berakhah B-17" onclick="window.open(this.src, '_blank')" src="Anillos/Hojas12.jpg"/>
+<img alt="Berakhah B-17" onclick="window.open(this.src, '_blank')" src="Anillos/Holas-1.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B17')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B17')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-17')">Berakhah B-17</h3>
+<p>Psalm 92:12 The righteous will flourish like a palm tree, they will grow like a cedar of Lebanon.</p>
+<p class="precio">$6</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-17', 6)">I want it!</button>
+</div>
+<!-- Categoria: anillos - Producto: Berakhah B-18 -->
+<div class="producto" data-categoria="anillos">
+<div class="carousel" id="carousel-B18">
+<div class="carousel-images">
+<img alt="Berakhah B-18" class="active" onclick="window.open(this.src, '_blank')" src="Anillos/Cruz1.jpg"/>
+<img alt="Berakhah B-18" onclick="window.open(this.src, '_blank')" src="Anillos/Cruz-1.jpg"/>
+<img alt="Berakhah B-18" onclick="window.open(this.src, '_blank')" src="Anillos/Cruz.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B18')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B18')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-18')">Berakhah B-18</h3>
+<p>Psalm 56:3 When I am afraid, I put my trust in you.</p>
+<p class="precio">$6</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-18', 6)">I want it!</button>
+</div>
+<!-- Categoria: anillos - Producto: Berakhah B-19 -->
+<div class="producto" data-categoria="anillos">
+<div class="carousel" id="carousel-B19">
+<div class="carousel-images">
+<img alt="Berakhah B-19" class="active" onclick="window.open(this.src, '_blank')" src="Anillos/Lazo1.jpg"/>
+<img alt="Berakhah B-19" onclick="window.open(this.src, '_blank')" src="Anillos/Lazo.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B19')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B19')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-19')">Berakhah B-19</h3>
+<p>Colossians 3:14 And over all these virtues put on love, which binds them all together in perfect unity.</p>
+<p class="precio">$6</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-19', 6)">I want it!</button>
+</div>
+<!-- Categoria: zarcillos - Producto: Berakhah B-20 -->
+<div class="producto" data-categoria="zarcillos">
+<div class="carousel" id="carousel-B20">
+<div class="carousel-images">
+<img alt="Berakhah B-20" class="active" onclick="window.open(this.src, '_blank')" src="Zarcillos/Corazones.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B20')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B20')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-20')">Berakhah B-20</h3>
+<p>Proverbs 27:19 As water reflects the face, so one’s life reflects the heart.</p>
+<p class="precio">$6</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-20', 6)">I want it!</button>
+</div>
+<!-- Categoria: zarcillos - Producto: Berakhah B-29 -->
+<div class="producto" data-categoria="zarcillos">
+<div class="carousel" id="carousel-B29">
+<div class="carousel-images">
+<img alt="Berakhah B-29" class="active" onclick="window.open(this.src, '_blank')" src="Zarcillos/Agolla2.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B29')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B29')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-29')">Berakhah B-29</h3>
+<p>Psalm 20:4 May he give you the desire of your heart and make all your plans succeed.</p>
+<p>Size: 1cm.</p>
+<p class="precio">$5</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-29', 5)">I want it!</button>
+</div>
+<!-- Categoria: zarcillos - Producto: Berakhah B-30 -->
+<div class="producto" data-categoria="zarcillos">
+<div class="carousel" id="carousel-B30">
+<div class="carousel-images">
+<img alt="Berakhah B-30" class="active" onclick="window.open(this.src, '_blank')" src="Zarcillos/Agolla3.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B30')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B30')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-30')">Berakhah B-30</h3>
+<p>Proverbs 3:3 Let love and faithfulness never leave you; bind them around your neck, write them on the tablet of your heart.</p>
+<p>Size: 1.5cm.</p>
+<p class="precio">$5</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-30', 5)">I want it!</button>
+</div>
+<!-- Categoria: zarcillos - Producto: Berakhah B-31 -->
+<div class="producto" data-categoria="zarcillos">
+<div class="carousel" id="carousel-B31">
+<div class="carousel-images">
+<img alt="Berakhah B-31" class="active" onclick="window.open(this.src, '_blank')" src="Zarcillos/Agolla1.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B31')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B31')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-31')">Berakhah B-31</h3>
+<p>Matthew 6:21 For where your treasure is, there your heart will be also.</p>
+<p>Size: 1.8cm.</p>
+<p class="precio">$5</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-31', 5)">I want it!</button>
+</div>
+<!-- Categoria: caballeros - Producto: Berakhah B-39 -->
+<div class="producto" data-categoria="caballeros">
+<div class="carousel" id="carousel-B39">
+<div class="carousel-images">
+<img alt="Berakhah B-39" class="active" onclick="window.open(this.src, '_blank')" src="Caballeros/B39.jpg"/>
+<img alt="Berakhah B-39" onclick="window.open(this.src, '_blank')" src="Caballeros/B39-1.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B39')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B39')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-39')">Berakhah B-39</h3>
+<p>Revelation 1:6 And has made us kings and priests to God and His Father; to Him be glory and dominion forever and ever. Amen.</p>
+<p class="precio">$8</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-39', 8)">I want it!</button>
+</div>
+<!-- Categoria: caballeros - Producto: Berakhah B-40 -->
+<div class="producto" data-categoria="caballeros">
+<div class="carousel" id="carousel-B40">
+<div class="carousel-images">
+<img alt="Berakhah B-40" class="active" onclick="window.open(this.src, '_blank')" src="Caballeros/B40.jpg"/>
+<img alt="Berakhah B-40" onclick="window.open(this.src, '_blank')" src="Caballeros/B40-1.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B40')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B40')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-40')">Berakhah B-40</h3>
+<p>Revelation 1:6 And has made us kings and priests to God and His Father; to Him be glory and dominion forever and ever. Amen.</p>
+<p class="precio">$8</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-40', 8)">I want it!</button>
+</div>
+<!-- Categoria: caballeros - Producto: Berakhah B-41 -->
+<div class="producto" data-categoria="caballeros">
+<div class="carousel" id="carousel-B41">
+<div class="carousel-images">
+<img alt="Berakhah B-41" class="active" onclick="window.open(this.src, '_blank')" src="Caballeros/B41.jpg"/>
+<img alt="Berakhah B-41" onclick="window.open(this.src, '_blank')" src="Caballeros/B41-1.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B41')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B41')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-41')">Berakhah B-41</h3>
+<p>Revelation 1:6 And has made us kings and priests to God and His Father; to Him be glory and dominion forever and ever. Amen.</p>
+<p class="precio">$8</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-41', 8)">I want it!</button>
+</div>
+<!-- Categoria: caballeros - Producto: Berakhah B-14 -->
+<div class="producto" data-categoria="caballeros">
+<div class="carousel" id="carousel-B14">
+<div class="carousel-images">
+<img alt="Berakhah B-14" class="active" onclick="window.open(this.src, '_blank')" src="Caballeros/Cruz1.jpg"/>
+<img alt="Berakhah B-14" onclick="window.open(this.src, '_blank')" src="Caballeros/Cruz-1.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B14')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B14')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-14')">Berakhah B-14</h3>
+<p>John 11:25-26 Jesus said to her, "I am the resurrection and the life. The one who believes in me will live, even though they die; and whoever lives by believing in me will never die. Do you believe this?"</p>
+<p class="precio">$7</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-14', 7)">I want it!</button>
+</div>
+<!-- Categoria: caballeros - Producto: Berakhah B-36 -->
+<div class="producto" data-categoria="caballeros">
+<div class="carousel" id="carousel-B36">
+<div class="carousel-images">
+<img alt="Berakhah B-36" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Perlas.jpg"/>
+</div>
+<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B36')">❮</button>
+<button class="carousel-button next" onclick="changeImage(1, 'carousel-B36')">❯</button>
+</div>
+<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-36')">Berakhah B-36</h3>
+<p>Jeremiah 29:13 You will seek me and find me when you seek me with all your heart.</p>
+<p class="precio">$8</p>
+<button class="button" onclick="agregarAlCarrito('Berakhah B-36', 8)">I want it!</button>
+</div>
+</main>
+<!-- Shopping Cart -->
+<div id="carrito" style="display: none;">
+<h2>Your Cart</h2>
+<ul id="lista-carrito"></ul>
+<p>Total: $<span id="total-carrito">0</span></p>
+<button class="button" id="btn-pedir">Place Order</button>
+<button class="button" id="btn-vaciar-carrito">Empty Cart</button>
+<p id="mensaje-pedido" style="font-size: 14px; margin-top: 10px;">
+            If you are placing an order from a PC and do not have WhatsApp linked, you can send us a photo of the order to 
+            <strong>+57 318 4818 218</strong> or log in to 
+            <a href="https://web.whatsapp.com/" target="_blank">WhatsApp Web</a> and place the order by clicking on the chat and using WhatsApp Web.
+        </p>
+</div>
+<!-- Floating Back to Top Button -->
+<button class="volver-inicio" id="btn-volver-inicio" title="Back to Top">↑</button>
+<!-- Loading Bar -->
+<div id="barra-carga">
+<div class="carga"></div>
+</div>
+<!-- Social Media Icons -->
+<div class="rrss-icons">
+<a href="https://www.instagram.com/berakhah_co/" target="_blank">
+<img alt="Instagram" src="iconos/instagram.png"/>
+</a>
+<a href="https://api.whatsapp.com/send?phone=573184818218&amp;text=Hello%2C%20I%20would%20like%20to%20get%20more%20information..." target="_blank">
+<img alt="WhatsApp" src="iconos/whatsapp.png"/>
+</a>
+</div>
+<!-- Floating Cart Button -->
+<button class="boton-flotante" id="btn-ver-carrito" onclick="toggleCarrito()">🛒 <span id="contador-carrito">0</span></button>
 <script src="scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1/dist/confetti.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
