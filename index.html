@@ -1,53 +1,57 @@
+
 <!DOCTYPE html>
 <body class="es"></body>
 <html lang="es">
-<head>
-<link href="Logo.jpg" rel="icon" type="image/png"/>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Catálogo de Productos - Berakhah</title>
-<link href="styles.css" rel="stylesheet"/>
-</head>
+    <head>
+        <link href="Logo.jpg" rel="icon" type="image/png"/>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>Catálogo de Productos - Berakhah</title>
+        <meta name="description" content="Descubre nuestra colección de joyería fina y accesorios personalizados. Ofrecemos collares, pulseras y anillos únicos, perfectos para regalar en ocasiones especiales."/>
+        <meta name="keywords" content="joyería artesanal, collares elegantes, pulseras de moda, anillos únicos, joyería personalizada, regalos especiales, joyas hechas a mano, accesorios modernos, joyas de alta calidad, collares de plata, joyería de lujo, joyas para regalar, regalos para ella, joyas femeninas, collares con significado, anillos de compromiso, joyas con estilo, joyería minimalista, pulseras delicadas, joyas exclusivas, joyería para ocasiones especiales, detalles elegantes, joyería para mujer, collares para regalo, regalos originales, accesorios elegantes, pulseras modernas, joyería fina, joyas para aniversario, accesorios personalizados, collares para mujer, joyas para todos los días, detalles únicos, joyas de moda, joyería creativa, joyas con encanto, pulseras elegantes, joyería de diseño, regalos únicos, collares delicados, anillos elegantes, joyería sofisticada, joyas de alta gama, collares de oro, pulseras ajustables, joyas perfectas para regalar"/>
+        <link href="styles.css" rel="stylesheet"/>
+    </head>
+    
 <body>
-<!-- Banner -->
-<header class="banner">
-<div class="banner-content">
-<img alt="Logo de Berakhah" class="logo" src="Logo.jpg"/>
-<div class="banner-text">
-<h1>Berakhah</h1>
-<p>En Berakhah encontrarás accesorios con significado y propósito. 💖 ¿Ya tienes el tuyo?</p>
-</div>
-<div class="banner-buttons">
-<a class="button" href="indexen.html">English</a>
-<a class="button" href="index.html">Español</a>
-</div>
-<!-- Campo de búsqueda -->
-<div class="buscador">
-<input id="campo-busqueda" placeholder="Buscar por codigo" type="text"/>
-<button class="button" id="btn-buscar">Buscar</button>
-</div>
-</div>
-</header>
-<!-- Categorías -->
-<div class="categorias">
-<button onclick="mostrarCategoria('todo')">Todo</button>
-<button onclick="mostrarCategoria('collares')">Collares</button>
-<button onclick="mostrarCategoria('pulseras')">Pulseras</button>
-<button onclick="mostrarCategoria('anillos')">Anillos</button>
-<button onclick="mostrarCategoria('zarcillos')">Zarcillos</button>
-<button onclick="mostrarCategoria('caballeros')">Caballeros</button>
-</div>
-<!-- Catálogo de Productos -->
-<main class="catalogo" id="catalogo">
-<!-- Categoria: collares - Producto: Berakhah B-38 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B38">
-<div class="carousel-images"><img alt="Berakhah B-38" class="active" onclick="window.open(this.src, '_blank')" src="Collares/B38.jpg"/><img alt="Berakhah B-38" onclick="window.open(this.src, '_blank')" src="Collares/B38-1.jpg"/></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B38')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B38')">❯</button>
-</div>
+    <!-- Banner -->
+    <header class="banner">
+    <div class="banner-content">
+        <img alt="Logo de Berakhah" class="logo" src="Logo.jpg"/>
+        <div class="banner-text">
+        <p>En Berakhah encontrarás accesorios con significado y propósito. 💖 ¿Ya tienes el tuyo?</p>
+        </div>
+        <div class="banner-buttons">
+        <a class="button-language" href="indexen.html">English</a>
+        <a class="button-language" href="index.html">Español</a>
+        </div>
+        <!-- Campo de búsqueda -->
+        <div class="buscador">
+        <input id="campo-busqueda" placeholder="Buscar por codigo" type="text"/>
+        <button class="button" id="btn-buscar">Buscar</button>
+        </div>
+    </div>
+    </header>
+
+        <!-- Categorías -->
+        <div class="categorias">
+        <button onclick="mostrarCategoria('todo')">Todo</button>
+        <button onclick="mostrarCategoria('collares')">Collares</button>
+        <button onclick="mostrarCategoria('pulseras')">Pulseras</button>
+        <button onclick="mostrarCategoria('anillos')">Anillos</button>
+        <button onclick="mostrarCategoria('zarcillos')">Zarcillos</button>
+        <button onclick="mostrarCategoria('caballeros')">Caballeros</button>
+        </div>
+        <!-- Catálogo de Productos -->
+        <main class="catalogo" id="catalogo">
+        <!-- Categoria: collares - Producto: Berakhah B-38 -->
+        <div class="producto" data-categoria="collares">
+        <div class="carousel" id="carousel-B38">
+        <div class="carousel-images"><img alt="Berakhah B-38" class="active" onclick="window.open(this.src, '_blank')" src="Collares/B38.jpg"/><img alt="Berakhah B-38" onclick="window.open(this.src, '_blank')" src="Collares/B38-1.jpg"/></div>
+        <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B38')">❮</button>
+        <button class="carousel-button next" onclick="changeImage(1, 'carousel-B38')">❯</button>
+        </div>
 <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-38')">Berakhah B-38</h3>
-<p>Ciertamente él cargó con nuestras enfermedades y soportó nuestros dolores...</p>
+<p>Isaías 53:4 Ciertamente él cargó con nuestras enfermedades y soportó nuestros dolores, pero nosotros lo consideramos herido, golpeado por Dios, y humillado.</p>
 <p class="precio">$35.000</p>
 <button class="button" onclick="agregarAlCarrito('Berakhah B-38', 35.000)">¡Lo quiero!</button>
 </div>
@@ -630,13 +634,12 @@
     <strong>+57 318 4818 218</strong> o puedes iniciar sesión en 
     <a href="https://web.whatsapp.com/" target="_blank">WhatsAppWeb</a> enviar el pedido luego click en Ir al chat y click en usar Whatsapp web.
     </p></div>
-    <!-- Botón Flotante de Volver al Inicio -->
+<!-- Botón Flotante de Volver al Inicio -->
 <button class="volver-inicio" id="btn-volver-inicio" title="Volver al inicio">↑</button>
 <!-- Barra de Carga -->
 <div id="barra-carga">
-    <div class="carga"></div>
+<div class="carga"></div>
 </div>
-
 <!-- Íconos de Instagram y WhatsApp -->
 <div class="rrss-icons">
 <a href="https://www.instagram.com/berakhah_co/" target="_blank">
