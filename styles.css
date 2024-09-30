@@ -23,8 +23,8 @@ body {
 }
 
 .banner .logo {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     margin: -25px 0 -30px;
 }
@@ -36,13 +36,14 @@ body {
     display: inline-block;
     margin: 2px;
     padding: 5px 5px;
-    font-size: 18px;
+    font-size: 14px;
     text-decoration: none;
     color: white;
     background-color: #0c0c0c;
     border-radius: 5px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Añadir transiciones */
+    border: 1px solid #D4AF37; /* Borde dorado */
 }
 
 .button-language:hover {
@@ -131,7 +132,7 @@ body {
     color: #ffffff;
     padding: 15px 20px;
     border: none;
-    margin: 10px;
+    margin: 8px 2px 0px 2px; /* Cambia solo el margen superior a 20px */
     cursor: pointer;
     border-radius: 10px;
     transition: background-color 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease;
@@ -352,7 +353,23 @@ body {
 
 
 /* Estilos para el botón flotante del carrito */
+
+/* Añadir una animación de inflar y desinflar al botón flotante del carrito */
+@keyframes inflarDesinflar {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.10); /* Aumentar ligeramente el tamaño */
+    }
+    100% {
+        transform: scale(1); /* Volver al tamaño original */
+    }
+}
+
 .boton-flotante {
+    animation: inflarDesinflar 2s ease-in-out infinite; /* Duración de 2s, repetir infinitamente */
+    transition: background-color 0.3s ease; /* Mantener las otras transiciones */
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -371,7 +388,7 @@ body {
 }
 
 .boton-flotante:hover {
-    background-color: #ffffff;
+    background-color: #443f0fa8;
     transform: scale(1.1);
 }
 
