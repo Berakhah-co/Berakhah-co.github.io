@@ -153,8 +153,8 @@ function enviarPedido() {
         showCancelButton: true,
         confirmButtonText: bodyClass === 'en' ? 'Yes, empty it' : 'Sí, vaciar carrito',
         cancelButtonText: bodyClass === 'en' ? 'No, keep it' : 'No, mantener carrito',
-        background: '#28a745',
-        color: '#ffffff',
+        background: '#ffffff',
+        color: '#000000',
     }).then((result) => {
         if (result.isConfirmed) {
             vaciarCarrito(); // Llamar a la función para vaciar el carrito
