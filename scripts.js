@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-pedir').addEventListener('click', enviarPedido);
 });
 
+
+
 // Función para mostrar el carrito y actualizar el contador
 function mostrarCarrito() {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -117,28 +119,52 @@ function actualizarContadorCarrito() {
 
 function enviarPedido() {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    const bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
-
     if (carrito.length === 0) {
-        Swal.fire(bodyClass === 'en' ? 'Your cart is empty.' : 'El carrito está vacío.');
+        Swal.fire('El carrito está vacío.');
         return;
     }
 
-    let mensaje = bodyClass === 'en' ? '🛒 *Order Placed:*\n\n' : '🛒 *Pedido Realizado:*\n\n';
+    // Detectar el idioma basado en la clase del body ('en' para inglés, 'es' para español)
+    const bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
+
+    let mensaje = '🛒 *Pedido Realizado:*\n\n';
     let total = 0;
 
     carrito.forEach((producto, index) => {
-        let precioFormateado = parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
+        // Redondear si el precio no tiene decimales
+        let precioFormateado;
+
+        if (bodyClass === 'en') {
+            // Para inglés, sin decimales si es un número entero
+            precioFormateado = Number.isInteger(parseFloat(producto.precio)) 
+                ? parseFloat(producto.precio).toLocaleString('en-US', { minimumFractionDigits: 0 }) 
+                : parseFloat(producto.precio).toLocaleString('en-US', { minimumFractionDigits: 2 });
+        } else {
+            // Para español, usar 3 decimales en Colombia
+            precioFormateado = parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
+        }
+
         mensaje += `${index + 1}. *${producto.nombre}* - $${precioFormateado}\n`;
-        
+
+        // Incluir el enlace de la imagen con un emoji
         if (producto.imagen) {
-            mensaje += `🔗 Image: ${producto.imagen}\n`;
+            mensaje += `🔗 Imagen: ${producto.imagen}\n`;
         }
 
         total += parseFloat(producto.precio);
     });
 
-    let totalFormateado = total.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+    // Formatear el total de manera similar
+    let totalFormateado;
+    
+    if (bodyClass === 'en') {
+        totalFormateado = Number.isInteger(total)
+            ? total.toLocaleString('en-US', { minimumFractionDigits: 0 })
+            : total.toLocaleString('en-US', { minimumFractionDigits: 2 });
+    } else {
+        totalFormateado = total.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+    }
+
     mensaje += `\n🧾 *Total:* $${totalFormateado}`;
 
     const numeroWhatsApp = "+573184818218";
@@ -148,13 +174,13 @@ function enviarPedido() {
     // Mostrar SweetAlert2 con confetti para indicar que se ha enviado el pedido
     Swal.fire({
         title: bodyClass === 'en' ? 'Order Sent!' : '¡Pedido Enviado!',
-        text: bodyClass === 'en' ? 'Do you want to empty the cart?' : '¿Deseas vaciar el carrito?',
+        text: bodyClass === 'en' ? 'Thank you for your purchase. Do you want to empty the cart?' : 'Gracias por tu compra. ¿Deseas vaciar el carrito?',
         icon: 'success',
         showCancelButton: true,
-        confirmButtonText: bodyClass === 'en' ? 'Yes, empty it' : 'Sí, vaciar carrito',
-        cancelButtonText: bodyClass === 'en' ? 'No, keep it' : 'No, mantener carrito',
-        background: '#ffffff',
-        color: '#000000',
+        confirmButtonText: bodyClass === 'en' ? 'Yes, empty cart' : 'Sí, vaciar carrito',
+        cancelButtonText: bodyClass === 'en' ? 'No, keep cart' : 'No, mantener carrito',
+        background: '#28a745',
+        color: '#ffffff',
     }).then((result) => {
         if (result.isConfirmed) {
             vaciarCarrito(); // Llamar a la función para vaciar el carrito
@@ -169,6 +195,7 @@ function enviarPedido() {
         origin: { x: 0.5, y: 0.5 }
     });
 }
+
 
 
 // Función para vaciar el carrito
