@@ -32,8 +32,7 @@ body {
 .banner-buttons {
     margin-top: 0px;
 }
-
-.button {
+.button-language {
     display: inline-block;
     margin: 2px;
     padding: 5px 5px;
@@ -46,11 +45,29 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Añadir transiciones */
 }
 
-.button:hover {
+.button-language:hover {
     background-color: #555554;
     transform: scale(1.05);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
+.button {
+    background-color: #000000; /* Negro profundo */
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #D4AF37; /* Borde dorado */
+    font-size: 18px;
+}
+
+.button:hover {
+    background-color: #D4AF37; /* Dorado */
+    color: #000000;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
 
 .banner-text h1 {
     margin: 0;
@@ -277,35 +294,62 @@ body {
     border-radius: 5px;
 }
 
+/* Botón Enviar Pedido */
 #btn-pedir {
     width: 100%;
-    background-color: #556B2F;
-    color: white;
+    background-color: #6C757D; /* Gris oscuro elegante */
+    color: #FFFFFF;
     padding: 10px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
     margin-top: 0px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
 }
 
 #btn-pedir:hover {
-    background-color: #0c5011;
+    background-color: #495057; /* Un gris ligeramente más oscuro */
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
 }
 
+/* Botón Vaciar Carrito */
 #btn-vaciar-carrito {
     width: 100%;
-    background-color: #d9534f;
-    color: white;
+    background-color: #E63946; /* Rojo elegante */
+    color: #FFFFFF;
     padding: 10px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    margin-top: 0px;
+    margin-top: 3px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
 }
 
 #btn-vaciar-carrito:hover {
-    background-color: #c9302c;
+    background-color: #C92A38; /* Un rojo más oscuro */
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
 }
+
+/* Botón Eliminar (al lado de cada producto en el carrito) */
+#lista-carrito button {
+    background-color: #FFC107; /* Dorado suave */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+}
+
+#lista-carrito button:hover {
+    background-color: #E0A800; /* Dorado más oscuro */
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+
 
 /* Estilos para el botón flotante del carrito */
 .boton-flotante {
@@ -409,14 +453,14 @@ body {
     top: 50%;
     transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.5);
-    color: white;
+    color: #aa8b27;
     border: none;
     cursor: pointer;
     padding: 10px;
 }
 
 .carousel-button.prev {
-    left: 0;
+    left: 4px;
 }
 
 .carousel-button.next {
@@ -496,7 +540,7 @@ html {
     width: 0;
     height: 100%;
     background-color: #D4AF37; /* Color de la barra de progreso */
-    animation: cargar 3s ease-out forwards; /* Animación de la barra */
+    animation: cargar 4s ease-out forwards; /* Animación de la barra */
 }
 
 /* Animación de la barra de carga */
