@@ -51,17 +51,26 @@ function mostrarCarrito() {
 
 
 // Función para mostrar una notificación con SweetAlert2
-function mostrarNotificacion(mensaje) {
-    // Mostrar alerta usando SweetAlert2
+function mostrarNotificacion(nombre) {
+    // Detectar el idioma basado en la clase del body ('en' para inglés, 'es' para español)
+    const bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
+
+    // Establecer el título y el mensaje dependiendo del idioma
+    const title = bodyClass === 'en' ? 'Product Added!' : '¡Producto Agregado!';
+    const message = bodyClass === 'en'
+        ? `${nombre} has been added to the cart.`
+        : `${nombre} ha sido añadido al carrito.`;
+
+    // Mostrar alerta usando SweetAlert2 con el mensaje correcto en un solo idioma
     Swal.fire({
-        title: '¡Producto Agregado!',
-        text: mensaje,
+        title: title,
+        text: message,  // El mensaje correcto solo en el idioma correspondiente
         icon: 'success',
         showConfirmButton: false,
-        timer: 2000, // Duración de la notificación en milisegundos
-        position: 'center', // Mostrar en el centro de la pantalla
-        background: '#28a745', // Color de fondo para personalizar la alerta
-        color: '#ffffff', // Color del texto
+        timer: 2000,  // Duración de la notificación en milisegundos
+        position: 'center',
+        background: '#28a745',
+        color: '#ffffff'
     });
 }
 
@@ -86,11 +95,9 @@ function agregarAlCarrito(nombre, precio) {
     localStorage.setItem('carrito', JSON.stringify(carrito));
 
     mostrarCarrito();
-    mostrarNotificacion(`${nombre} ha sido añadido al carrito.`);
+    mostrarNotificacion(nombre);  // Solo pasar el nombre, sin texto añadido
     lanzarConfeti();
 }
-
-
 
 // Función para eliminar un producto del carrito y actualizar el contador
 function eliminarDelCarrito(index) {
@@ -110,48 +117,120 @@ function actualizarContadorCarrito() {
 
 function enviarPedido() {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
+
     if (carrito.length === 0) {
-        alert('El carrito está vacío.');
+        Swal.fire(bodyClass === 'en' ? 'Your cart is empty.' : 'El carrito está vacío.');
         return;
     }
 
-    let mensaje = '🛒 *Pedido Realizado:*\n\n';
+    let mensaje = bodyClass === 'en' ? '🛒 *Order Placed:*\n\n' : '🛒 *Pedido Realizado:*\n\n';
     let total = 0;
-    let bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
 
     carrito.forEach((producto, index) => {
-        let precioFormateado = bodyClass === 'en'
-            ? parseFloat(producto.precio).toLocaleString('en-US', { minimumFractionDigits: 0 })
-            : parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
-        
+        let precioFormateado = parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
         mensaje += `${index + 1}. *${producto.nombre}* - $${precioFormateado}\n`;
-
+        
         if (producto.imagen) {
-            mensaje += `🔗 Imagen: ${producto.imagen}\n`;
+            mensaje += `🔗 Image: ${producto.imagen}\n`;
         }
 
         total += parseFloat(producto.precio);
     });
 
-    let totalFormateado = bodyClass === 'en'
-        ? total.toLocaleString('en-US', { minimumFractionDigits: 0 })
-        : total.toLocaleString('es-CO', { minimumFractionDigits: 3 });
-
+    let totalFormateado = total.toLocaleString('es-CO', { minimumFractionDigits: 3 });
     mensaje += `\n🧾 *Total:* $${totalFormateado}`;
 
     const numeroWhatsApp = "+573184818218";
     const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
     window.open(urlWhatsApp, '_blank');
-    mostrarCarrito();
+
+    // Mostrar SweetAlert2 con confetti para indicar que se ha enviado el pedido
+    Swal.fire({
+        title: bodyClass === 'en' ? 'Order Sent!' : '¡Pedido Enviado!',
+        text: bodyClass === 'en' ? 'Do you want to empty the cart?' : '¿Deseas vaciar el carrito?',
+        icon: 'success',
+        showCancelButton: true,
+        confirmButtonText: bodyClass === 'en' ? 'Yes, empty it' : 'Sí, vaciar carrito',
+        cancelButtonText: bodyClass === 'en' ? 'No, keep it' : 'No, mantener carrito',
+        background: '#28a745',
+        color: '#ffffff',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            vaciarCarrito(); // Llamar a la función para vaciar el carrito
+        }
+    });
+
+    // Lanza confeti después de que se muestra el SweetAlert
+    confetti({
+        particleCount: 100,
+        startVelocity: 30,
+        spread: 360,
+        origin: { x: 0.5, y: 0.5 }
+    });
 }
 
 
+// Función para vaciar el carrito
 function vaciarCarrito() {
+    const bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
     localStorage.removeItem('carrito');
-    mostrarCarrito(); // Actualiza el carrito después de vaciarlo
+    mostrarCarrito();
+
+    // Mostrar SweetAlert indicando que el carrito se vació
+    Swal.fire({
+        title: bodyClass === 'en' ? 'Cart emptied!' : '¡Carrito Vacío!',
+        text: bodyClass === 'en' ? 'Your cart has been emptied.' : 'Has vaciado tu carrito.',
+        icon: 'info',
+        background: '#dc3545', // Color de fondo rojo
+        color: '#ffffff', // Color del texto
+        timer: 2000, // Tiempo para que desaparezca la alerta automáticamente
+        showConfirmButton: false
+    });
+
+    // Lanza confeti cuando se vacía el carrito
+    lanzarConfeti();
 }
 
-document.getElementById('btn-vaciar-carrito').addEventListener('click', vaciarCarrito);
+
+// Función para vaciar el carrito con la animación existente
+function vaciarCarrito() {
+    const carritoContenedor = document.getElementById('lista-carrito'); // El contenedor del carrito
+
+    // Añadir la clase de animación existente (si ya la tienes en tu código)
+    carritoContenedor.classList.add('animacion-existente'); // Reemplaza 'animacion-existente' por la clase que ya tienes
+
+    // Esperar a que termine la animación (ajustar el tiempo según la duración de la animación)
+    setTimeout(() => {
+        localStorage.removeItem('carrito'); // Vaciar el carrito
+        mostrarCarrito(); // Actualizar el carrito
+        carritoContenedor.classList.remove('animacion-existente'); // Eliminar la clase de animación
+    }, 500); // Ajusta este tiempo según la duración de tu animación actual
+}
+
+
+// Añadir el evento al botón de vaciar carrito
+document.getElementById('btn-vaciar-carrito').addEventListener('click', () => {
+    const bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
+
+    Swal.fire({
+        title: bodyClass === 'en' ? 'Are you sure?' : '¿Estás seguro?',
+        text: bodyClass === 'en' ? 'You are about to empty your cart.' : 'Estás a punto de vaciar tu carrito.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: bodyClass === 'en' ? 'Yes, empty it' : 'Sí, vaciar',
+        cancelButtonText: bodyClass === 'en' ? 'No, keep it' : 'No, mantener',
+        background: '#dc3545',
+        color: '#ffffff',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            vaciarCarrito(); // Llama a la función de vaciar el carrito si el usuario confirma
+        }
+    });
+});
+
+
+
 
 // Función para mostrar u ocultar el carrito
 function toggleCarrito() {
