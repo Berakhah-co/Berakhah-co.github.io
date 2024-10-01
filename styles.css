@@ -150,10 +150,8 @@ body {
 /* Estilos para la disposición del catálogo */
 .catalogo {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     padding: 20px;
-    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -165,7 +163,9 @@ body {
     text-align: center;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Añadir sombra */
+    border: 2px solid #D4AF37; /* Borde dorado */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .producto.visible {
@@ -175,12 +175,13 @@ body {
 
 .producto img {
     width: 100%;
-    height: 300px;
+    height: 100%;
     object-fit: cover;
     border-radius: 15px;
     margin: 5px;
     cursor: pointer;
     transition: transform 0.3s ease;
+    
 }
 
 .producto img:hover {
@@ -195,9 +196,6 @@ body {
     transition: color 0.3s ease;
 }
 
-.titulo-producto:hover {
-    color: #007BFF;
-}
 
 .producto p {
     color: #666;
@@ -215,6 +213,7 @@ body {
 @media (max-width: 768px) {
     .catalogo {
         grid-template-columns: repeat(1, 1fr);
+        max-width: 85%;
     }
 
     .categorias {
@@ -230,6 +229,7 @@ body {
 @media (min-width: 769px) {
     .catalogo {
         grid-template-columns: repeat(3, 1fr);
+        max-width: 70%;
     }
 
     .categorias {
@@ -257,6 +257,35 @@ body {
 }
 
 /* Estilos del carrito */
+.mercado-pago-button {
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mercado-pago-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+/* Estilos para el botón cerrar del carrito */
+.cerrar-carrito {
+    background-color: transparent;
+    border: none;
+    color: #d9534f;
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.cerrar-carrito:hover {
+    color: #c9302c;
+}
+
+
 #carrito {
     position: fixed;
     right: 20px;
@@ -557,7 +586,7 @@ html {
     width: 0;
     height: 100%;
     background-color: #D4AF37; /* Color de la barra de progreso */
-    animation: cargar 4s ease-out forwards; /* Animación de la barra */
+    animation: cargar 3s ease-out forwards; /* Animación de la barra */
 }
 
 /* Animación de la barra de carga */
