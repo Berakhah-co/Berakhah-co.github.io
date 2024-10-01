@@ -11,6 +11,8 @@
 <meta content="Descubre nuestra colección de joyería fina y accesorios personalizados. Ofrecemos collares, pulseras y anillos únicos, perfectos para regalar en ocasiones especiales." name="description"/>
 <meta content="joyería artesanal, collares elegantes, pulseras de moda, anillos únicos, joyería personalizada, regalos especiales, joyas hechas a mano, accesorios modernos, joyas de alta calidad, collares de plata, joyería de lujo, joyas para regalar, regalos para ella, joyas femeninas, collares con significado, anillos de compromiso, joyas con estilo, joyería minimalista, pulseras delicadas, joyas exclusivas, joyería para ocasiones especiales, detalles elegantes, joyería para mujer, collares para regalo, regalos originales, accesorios elegantes, pulseras modernas, joyería fina, joyas para aniversario, accesorios personalizados, collares para mujer, joyas para todos los días, detalles únicos, joyas de moda, joyería creativa, joyas con encanto, pulseras elegantes, joyería de diseño, regalos únicos, collares delicados, anillos elegantes, joyería sofisticada, joyas de alta gama, collares de oro, pulseras ajustables, joyas perfectas para regalar" name="keywords"/>
 <link href="styles.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4/dist/fancybox.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4/dist/fancybox.umd.js"></script>
 </head>
 <body>
 <!-- Banner -->
@@ -42,22 +44,28 @@
 </div>
 <!-- Catálogo de Productos -->
 <main class="catalogo" id="catalogo">
+
 <!-- Categoria: collares - Producto: Berakhah B-38 -->
 <div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B38">
-<div class="carousel-images"><img alt="Collar Berakhah B-38" class="active" onclick="window.open(this.src, '_blank')" src="Collares/B38.jpg"/><img alt="Collar Berakhah B-38" onclick="window.open(this.src, '_blank')" src="Collares/B38-1.jpg"/></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B38')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B38')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-38')">Collar Berakhah B-38</h3>
-<p>Isaías 53:4 Ciertamente él cargó con nuestras enfermedades y soportó nuestros dolores, pero nosotros lo consideramos herido, golpeado por Dios, y humillado.</p>
-<p class="precio">$35.000</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-38', 35.000)">¡Lo quiero!</button>
-</div>
+    <div class="carousel" id="carousel-B38">
+    <div class="carousel-images">
+    <a href="Collares/B38.jpg" data-fancybox="gallery-Collar Berakhah B-38" data-caption="Collar Berakhah B-38"><img  alt="Collar Berakhah B-38" class="active"   src="Collares/B38.jpg"/></a>
+    <a href="Collares/B38-1.jpg" data-fancybox="gallery-Collar Berakhah B-38" data-caption="Collar Berakhah B-38"><img  alt="Collar Berakhah B-38"   src="Collares/B38-1.jpg"/></a>
+    </div>
+    <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B38')">❮</button>
+    <button class="carousel-button next" onclick="changeImage(1, 'carousel-B38')">❯</button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-38')">Collar Berakhah B-38</h3>
+    <p>Isaías 53:4 Ciertamente él cargó con nuestras enfermedades y soportó nuestros dolores, pero nosotros lo consideramos herido, golpeado por Dios, y humillado.</p>
+    <p class="precio">$35.000</p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-38', 35.000)">¡Lo quiero!</button>
+    </div>
 <!-- Categoria: collares - Producto: Berakhah B-49 -->
 <div class="producto" data-categoria="collares">
 <div class="carousel" id="carousel-B49">
-<div class="carousel-images"><img alt="Collar Berakhah B-49" class="active" onclick="window.open(this.src, '_blank')" src="Joyero/B49.jpg"/></div>
+<div class="carousel-images">
+<a data-caption="Collar Berakhah B-49" data-fancybox="gallery-Collar Berakhah B-49" href="Joyero/B49.jpg"><img alt="Collar Berakhah B-49" class="active" src="Joyero/B49.jpg"/></a>
+</div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B49')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B49')">❯</button>
 </div>
@@ -69,7 +77,9 @@
 <!-- Categoria: collares - Producto: Berakhah B-48 -->
 <div class="producto" data-categoria="collares">
 <div class="carousel" id="carousel-B48">
-<div class="carousel-images"><img alt="Collar Berakhah B-48" class="active" onclick="window.open(this.src, '_blank')" src="Joyero/B48.jpg"/></div>
+<div class="carousel-images">
+<a data-caption="Collar Berakhah B-48" data-fancybox="gallery-Collar Berakhah B-48" href="Joyero/B48.jpg"><img alt="Collar Berakhah B-48" class="active" src="Joyero/B48.jpg"/></a>
+</div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B48')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B48')">❯</button>
 </div>
@@ -81,7 +91,9 @@
 <!-- Categoria: collares - Producto: Berakhah B-28 -->
 <div class="producto" data-categoria="collares">
 <div class="carousel" id="carousel-B28">
-<div class="carousel-images"><img alt="Collar Berakhah B-28" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Corazon B28.jpg"/></div>
+<div class="carousel-images">
+<a data-caption="Collar Berakhah B-28" data-fancybox="gallery-Collar Berakhah B-28" href="Collares/Corazon B28.jpg"><img alt="Collar Berakhah B-28" class="active" src="Collares/Corazon B28.jpg"/></a>
+</div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B28')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B28')">❯</button>
 </div>
@@ -93,7 +105,9 @@
 <!-- Categoria: collares - Producto: Berakhah B-36 -->
 <div class="producto" data-categoria="collares">
 <div class="carousel" id="carousel-B36">
-<div class="carousel-images"><img alt="Collar Berakhah B-36" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Perlas.jpg"/></div>
+<div class="carousel-images">
+<a data-caption="Collar Berakhah B-36" data-fancybox="gallery-Collar Berakhah B-36" href="Collares/Perlas.jpg"><img alt="Collar Berakhah B-36" class="active" src="Collares/Perlas.jpg"/></a>
+</div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B36')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B36')">❯</button>
 </div>
@@ -105,7 +119,9 @@
 <!-- Categoria: collares - Producto: Berakhah B-37 -->
 <div class="producto" data-categoria="collares">
 <div class="carousel" id="carousel-B37">
-<div class="carousel-images"><img alt="Collar Berakhah B-37" class="active" onclick="window.open(this.src, '_blank')" src="Collares/B37.jpg"/></div>
+<div class="carousel-images">
+<a data-caption="Collar Berakhah B-37" data-fancybox="gallery-Collar Berakhah B-37" href="Collares/B37.jpg"><img alt="Collar Berakhah B-37" class="active" src="Collares/B37.jpg"/></a>
+</div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B37')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B37')">❯</button>
 </div>
@@ -117,7 +133,9 @@
 <!-- Categoria: collares - Producto: Berakhah B-11 -->
 <div class="producto" data-categoria="collares">
 <div class="carousel" id="carousel-B11">
-<div class="carousel-images"><img alt="Collar Berakhah B-11" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Jesus.jpg"/></div>
+<div class="carousel-images">
+<a data-caption="Collar Berakhah B-11" data-fancybox="gallery-Collar Berakhah B-11" href="Collares/Jesus.jpg"><img alt="Collar Berakhah B-11" class="active" src="Collares/Jesus.jpg"/></a>
+</div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B11')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B11')">❯</button>
 </div>
@@ -129,7 +147,9 @@
 <!-- Categoria: collares - Producto: Berakhah B-6 -->
 <div class="producto" data-categoria="collares">
 <div class="carousel" id="carousel-B6">
-<div class="carousel-images"><img alt="Collar Berakhah B-6" class="active" onclick="window.open(this.src, '_blank')" src="Collares/FeCorazon.jpg"/></div>
+<div class="carousel-images">
+<a data-caption="Collar Berakhah B-6" data-fancybox="gallery-Collar Berakhah B-6" href="Collares/FeCorazon.jpg"><img alt="Collar Berakhah B-6" class="active" src="Collares/FeCorazon.jpg"/></a>
+</div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B6')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B6')">❯</button>
 </div>
@@ -141,7 +161,9 @@
 <!-- Categoria: collares - Producto: Berakhah B-4 -->
 <div class="producto" data-categoria="collares">
 <div class="carousel" id="carousel-B4">
-<div class="carousel-images"><img alt="Collar Berakhah B-4" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Vida.jpg"/></div>
+<div class="carousel-images">
+<a data-caption="Collar Berakhah B-4" data-fancybox="gallery-Collar Berakhah B-4" href="Collares/Vida.jpg"><img alt="Collar Berakhah B-4" class="active" src="Collares/Vida.jpg"/></a>
+</div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B4')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B4')">❯</button>
 </div>
@@ -153,7 +175,9 @@
 <!-- Categoria: collares - Producto: Berakhah B-5 -->
 <div class="producto" data-categoria="collares">
 <div class="carousel" id="carousel-B5">
-<div class="carousel-images"><img alt="Collar Berakhah B-5" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Fe.jpg"/></div>
+<div class="carousel-images">
+<a data-caption="Collar Berakhah B-5" data-fancybox="gallery-Collar Berakhah B-5" href="Collares/Fe.jpg"><img alt="Collar Berakhah B-5" class="active" src="Collares/Fe.jpg"/></a>
+</div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B5')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B5')">❯</button>
 </div>
@@ -165,7 +189,9 @@
 <!-- Categoria: collares - Producto: Berakhah B-15 -->
 <div class="producto" data-categoria="collares">
 <div class="carousel" id="carousel-B15">
-<div class="carousel-images"><img alt="Collar Berakhah B-15" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Oso.jpg"/></div>
+<div class="carousel-images">
+<a data-caption="Collar Berakhah B-15" data-fancybox="gallery-Collar Berakhah B-15" href="Collares/Oso.jpg"><img alt="Collar Berakhah B-15" class="active" src="Collares/Oso.jpg"/></a>
+</div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B15')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B15')">❯</button>
 </div>
@@ -177,7 +203,9 @@
 <!-- Categoria: collares - Producto: Berakhah B-10 -->
 <div class="producto" data-categoria="collares">
 <div class="carousel" id="carousel-B10">
-<div class="carousel-images"><img alt="Collar Berakhah B-10" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Paz.jpg"/></div>
+<div class="carousel-images">
+<a data-caption="Collar Berakhah B-10" data-fancybox="gallery-Collar Berakhah B-10" href="Collares/Paz.jpg"><img alt="Collar Berakhah B-10" class="active" src="Collares/Paz.jpg"/></a>
+</div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B10')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B10')">❯</button>
 </div>
@@ -189,7 +217,9 @@
 <!-- Categoria: collares - Producto: Berakhah B-2 -->
 <div class="producto" data-categoria="collares">
 <div class="carousel" id="carousel-B2">
-<div class="carousel-images"><img alt="Collar Berakhah B-2" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Dios.jpg"/></div>
+<div class="carousel-images">
+<a data-caption="Collar Berakhah B-2" data-fancybox="gallery-Collar Berakhah B-2" href="Collares/Dios.jpg"><img alt="Collar Berakhah B-2" class="active" src="Collares/Dios.jpg"/></a>
+</div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B2')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B2')">❯</button>
 </div>
@@ -201,7 +231,9 @@
 <!-- Categoria: collares - Producto: Berakhah B-24 -->
 <div class="producto" data-categoria="collares">
 <div class="carousel" id="carousel-B24">
-<div class="carousel-images"><img alt="Collar Berakhah B-24" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Maranatha.jpg"/></div>
+<div class="carousel-images">
+<a data-caption="Collar Berakhah B-24" data-fancybox="gallery-Collar Berakhah B-24" href="Collares/Maranatha.jpg"><img alt="Collar Berakhah B-24" class="active" src="Collares/Maranatha.jpg"/></a>
+</div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B24')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B24')">❯</button>
 </div>
@@ -213,7 +245,9 @@
 <!-- Categoria: collares - Producto: Berakhah B-26 -->
 <div class="producto" data-categoria="collares">
 <div class="carousel" id="carousel-B26">
-<div class="carousel-images"><img alt="Collar Berakhah B-26" class="active" onclick="window.open(this.src, '_blank')" src="Collares/FeCruz.jpg"/></div>
+<div class="carousel-images">
+<a data-caption="Collar Berakhah B-26" data-fancybox="gallery-Collar Berakhah B-26" href="Collares/FeCruz.jpg"><img alt="Collar Berakhah B-26" class="active" src="Collares/FeCruz.jpg"/></a>
+</div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B26')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B26')">❯</button>
 </div>
@@ -227,8 +261,8 @@
 <div class="producto" data-categoria="pulseras">
 <div class="carousel" id="carousel-B40">
 <div class="carousel-images">
-<img alt="Berakhah B-40" class="active" onclick="window.open(this.src, '_blank')" src="Caballeros/B40.jpg"/>
-<img alt="Berakhah B-40" onclick="window.open(this.src, '_blank')" src="Caballeros/B40-1.jpg"/>
+<a data-caption="Berakhah B-40" data-fancybox="gallery-Berakhah B-40" href="Caballeros/B40.jpg"><img alt="Berakhah B-40" class="active" src="Caballeros/B40.jpg"/></a>
+<a data-caption="Berakhah B-40" data-fancybox="gallery-Berakhah B-40" href="Caballeros/B40-1.jpg"><img alt="Berakhah B-40" src="Caballeros/B40-1.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B40')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B40')">❯</button>
@@ -242,8 +276,8 @@
 <div class="producto" data-categoria="pulseras">
 <div class="carousel" id="carousel-B41">
 <div class="carousel-images">
-<img alt="Berakhah B-41" class="active" onclick="window.open(this.src, '_blank')" src="Caballeros/B41.jpg"/>
-<img alt="Berakhah B-41" onclick="window.open(this.src, '_blank')" src="Caballeros/B41-1.jpg"/>
+<a data-caption="Berakhah B-41" data-fancybox="gallery-Berakhah B-41" href="Caballeros/B41.jpg"><img alt="Berakhah B-41" class="active" src="Caballeros/B41.jpg"/></a>
+<a data-caption="Berakhah B-41" data-fancybox="gallery-Berakhah B-41" href="Caballeros/B41-1.jpg"><img alt="Berakhah B-41" src="Caballeros/B41-1.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B41')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B41')">❯</button>
@@ -257,8 +291,8 @@
 <div class="producto" data-categoria="pulseras">
 <div class="carousel" id="carousel-B12">
 <div class="carousel-images">
-<img alt="Berakhah B-12" class="active" onclick="window.open(this.src, '_blank')" src="Pulseras/Cruz-1.jpg"/>
-<img alt="Berakhah B-12" onclick="window.open(this.src, '_blank')" src="Pulseras/Cruz1.jpg"/>
+<a data-caption="Berakhah B-12" data-fancybox="gallery-Berakhah B-12" href="Pulseras/Cruz-1.jpg"><img alt="Berakhah B-12" class="active" src="Pulseras/Cruz-1.jpg"/></a>
+<a data-caption="Berakhah B-12" data-fancybox="gallery-Berakhah B-12" href="Pulseras/Cruz1.jpg"><img alt="Berakhah B-12" src="Pulseras/Cruz1.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B12')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B12')">❯</button>
@@ -272,8 +306,8 @@
 <div class="producto" data-categoria="pulseras">
 <div class="carousel" id="carousel-B3">
 <div class="carousel-images">
-<img alt="Berakhah B-3" class="active" onclick="window.open(this.src, '_blank')" src="Pulseras/Corazon-2.jpg"/>
-<img alt="Berakhah B-3" onclick="window.open(this.src, '_blank')" src="Pulseras/Corazon2.jpg"/>
+<a data-caption="Berakhah B-3" data-fancybox="gallery-Berakhah B-3" href="Pulseras/Corazon-2.jpg"><img alt="Berakhah B-3" class="active" src="Pulseras/Corazon-2.jpg"/></a>
+<a data-caption="Berakhah B-3" data-fancybox="gallery-Berakhah B-3" href="Pulseras/Corazon2.jpg"><img alt="Berakhah B-3" src="Pulseras/Corazon2.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B3')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B3')">❯</button>
@@ -287,8 +321,8 @@
 <div class="producto" data-categoria="pulseras">
 <div class="carousel" id="carousel-B1">
 <div class="carousel-images">
-<img alt="Berakhah B-1" class="active" onclick="window.open(this.src, '_blank')" src="Pulseras/Arbol-1.jpg"/>
-<img alt="Berakhah B-1" onclick="window.open(this.src, '_blank')" src="Pulseras/Arbol1.jpg"/>
+<a data-caption="Berakhah B-1" data-fancybox="gallery-Berakhah B-1" href="Pulseras/Arbol-1.jpg"><img alt="Berakhah B-1" class="active" src="Pulseras/Arbol-1.jpg"/></a>
+<a data-caption="Berakhah B-1" data-fancybox="gallery-Berakhah B-1" href="Pulseras/Arbol1.jpg"><img alt="Berakhah B-1" src="Pulseras/Arbol1.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B1')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B1')">❯</button>
@@ -302,8 +336,8 @@
 <div class="producto" data-categoria="pulseras">
 <div class="carousel" id="carousel-B8">
 <div class="carousel-images">
-<img alt="Berakhah B-8" class="active" onclick="window.open(this.src, '_blank')" src="Pulseras/Corazon-1.jpg"/>
-<img alt="Berakhah B-8" onclick="window.open(this.src, '_blank')" src="Pulseras/Corazon1.jpg"/>
+<a data-caption="Berakhah B-8" data-fancybox="gallery-Berakhah B-8" href="Pulseras/Corazon-1.jpg"><img alt="Berakhah B-8" class="active" src="Pulseras/Corazon-1.jpg"/></a>
+<a data-caption="Berakhah B-8" data-fancybox="gallery-Berakhah B-8" href="Pulseras/Corazon1.jpg"><img alt="Berakhah B-8" src="Pulseras/Corazon1.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B8')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B8')">❯</button>
@@ -317,8 +351,8 @@
 <div class="producto" data-categoria="pulseras">
 <div class="carousel" id="carousel-B7">
 <div class="carousel-images">
-<img alt="Berakhah B-7" class="active" onclick="window.open(this.src, '_blank')" src="Pulseras/Fe-1.jpg"/>
-<img alt="Berakhah B-7" onclick="window.open(this.src, '_blank')" src="Pulseras/Fe1.jpg"/>
+<a data-caption="Berakhah B-7" data-fancybox="gallery-Berakhah B-7" href="Pulseras/Fe-1.jpg"><img alt="Berakhah B-7" class="active" src="Pulseras/Fe-1.jpg"/></a>
+<a data-caption="Berakhah B-7" data-fancybox="gallery-Berakhah B-7" href="Pulseras/Fe1.jpg"><img alt="Berakhah B-7" src="Pulseras/Fe1.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B7')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B7')">❯</button>
@@ -332,8 +366,8 @@
 <div class="producto" data-categoria="pulseras">
 <div class="carousel" id="carousel-B9">
 <div class="carousel-images">
-<img alt="Berakhah B-9" class="active" onclick="window.open(this.src, '_blank')" src="Pulseras/Cruz-3.jpg"/>
-<img alt="Berakhah B-9" onclick="window.open(this.src, '_blank')" src="Pulseras/Cruz3.jpg"/>
+<a data-caption="Berakhah B-9" data-fancybox="gallery-Berakhah B-9" href="Pulseras/Cruz-3.jpg"><img alt="Berakhah B-9" class="active" src="Pulseras/Cruz-3.jpg"/></a>
+<a data-caption="Berakhah B-9" data-fancybox="gallery-Berakhah B-9" href="Pulseras/Cruz3.jpg"><img alt="Berakhah B-9" src="Pulseras/Cruz3.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B9')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B9')">❯</button>
@@ -347,9 +381,9 @@
 <div class="producto" data-categoria="pulseras">
 <div class="carousel" id="carousel-B23">
 <div class="carousel-images">
-<img alt="Berakhah B-23" class="active" onclick="window.open(this.src, '_blank')" src="Pulseras/Cruzb1.jpg"/>
-<img alt="Berakhah B-23" onclick="window.open(this.src, '_blank')" src="Pulseras/Cruzb2.jpg"/>
-<img alt="Berakhah B-23" onclick="window.open(this.src, '_blank')" src="Pulseras/Cruzb3.jpg"/>
+<a data-caption="Berakhah B-23" data-fancybox="gallery-Berakhah B-23" href="Pulseras/Cruzb1.jpg"><img alt="Berakhah B-23" class="active" src="Pulseras/Cruzb1.jpg"/></a>
+<a data-caption="Berakhah B-23" data-fancybox="gallery-Berakhah B-23" href="Pulseras/Cruzb2.jpg"><img alt="Berakhah B-23" src="Pulseras/Cruzb2.jpg"/></a>
+<a data-caption="Berakhah B-23" data-fancybox="gallery-Berakhah B-23" href="Pulseras/Cruzb3.jpg"><img alt="Berakhah B-23" src="Pulseras/Cruzb3.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B23')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B23')">❯</button>
@@ -363,7 +397,7 @@
 <div class="producto" data-categoria="pulseras">
 <div class="carousel" id="carousel-B25">
 <div class="carousel-images">
-<img alt="Berakhah B-25" class="active" onclick="window.open(this.src, '_blank')" src="Pulseras/Dios1.jpg"/>
+<a data-caption="Berakhah B-25" data-fancybox="gallery-Berakhah B-25" href="Pulseras/Dios1.jpg"><img alt="Berakhah B-25" class="active" src="Pulseras/Dios1.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B25')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B25')">❯</button>
@@ -378,9 +412,9 @@
 <div class="producto" data-categoria="anillos">
 <div class="carousel" id="carousel-B34">
 <div class="carousel-images">
-<img alt="Berakhah B-34" class="active" onclick="window.open(this.src, '_blank')" src="Anillos/B-34.jpg"/>
-<img alt="Berakhah B-34" onclick="window.open(this.src, '_blank')" src="Anillos/B-34-1.jpg"/>
-<img alt="Berakhah B-34" onclick="window.open(this.src, '_blank')" src="Anillos/B-34-2.jpg"/>
+<a data-caption="Berakhah B-34" data-fancybox="gallery-Berakhah B-34" href="Anillos/B-34.jpg"><img alt="Berakhah B-34" class="active" src="Anillos/B-34.jpg"/></a>
+<a data-caption="Berakhah B-34" data-fancybox="gallery-Berakhah B-34" href="Anillos/B-34-1.jpg"><img alt="Berakhah B-34" src="Anillos/B-34-1.jpg"/></a>
+<a data-caption="Berakhah B-34" data-fancybox="gallery-Berakhah B-34" href="Anillos/B-34-2.jpg"><img alt="Berakhah B-34" src="Anillos/B-34-2.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B34')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B34')">❯</button>
@@ -394,9 +428,9 @@
 <div class="producto" data-categoria="anillos">
 <div class="carousel" id="carousel-B35">
 <div class="carousel-images">
-<img alt="Berakhah B-35" class="active" onclick="window.open(this.src, '_blank')" src="Anillos/B-35.jpg"/>
-<img alt="Berakhah B-35" onclick="window.open(this.src, '_blank')" src="Anillos/B-35-1.jpg"/>
-<img alt="Berakhah B-35" onclick="window.open(this.src, '_blank')" src="Anillos/B-35-2.jpg"/>
+<a data-caption="Berakhah B-35" data-fancybox="gallery-Berakhah B-35" href="Anillos/B-35.jpg"><img alt="Berakhah B-35" class="active" src="Anillos/B-35.jpg"/></a>
+<a data-caption="Berakhah B-35" data-fancybox="gallery-Berakhah B-35" href="Anillos/B-35-1.jpg"><img alt="Berakhah B-35" src="Anillos/B-35-1.jpg"/></a>
+<a data-caption="Berakhah B-35" data-fancybox="gallery-Berakhah B-35" href="Anillos/B-35-2.jpg"><img alt="Berakhah B-35" src="Anillos/B-35-2.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B35')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B35')">❯</button>
@@ -410,9 +444,9 @@
 <div class="producto" data-categoria="anillos">
 <div class="carousel" id="carousel-B32">
 <div class="carousel-images">
-<img alt="Berakhah B-32" class="active" onclick="window.open(this.src, '_blank')" src="Anillos/Corazonesmeralda1.jpg"/>
-<img alt="Berakhah B-32" onclick="window.open(this.src, '_blank')" src="Anillos/Corazonesmeralda2.jpg"/>
-<img alt="Berakhah B-32" onclick="window.open(this.src, '_blank')" src="Anillos/Corazonesmeralda.jpg"/>
+<a data-caption="Berakhah B-32" data-fancybox="gallery-Berakhah B-32" href="Anillos/Corazonesmeralda1.jpg"><img alt="Berakhah B-32" class="active" src="Anillos/Corazonesmeralda1.jpg"/></a>
+<a data-caption="Berakhah B-32" data-fancybox="gallery-Berakhah B-32" href="Anillos/Corazonesmeralda2.jpg"><img alt="Berakhah B-32" src="Anillos/Corazonesmeralda2.jpg"/></a>
+<a data-caption="Berakhah B-32" data-fancybox="gallery-Berakhah B-32" href="Anillos/Corazonesmeralda.jpg"><img alt="Berakhah B-32" src="Anillos/Corazonesmeralda.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B32')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B32')">❯</button>
@@ -426,9 +460,9 @@
 <div class="producto" data-categoria="anillos">
 <div class="carousel" id="carousel-B16">
 <div class="carousel-images">
-<img alt="Berakhah B-16" class="active" onclick="window.open(this.src, '_blank')" src="Anillos/Corazon-1.jpg"/>
-<img alt="Berakhah B-16" onclick="window.open(this.src, '_blank')" src="Anillos/Corazon1.jpg"/>
-<img alt="Berakhah B-16" onclick="window.open(this.src, '_blank')" src="Anillos/Corazon2.jpg"/>
+<a data-caption="Berakhah B-16" data-fancybox="gallery-Berakhah B-16" href="Anillos/Corazon-1.jpg"><img alt="Berakhah B-16" class="active" src="Anillos/Corazon-1.jpg"/></a>
+<a data-caption="Berakhah B-16" data-fancybox="gallery-Berakhah B-16" href="Anillos/Corazon1.jpg"><img alt="Berakhah B-16" src="Anillos/Corazon1.jpg"/></a>
+<a data-caption="Berakhah B-16" data-fancybox="gallery-Berakhah B-16" href="Anillos/Corazon2.jpg"><img alt="Berakhah B-16" src="Anillos/Corazon2.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B16')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B16')">❯</button>
@@ -442,9 +476,9 @@
 <div class="producto" data-categoria="anillos">
 <div class="carousel" id="carousel-B17">
 <div class="carousel-images">
-<img alt="Berakhah B-17" class="active" onclick="window.open(this.src, '_blank')" src="Anillos/hojas1.jpg"/>
-<img alt="Berakhah B-17" onclick="window.open(this.src, '_blank')" src="Anillos/Hojas12.jpg"/>
-<img alt="Berakhah B-17" onclick="window.open(this.src, '_blank')" src="Anillos/Holas-1.jpg"/>
+<a data-caption="Berakhah B-17" data-fancybox="gallery-Berakhah B-17" href="Anillos/hojas1.jpg"><img alt="Berakhah B-17" class="active" src="Anillos/hojas1.jpg"/></a>
+<a data-caption="Berakhah B-17" data-fancybox="gallery-Berakhah B-17" href="Anillos/Hojas12.jpg"><img alt="Berakhah B-17" src="Anillos/Hojas12.jpg"/></a>
+<a data-caption="Berakhah B-17" data-fancybox="gallery-Berakhah B-17" href="Anillos/Holas-1.jpg"><img alt="Berakhah B-17" src="Anillos/Holas-1.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B17')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B17')">❯</button>
@@ -458,9 +492,9 @@
 <div class="producto" data-categoria="anillos">
 <div class="carousel" id="carousel-B18">
 <div class="carousel-images">
-<img alt="Berakhah B-18" class="active" onclick="window.open(this.src, '_blank')" src="Anillos/Cruz1.jpg"/>
-<img alt="Berakhah B-18" onclick="window.open(this.src, '_blank')" src="Anillos/Cruz-1.jpg"/>
-<img alt="Berakhah B-18" onclick="window.open(this.src, '_blank')" src="Anillos/Cruz.jpg"/>
+<a data-caption="Berakhah B-18" data-fancybox="gallery-Berakhah B-18" href="Anillos/Cruz1.jpg"><img alt="Berakhah B-18" class="active" src="Anillos/Cruz1.jpg"/></a>
+<a data-caption="Berakhah B-18" data-fancybox="gallery-Berakhah B-18" href="Anillos/Cruz-1.jpg"><img alt="Berakhah B-18" src="Anillos/Cruz-1.jpg"/></a>
+<a data-caption="Berakhah B-18" data-fancybox="gallery-Berakhah B-18" href="Anillos/Cruz.jpg"><img alt="Berakhah B-18" src="Anillos/Cruz.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B18')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B18')">❯</button>
@@ -474,8 +508,8 @@
 <div class="producto" data-categoria="anillos">
 <div class="carousel" id="carousel-B19">
 <div class="carousel-images">
-<img alt="Berakhah B-19" class="active" onclick="window.open(this.src, '_blank')" src="Anillos\Lazo1.jpg"/>
-<img alt="Berakhah B-19" onclick="window.open(this.src, '_blank')" src="Anillos\Lazo.jpg"/>
+<a data-caption="Berakhah B-19" data-fancybox="gallery-Berakhah B-19" href="Anillos\Lazo1.jpg"><img alt="Berakhah B-19" class="active" src="Anillos\Lazo1.jpg"/></a>
+<a data-caption="Berakhah B-19" data-fancybox="gallery-Berakhah B-19" href="Anillos\Lazo.jpg"><img alt="Berakhah B-19" src="Anillos\Lazo.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B19')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B19')">❯</button>
@@ -490,7 +524,7 @@
 <div class="producto" data-categoria="zarcillos">
 <div class="carousel" id="carousel-B20">
 <div class="carousel-images">
-<img alt="Berakhah B-20" class="active" onclick="window.open(this.src, '_blank')" src="Zarcillos/Corazones.jpg"/>
+<a data-caption="Berakhah B-20" data-fancybox="gallery-Berakhah B-20" href="Zarcillos/Corazones.jpg"><img alt="Berakhah B-20" class="active" src="Zarcillos/Corazones.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B20')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B20')">❯</button>
@@ -504,7 +538,7 @@
 <div class="producto" data-categoria="zarcillos">
 <div class="carousel" id="carousel-B29">
 <div class="carousel-images">
-<img alt="Berakhah B-29" class="active" onclick="window.open(this.src, '_blank')" src="Zarcillos/Agolla2.jpg"/>
+<a data-caption="Berakhah B-29" data-fancybox="gallery-Berakhah B-29" href="Zarcillos/Agolla2.jpg"><img alt="Berakhah B-29" class="active" src="Zarcillos/Agolla2.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B29')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B29')">❯</button>
@@ -519,7 +553,7 @@
 <div class="producto" data-categoria="zarcillos">
 <div class="carousel" id="carousel-B30">
 <div class="carousel-images">
-<img alt="Berakhah B-30" class="active" onclick="window.open(this.src, '_blank')" src="Zarcillos/Agolla3.jpg"/>
+<a data-caption="Berakhah B-30" data-fancybox="gallery-Berakhah B-30" href="Zarcillos/Agolla3.jpg"><img alt="Berakhah B-30" class="active" src="Zarcillos/Agolla3.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B30')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B30')">❯</button>
@@ -534,7 +568,7 @@
 <div class="producto" data-categoria="zarcillos">
 <div class="carousel" id="carousel-B31">
 <div class="carousel-images">
-<img alt="Berakhah B-31" class="active" onclick="window.open(this.src, '_blank')" src="Zarcillos/Agolla1.jpg"/>
+<a data-caption="Berakhah B-31" data-fancybox="gallery-Berakhah B-31" href="Zarcillos/Agolla1.jpg"><img alt="Berakhah B-31" class="active" src="Zarcillos/Agolla1.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B31')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B31')">❯</button>
@@ -561,8 +595,8 @@
 <div class="producto" data-categoria="caballeros">
 <div class="carousel" id="carousel-B39">
 <div class="carousel-images">
-<img alt="Berakhah B-39" class="active" onclick="window.open(this.src, '_blank')" src="Caballeros/B39.jpg"/>
-<img alt="Berakhah B-39" onclick="window.open(this.src, '_blank')" src="Caballeros/B39-1.jpg"/>
+<a data-caption="Berakhah B-39" data-fancybox="gallery-Berakhah B-39" href="Caballeros/B39.jpg"><img alt="Berakhah B-39" class="active" src="Caballeros/B39.jpg"/></a>
+<a data-caption="Berakhah B-39" data-fancybox="gallery-Berakhah B-39" href="Caballeros/B39-1.jpg"><img alt="Berakhah B-39" src="Caballeros/B39-1.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B39')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B39')">❯</button>
@@ -576,8 +610,8 @@
 <div class="producto" data-categoria="caballeros">
 <div class="carousel" id="carousel-B40">
 <div class="carousel-images">
-<img alt="Berakhah B-40" class="active" onclick="window.open(this.src, '_blank')" src="Caballeros/B40.jpg"/>
-<img alt="Berakhah B-40" onclick="window.open(this.src, '_blank')" src="Caballeros/B40-1.jpg"/>
+<a data-caption="Berakhah B-40" data-fancybox="gallery-Berakhah B-40" href="Caballeros/B40.jpg"><img alt="Berakhah B-40" class="active" src="Caballeros/B40.jpg"/></a>
+<a data-caption="Berakhah B-40" data-fancybox="gallery-Berakhah B-40" href="Caballeros/B40-1.jpg"><img alt="Berakhah B-40" src="Caballeros/B40-1.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B40')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B40')">❯</button>
@@ -591,8 +625,8 @@
 <div class="producto" data-categoria="caballeros">
 <div class="carousel" id="carousel-B41">
 <div class="carousel-images">
-<img alt="Berakhah B-41" class="active" onclick="window.open(this.src, '_blank')" src="Caballeros/B41.jpg"/>
-<img alt="Berakhah B-41" onclick="window.open(this.src, '_blank')" src="Caballeros/B41-1.jpg"/>
+<a data-caption="Berakhah B-41" data-fancybox="gallery-Berakhah B-41" href="Caballeros/B41.jpg"><img alt="Berakhah B-41" class="active" src="Caballeros/B41.jpg"/></a>
+<a data-caption="Berakhah B-41" data-fancybox="gallery-Berakhah B-41" href="Caballeros/B41-1.jpg"><img alt="Berakhah B-41" src="Caballeros/B41-1.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B41')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B41')">❯</button>
@@ -606,8 +640,8 @@
 <div class="producto" data-categoria="caballeros">
 <div class="carousel" id="carousel-B14">
 <div class="carousel-images">
-<img alt="Berakhah B-14" class="active" onclick="window.open(this.src, '_blank')" src="Caballeros/Cruz1.jpg"/>
-<img alt="Berakhah B-14" onclick="window.open(this.src, '_blank')" src="Caballeros/Cruz-1.jpg"/>
+<a data-caption="Berakhah B-14" data-fancybox="gallery-Berakhah B-14" href="Caballeros/Cruz1.jpg"><img alt="Berakhah B-14" class="active" src="Caballeros/Cruz1.jpg"/></a>
+<a data-caption="Berakhah B-14" data-fancybox="gallery-Berakhah B-14" href="Caballeros/Cruz-1.jpg"><img alt="Berakhah B-14" src="Caballeros/Cruz-1.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B14')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B14')">❯</button>
@@ -621,7 +655,7 @@
 <div class="producto" data-categoria="caballeros">
 <div class="carousel" id="carousel-B36">
 <div class="carousel-images">
-<img alt="Berakhah B-36" class="active" onclick="window.open(this.src, '_blank')" src="Collares/Perlas.jpg"/>
+<a data-caption="Berakhah B-36" data-fancybox="gallery-Berakhah B-36" href="Collares/Perlas.jpg"><img alt="Berakhah B-36" class="active" src="Collares/Perlas.jpg"/></a>
 </div>
 <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B36')">❮</button>
 <button class="carousel-button next" onclick="changeImage(1, 'carousel-B36')">❯</button>
@@ -640,6 +674,10 @@
 <p>Total: $<span id="total-carrito">0</span></p>
 <button class="button" id="btn-pedir">Enviar pedido</button>
 <button class="button" id="btn-vaciar-carrito">Vaciar Carrito</button>
+<!-- Botón de Mercado Pago -->
+<button class="mercado-pago-button" id="btn-mercado-pago">
+<img alt="Mercado Pago Logo" src="https://www.mercadopago.com/org-img/MP3/API/logos/mercadopago.gif" width="150"/>
+</button>
 <!-- Mensaje adicional debajo del botón -->
 <p id="mensaje-pedido" style="font-size: 14px; margin-top: 10px;">
     Si realizas el pedido desde un PC y no tienes enlazado el WhatsApp, puedes enviarnos una foto del pedido al 
