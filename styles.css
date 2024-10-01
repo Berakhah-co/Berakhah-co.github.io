@@ -296,8 +296,11 @@ body {
     border-radius: 10px;
     width: 300px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    z-index: 9999; /* Asegúrate de que sea mayor que cualquier otro elemento */
+    max-height: 80vh; /* Limita la altura del carrito */
+    overflow-y: auto; /* Añade scroll interno si el contenido sobrepasa la altura */
 }
+
 
 #carrito h2 {
     margin-top: 0;
@@ -379,6 +382,57 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
 }
 
+/* Estilos para la sección de cotización de envío */
+#cotizacion-envio {
+    margin: 20px 0;
+}
+
+#cotizacion-envio label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 10px;
+}
+
+#campos-envio {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+}
+
+.campo-envio {
+    margin-bottom: 15px;
+}
+
+.campo-envio label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.campo-envio input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #faf6f6;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.campo-envio input:focus {
+    border-color: #D4AF37; /* Borde dorado al enfocar */
+    box-shadow: 0 0 5px rgba(212, 175, 55, 0.5); /* Sombra dorada al enfocar */
+}
+
+/* Estilo especial para campos de entrada pequeños */
+.campo-envio input[list] {
+    cursor: pointer;
+}
 
 
 /* Estilos para el botón flotante del carrito */
