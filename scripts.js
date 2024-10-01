@@ -412,18 +412,5 @@ window.addEventListener('load', function () {
     }, 2000); // Ajusta el tiempo de la animación al mismo que el CSS o según la carga real
 });
 
-// Función para manejar el pago por Mercado Pago
-document.getElementById('btn-mercado-pago').addEventListener('click', function() {
-    // Abrir el enlace de pago de Mercado Pago
-    window.open('https://link.mercadopago.com.co/berakhahco', '_blank');
 
-    // Mostrar notificación de recordar enviar el pedido y adjuntar el pago
-    Swal.fire({
-        title: 'Recuerda',
-        text: 'Recuerda enviar tu pedido y adjuntar el comprobante de pago.',
-        icon: 'info',
-        background: '#28a745',
-        color: '#ffffff',
-        confirmButtonText: 'Entendido'
-    });
-});
+
