@@ -196,44 +196,35 @@ function enviarPedido() {
     });
 }
 
-
-
 // Función para vaciar el carrito
+
 function vaciarCarrito() {
-    const bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
+    const carritoContenedor = document.getElementById('lista-carrito');
     localStorage.removeItem('carrito');
     mostrarCarrito();
 
-    // Mostrar SweetAlert indicando que el carrito se vació
+    carritoContenedor.classList.add('animacion-existente');
+    setTimeout(() => {
+        carritoContenedor.classList.remove('animacion-existente');
+    }, 500); // Duración de la animación
+
+    const bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
     Swal.fire({
         title: bodyClass === 'en' ? 'Cart emptied!' : '¡Carrito Vacío!',
         text: bodyClass === 'en' ? 'Your cart has been emptied.' : 'Has vaciado tu carrito.',
         icon: 'info',
-        background: '#dc3545', // Color de fondo rojo
-        color: '#ffffff', // Color del texto
-        timer: 2000, // Tiempo para que desaparezca la alerta automáticamente
+        background: '#dc3545',
+        color: '#ffffff',
+        timer: 2000,
         showConfirmButton: false
     });
 
-    // Lanza confeti cuando se vacía el carrito
-    lanzarConfeti();
+    lanzarConfeti(); // Lanza confeti al vaciar el carrito
 }
 
 
-// Función para vaciar el carrito con la animación existente
-function vaciarCarrito() {
-    const carritoContenedor = document.getElementById('lista-carrito'); // El contenedor del carrito
 
-    // Añadir la clase de animación existente (si ya la tienes en tu código)
-    carritoContenedor.classList.add('animacion-existente'); // Reemplaza 'animacion-existente' por la clase que ya tienes
 
-    // Esperar a que termine la animación (ajustar el tiempo según la duración de la animación)
-    setTimeout(() => {
-        localStorage.removeItem('carrito'); // Vaciar el carrito
-        mostrarCarrito(); // Actualizar el carrito
-        carritoContenedor.classList.remove('animacion-existente'); // Eliminar la clase de animación
-    }, 500); // Ajusta este tiempo según la duración de tu animación actual
-}
 
 
 // Añadir el evento al botón de vaciar carrito
@@ -257,14 +248,14 @@ document.getElementById('btn-vaciar-carrito').addEventListener('click', () => {
 });
 
 
-
-
 // Función para mostrar u ocultar el carrito
 function toggleCarrito() {
     let carrito = document.getElementById('carrito');
     carrito.style.display = carrito.style.display === 'none' ? 'block' : 'none';
+    
 }
-
+// evento para mostrar u ocultar el carrito con la X
+document.getElementById('cerrar-carrito').addEventListener('click', toggleCarrito);
 // Cargar el contador al iniciar la página
 document.addEventListener('DOMContentLoaded', () => {
     mostrarCarrito();
@@ -318,11 +309,10 @@ function changeImage(step, carouselId) {
 // Movimiento automático en el carrusel
 document.addEventListener('DOMContentLoaded', function () {
     const carousels = document.querySelectorAll('.carousel-images');
-    let intervalTime = 9000; // Tiempo en milisegundos (9 segundos)
-    let pauseTime = 40000; // Pausar por 40 segundos si el usuario interactúa
+    let intervalTime = 7000; // Tiempo en milisegundos (7 segundos)
     let intervalID; // Variable para almacenar el ID del intervalo
 
-    // Función para mostrar la siguiente imagen en cada carrusel
+    // Función para mostrar la siguiente imagen en cada carousel
     function showNextImage(carousel) {
         const images = carousel.querySelectorAll('img');
         let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
@@ -349,14 +339,6 @@ document.addEventListener('DOMContentLoaded', function () {
         clearInterval(intervalID);
     }
 
-    // Función para pausar el ciclo automático por 40 segundos
-    function pauseCarousel() {
-        stopCarousel(); // Detenemos el ciclo automático
-        setTimeout(() => {
-            startCarousel(); // Reiniciamos el ciclo automático después de 40 segundos
-        }, pauseTime);
-    }
-
     // Inicia el carrusel automáticamente
     startCarousel();
 
@@ -365,21 +347,22 @@ document.addEventListener('DOMContentLoaded', function () {
         const prevButton = carousel.parentElement.querySelector('.carousel-button.prev');
         const nextButton = carousel.parentElement.querySelector('.carousel-button.next');
 
-        // Pausar el carrusel si el usuario hace clic en los botones
+        // Detener el carrusel si el usuario hace clic en los botones
         prevButton.addEventListener('click', () => {
-            pauseCarousel();
+            stopCarousel(); // Detener el cambio automático
         });
 
         nextButton.addEventListener('click', () => {
-            pauseCarousel();
+            stopCarousel(); // Detener el cambio automático
         });
 
-        // Pausar también si el usuario desliza imágenes (en dispositivos táctiles)
+        // Detener también si el usuario desliza imágenes (en dispositivos táctiles)
         carousel.addEventListener('touchstart', () => {
-            pauseCarousel();
+            stopCarousel(); // Detener el cambio automático
         });
     });
 });
+
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -426,5 +409,21 @@ window.addEventListener('load', function () {
     // Simula una pequeña demora para la carga, ajusta según sea necesario
     setTimeout(function() {
         document.getElementById('barra-carga').style.display = 'none'; // Oculta la barra de carga
-    }, 3000); // Ajusta el tiempo de la animación al mismo que el CSS o según la carga real
+    }, 2000); // Ajusta el tiempo de la animación al mismo que el CSS o según la carga real
+});
+
+// Función para manejar el pago por Mercado Pago
+document.getElementById('btn-mercado-pago').addEventListener('click', function() {
+    // Abrir el enlace de pago de Mercado Pago
+    window.open('https://link.mercadopago.com.co/berakhahco', '_blank');
+
+    // Mostrar notificación de recordar enviar el pedido y adjuntar el pago
+    Swal.fire({
+        title: 'Recuerda',
+        text: 'Recuerda enviar tu pedido y adjuntar el comprobante de pago.',
+        icon: 'info',
+        background: '#28a745',
+        color: '#ffffff',
+        confirmButtonText: 'Entendido'
+    });
 });
