@@ -224,12 +224,12 @@ function vaciarCarrito() {
 
 
 
-
-
-
 // Añadir el evento al botón de vaciar carrito
 document.getElementById('btn-vaciar-carrito').addEventListener('click', () => {
     const bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
+
+    // Cerrar el carrito antes de mostrar la alerta
+    document.getElementById('carrito').style.display = 'none';
 
     Swal.fire({
         title: bodyClass === 'en' ? 'Are you sure?' : '¿Estás seguro?',
@@ -243,9 +243,13 @@ document.getElementById('btn-vaciar-carrito').addEventListener('click', () => {
     }).then((result) => {
         if (result.isConfirmed) {
             vaciarCarrito(); // Llama a la función de vaciar el carrito si el usuario confirma
+        } else {
+            // Si el usuario cancela, puedes volver a mostrar el carrito si es necesario
+            document.getElementById('carrito').style.display = 'block';
         }
     });
 });
+
 
 
 // Función para mostrar u ocultar el carrito
@@ -411,6 +415,3 @@ window.addEventListener('load', function () {
         document.getElementById('barra-carga').style.display = 'none'; // Oculta la barra de carga
     }, 2000); // Ajusta el tiempo de la animación al mismo que el CSS o según la carga real
 });
-
-
-
