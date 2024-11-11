@@ -1,14 +1,60 @@
-// Función para mostrar productos por categoría
-function mostrarCategoria(categoria) {
-    const productos = document.querySelectorAll('.producto');
-    productos.forEach(producto => {
-        if (categoria === 'todo' || producto.getAttribute('data-categoria') === categoria) {
-            producto.style.display = 'block';
-        } else {
-            producto.style.display = 'none';
-        }
-    });
-}
+// Obtener todos los productos al cargar la página en el orden original
+const productosOriginales = Array.from(document.querySelectorAll('.producto'));
+// Array que usaremos para aleatorizar en la categoría "Todos"
+let productosAleatorios = [...productosOriginales];
+
+// Función para mezclar el array usando Fisher-Yates
+function mezclarArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]]; // Intercambiar elementos
+    }
+    return array;
+  }
+  
+  // Función para mostrar productos por categoría
+  function mostrarCategoria(categoria) {
+      const contenedor = document.querySelector('.catalogo'); // Contenedor del catálogo
+  
+      // Si es la categoría "Todos", mezclar el array de productos usando Fisher-Yates
+      if (categoria === 'todo') {
+          productosAleatorios = [...productosOriginales]; // Resetear el orden a original antes de mezclar
+          mezclarArray(productosAleatorios); // Mezclar el array
+      }
+  
+      // Limpiar el contenedor del catálogo para evitar duplicados
+      contenedor.innerHTML = '';
+  
+      // Determinar el array de productos a usar (mezclado u original)
+      const productosAMostrar = categoria === 'todo' ? productosAleatorios : productosOriginales;
+  
+      // Filtrar y agregar productos según la categoría seleccionada
+      productosAMostrar.forEach(producto => {
+          if (categoria === 'todo' || producto.getAttribute('data-categoria') === categoria) {
+              producto.style.display = 'block';
+              contenedor.appendChild(producto); // Agregar producto al contenedor
+          } else {
+              producto.style.display = 'none';
+          }
+      });
+  }
+  
+  // Función para aleatorizar productos cada minuto
+  function iniciarAleatorizacionAutomatica() {
+      setInterval(() => {
+          mostrarCategoria('todo'); // Mezclar y mostrar la categoría "Todos"
+      }, 60000); // 60000 milisegundos = 1 minuto
+  }
+  
+  // Iniciar la aleatorización automática
+  iniciarAleatorizacionAutomatica();
+  
+
+// Evento para cargar todos los productos al inicio en la categoría "Todos"
+document.addEventListener('DOMContentLoaded', () => {
+    mostrarCategoria('todo');
+});
+
 
 // Mostrar todos los productos al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
@@ -415,6 +461,3 @@ window.addEventListener('load', function () {
         document.getElementById('barra-carga').style.display = 'none'; // Oculta la barra de carga
     }, 2000); // Ajusta el tiempo de la animación al mismo que el CSS o según la carga real
 });
-
-
-
