@@ -43,7 +43,7 @@ function mezclarArray(array) {
   function iniciarAleatorizacionAutomatica() {
       setInterval(() => {
           mostrarCategoria('todo'); // Mezclar y mostrar la categoría "Todos"
-      }, 60000); // 60000 milisegundos = 1 minuto
+      }, 60000); // 100000 milisegundos = 10 minuto
   }
   
   // Iniciar la aleatorización automática
