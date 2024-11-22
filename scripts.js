@@ -257,8 +257,6 @@ function vaciarCarrito() {
     lanzarConfeti(); // Lanza confeti al vaciar el carrito
 }
 
-
-
 // Añadir el evento al botón de vaciar carrito
 document.getElementById('btn-vaciar-carrito').addEventListener('click', () => {
     const bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
@@ -284,8 +282,6 @@ document.getElementById('btn-vaciar-carrito').addEventListener('click', () => {
         }
     });
 });
-
-
 
 // Función para mostrar u ocultar el carrito
 function toggleCarrito() {
@@ -348,7 +344,7 @@ function changeImage(step, carouselId) {
 // Movimiento automático en el carrusel
 document.addEventListener('DOMContentLoaded', function () {
     const carousels = document.querySelectorAll('.carousel-images');
-    let intervalTime = 7000; // Tiempo en milisegundos (7 segundos)
+    let intervalTime = 15000; // Tiempo en milisegundos (15 segundos)
     let intervalID; // Variable para almacenar el ID del intervalo
 
     // Función para mostrar la siguiente imagen en cada carousel
