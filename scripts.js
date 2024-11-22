@@ -39,17 +39,6 @@ function mezclarArray(array) {
       });
   }
   
-  // Función para aleatorizar productos cada minuto
-  function iniciarAleatorizacionAutomatica() {
-      setInterval(() => {
-          mostrarCategoria('todo'); // Mezclar y mostrar la categoría "Todos"
-      }, 100000); // 100000 milisegundos = 10 minuto
-  }
-  
-  // Iniciar la aleatorización automática
-  iniciarAleatorizacionAutomatica();
-  
-
 // Evento para cargar todos los productos al inicio en la categoría "Todos"
 document.addEventListener('DOMContentLoaded', () => {
     mostrarCategoria('todo');
@@ -461,6 +450,3 @@ window.addEventListener('load', function () {
         document.getElementById('barra-carga').style.display = 'none'; // Oculta la barra de carga
     }, 2000); // Ajusta el tiempo de la animación al mismo que el CSS o según la carga real
 });
-
-
-
