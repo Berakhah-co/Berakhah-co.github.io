@@ -43,7 +43,7 @@ function mezclarArray(array) {
   function iniciarAleatorizacionAutomatica() {
       setInterval(() => {
           mostrarCategoria('todo'); // Mezclar y mostrar la categoría "Todos"
-      }, 60000); // 100000 milisegundos = 10 minuto
+      }, 100000); // 100000 milisegundos = 10 minuto
   }
   
   // Iniciar la aleatorización automática
@@ -461,3 +461,6 @@ window.addEventListener('load', function () {
         document.getElementById('barra-carga').style.display = 'none'; // Oculta la barra de carga
     }, 2000); // Ajusta el tiempo de la animación al mismo que el CSS o según la carga real
 });
+
+
+
