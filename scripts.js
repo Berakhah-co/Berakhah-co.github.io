@@ -1,3 +1,58 @@
+// Mostrar mensaje al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    // Mostrar mensaje de descuento con SweetAlert2
+    const swalWithTimer = Swal.fire({
+        title: '🎅 ¡Promoción Navideña! 🎄',
+        text: 'Estas Navidades, disfruta de un 10% de descuento en el total de tu carrito.',
+        icon: 'success',
+        confirmButtonText: '¡Entendido!',
+        background: '#007f00', // Verde navideño
+        color: '#ffffff', // Letras blancas
+        customClass: {
+            popup: 'swal2-popup-navidad' // Clase personalizada (por si deseas añadir más estilos)
+        },
+        timer: 4000, // Tiempo en milisegundos
+        timerProgressBar: true, // Mostrar barra de progreso
+        didOpen: () => {
+            // Lanza confeti con colores navideños después de que el usuario cierre el mensaje
+            Swal.showLoading();
+            const timerInterval = setInterval(() => {
+                Swal.getTimerLeft();
+            }, 100);
+        },
+        willClose: () => {
+            // Lanza confeti al cerrar el mensaje automáticamente
+            confetti({
+                particleCount: 150,
+                spread: 360, // Distribución completa
+                colors: ['#ff0000', '#00ff00', '#ffffff'], // Colores rojo, verde y blanco
+                origin: { x: 0.5, y: 0.5 }, // Explota desde el centro
+                scalar: 1.2 // Tamaño de las partículas
+            });
+        }
+    });
+});
+
+// Iniciar la nieve al cargar la página
+document.addEventListener('DOMContentLoaded', iniciarNieve);
+
+function iniciarNieve() {
+    const cantidadCopos = 100; // Número de copos de nieve
+    const coposContainer = document.createElement('div');
+    coposContainer.classList.add('nieve-contenedor');
+    document.body.appendChild(coposContainer);
+
+    for (let i = 0; i < cantidadCopos; i++) {
+        const copo = document.createElement('div');
+        copo.classList.add('copo-nieve');
+        copo.style.left = Math.random() * 100 + 'vw'; // Posición horizontal aleatoria
+        copo.style.animationDuration = Math.random() * 3 + 2 + 's'; // Duración de la caída
+        copo.style.opacity = Math.random(); // Transparencia aleatoria
+        coposContainer.appendChild(copo);
+    }
+}
+
+
 // Obtener todos los productos al cargar la página en el orden original
 const productosOriginales = Array.from(document.querySelectorAll('.producto'));
 // Array que usaremos para aleatorizar en la categoría "Todos"
@@ -55,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Función para mostrar el carrito y actualizar el contador
+// Función para mostrar el carrito y actualizar el contador
 function mostrarCarrito() {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     let listaCarrito = document.getElementById('lista-carrito');
@@ -63,10 +119,11 @@ function mostrarCarrito() {
 
     let bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
 
+    // Calcular el total del carrito
     carrito.forEach((producto, index) => {
         totalCarrito += parseFloat(producto.precio);
+
         let li = document.createElement('li');
-        
         let precioFormateado = bodyClass === 'en' 
             ? parseFloat(producto.precio).toLocaleString('en-US', { minimumFractionDigits: 0 }) 
             : parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
@@ -78,13 +135,38 @@ function mostrarCarrito() {
         listaCarrito.appendChild(li);
     });
 
-    let totalFormateado = bodyClass === 'en' 
-        ? totalCarrito.toLocaleString('en-US', { minimumFractionDigits: 0 })
-        : totalCarrito.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+    // Calcular el descuento del 10%
+    let descuento = totalCarrito * 0.10;
+    let totalConDescuento = totalCarrito - descuento;
 
+    // Formatear el total y el descuento
+    let totalFormateado = bodyClass === 'en'
+        ? totalConDescuento.toLocaleString('en-US', { minimumFractionDigits: 2 })
+        : totalConDescuento.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+
+    let descuentoFormateado = bodyClass === 'en'
+        ? descuento.toLocaleString('en-US', { minimumFractionDigits: 2 })
+        : descuento.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+
+    // Mostrar el total con descuento en la interfaz
     document.getElementById('total-carrito').textContent = totalFormateado;
+
+    // Mostrar el descuento (opcional: puedes añadirlo como un párrafo debajo del total)
+    const descuentoElemento = document.getElementById('descuento-carrito');
+    if (!descuentoElemento) {
+        const nuevoElemento = document.createElement('p');
+        nuevoElemento.id = 'descuento-carrito';
+        nuevoElemento.textContent = `Descuento aplicado: $${descuentoFormateado}`;
+        nuevoElemento.style.color = 'green';
+        listaCarrito.parentElement.appendChild(nuevoElemento);
+    } else {
+        descuentoElemento.textContent = `Descuento aplicado: $${descuentoFormateado}`;
+    }
+
+    // Actualizar el contador del carrito
     actualizarContadorCarrito();
 }
+
 
 
 // Función para mostrar una notificación con SweetAlert2
@@ -159,25 +241,12 @@ function enviarPedido() {
         return;
     }
 
-    // Detectar el idioma basado en la clase del body ('en' para inglés, 'es' para español)
-    const bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
-
     let mensaje = '🛒 *Pedido Realizado:*\n\n';
     let total = 0;
 
     carrito.forEach((producto, index) => {
-        // Redondear si el precio no tiene decimales
-        let precioFormateado;
-
-        if (bodyClass === 'en') {
-            // Para inglés, sin decimales si es un número entero
-            precioFormateado = Number.isInteger(parseFloat(producto.precio)) 
-                ? parseFloat(producto.precio).toLocaleString('en-US', { minimumFractionDigits: 0 }) 
-                : parseFloat(producto.precio).toLocaleString('en-US', { minimumFractionDigits: 2 });
-        } else {
-            // Para español, usar 3 decimales en Colombia
-            precioFormateado = parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
-        }
+        // Formatear el precio según el formato colombiano (3 decimales)
+        let precioFormateado = parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
 
         mensaje += `${index + 1}. *${producto.nombre}* - $${precioFormateado}\n`;
 
@@ -189,31 +258,33 @@ function enviarPedido() {
         total += parseFloat(producto.precio);
     });
 
-    // Formatear el total de manera similar
-    let totalFormateado;
-    
-    if (bodyClass === 'en') {
-        totalFormateado = Number.isInteger(total)
-            ? total.toLocaleString('en-US', { minimumFractionDigits: 0 })
-            : total.toLocaleString('en-US', { minimumFractionDigits: 2 });
-    } else {
-        totalFormateado = total.toLocaleString('es-CO', { minimumFractionDigits: 3 });
-    }
+    // Calcular el descuento y el total con descuento
+    let descuento = total * 0.10; // 10% de descuento
+    let totalConDescuento = total - descuento;
 
-    mensaje += `\n🧾 *Total:* $${totalFormateado}`;
+    // Formatear los valores en formato colombiano
+    let totalFormateado = total.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+    let descuentoFormateado = descuento.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+    let totalConDescuentoFormateado = totalConDescuento.toLocaleString('es-CO', { minimumFractionDigits: 3 });
 
+    // Agregar los totales al mensaje
+    mensaje += `\n🧾 *Subtotal:* $${totalFormateado}`;
+    mensaje += `\n🔖 *Descuento (10%):* -$${descuentoFormateado}`;
+    mensaje += `\n💰 *Total con Descuento:* $${totalConDescuentoFormateado}`;
+
+    // Enviar el mensaje por WhatsApp
     const numeroWhatsApp = "+573184818218";
     const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
     window.open(urlWhatsApp, '_blank');
 
     // Mostrar SweetAlert2 con confetti para indicar que se ha enviado el pedido
     Swal.fire({
-        title: bodyClass === 'en' ? 'Order Sent!' : '¡Pedido Enviado!',
-        text: bodyClass === 'en' ? 'Thank you for your purchase. Do you want to empty the cart?' : 'Gracias por tu compra. ¿Deseas vaciar el carrito?',
+        title: '¡Pedido Enviado!',
+        text: 'Gracias por tu compra. ¿Deseas vaciar el carrito?',
         icon: 'success',
         showCancelButton: true,
-        confirmButtonText: bodyClass === 'en' ? 'Yes, empty cart' : 'Sí, vaciar carrito',
-        cancelButtonText: bodyClass === 'en' ? 'No, keep cart' : 'No, mantener carrito',
+        confirmButtonText: 'Sí, vaciar carrito',
+        cancelButtonText: 'No, mantener carrito',
         background: '#ffffff',
         color: '#000000',
     }).then((result) => {
@@ -230,6 +301,7 @@ function enviarPedido() {
         origin: { x: 0.5, y: 0.5 }
     });
 }
+
 
 // Función para vaciar el carrito
 
@@ -446,3 +518,6 @@ window.addEventListener('load', function () {
         document.getElementById('barra-carga').style.display = 'none'; // Oculta la barra de carga
     }, 2000); // Ajusta el tiempo de la animación al mismo que el CSS o según la carga real
 });
+
+
+
