@@ -110,27 +110,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Función para mostrar el carrito y actualizar el contador
-// Función para mostrar el carrito y actualizar el contador
 function mostrarCarrito() {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     let listaCarrito = document.getElementById('lista-carrito');
     let totalCarrito = 0;
     listaCarrito.innerHTML = '';
 
-    let bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
-
-    // Calcular el total del carrito
     carrito.forEach((producto, index) => {
-        totalCarrito += parseFloat(producto.precio);
+        let subtotalProducto = parseFloat(producto.precio) * producto.cantidad;
+        totalCarrito += subtotalProducto;
+
+        // Obtener el nombre desde "Berakhah" en adelante
+        let nombreReducido = producto.nombre.split("Berakhah")[1]?.trim() || producto.nombre;
 
         let li = document.createElement('li');
-        let precioFormateado = bodyClass === 'en' 
-            ? parseFloat(producto.precio).toLocaleString('en-US', { minimumFractionDigits: 0 }) 
-            : parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
+        let precioFormateado = subtotalProducto.toLocaleString('es-CO', { minimumFractionDigits: 3 });
 
         li.innerHTML = `
-            ${producto.nombre} - $${precioFormateado}
-            <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
+            Berakhah ${nombreReducido} - 
+            <button onclick="cambiarCantidad(${index}, -1)">-</button>
+            x${producto.cantidad}
+            <button onclick="cambiarCantidad(${index}, 1)">+</button> 
+            $${precioFormateado}
         `;
         listaCarrito.appendChild(li);
     });
@@ -139,34 +140,40 @@ function mostrarCarrito() {
     let descuento = totalCarrito * 0.10;
     let totalConDescuento = totalCarrito - descuento;
 
-    // Formatear el total y el descuento
-    let totalFormateado = bodyClass === 'en'
-        ? totalConDescuento.toLocaleString('en-US', { minimumFractionDigits: 2 })
-        : totalConDescuento.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+    // Formatear los valores
+    let subtotalFormateado = totalCarrito.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+    let descuentoFormateado = descuento.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+    let totalConDescuentoFormateado = totalConDescuento.toLocaleString('es-CO', { minimumFractionDigits: 3 });
 
-    let descuentoFormateado = bodyClass === 'en'
-        ? descuento.toLocaleString('en-US', { minimumFractionDigits: 2 })
-        : descuento.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+    // Mostrar subtotal, descuento y total
+    const totalCarritoElemento = document.getElementById('total-carrito');
+    totalCarritoElemento.innerHTML = `
+        <p>Subtotal: $${subtotalFormateado}</p>
+        <p>Descuento (10%): -$${descuentoFormateado}</p>
+        <p><strong>Total con descuento: $${totalConDescuentoFormateado}</strong></p>
+    `;
 
-    // Mostrar el total con descuento en la interfaz
-    document.getElementById('total-carrito').textContent = totalFormateado;
-
-    // Mostrar el descuento (opcional: puedes añadirlo como un párrafo debajo del total)
-    const descuentoElemento = document.getElementById('descuento-carrito');
-    if (!descuentoElemento) {
-        const nuevoElemento = document.createElement('p');
-        nuevoElemento.id = 'descuento-carrito';
-        nuevoElemento.textContent = `Descuento aplicado: $${descuentoFormateado}`;
-        nuevoElemento.style.color = 'green';
-        listaCarrito.parentElement.appendChild(nuevoElemento);
-    } else {
-        descuentoElemento.textContent = `Descuento aplicado: $${descuentoFormateado}`;
-    }
-
-    // Actualizar el contador del carrito
     actualizarContadorCarrito();
 }
 
+
+function cambiarCantidad(index, cambio) {
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    // Cambiar la cantidad del producto
+    carrito[index].cantidad += cambio;
+
+    // Si la cantidad llega a 0, eliminar el producto
+    if (carrito[index].cantidad <= 0) {
+        carrito.splice(index, 1);
+    }
+
+    // Guardar el carrito actualizado
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+
+    // Actualizar la vista del carrito
+    mostrarCarrito();
+}
 
 
 // Función para mostrar una notificación con SweetAlert2
@@ -210,13 +217,31 @@ function agregarAlCarrito(nombre, precio) {
     const urlCompletaImagen = `https://berakhah.site/${rutaImagen}`;
 
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    carrito.push({ nombre, precio, imagen: urlCompletaImagen });
+
+    // Verificar si el producto ya está en el carrito
+    let productoExistente = carrito.find(producto => producto.nombre === nombre);
+
+    if (productoExistente) {
+        // Incrementar la cantidad si ya existe
+        productoExistente.cantidad += 1;
+    } else {
+        // Agregar un nuevo producto con cantidad 1
+        carrito.push({ nombre, precio, imagen: urlCompletaImagen, cantidad: 1 });
+    }
+
+    // Guardar el carrito actualizado
     localStorage.setItem('carrito', JSON.stringify(carrito));
 
+    // Actualizar la vista del carrito
     mostrarCarrito();
-    mostrarNotificacion(nombre);  // Solo pasar el nombre, sin texto añadido
+
+    // Mostrar notificación
+    mostrarNotificacion(nombre);
+
+    // Lanzar confeti
     lanzarConfeti();
 }
+
 
 // Función para eliminar un producto del carrito y actualizar el contador
 function eliminarDelCarrito(index) {
@@ -241,45 +266,53 @@ function enviarPedido() {
         return;
     }
 
-    let mensaje = '🛒 *Pedido Realizado:*\n\n';
+    let mensaje = '🎉🛍️ *¡Tu Pedido Está Listo!*\n\n';
     let total = 0;
+    let subtotalTotal = 0;
+    let descuentoTotal = 0;
 
+    // Iterar sobre el carrito
     carrito.forEach((producto, index) => {
-        // Formatear el precio según el formato colombiano (3 decimales)
+        // Obtener el nombre completo del producto (asegúrate de que el nombre completo esté almacenado)
+        let nombreProducto = producto.nombre;  // Asegúrate de que 'producto.nombre' tenga el nombre completo
+
+        // Obtener la URL de la primera imagen del producto
+        let imagenProducto = producto.imagen || ''; // Asegúrate de que la propiedad 'imagen' esté bien definida en los productos
+        let subtotalProducto = parseFloat(producto.precio) * producto.cantidad;
+        subtotalTotal += subtotalProducto;
+
+        // Calcular el precio formateado
         let precioFormateado = parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
+        let subtotalFormateado = subtotalProducto.toLocaleString('es-CO', { minimumFractionDigits: 3 });
 
-        mensaje += `${index + 1}. *${producto.nombre}* - $${precioFormateado}\n`;
-
-        // Incluir el enlace de la imagen con un emoji
-        if (producto.imagen) {
-            mensaje += `🔗 Imagen: ${producto.imagen}\n`;
-        }
-
-        total += parseFloat(producto.precio);
+        // Añadir el producto al mensaje (nombre completo, cantidad, subtotal y link de la primera imagen)
+        mensaje += `🌟 *${nombreProducto}* - x${producto.cantidad}  *$${subtotalFormateado}*  
+                    🖼️ Imagen: ${imagenProducto}\n`;
+        total += subtotalProducto;
     });
 
-    // Calcular el descuento y el total con descuento
-    let descuento = total * 0.10; // 10% de descuento
-    let totalConDescuento = total - descuento;
+    // Calcular el descuento
+    let descuento = subtotalTotal * 0.10;
+    let totalConDescuento = subtotalTotal - descuento;
 
-    // Formatear los valores en formato colombiano
-    let totalFormateado = total.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+    // Formatear el total y el descuento
+    let subtotalTotalFormateado = subtotalTotal.toLocaleString('es-CO', { minimumFractionDigits: 3 });
     let descuentoFormateado = descuento.toLocaleString('es-CO', { minimumFractionDigits: 3 });
     let totalConDescuentoFormateado = totalConDescuento.toLocaleString('es-CO', { minimumFractionDigits: 3 });
 
-    // Agregar los totales al mensaje
-    mensaje += `\n🧾 *Subtotal:* $${totalFormateado}`;
-    mensaje += `\n🔖 *Descuento (10%):* -$${descuentoFormateado}`;
-    mensaje += `\n💰 *Total con Descuento:* $${totalConDescuentoFormateado}`;
+    // Añadir subtotales, descuento y total
+    mensaje += `\n💰 *Subtotal:* $${subtotalTotalFormateado}\n`;
+    mensaje += `🎁 *Descuento aplicado (10%):* -$${descuentoFormateado}\n`;
+    mensaje += `✨ *Total con descuento:* $${totalConDescuentoFormateado}`;
 
-    // Enviar el mensaje por WhatsApp
+    // Enviar mensaje por WhatsApp
     const numeroWhatsApp = "+573184818218";
     const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
     window.open(urlWhatsApp, '_blank');
 
     // Mostrar SweetAlert2 con confetti para indicar que se ha enviado el pedido
     Swal.fire({
-        title: '¡Pedido Enviado!',
+        title: '🎉 ¡Pedido Enviado! 🎉',
         text: 'Gracias por tu compra. ¿Deseas vaciar el carrito?',
         icon: 'success',
         showCancelButton: true,
@@ -301,6 +334,7 @@ function enviarPedido() {
         origin: { x: 0.5, y: 0.5 }
     });
 }
+
 
 
 // Función para vaciar el carrito
