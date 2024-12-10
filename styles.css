@@ -364,37 +364,52 @@ body {
 }
 
 
+/* Estilos para el carrito */
 #carrito {
     position: fixed;
     right: 20px;
     top: 20px;
-    background-color: #fff;
+    background-color: #ffffff;
     border: 1px solid #ddd;
     padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    z-index: 9999; /* Asegúrate de que sea mayor que cualquier otro elemento */
+    border-radius: 15px; /* Bordes más redondeados */
+    width: 320px; /* Un poco más ancho */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); /* Sombra suave y más prominente */
+    z-index: 9999; /* Asegúrate de que sea visible encima de todo */
     max-height: 80vh; /* Limita la altura del carrito */
-    overflow-y: auto; /* Añade scroll interno si el contenido sobrepasa la altura */
+    overflow-y: auto; /* Añadir scroll interno si el contenido sobrepasa la altura */
+    background-image: linear-gradient(180deg, #f4f4f4, #ffffff); /* Fondo degradado suave */
+    transition: all 0.3s ease; /* Transición suave al abrir o cerrar el carrito */
 }
 
-
+/* Título del carrito */
 #carrito h2 {
     margin-top: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #D4AF37; /* Dorado para que destaque */
+    text-align: center;
 }
 
+/* Lista de productos en el carrito */
 #lista-carrito {
     list-style-type: none;
     padding: 0;
+    margin: 20px 0;
 }
 
+/* Elementos de la lista (productos) */
 #lista-carrito li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px 0;
+    margin: 15px 0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Línea de separación entre productos */
+    font-size: 16px;
+    color: #333;
 }
+
 
 #lista-carrito button {
     background-color: #d9534f;
