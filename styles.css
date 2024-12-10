@@ -1,3 +1,82 @@
+/* Contenedor de la guirnalda */
+.guirnalda {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Centra la guirnalda */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9998; /* Asegura que esté justo debajo de la barra de navegación */
+    pointer-events: none; /* No interfiere con otros elementos */
+}
+
+/* Cada item de la guirnalda */
+.guirnalda-item {
+    width: 30px;
+    height: 30px;
+    background-color: #ff0000; /* Rojo navideño */
+    border-radius: 50%;
+    position: relative;
+    animation: colgarGuirnalda 3s ease-in-out infinite; /* Animación de movimiento */
+}
+
+/* Animación para simular que las guirnaldas cuelgan */
+@keyframes colgarGuirnalda {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px); /* Cae un poco para simular movimiento */
+    }
+}
+
+/* Colores alternados para los círculos (puedes agregar más colores para que se vean como bolas de Navidad) */
+.guirnalda-item:nth-child(1) {
+    background-color: #ff0000; /* Rojo */
+}
+.guirnalda-item:nth-child(2) {
+    background-color: #00ff00; /* Verde */
+}
+.guirnalda-item:nth-child(3) {
+    background-color: #ffffff; /* Blanco */
+}
+
+
+/* Contenedor de la nieve */
+.nieve-contenedor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* No interfiere con otros elementos de la página */
+    z-index: 9999; /* Siempre visible */
+    overflow: hidden;
+}
+
+/* Estilo de los copos de nieve */
+.copo-nieve {
+    position: absolute;
+    top: -10px; /* Empieza fuera de la pantalla */
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff; /* Color blanco */
+    border-radius: 50%; /* Forma circular */
+    opacity: 0.8; /* Transparencia leve */
+    animation: caerNieve linear infinite; /* Animación de caída */
+}
+
+/* Animación de la caída de nieve */
+@keyframes caerNieve {
+    to {
+        transform: translateY(100vh); /* Caer hasta el final de la pantalla */
+    }
+}
+
+
+
 /* Importar la fuente Roboto Slab desde Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
 
@@ -192,7 +271,6 @@ body {
     color: #333;
     font-size: 1.2rem;
     margin: 15px 0 10px;
-    cursor: pointer;
     transition: color 0.3s ease;
 }
 
