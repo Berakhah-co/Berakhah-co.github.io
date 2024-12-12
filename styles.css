@@ -1,36 +1,4 @@
-/* Contenedor de la guirnalda */
-.guirnalda {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%); /* Centra la guirnalda */
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 9998; /* Asegura que esté justo debajo de la barra de navegación */
-    pointer-events: none; /* No interfiere con otros elementos */
-}
 
-/* Cada item de la guirnalda */
-.guirnalda-item {
-    width: 30px;
-    height: 30px;
-    background-color: #ff0000; /* Rojo navideño */
-    border-radius: 50%;
-    position: relative;
-    animation: colgarGuirnalda 3s ease-in-out infinite; /* Animación de movimiento */
-}
-
-/* Animación para simular que las guirnaldas cuelgan */
-@keyframes colgarGuirnalda {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(10px); /* Cae un poco para simular movimiento */
-    }
-}
 
 /* Colores alternados para los círculos (puedes agregar más colores para que se vean como bolas de Navidad) */
 .guirnalda-item:nth-child(1) {
