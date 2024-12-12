@@ -46,7 +46,7 @@ function iniciarNieve() {
         const copo = document.createElement('div');
         copo.classList.add('copo-nieve');
         copo.style.left = Math.random() * 100 + 'vw'; // Posición horizontal aleatoria
-        copo.style.animationDuration = Math.random() * 5 + 3 + 's'; // Duración de la caída
+        copo.style.animationDuration = Math.random() * 8 + 5 + 's'; // Duración de la caída
         copo.style.opacity = Math.random(); // Transparencia aleatoria
         coposContainer.appendChild(copo);
     }
