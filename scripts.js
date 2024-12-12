@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', iniciarNieve);
 
 function iniciarNieve() {
-    const cantidadCopos = 100; // Número de copos de nieve
+    const cantidadCopos = 50; // Número de copos de nieve
     const coposContainer = document.createElement('div');
     coposContainer.classList.add('nieve-contenedor');
     document.body.appendChild(coposContainer);
@@ -46,7 +46,7 @@ function iniciarNieve() {
         const copo = document.createElement('div');
         copo.classList.add('copo-nieve');
         copo.style.left = Math.random() * 100 + 'vw'; // Posición horizontal aleatoria
-        copo.style.animationDuration = Math.random() * 3 + 2 + 's'; // Duración de la caída
+        copo.style.animationDuration = Math.random() * 5 + 3 + 's'; // Duración de la caída
         copo.style.opacity = Math.random(); // Transparencia aleatoria
         coposContainer.appendChild(copo);
     }
