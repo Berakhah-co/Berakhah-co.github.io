@@ -17,7 +17,7 @@
     width: 10px;
     height: 10px;
     background-color: #ffffff; /* Color blanco */
-    border-radius: 25%; /* Forma circular */
+    border-radius: 80%; /* Forma circular */
     opacity: 0.8; /* Transparencia leve */
     animation: caerNieve linear infinite; /* Animación de caída */
 }
