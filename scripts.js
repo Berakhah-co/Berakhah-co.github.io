@@ -286,7 +286,7 @@ function enviarPedido() {
         let subtotalFormateado = subtotalProducto.toLocaleString('es-CO', { minimumFractionDigits: 3 });
 
         // Añadir el producto al mensaje (nombre completo, cantidad, subtotal y link de la primera imagen)
-        mensaje += `🌟 *${nombreProducto}* - x${producto.cantidad}  *$${subtotalFormateado}*  \n🖼️ Imagen:${imagenProducto}\n`;
+        mensaje += `🌟 *${nombreProducto}* - x${producto.cantidad}  *$${subtotalFormateado}*  \n🖼️ Imagen:${imagenProducto}\n--------------------------------------------------------\n`;
         total += subtotalProducto;
     });
 
@@ -551,3 +551,6 @@ window.addEventListener('load', function () {
         document.getElementById('barra-carga').style.display = 'none'; // Oculta la barra de carga
     }, 2000); // Ajusta el tiempo de la animación al mismo que el CSS o según la carga real
 });
+
+
+
