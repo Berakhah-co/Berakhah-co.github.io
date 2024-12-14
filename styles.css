@@ -14,10 +14,10 @@
 .copo-nieve {
     position: absolute;
     top: -10px; /* Empieza fuera de la pantalla */
-    width: 10px;
-    height: 10px;
+    width: 5px;
+    height: 5px;
     background-color: #ffffff; /* Color blanco */
-    border-radius: 80%; /* Forma circular */
+    border-radius: 50%; /* Forma circular */
     opacity: 0.5; /* Transparencia leve */
     animation: caerNieve linear infinite; /* Animación de caída */
 }
@@ -196,7 +196,7 @@ body {
     text-align: center;
     opacity: 0;
     transform: translateY(20px);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Añadir sombra */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra más suave */
     border: 2px solid #D4AF37; /* Borde dorado */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -321,14 +321,14 @@ body {
 /* Estilos para el carrito */
 #carrito {
     position: fixed;
-    right: 20px;
+    right: 10px;
     top: 20px;
     background-color: #ffffff;
     border: 1px solid #ddd;
     padding: 20px;
     border-radius: 15px; /* Bordes más redondeados */
     width: 320px; /* Un poco más ancho */
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); /* Sombra suave y más prominente */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra más tenue */
     z-index: 9999; /* Asegúrate de que sea visible encima de todo */
     max-height: 80vh; /* Limita la altura del carrito */
     overflow-y: auto; /* Añadir scroll interno si el contenido sobrepasa la altura */
@@ -357,13 +357,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 15px 0;
-    padding: 10px;
-    border-bottom: 1px solid #ddd; /* Línea de separación entre productos */
-    font-size: 16px;
-    color: #333;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: #ffffff; /* Fondo blanco para cada elemento */
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09); /* Sombra suave */
+    transition: transform 0.2s ease;
+    font-weight: 550; /* Negrita más delicada */
 }
-
 
 #lista-carrito button {
     background-color: #d9534f;
@@ -382,16 +383,16 @@ body {
     padding: 10px;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 20px;
     margin-top: 0px;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones más suaves */
 }
 
 #btn-pedir:hover {
     background-color: #495057; /* Un gris ligeramente más oscuro */
-    transform: scale(1.05);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    transform: scale(1.02); /* Efecto de agrandamiento más sutil */
 }
+
 
 /* Botón Vaciar Carrito */
 #btn-vaciar-carrito {
@@ -401,7 +402,7 @@ body {
     padding: 10px;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 20px;
     margin-top: 3px;
     transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
 }
