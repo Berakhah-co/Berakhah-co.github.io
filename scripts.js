@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', iniciarNieve);
 
 function iniciarNieve() {
-    const cantidadCopos = 30; // Número de copos de nieve
+    const cantidadCopos = 50; // Número de copos de nieve
     const coposContainer = document.createElement('div');
     coposContainer.classList.add('nieve-contenedor');
     document.body.appendChild(coposContainer);
@@ -46,7 +46,7 @@ function iniciarNieve() {
         const copo = document.createElement('div');
         copo.classList.add('copo-nieve');
         copo.style.left = Math.random() * 100 + 'vw'; // Posición horizontal aleatoria
-        copo.style.animationDuration = Math.random() * 10 + 8 + 's'; // Duración de la caída
+        copo.style.animationDuration = Math.random() * 5 + 3 + 's'; // Duración de la caída
         copo.style.opacity = Math.random(); // Transparencia aleatoria
         coposContainer.appendChild(copo);
     }
@@ -286,8 +286,7 @@ function enviarPedido() {
         let subtotalFormateado = subtotalProducto.toLocaleString('es-CO', { minimumFractionDigits: 3 });
 
         // Añadir el producto al mensaje (nombre completo, cantidad, subtotal y link de la primera imagen)
-        mensaje += `🌟 *${nombreProducto}* - x${producto.cantidad}  *$${subtotalFormateado}*  
-                    🖼️ Imagen: ${imagenProducto}\n`;
+        mensaje += `🌟 *${nombreProducto}* - x${producto.cantidad}  *$${subtotalFormateado}*  \n🖼️ Imagen:${imagenProducto}\n`;
         total += subtotalProducto;
     });
 
@@ -552,6 +551,3 @@ window.addEventListener('load', function () {
         document.getElementById('barra-carga').style.display = 'none'; // Oculta la barra de carga
     }, 2000); // Ajusta el tiempo de la animación al mismo que el CSS o según la carga real
 });
-
-
-
