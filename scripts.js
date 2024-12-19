@@ -324,7 +324,7 @@ function enviarPedido() {
             vaciarCarrito(); // Llamar a la función para vaciar el carrito
         }
     });
-
+    document.getElementById('carrito').style.display = 'none';
     // Lanza confeti después de que se muestra el SweetAlert
     confetti({
         particleCount: 100,
