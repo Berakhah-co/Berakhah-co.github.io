@@ -266,7 +266,7 @@ function enviarPedido() {
 
         // Obtener la URL de la primera imagen del producto
         let imagenProducto = producto.imagen || ''; // Asegúrate de que la propiedad 'imagen' esté bien definida en los productos
-        let subtotalProducto = parseFloat(producto.precio) * producto.cantidad;
+        let subtotalProducto = parseFloat(producto.precio);
         subtotalTotal += subtotalProducto;
 
         // Calcular el precio formateado
