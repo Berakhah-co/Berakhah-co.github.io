@@ -116,22 +116,22 @@ function mostrarCarrito() {
     let totalCarrito = 0;
     listaCarrito.innerHTML = '';
 
+    let bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
+
     carrito.forEach((producto, index) => {
-        let subtotalProducto = parseFloat(producto.precio) * producto.cantidad;
-        totalCarrito += subtotalProducto;
-
-        // Obtener el nombre desde "Berakhah" en adelante
-        let nombreReducido = producto.nombre.split("Berakhah")[1]?.trim() || producto.nombre;
-
+        totalCarrito += parseFloat(producto.precio);
         let li = document.createElement('li');
-        let precioFormateado = subtotalProducto.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+        
+        // Aquí eliminamos la parte "Berakhah" del nombre del producto
+        let nombreModificado = producto.nombre.replace(/Berakhah\s/, '');
+
+        let precioFormateado = bodyClass === 'en' 
+            ? parseFloat(producto.precio).toLocaleString('en-US', { minimumFractionDigits: 0 }) 
+            : parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
 
         li.innerHTML = `
-            Berakhah ${nombreReducido} - 
-            <button onclick="cambiarCantidad(${index}, -1)">-</button>
-            x${producto.cantidad}
-            <button onclick="cambiarCantidad(${index}, 1)">+</button> 
-            $${precioFormateado}
+            ${nombreModificado} - $${precioFormateado}
+            <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
         `;
         listaCarrito.appendChild(li);
     });
@@ -148,13 +148,12 @@ function mostrarCarrito() {
     // Mostrar subtotal, descuento y total
     const totalCarritoElemento = document.getElementById('total-carrito');
     totalCarritoElemento.innerHTML = `
-        <p>Subtotal: $${subtotalFormateado}</p>
-        <p>Descuento (10%): -$${descuentoFormateado}</p>
-        <p><strong>Total con descuento: $${totalConDescuentoFormateado}</strong></p>
-    `;
-
+        <p class="subtotal">Subtotal: $${subtotalFormateado}</p>
+        <p class="descuento">Descuento (10%): -$${descuentoFormateado}</p>
+        <p class="total"><strong>Total con descuento: $${totalConDescuentoFormateado}</strong></p>`;
     actualizarContadorCarrito();
 }
+
 
 
 function cambiarCantidad(index, cambio) {
