@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         customClass: {
             popup: 'swal2-popup-navidad' // Clase personalizada (por si deseas añadir más estilos)
         },
-        timer: 3000, // Tiempo en milisegundos
+        timer: 4000, // Tiempo en milisegundos
         timerProgressBar: true, // Mostrar barra de progreso
         didOpen: () => {
             // Lanza confeti con colores navideños después de que el usuario cierre el mensaje
@@ -51,7 +51,6 @@ function iniciarNieve() {
         coposContainer.appendChild(copo);
     }
 }
-
 
 // Obtener todos los productos al cargar la página en el orden original
 const productosOriginales = Array.from(document.querySelectorAll('.producto'));
@@ -99,15 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarCategoria('todo');
 });
 
-
 // Mostrar todos los productos al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
     mostrarCategoria('todo');
     mostrarCarrito();
     document.getElementById('btn-pedir').addEventListener('click', enviarPedido);
 });
-
-
 
 // Función para mostrar el carrito y actualizar el contador
 function mostrarCarrito() {
@@ -116,16 +112,12 @@ function mostrarCarrito() {
     let totalCarrito = 0;
     listaCarrito.innerHTML = '';
 
-    let bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
-
     carrito.forEach((producto, index) => {
         totalCarrito += parseFloat(producto.precio);
         let li = document.createElement('li');
         
         let nombreModificado = producto.nombre.replace(/Berakhah\s/, '');
-        let precioFormateado = bodyClass === 'en' 
-            ? parseFloat(producto.precio).toLocaleString('en-US', { minimumFractionDigits: 0 }) 
-            : parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
+        let precioFormateado = parseFloat(producto.precio).toLocaleString(undefined, { minimumFractionDigits: 3 });
 
         li.innerHTML = `
             <img src="${producto.imagen}" alt="${nombreModificado}" style="width: 50px; height: 50px; margin-right: 10px;">
@@ -138,9 +130,9 @@ function mostrarCarrito() {
     let descuento = totalCarrito * 0.10;
     let totalConDescuento = totalCarrito - descuento;
 
-    let subtotalFormateado = totalCarrito.toLocaleString('es-CO', { minimumFractionDigits: 3 });
-    let descuentoFormateado = descuento.toLocaleString('es-CO', { minimumFractionDigits: 3 });
-    let totalConDescuentoFormateado = totalConDescuento.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+    let subtotalFormateado = totalCarrito.toLocaleString(undefined, { minimumFractionDigits: 3 });
+    let descuentoFormateado = descuento.toLocaleString(undefined, { minimumFractionDigits: 3 });
+    let totalConDescuentoFormateado = totalConDescuento.toLocaleString(undefined, { minimumFractionDigits: 3 });
 
     const totalCarritoElemento = document.getElementById('total-carrito');
     totalCarritoElemento.innerHTML = `
@@ -152,19 +144,14 @@ function mostrarCarrito() {
 
 // Función para mostrar una notificación con SweetAlert2
 function mostrarNotificacion(nombre) {
-    // Detectar el idioma basado en la clase del body ('en' para inglés, 'es' para español)
-    const bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
+    // Establecer el título y el mensaje en un solo idioma (español)
+    const title = '¡Producto Agregado!';
+    const message = `${nombre} ha sido añadido al carrito.`;
 
-    // Establecer el título y el mensaje dependiendo del idioma
-    const title = bodyClass === 'en' ? 'Product Added!' : '¡Producto Agregado!';
-    const message = bodyClass === 'en'
-        ? `${nombre} has been added to the cart.`
-        : `${nombre} ha sido añadido al carrito.`;
-
-    // Mostrar alerta usando SweetAlert2 con el mensaje correcto en un solo idioma
+    // Mostrar alerta usando SweetAlert2 con el mensaje en español
     Swal.fire({
         title: title,
-        text: message,  // El mensaje correcto solo en el idioma correspondiente
+        text: message,
         icon: 'success',
         showConfirmButton: false,
         timer: 2000,  // Duración de la notificación en milisegundos
@@ -216,7 +203,6 @@ function eliminarDelCarrito(index) {
     mostrarCarrito();
 }
 
-
 // Función para actualizar el contador del carrito
 function actualizarContadorCarrito() {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -247,8 +233,8 @@ function enviarPedido() {
         subtotalTotal += subtotalProducto;
 
         // Calcular el precio formateado
-        let precioFormateado = parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
-        let subtotalFormateado = subtotalProducto.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+        let precioFormateado = parseFloat(producto.precio).toLocaleString(undefined, { minimumFractionDigits: 3 });
+        let subtotalFormateado = subtotalProducto.toLocaleString(undefined, { minimumFractionDigits: 3 });
 
         // Añadir el producto al mensaje (nombre completo, cantidad, subtotal y link de la primera imagen)
         mensaje += `🌟${nombreProducto}: *$${subtotalFormateado}*  \n🖼️ Img:${imagenProducto}\n--------------------------------------------------------\n`;
@@ -260,9 +246,9 @@ function enviarPedido() {
     let totalConDescuento = subtotalTotal - descuento;
 
     // Formatear el total y el descuento
-    let subtotalTotalFormateado = subtotalTotal.toLocaleString('es-CO', { minimumFractionDigits: 3 });
-    let descuentoFormateado = descuento.toLocaleString('es-CO', { minimumFractionDigits: 3 });
-    let totalConDescuentoFormateado = totalConDescuento.toLocaleString('es-CO', { minimumFractionDigits: 3 });
+    let subtotalTotalFormateado = subtotalTotal.toLocaleString(undefined, { minimumFractionDigits: 3 });
+    let descuentoFormateado = descuento.toLocaleString(undefined, { minimumFractionDigits: 3 });
+    let totalConDescuentoFormateado = totalConDescuento.toLocaleString(undefined, { minimumFractionDigits: 3 });
 
     // Añadir subtotales, descuento y total
     mensaje += `\n💰 *Subtotal:* $${subtotalTotalFormateado}\n`;
@@ -275,21 +261,23 @@ function enviarPedido() {
     window.open(urlWhatsApp, '_blank');
 
     // Mostrar SweetAlert2 con confetti para indicar que se ha enviado el pedido
-    Swal.fire({
-        title: '🎉 ¡Pedido Enviado! 🎉',
-        text: 'Gracias por tu compra. ¿Deseas vaciar el carrito?',
-        icon: 'success',
-        showCancelButton: true,
-        confirmButtonText: 'Sí, vaciar carrito',
-        cancelButtonText: 'No, mantener carrito',
-        background: '#ffffff',
-        color: '#000000',
-    }).then((result) => {
-        if (result.isConfirmed) {
-            vaciarCarrito(); // Llamar a la función para vaciar el carrito
-        }
-    });
-    document.getElementById('carrito').style.display = 'none';
+Swal.fire({
+    title: '🎉 ¡Pedido Enviado! 🎉',
+    text: 'Gracias por tu compra. ¿Deseas vaciar el carrito?',
+    icon: 'success',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, vaciar carrito',
+    cancelButtonText: 'No, mantener carrito',
+    background: '#333333', // Color oscuro de fondo
+    color: '#D4AF37', // Color dorado para el texto
+}).then((result) => {
+    if (result.isConfirmed) {
+        vaciarCarrito(); // Llamar a la función para vaciar el carrito
+    }
+});
+
+    document.getElementById('carrito').style.display = 'none'; // cierra el carrito 
+
     // Lanza confeti después de que se muestra el SweetAlert
     confetti({
         particleCount: 100,
@@ -298,8 +286,6 @@ function enviarPedido() {
         origin: { x: 0.5, y: 0.5 }
     });
 }
-
-
 
 // Función para vaciar el carrito
 
@@ -313,13 +299,12 @@ function vaciarCarrito() {
         carritoContenedor.classList.remove('animacion-existente');
     }, 500); // Duración de la animación
 
-    const bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
     Swal.fire({
-        title: bodyClass === 'en' ? 'Cart emptied!' : '¡Carrito Vacío!',
-        text: bodyClass === 'en' ? 'Your cart has been emptied.' : 'Has vaciado tu carrito.',
+        title: '¡Carrito Vacío!',
+        text: 'Has vaciado tu carrito.',
         icon: 'info',
-        background: '#dc3545',
-        color: '#ffffff',
+        background: '#333333', // Color oscuro de fondo
+        color: '#D4AF37', // Color dorado para el texto
         timer: 2000,
         showConfirmButton: false
     });
@@ -327,22 +312,22 @@ function vaciarCarrito() {
     lanzarConfeti(); // Lanza confeti al vaciar el carrito
 }
 
+
 // Añadir el evento al botón de vaciar carrito
 document.getElementById('btn-vaciar-carrito').addEventListener('click', () => {
-    const bodyClass = document.body.classList.contains('en') ? 'en' : 'es';
-
+    
     // Cerrar el carrito antes de mostrar la alerta
     document.getElementById('carrito').style.display = 'none';
 
     Swal.fire({
-        title: bodyClass === 'en' ? 'Are you sure?' : '¿Estás seguro?',
-        text: bodyClass === 'en' ? 'You are about to empty your cart.' : 'Estás a punto de vaciar tu carrito.',
+        title: '¿Estás seguro?',
+        text: 'Estás a punto de vaciar tu carrito.',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: bodyClass === 'en' ? 'Yes, empty it' : 'Sí, vaciar',
-        cancelButtonText: bodyClass === 'en' ? 'No, keep it' : 'No, mantener',
-        background: '#dc3545',
-        color: '#ffffff',
+        confirmButtonText: 'Sí, vaciar',
+        cancelButtonText: 'No, mantener',
+        background: '#333333', // Color oscuro de fondo
+        color: '#D4AF37', // Color dorado para el texto
     }).then((result) => {
         if (result.isConfirmed) {
             vaciarCarrito(); // Llama a la función de vaciar el carrito si el usuario confirma
@@ -353,6 +338,11 @@ document.getElementById('btn-vaciar-carrito').addEventListener('click', () => {
     });
 });
 
+// Selecciona el contenedor del carrito
+const carritoContenedor = document.getElementById('carrito');
+const productos = document.querySelectorAll('.producto'); // Selecciona todos los contenedores de productos
+const btnCerrarCarrito = document.getElementById('cerrar-carrito');
+
 // Función para mostrar u ocultar el carrito
 function toggleCarrito() {
     let carrito = document.getElementById('carrito');
@@ -361,6 +351,21 @@ function toggleCarrito() {
 }
 // evento para mostrar u ocultar el carrito con la X
 document.getElementById('cerrar-carrito').addEventListener('click', toggleCarrito);
+
+// Función para verificar si el carrito está abierto
+function isCarritoAbierto() {
+    return carritoContenedor.style.display === 'block';
+}
+
+// Evento para cerrar el carrito al hacer clic en cualquier contenedor de producto
+productos.forEach(producto => {
+    producto.addEventListener('click', (event) => {
+        if (isCarritoAbierto()) {
+            carritoContenedor.style.display = 'none'; // Cierra el carrito
+        }
+    });
+});
+
 // Cargar el contador al iniciar la página
 document.addEventListener('DOMContentLoaded', () => {
     mostrarCarrito();
@@ -467,8 +472,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
-
 
 document.addEventListener('DOMContentLoaded', function () {
     const productos = document.querySelectorAll('.producto');
