@@ -122,30 +122,26 @@ function mostrarCarrito() {
         totalCarrito += parseFloat(producto.precio);
         let li = document.createElement('li');
         
-        // Aquí eliminamos la parte "Berakhah" del nombre del producto
         let nombreModificado = producto.nombre.replace(/Berakhah\s/, '');
-
         let precioFormateado = bodyClass === 'en' 
             ? parseFloat(producto.precio).toLocaleString('en-US', { minimumFractionDigits: 0 }) 
             : parseFloat(producto.precio).toLocaleString('es-CO', { minimumFractionDigits: 3 });
 
         li.innerHTML = `
+            <img src="${producto.imagen}" alt="${nombreModificado}" style="width: 50px; height: 50px; margin-right: 10px;">
             ${nombreModificado} - $${precioFormateado}
             <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
         `;
         listaCarrito.appendChild(li);
     });
 
-    // Calcular el descuento del 10%
     let descuento = totalCarrito * 0.10;
     let totalConDescuento = totalCarrito - descuento;
 
-    // Formatear los valores
     let subtotalFormateado = totalCarrito.toLocaleString('es-CO', { minimumFractionDigits: 3 });
     let descuentoFormateado = descuento.toLocaleString('es-CO', { minimumFractionDigits: 3 });
     let totalConDescuentoFormateado = totalConDescuento.toLocaleString('es-CO', { minimumFractionDigits: 3 });
 
-    // Mostrar subtotal, descuento y total
     const totalCarritoElemento = document.getElementById('total-carrito');
     totalCarritoElemento.innerHTML = `
         <p class="subtotal">Subtotal: $${subtotalFormateado}</p>
@@ -210,23 +206,15 @@ function lanzarConfeti() {
 }
 
 // Función para agregar productos al carrito y mostrar la notificación con confeti
-function agregarAlCarrito(nombre, precio) {
+function agregarAlCarrito(nombre, precio, imagenURL) {
     const imagenProducto = document.querySelector(`[alt='${nombre}']`)?.src || '';
     const rutaImagen = imagenProducto.split('/').slice(-2).join('/');
     const urlCompletaImagen = `https://berakhah.site/${rutaImagen}`;
 
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-    // Verificar si el producto ya está en el carrito
-    let productoExistente = carrito.find(producto => producto.nombre === nombre);
-
-    if (productoExistente) {
-        // Incrementar la cantidad si ya existe
-        productoExistente.cantidad += 1;
-    } else {
-        // Agregar un nuevo producto con cantidad 1
-        carrito.push({ nombre, precio, imagen: urlCompletaImagen, cantidad: 1 });
-    }
+    // Agregar el producto al carrito sin verificar si ya existe
+    carrito.push({ nombre, precio, imagen: urlCompletaImagen });
 
     // Guardar el carrito actualizado
     localStorage.setItem('carrito', JSON.stringify(carrito));
@@ -240,6 +228,7 @@ function agregarAlCarrito(nombre, precio) {
     // Lanzar confeti
     lanzarConfeti();
 }
+
 
 
 // Función para eliminar un producto del carrito y actualizar el contador
@@ -550,6 +539,3 @@ window.addEventListener('load', function () {
         document.getElementById('barra-carga').style.display = 'none'; // Oculta la barra de carga
     }, 2000); // Ajusta el tiempo de la animación al mismo que el CSS o según la carga real
 });
-
-
-
