@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         customClass: {
             popup: 'swal2-popup-navidad' // Clase personalizada (por si deseas añadir más estilos)
         },
-        timer: 4000, // Tiempo en milisegundos
+        timer: 3000, // Tiempo en milisegundos
         timerProgressBar: true, // Mostrar barra de progreso
         didOpen: () => {
             // Lanza confeti con colores navideños después de que el usuario cierre el mensaje
