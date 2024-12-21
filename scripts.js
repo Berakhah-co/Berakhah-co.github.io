@@ -150,27 +150,6 @@ function mostrarCarrito() {
     actualizarContadorCarrito();
 }
 
-
-
-function cambiarCantidad(index, cambio) {
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-
-    // Cambiar la cantidad del producto
-    carrito[index].cantidad += cambio;
-
-    // Si la cantidad llega a 0, eliminar el producto
-    if (carrito[index].cantidad <= 0) {
-        carrito.splice(index, 1);
-    }
-
-    // Guardar el carrito actualizado
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-
-    // Actualizar la vista del carrito
-    mostrarCarrito();
-}
-
-
 // Función para mostrar una notificación con SweetAlert2
 function mostrarNotificacion(nombre) {
     // Detectar el idioma basado en la clase del body ('en' para inglés, 'es' para español)
@@ -229,8 +208,6 @@ function agregarAlCarrito(nombre, precio, imagenURL) {
     lanzarConfeti();
 }
 
-
-
 // Función para eliminar un producto del carrito y actualizar el contador
 function eliminarDelCarrito(index) {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -274,7 +251,7 @@ function enviarPedido() {
         let subtotalFormateado = subtotalProducto.toLocaleString('es-CO', { minimumFractionDigits: 3 });
 
         // Añadir el producto al mensaje (nombre completo, cantidad, subtotal y link de la primera imagen)
-        mensaje += `🌟 *${nombreProducto}* - x${producto.cantidad}  *$${subtotalFormateado}*  \n🖼️ Imagen:${imagenProducto}\n--------------------------------------------------------\n`;
+        mensaje += `🌟 *${nombreProducto}* - $${subtotalFormateado}*  \n🖼️ Imagen:${imagenProducto}\n--------------------------------------------------------\n`;
         total += subtotalProducto;
     });
 
