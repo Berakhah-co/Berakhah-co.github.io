@@ -251,7 +251,7 @@ function enviarPedido() {
         let subtotalFormateado = subtotalProducto.toLocaleString('es-CO', { minimumFractionDigits: 3 });
 
         // Añadir el producto al mensaje (nombre completo, cantidad, subtotal y link de la primera imagen)
-        mensaje += `🌟 *${nombreProducto}* : *$${subtotalFormateado}*  \n🖼️ Imagen:${imagenProducto}\n--------------------------------------------------------\n`;
+        mensaje += `🌟${nombreProducto}: *$${subtotalFormateado}*  \n🖼️ Img:${imagenProducto}\n--------------------------------------------------------\n`;
         total += subtotalProducto;
     });
 
