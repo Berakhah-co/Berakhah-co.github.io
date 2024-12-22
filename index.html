@@ -720,23 +720,24 @@
     Si realizas el pedido desde un PC y no tienes enlazado el WhatsApp, puedes enviarnos una foto del pedido al 
     <strong>+57 318 4818 218</strong>
 </p></div>
-<!-- Botón Flotante de Volver al Inicio -->
-<button class="volver-inicio" id="btn-volver-inicio" title="Volver al inicio">↑</button>
-<!-- Barra de Carga -->
-<div id="barra-carga">
-<div class="carga"></div>
-</div>
-<!-- Íconos de Instagram y WhatsApp -->
+<!-- Contenedor de los íconos sociales y el carrito -->
 <div class="rrss-icons">
-<a href="https://www.instagram.com/berakhah_co/" target="_blank">
-<img alt="Instagram" src="iconos/instagram.png"/>
-</a>
-<a href="https://api.whatsapp.com/send?phone=573184818218&amp;text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n..." target="_blank">
-<img alt="WhatsApp" src="iconos/whatsapp.png"/>
-</a>
+    <!-- Icono de Instagram -->
+    <a href="https://www.instagram.com/berakhah_co/" target="_blank" aria-label="Instagram">
+        <img alt="Instagram" src="iconos/instagram.png"/>
+    </a>
+    
+    <!-- Icono de WhatsApp -->
+    <a href="https://api.whatsapp.com/send?phone=573184818218&amp;text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n..." target="_blank" aria-label="WhatsApp">
+        <img alt="WhatsApp" src="iconos/whatsapp.png"/>
+    </a>
+    
+    <!-- Botón flotante del carrito -->
+    <button class="boton-flotante" id="btn-ver-carrito" onclick="toggleCarrito()" aria-label="Ver carrito">
+        🛒 <span id="contador-carrito">0</span>
+    </button>
 </div>
-<!-- Botón flotante para abrir el carrito -->
-<button class="boton-flotante" id="btn-ver-carrito" onclick="toggleCarrito()">🛒 <span id="contador-carrito">0</span></button>
+
 <script src="scripts.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1/dist/confetti.browser.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
