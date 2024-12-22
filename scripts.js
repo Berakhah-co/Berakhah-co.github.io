@@ -489,20 +489,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-window.addEventListener('scroll', function () {
-    const scrollButton = document.getElementById('btn-volver-inicio');
-    const rrssIcons = document.querySelector('.rrss-icons');
-
-    if (window.scrollY > 300) {
-        // Mostrar la flecha y ocultar los iconos de redes sociales
-        scrollButton.classList.add('show');
-        rrssIcons.classList.add('hide');
-    } else {
-        // Mostrar los iconos de redes sociales y ocultar la flecha
-        scrollButton.classList.remove('show');
-        rrssIcons.classList.remove('hide');
-    }
-});
 
 // Desplazar suavemente al inicio de la página al hacer clic en el botón
 document.getElementById('btn-volver-inicio').addEventListener('click', function () {
