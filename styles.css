@@ -65,6 +65,42 @@ body {
 .banner-buttons {
     margin-top: 0px;
 }
+.button-language {
+    display: inline-block;
+    margin: 2px;
+    padding: 5px 5px;
+    font-size: 14px;
+    text-decoration: none;
+    color: white;
+    background-color: #0c0c0c;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Añadir transiciones */
+    border: 1px solid #D4AF37; /* Borde dorado */
+}
+
+.button-language:hover {
+    background-color: #555554;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.button {
+    background-color: #000000; /* Negro profundo */
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #D4AF37; /* Borde dorado */
+    font-size: 18px;
+}
+
+.button:hover {
+    background-color: #D4AF37; /* Dorado */
+    color: #000000;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
 
 
 .banner-text h1 {
@@ -152,15 +188,15 @@ body {
     margin: 0 auto;
 }
 
-/* Contenedor del producto */
 .producto {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     opacity: 0;
     transform: translateY(20px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra más suave */
     border: 2px solid #D4AF37; /* Borde dorado */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -170,7 +206,6 @@ body {
     transform: translateY(0);
 }
 
-/* Imagen del producto */
 .producto img {
     width: 100%;
     height: 100%;
@@ -179,13 +214,13 @@ body {
     margin: 5px;
     cursor: pointer;
     transition: transform 0.3s ease;
+    
 }
 
 .producto img:hover {
     transform: scale(1.05);
 }
 
-/* Título del producto */
 .titulo-producto {
     color: #333;
     font-size: 1.2rem;
@@ -193,13 +228,12 @@ body {
     transition: color 0.3s ease;
 }
 
-/* Descripción del producto */
+
 .producto p {
     color: #666;
     font-size: 0.9rem;
 }
 
-/* Precio del producto */
 .precio {
     font-size: 1.4rem !important;
     font-weight: bold;
@@ -207,22 +241,36 @@ body {
     margin-top: 1px;
 }
 
-.button {
-    background-color: #000000; /* Negro profundo */
-    color: white;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #D4AF37; /* Borde dorado */
-    font-size: 18px;
+/* Media queries para dispositivos pequeños */
+@media (max-width: 768px) {
+    .catalogo {
+        grid-template-columns: repeat(1, 1fr);
+        max-width: 85%;
+    }
+
+    .categorias {
+        flex-direction: row;
+    }
+
+    .categorias button {
+        max-width: 25%;
+    }
 }
 
-.button:hover {
-    background-color: #D4AF37; /* Dorado */
-    color: #000000;
-    transform: scale(1.05);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+/* Media queries para pantallas grandes */
+@media (min-width: 769px) {
+    .catalogo {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 70%;
+    }
+
+    .categorias {
+        flex-direction: row;
+    }
+
+    .categorias button {
+        max-width: 150px;
+    }
 }
 
 /* Estilos personalizados para ajustar el tamaño de la alerta de SweetAlert2 */
@@ -434,9 +482,10 @@ body {
     cursor: pointer;
 }
 
-/* Estilos generales para los íconos flotantes */
 
-/* Estilo de la animación para el carrito */
+/* Estilos para el botón flotante del carrito */
+
+/* Añadir una animación de inflar y desinflar al botón flotante del carrito */
 @keyframes inflarDesinflar {
     0% {
         transform: scale(1);
@@ -449,120 +498,75 @@ body {
     }
 }
 
-/* Contenedor para los íconos sociales y el carrito */
-.rrss-icons {
+.boton-flotante {
+    animation: inflarDesinflar 2s ease-in-out infinite; /* Duración de 2s, repetir infinitamente */
+    transition: background-color 0.3s ease; /* Mantener las otras transiciones */
     position: fixed;
-    bottom: 50%; /* Coloca los íconos a la mitad de la página */
-    right: 10px; /* Los alinea a la derecha */
-    display: flex;
-    flex-direction: column; /* Apila los íconos en columna */
-    align-items: center; /* Centra los íconos */
-    gap: 10px; /* Espacio igual entre los íconos */
-    z-index: 1000;
-    transform: translateY(50%); /* Ajuste adicional para centrar perfectamente */
-}
-
-/* Estilo para cada enlace de los íconos sociales */
-.rrss-icons a, .boton-flotante {
-    width: 45px; /* Tamaño del ícono */
-    height: 45px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #264653; /* Color atractivo */
+    bottom: 20px;
+    right: 20px;
+    background-color: #000;
+    color: #fff;
+    border: none;
     border-radius: 50%;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Tamaño de las imágenes dentro de los íconos */
-.rrss-icons a img, .boton-flotante img {
-    width: 24px; /* Ajustamos el tamaño de los íconos */
-    height: 24px;
-}
-
-/* Estilo de hover para los íconos */
-.rrss-icons a:hover, .boton-flotante:hover {
-    background-color: #2a9d8f; /* Color más vibrante al pasar el mouse */
+.boton-flotante:hover {
+    background-color: #443f0fa8;
     transform: scale(1.1);
 }
 
-/* Estilos para el botón flotante del carrito */
-.boton-flotante {
-    background-color: #f4a261; /* Color atractivo */
-    color: #fff;
-    font-size: 18px;
-    border: none;
-    border-radius: 50%;
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombras atractivas */
-    animation: inflarDesinflar 2s ease-in-out infinite; /* Añadimos la animación de inflar/desinflar */
-}
-
-/* Contador de artículos en el carrito */
 .boton-flotante #contador-carrito {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: -10px;
+    right: -10px;
     background-color: red;
     color: white;
     border-radius: 50%;
-    padding: 4px;
-    font-size: 12px;
+    padding: 5px;
+    font-size: 14px;
 }
 
-/* Estilo para el botón de Volver al Inicio */
-.volver-inicio {
+/* Contenedor para los íconos sociales sobre el carrito */
+.rrss-icons {
     position: fixed;
-    bottom: 20px;
-    right: 80px; /* Se coloca al lado del carrito */
-    background-color: #f1faee;
-    color: #264653;
-    font-size: 24px;
-    border: none;
-    padding: 10px;
+    bottom: 85px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    z-index: 1000;
+}
+
+.rrss-icons a {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
     border-radius: 50%;
-    cursor: pointer;
-    z-index: 1001;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Estilo de hover para el botón Volver al Inicio */
-.volver-inicio:hover {
-    background-color: #2a9d8f;
-    color: #fff;
+.rrss-icons a img {
+    width: 24px;
+    height: 24px;
+}
+
+.rrss-icons a:hover {
+    background-color: #ffffff;
     transform: scale(1.1);
 }
-
-/* Estilos para la barra de carga */
-#barra-carga {
-    width: 100%;
-    height: 5px;
-    background-color: #ddd;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
-}
-
-.carga {
-    width: 0;
-    height: 100%;
-    background-color: #2a9d8f;
-    animation: carga 5s infinite;
-}
-
-@keyframes carga {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
-}
-
 
 .carousel {
     position: relative;
@@ -636,19 +640,19 @@ html {
     visibility: hidden;
 }
 
-/* Botón de "Volver al Inicio" */
+/* Estilos ajustados para el botón de "Volver al Inicio" */
 .volver-inicio {
     position: fixed;
-    bottom: 85px;
+    bottom: 85px; /* Mismo lugar que los iconos de redes sociales */
     right: 20px;
-    background-color: var(--color-gold);
-    color: var(--color-white);
+    background-color: #D4AF37;
+    color: white;
     border: none;
     border-radius: 50%;
     padding: 15px;
-    width: 60px; /* Ajusta el tamaño del botón */
-    height: 60px; /* Ajusta el tamaño del botón */
-    font-size: 30px; /* Ajusta el tamaño de la flecha */
+    width: 60px; /* Ajusta el ancho del botón para que coincida con los iconos de redes */
+    height: 60px; /* Ajusta la altura del botón para que coincida con los iconos de redes */
+    font-size: 40px;
     cursor: pointer;
     z-index: 1000;
     display: flex;
@@ -665,7 +669,10 @@ html {
     visibility: visible;
 }
 
-
+.volver-inicio:hover {
+    background-color: #aa8b27;
+    transform: scale(1.1);
+}
 /* Estilos de la barra de carga */
 #barra-carga {
     position: fixed;
@@ -691,37 +698,5 @@ html {
     }
     100% {
         width: 100%;
-    }
-}
-
-/* Media queries para dispositivos pequeños */
-@media (max-width: 768px) {
-    .catalogo {
-        grid-template-columns: repeat(1, 1fr);
-        max-width: 85%;
-    }
-
-    .categorias {
-        flex-direction: row;
-    }
-
-    .categorias button {
-        max-width: 25%;
-    }
-}
-
-/* Media queries para pantallas grandes */
-@media (min-width: 769px) {
-    .catalogo {
-        grid-template-columns: repeat(3, 1fr);
-        max-width: 70%;
-    }
-
-    .categorias {
-        flex-direction: row;
-    }
-
-    .categorias button {
-        max-width: 150px;
     }
 }
