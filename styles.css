@@ -690,8 +690,8 @@ html {
 /* Media queries para pantallas grandes */
 @media (min-width: 769px) {
     .catalogo {
-        grid-template-columns: repeat(3, 1fr);
-        max-width: 70%;
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 90%;
     }
 
     .categorias {
