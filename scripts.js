@@ -73,20 +73,15 @@ function mostrarCarrito() {
         listaCarrito.appendChild(li);
     });
 
-    let descuento = totalCarrito * 0.10;
-    let totalConDescuento = totalCarrito - descuento;
-
-    let subtotalFormateado = totalCarrito.toLocaleString(undefined, { minimumFractionDigits: 3 });
-    let descuentoFormateado = descuento.toLocaleString(undefined, { minimumFractionDigits: 3 });
-    let totalConDescuentoFormateado = totalConDescuento.toLocaleString(undefined, { minimumFractionDigits: 3 });
+    let totalCarritoFormateado = totalCarrito.toLocaleString(undefined, { minimumFractionDigits: 3 });
 
     const totalCarritoElemento = document.getElementById('total-carrito');
     totalCarritoElemento.innerHTML = `
-        <p class="subtotal">Subtotal: $${subtotalFormateado}</p>
-        <p class="descuento">Descuento (10%): -$${descuentoFormateado}</p>
-        <p class="total"><strong>Total con descuento: $${totalConDescuentoFormateado}</strong></p>`;
+        <p class="total"><strong>Total: $${totalCarritoFormateado}</strong></p>`;
+    
     actualizarContadorCarrito();
 }
+
 
 // Función para mostrar una notificación con SweetAlert2
 function mostrarNotificacion(nombre) {
@@ -165,41 +160,29 @@ function enviarPedido() {
 
     let mensaje = '🎉🛍️ *¡Tu Pedido Está Listo!*\n\n';
     let total = 0;
-    let subtotalTotal = 0;
-    let descuentoTotal = 0;
 
     // Iterar sobre el carrito
     carrito.forEach((producto, index) => {
-        // Obtener el nombre completo del producto (asegúrate de que el nombre completo esté almacenado)
-        let nombreProducto = producto.nombre;  // Asegúrate de que 'producto.nombre' tenga el nombre completo
+        // Obtener el nombre completo del producto
+        let nombreProducto = producto.nombre;
 
         // Obtener la URL de la primera imagen del producto
-        let imagenProducto = producto.imagen || ''; // Asegúrate de que la propiedad 'imagen' esté bien definida en los productos
+        let imagenProducto = producto.imagen || '';
         let subtotalProducto = parseFloat(producto.precio);
-        subtotalTotal += subtotalProducto;
 
         // Calcular el precio formateado
-        let precioFormateado = parseFloat(producto.precio).toLocaleString(undefined, { minimumFractionDigits: 3 });
-        let subtotalFormateado = subtotalProducto.toLocaleString(undefined, { minimumFractionDigits: 3 });
+        let precioFormateado = subtotalProducto.toLocaleString(undefined, { minimumFractionDigits: 3 });
 
-        // Añadir el producto al mensaje (nombre completo, cantidad, subtotal y link de la primera imagen)
-        mensaje += `🌟${nombreProducto}: *$${subtotalFormateado}*  \n🖼️ Img:${imagenProducto}\n--------------------------------------------------------\n`;
+        // Añadir el producto al mensaje (nombre completo y link de la primera imagen)
+        mensaje += `🌟${nombreProducto}: *$${precioFormateado}*  \n🖼️${imagenProducto}\n--------------------------------------------------------\n`;
         total += subtotalProducto;
     });
 
-    // Calcular el descuento
-    let descuento = subtotalTotal * 0.10;
-    let totalConDescuento = subtotalTotal - descuento;
+    // Formatear el total
+    let totalFormateado = total.toLocaleString(undefined, { minimumFractionDigits: 3 });
 
-    // Formatear el total y el descuento
-    let subtotalTotalFormateado = subtotalTotal.toLocaleString(undefined, { minimumFractionDigits: 3 });
-    let descuentoFormateado = descuento.toLocaleString(undefined, { minimumFractionDigits: 3 });
-    let totalConDescuentoFormateado = totalConDescuento.toLocaleString(undefined, { minimumFractionDigits: 3 });
-
-    // Añadir subtotales, descuento y total
-    mensaje += `\n💰 *Subtotal:* $${subtotalTotalFormateado}\n`;
-    mensaje += `🎁 *Descuento aplicado (10%):* -$${descuentoFormateado}\n`;
-    mensaje += `✨ *Total con descuento:* $${totalConDescuentoFormateado}`;
+    // Añadir el total al mensaje
+    mensaje += `\n✨ *Total:* $${totalFormateado}`;
 
     // Enviar mensaje por WhatsApp
     const numeroWhatsApp = "+573184818218";
@@ -207,20 +190,20 @@ function enviarPedido() {
     window.open(urlWhatsApp, '_blank');
 
     // Mostrar SweetAlert2 con confetti para indicar que se ha enviado el pedido
-Swal.fire({
-    title: '🎉 ¡Pedido Enviado! 🎉',
-    text: 'Gracias por tu compra. ¿Deseas vaciar el carrito?',
-    icon: 'success',
-    showCancelButton: true,
-    confirmButtonText: 'Sí, vaciar carrito',
-    cancelButtonText: 'No, mantener carrito',
-    background: '#333333', // Color oscuro de fondo
-    color: '#D4AF37', // Color dorado para el texto
-}).then((result) => {
-    if (result.isConfirmed) {
-        vaciarCarrito(); // Llamar a la función para vaciar el carrito
-    }
-});
+    Swal.fire({
+        title: '🎉 ¡Pedido Enviado! 🎉',
+        text: 'Gracias por tu compra. ¿Deseas vaciar el carrito?',
+        icon: 'success',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, vaciar carrito',
+        cancelButtonText: 'No, mantener carrito',
+        background: '#333333', // Color oscuro de fondo
+        color: '#D4AF37', // Color dorado para el texto
+    }).then((result) => {
+        if (result.isConfirmed) {
+            vaciarCarrito(); // Llamar a la función para vaciar el carrito
+        }
+    });
 
     document.getElementById('carrito').style.display = 'none'; // cierra el carrito 
 
@@ -232,6 +215,7 @@ Swal.fire({
         origin: { x: 0.5, y: 0.5 }
     });
 }
+
 
 // Función para vaciar el carrito
 
