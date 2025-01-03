@@ -66,7 +66,7 @@ function mostrarCarrito() {
         let precioFormateado = parseFloat(producto.precio).toLocaleString(undefined, { minimumFractionDigits: 3 });
 
         li.innerHTML = `
-            <img src="${producto.imagen}" alt="${nombreModificado}" style="width: 50px; height: 50px; margin-right: 10px;">
+            <img src="${producto.imagen}" alt="${nombreModificado}" style="width: 50px; height: 50px; margin-right: 10px;" onclick="abrirImagenEnNuevaVentana('${producto.imagen}')">
             ${nombreModificado} - $${precioFormateado}
             <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
         `;
@@ -81,6 +81,12 @@ function mostrarCarrito() {
     
     actualizarContadorCarrito();
 }
+
+// Función para abrir la imagen en una nueva ventana
+function abrirImagenEnNuevaVentana(url) {
+    window.open(url, '_blank');
+}
+
 
 
 // Función para mostrar una notificación con SweetAlert2
@@ -426,12 +432,4 @@ document.getElementById('btn-volver-inicio').addEventListener('click', function 
         top: 0,
         behavior: 'smooth'
     });
-});
-
-// Mostrar la barra de carga al iniciar la página
-window.addEventListener('load', function () {
-    // Simula una pequeña demora para la carga, ajusta según sea necesario
-    setTimeout(function() {
-        document.getElementById('barra-carga').style.display = 'none'; // Oculta la barra de carga
-    }, 2000); // Ajusta el tiempo de la animación al mismo que el CSS o según la carga real
 });
