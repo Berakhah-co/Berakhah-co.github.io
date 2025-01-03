@@ -1,3 +1,4 @@
+
 /* Importar la fuente Roboto Slab desde Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
 
@@ -220,6 +221,7 @@ body {
     transform: scale(1.05);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
+
 /* Estilos para el botón cerrar del carrito */
 .cerrar-carrito {
     background-color: transparent;
@@ -235,7 +237,6 @@ body {
 .cerrar-carrito:hover {
     color: #c9302c;
 }
-
 
 /* Estilos para el carrito */
 #carrito {
@@ -253,6 +254,7 @@ body {
     overflow-y: auto; /* Añadir scroll interno si el contenido sobrepasa la altura */
     background-image: linear-gradient(180deg, #f4f4f4, #ffffff); /* Fondo degradado suave */
     transition: all 0.3s ease; /* Transición suave al abrir o cerrar el carrito */
+    background-image: url('https://example.com/new-year-background.png'); /* Fondo con temática de Año Nuevo */
 }
 
 /* Título del carrito */
@@ -260,8 +262,10 @@ body {
     margin-top: 0;
     font-size: 20px;
     font-weight: 600;
-    color: #D4AF37; /* Dorado para que destaque */
+    color: #FF4500; /* Naranja festivo */
     text-align: center;
+    border-bottom: 2px solid #FF4500; /* Línea festiva debajo del título */
+    padding-bottom: 10px; /* Espacio extra debajo del título */
 }
 
 /* Lista de productos en el carrito */
@@ -312,11 +316,10 @@ body {
     transform: scale(1.02); /* Efecto de agrandamiento más sutil */
 }
 
-
 /* Botón Vaciar Carrito */
 #btn-vaciar-carrito {
     width: 100%;
-    background-color: #E63946; /* Rojo elegante */
+    background-color: #E63946; /* Rojo festivo */
     color: #FFFFFF;
     padding: 10px;
     border: none;
@@ -349,57 +352,6 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
 }
 
-/* Estilos para la sección de cotización de envío */
-#cotizacion-envio {
-    margin: 20px 0;
-}
-
-#cotizacion-envio label {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    display: block;
-    margin-bottom: 10px;
-}
-
-#campos-envio {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 10px;
-}
-
-.campo-envio {
-    margin-bottom: 15px;
-}
-
-.campo-envio label {
-    display: block;
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 5px;
-}
-
-.campo-envio input {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #faf6f6;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.campo-envio input:focus {
-    border-color: #D4AF37; /* Borde dorado al enfocar */
-    box-shadow: 0 0 5px rgba(212, 175, 55, 0.5); /* Sombra dorada al enfocar */
-}
-
-/* Estilo especial para campos de entrada pequeños */
-.campo-envio input[list] {
-    cursor: pointer;
-}
 
 /* Estilos generales para los íconos flotantes */
 
@@ -456,7 +408,7 @@ body {
 
 /* Estilos para el botón flotante del carrito */
 .boton-flotante {
-    background-color: #f4a261; /* Color atractivo */
+    background-color: #264653; /* Color atractivo */
     color: #fff;
     font-size: 18px;
     border: none;
@@ -479,34 +431,6 @@ body {
     padding: 4px;
     font-size: 12px;
 }
-
-/* Estilos para la barra de carga */
-#barra-carga {
-    width: 100%;
-    height: 5px;
-    background-color: #ddd;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
-}
-
-.carga {
-    width: 0;
-    height: 100%;
-    background-color: #2a9d8f;
-    animation: carga 5s infinite;
-}
-
-@keyframes carga {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
-}
-
 
 .carousel {
     position: relative;
