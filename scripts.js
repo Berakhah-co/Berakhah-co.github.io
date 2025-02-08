@@ -191,16 +191,13 @@ function enviarPedido() {
     mensaje += `\n✨ *Total:* $${totalFormateado}`;
 
     // ** Enviar pedido por correo usando Google Apps Script **
-    let urlAppScript = "https://script.google.com/macros/s/AKfycbwy88nD9dcA7ffBUTTlSSt_T3uyXZbwH6lo4Y2yLbGv_fHKi-b4hkNyVidrCceWlHEgJQ/exec"; // 🚀 Reemplaza con la URL que copiaste
+    let urlAppScript = "https://script.google.com/macros/s/AKfycbzG8kTUDQQU51D_yzOr23v8KNnx5lR4Cixv3bnYz5kOoIEmdtQek8X3ZJQ5_u59kxE/exec"; // 🚀 Reemplaza con la URL que copiaste
     fetch(urlAppScript, {
         method: "POST",
+        mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datosPedido)
-    })
-    .then(response => response.json()) // Convertir la respuesta a JSON
-    .then(data => console.log("Respuesta del servidor:", data)) // Mostrar mensaje en la consola
-    .catch(error => console.log("Error:", error));
-    
+    }).then(() => console.log("Correo enviado con éxito")).catch(error => console.log("Error:", error));
 
     // ** Enviar pedido por WhatsApp **
     const numeroWhatsApp = "+573184818218";
