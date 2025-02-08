@@ -164,26 +164,54 @@ function enviarPedido() {
         return;
     }
 
-    let mensaje = '🎉🛍️ *¡Tu Pedido Está Listo!*\n\n';
-    let total = 0;
+    // Obtener datos del cliente
+    let nombreCliente = document.getElementById("nombre-cliente").value.trim();
+    let correoCliente = document.getElementById("correo-cliente").value.trim();
+    let direccionCliente = document.getElementById("direccion-cliente").value.trim();
+    let telefonoCliente = document.getElementById("telefono-cliente").value.trim();
 
-    // Generar datos para WhatsApp y correo
-    let datosPedido = [];
+
+    if (!nombreCliente || !correoCliente || !direccionCliente || !telefonoCliente) {
+        Swal.fire("Por favor, completa todos los datos de envío.");
+        return;
+    }
+
+    // Guardar los datos del cliente en localStorage
+    localStorage.setItem('datosCliente', JSON.stringify({
+        nombre: nombreCliente,
+        correo: correoCliente,
+        direccion: direccionCliente,
+        telefono: telefonoCliente
+    }));
+
+    let mensaje = '🎉🛍️ *¡Tu Pedido Está Listo!*\n\n';
+    mensaje += `👤 *Cliente:* ${nombreCliente}\n`;
+    mensaje += `📩 *Correo:* ${correoCliente}\n`;
+    mensaje += `📍 *Dirección:* ${direccionCliente}\n`;
+    mensaje += `📞 *Teléfono:* ${telefonoCliente}\n`;
+
+
+    let total = 0;
+    let datosPedido = {
+        nombre: nombreCliente,
+        correo: correoCliente,
+        direccion: direccionCliente,
+        telefono: telefonoCliente,
+        productos: []
+    };
 
     carrito.forEach((producto) => {
-        let nombreProducto = producto.nombre;
-        let imagenProducto = producto.imagen || '';
         let subtotalProducto = parseFloat(producto.precio);
         let precioFormateado = subtotalProducto.toLocaleString(undefined, { minimumFractionDigits: 3 });
 
-        mensaje += `🌟${nombreProducto}: *$${precioFormateado}*  \n🖼️${imagenProducto}\n--------------------------------------------------------\n`;
+        mensaje += `🌟 ${producto.nombre}: *$${precioFormateado}*\n🖼️ ${producto.imagen || 'Sin imagen'}\n--------------------------------------------------------\n`;
         total += subtotalProducto;
 
-        // Guardar en formato JSON para el correo
-        datosPedido.push({
-            nombre: nombreProducto,
+        // Agregar producto al JSON para el correo
+        datosPedido.productos.push({
+            nombre: producto.nombre,
             precio: subtotalProducto,
-            imagen: imagenProducto
+            imagen: producto.imagen || ''
         });
     });
 
@@ -191,7 +219,7 @@ function enviarPedido() {
     mensaje += `\n✨ *Total:* $${totalFormateado}`;
 
     // ** Enviar pedido por correo usando Google Apps Script **
-    let urlAppScript = "https://script.google.com/macros/s/AKfycbzG8kTUDQQU51D_yzOr23v8KNnx5lR4Cixv3bnYz5kOoIEmdtQek8X3ZJQ5_u59kxE/exec"; // 🚀 Reemplaza con la URL que copiaste
+    let urlAppScript = "https://script.google.com/macros/s/AKfycbzG8kTUDQQU51D_yzOr23v8KNnx5lR4Cixv3bnYz5kOoIEmdtQek8X3ZJQ5_u59kxE/exec"; 
     fetch(urlAppScript, {
         method: "POST",
         mode: "no-cors",
@@ -230,6 +258,18 @@ function enviarPedido() {
     });
 }
 
+function cargarDatosCliente() {
+    let datosGuardados = JSON.parse(localStorage.getItem('datosCliente'));
+    if (datosGuardados) {
+        document.getElementById("nombre-cliente").value = datosGuardados.nombre || "";
+        document.getElementById("correo-cliente").value = datosGuardados.correo || "";
+        document.getElementById("direccion-cliente").value = datosGuardados.direccion || "";
+        document.getElementById("telefono-cliente").value = datosGuardados.telefono || "";
+    }
+}
+
+// Llamar a la función al cargar la página
+document.addEventListener("DOMContentLoaded", cargarDatosCliente);
 
 
 // Función para vaciar el carrito
