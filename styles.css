@@ -209,18 +209,91 @@ body {
 }
 
 /* Estilos del carrito */
-.mercado-pago-button {
-    background-color: #fff;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Estilos del formulario del cliente */
+#datos-cliente {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+    font-family: Arial, sans-serif;
 }
 
-.mercado-pago-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+/* Título del formulario */
+#datos-cliente h3 {
+    font-size: 18px;
+    color: #FF4500;
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
 }
+
+/* Etiquetas de los campos */
+#datos-cliente label {
+    font-weight: 600;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+/* Campos de entrada */
+#datos-cliente input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+#datos-cliente input:focus {
+    border-color: #FF4500;
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(255, 69, 0, 0.5);
+}
+
+/* Espaciado entre campos */
+#datos-cliente input:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+/* Sección del método de pago */
+#metodo-pago {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+    font-family: Arial, sans-serif;
+}
+
+/* Título del método de pago */
+#metodo-pago h3 {
+    font-size: 18px;
+    color: #FF4500;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Estilos para los radio buttons */
+#metodo-pago label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+#metodo-pago input[type="radio"] {
+    margin-right: 8px;
+    transform: scale(1.2);
+}
+
 
 /* Estilos para el botón cerrar del carrito */
 .cerrar-carrito {
