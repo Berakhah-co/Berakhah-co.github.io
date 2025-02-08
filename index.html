@@ -708,17 +708,34 @@
 </div></main>
 <!-- Carrito de compras -->
 <div id="carrito" style="display: none;">
-<button class="cerrar-carrito" id="cerrar-carrito">X</button>
-<h2>Tu carrito</h2>
-<ul id="lista-carrito"></ul>
-<p><span id="total-carrito">0</span></p>
-<button class="button" id="btn-pedir">Enviar pedido</button>
-<button class="button" id="btn-vaciar-carrito">Vaciar Carrito</button>
+    <button class="cerrar-carrito" id="cerrar-carrito">X</button>
+    <h2>Tu carrito</h2>
+    <ul id="lista-carrito"></ul>
+    <p><span id="total-carrito">0</span></p>
+
+    <!-- Datos del cliente -->
+    <div id="datos-cliente">
+        <h3>Información del Cliente</h3>
+        <label for="nombre-cliente">Nombre:</label>
+        <input type="text" id="nombre-cliente" placeholder="Tu nombre" required>
+
+        <label for="correo-cliente">Correo Electrónico:</label>
+        <input type="email" id="correo-cliente" placeholder="Tu correo" required>
+
+        <label for="direccion-cliente">Dirección:</label>
+        <input type="text" id="direccion-cliente" placeholder="Direccion en Medellin" required>
+
+        <label for="telefono-cliente">Teléfono:</label>
+        <input type="tel" id="telefono-cliente" placeholder="Tu teléfono" required>
+    </div>
+    <button class="button" id="btn-pedir">Enviar pedido</button>
+    <button class="button" id="btn-vaciar-carrito">Vaciar Carrito</button>
+</div>
 <!-- Mensaje adicional debajo del botón -->
 <p id="mensaje-pedido" style="font-size: 14px; margin-top: 10px;">
-    Si realizas el pedido desde un PC y no tienes enlazado el WhatsApp, puedes enviarnos una foto del pedido al 
-    <strong>+57 318 4818 218</strong>
+    Tu pedido sera enviado a nuestro correo y a nuestro whatsapp
 </p></div>
+    
 <!-- Contenedor de los íconos sociales y el carrito -->
 <div class="rrss-icons">
 <!-- Icono de Instagram -->
