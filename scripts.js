@@ -167,35 +167,47 @@ function enviarPedido() {
     let mensaje = '🎉🛍️ *¡Tu Pedido Está Listo!*\n\n';
     let total = 0;
 
-    // Iterar sobre el carrito
-    carrito.forEach((producto, index) => {
-        // Obtener el nombre completo del producto
-        let nombreProducto = producto.nombre;
+    // Generar datos para WhatsApp y correo
+    let datosPedido = [];
 
-        // Obtener la URL de la primera imagen del producto
+    carrito.forEach((producto) => {
+        let nombreProducto = producto.nombre;
         let imagenProducto = producto.imagen || '';
         let subtotalProducto = parseFloat(producto.precio);
-
-        // Calcular el precio formateado
         let precioFormateado = subtotalProducto.toLocaleString(undefined, { minimumFractionDigits: 3 });
 
-        // Añadir el producto al mensaje (nombre completo y link de la primera imagen)
         mensaje += `🌟${nombreProducto}: *$${precioFormateado}*  \n🖼️${imagenProducto}\n--------------------------------------------------------\n`;
         total += subtotalProducto;
+
+        // Guardar en formato JSON para el correo
+        datosPedido.push({
+            nombre: nombreProducto,
+            precio: subtotalProducto,
+            imagen: imagenProducto
+        });
     });
 
-    // Formatear el total
     let totalFormateado = total.toLocaleString(undefined, { minimumFractionDigits: 3 });
-
-    // Añadir el total al mensaje
     mensaje += `\n✨ *Total:* $${totalFormateado}`;
 
-    // Enviar mensaje por WhatsApp
+    // ** Enviar pedido por correo usando Google Apps Script **
+    let urlAppScript = "https://script.google.com/macros/s/AKfycbwy88nD9dcA7ffBUTTlSSt_T3uyXZbwH6lo4Y2yLbGv_fHKi-b4hkNyVidrCceWlHEgJQ/exec"; // 🚀 Reemplaza con la URL que copiaste
+    fetch(urlAppScript, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(datosPedido)
+    })
+    .then(response => response.json()) // Convertir la respuesta a JSON
+    .then(data => console.log("Respuesta del servidor:", data)) // Mostrar mensaje en la consola
+    .catch(error => console.log("Error:", error));
+    
+
+    // ** Enviar pedido por WhatsApp **
     const numeroWhatsApp = "+573184818218";
     const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
     window.open(urlWhatsApp, '_blank');
 
-    // Mostrar SweetAlert2 con confetti para indicar que se ha enviado el pedido
+    // SweetAlert para confirmar
     Swal.fire({
         title: '🎉 ¡Pedido Enviado! 🎉',
         text: 'Gracias por tu compra. ¿Deseas vaciar el carrito?',
@@ -203,17 +215,16 @@ function enviarPedido() {
         showCancelButton: true,
         confirmButtonText: 'Sí, vaciar carrito',
         cancelButtonText: 'No, mantener carrito',
-        background: '#333333', // Color oscuro de fondo
-        color: '#D4AF37', // Color dorado para el texto
+        background: '#333333',
+        color: '#D4AF37',
     }).then((result) => {
         if (result.isConfirmed) {
-            vaciarCarrito(); // Llamar a la función para vaciar el carrito
+            vaciarCarrito();
         }
     });
 
-    document.getElementById('carrito').style.display = 'none'; // cierra el carrito 
+    document.getElementById('carrito').style.display = 'none';
 
-    // Lanza confeti después de que se muestra el SweetAlert
     confetti({
         particleCount: 100,
         startVelocity: 30,
@@ -221,6 +232,7 @@ function enviarPedido() {
         origin: { x: 0.5, y: 0.5 }
     });
 }
+
 
 
 // Función para vaciar el carrito
