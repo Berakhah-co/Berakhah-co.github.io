@@ -111,8 +111,8 @@ body {
 .categorias {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap; /* Permitir que los botones pasen a la siguiente línea */
-    gap: 10px; /* Espacio entre botones */
+    flex-wrap: wrap;
+    gap: 10px;
     padding: 20px 10px;
     margin: 0;
 }
@@ -122,14 +122,14 @@ body {
     color: var(--color-dark-pink);
     padding: 12px 25px;
     border: 2px solid var(--color-primary); /* Borde rosa */
-    margin: 5px; /* Margen alrededor de cada botón */
+    margin: 5px;
     cursor: pointer;
     border-radius: 30px; /* Bordes muy redondeados */
     font-size: 1em;
     font-weight: 700;
     transition: all 0.3s ease;
-    flex-grow: 1; /* Permitir que crezcan */
-    max-width: 180px; /* Ancho máximo en pantallas grandes */
+    flex-grow: 1;
+    max-width: 180px;
     font-family: 'Roboto Slab', serif; /* Asegurar fuente */
 }
 
@@ -333,19 +333,9 @@ body {
     max-height: 80vh; /* Limita la altura del carrito */
     overflow-y: auto; /* Añadir scroll interno si el contenido sobrepasa la altura */
     background-image: linear-gradient(180deg, #f4f4f4, #ffffff); /* Fondo degradado suave */
-    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out, visibility 0.4s; /* Añadida transición para visibility */
-    transform: translateX(110%); /* Oculto fuera por defecto */
-    opacity: 0;
-    visibility: hidden; /* Oculto por defecto */
-    /* display: none; NO USAR, gestionado por clase visible */
+    transition: all 0.3s ease; /* Transición suave al abrir o cerrar el carrito */
+    /* display: none; gestionado por JS */
 }
-
-#carrito.visible { /* Clase para mostrar el carrito */
-    transform: translateX(0);
-    opacity: 1;
-    visibility: visible; /* Hacer visible */
-}
-
 
 /* Título del carrito */
 #carrito h2 {
@@ -382,8 +372,8 @@ body {
 }
 
 #lista-carrito img { /* Estilo para imagen dentro del carrito */
-    width: 40px; /* Tamaño reducido */
-    height: 40px; /* Tamaño reducido */
+    width: 50px;
+    height: 50px;
     margin-right: 10px;
     border-radius: 5px; /* Bordes redondeados para la imagen */
     object-fit: cover;
@@ -394,23 +384,14 @@ body {
     background-color: #d9534f; /* Rojo original */
     color: white;
     border: none;
-    padding: 5px 8px; /* Padding ajustado */
+    padding: 5px 10px;
     cursor: pointer;
-    border-radius: 50%; /* Redondo */
-    font-size: 0.9em; /* Tamaño ajustado */
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    width: 24px; /* Tamaño fijo */
-    height: 24px; /* Tamaño fijo */
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    line-height: 1;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Añadido del original */
 }
 
 #lista-carrito button:hover { /* Hover del original */
      background-color: #c9302c; /* Rojo más oscuro */
-     transform: scale(1.1); /* Añadido efecto hover */
 }
 
 /* Estilos del formulario del cliente */
@@ -702,7 +683,7 @@ body {
     transition: width 0.5s ease; /* Transición suave */
 }
 
-/* --- Estilos SweetAlert Día de la Madre (Mantenidos por si se usan en el futuro) --- */
+/* --- Estilos SweetAlert Día de la Madre --- */
 .swal2-popup-madres {
     border-radius: 20px !important;
     border: 3px solid var(--color-primary) !important;
@@ -858,6 +839,7 @@ body {
     }
 }
 
+
 /* Pantallas grandes (Originales) */
 @media (min-width: 769px) {
     .catalogo {
@@ -897,3 +879,4 @@ body {
         width: 320px; /* Ancho original */
      }
 }
+
