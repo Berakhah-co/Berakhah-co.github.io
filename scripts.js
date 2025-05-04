@@ -1,3 +1,41 @@
+// Mostrar mensaje al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    const swalWithTimer = Swal.fire({
+        title: '🌸 ¡Feliz Día de las Madres! 💖',
+        html: '<p>Hoy celebramos a quienes llenan el mundo de amor y ternura.</p><p style="color:#d32f2f; font-size:1.2em; font-weight:bold;">¡Aprovecha un 10% de descuento en tu compra!</p>',
+        icon: 'success',
+        confirmButtonText: '💐 ¡Gracias!',
+        background: '#ffcccb',
+        color: '#b5651d',
+        customClass: { popup: 'swal2-popup-madres' },
+        timer: 4000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading();
+            setInterval(() => {
+                Swal.getTimerLeft();
+            }, 100);
+        },
+        willClose: () => {
+            const heartExplosion = () => {
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => {
+                        confetti({
+                            particleCount: 15,
+                            spread: 180,
+                            shapes: ['circle', 'heart'], // Incluye corazones
+                            colors: ['#ff1493', '#ff69b4', '#ffb6c1', '#d32f2f'], // Diferentes tonos de rosa y rojo
+                            origin: { x: Math.random(), y: Math.random() },
+                        });
+                    }, i * 100);
+                }
+            };
+            heartExplosion();
+        }
+    });
+});
+
+
 // Obtener todos los productos al cargar la página en el orden original
 const productosOriginales = Array.from(document.querySelectorAll('.producto'));
 // Array que usaremos para aleatorizar en la categoría "Todos"
@@ -74,10 +112,16 @@ function mostrarCarrito() {
     });
 
     let totalCarritoFormateado = totalCarrito.toLocaleString(undefined, { minimumFractionDigits: 3 });
+    let descuento = totalCarrito * 0.1;
+    let totalConDescuento = totalCarrito - descuento;
+    let descuentoFormateado = descuento.toLocaleString(undefined, { minimumFractionDigits: 3 });
+    let totalConDescuentoFormateado = totalConDescuento.toLocaleString(undefined, { minimumFractionDigits: 3 });
 
     const totalCarritoElemento = document.getElementById('total-carrito');
     totalCarritoElemento.innerHTML = `
-        <p class="total"><strong>Total: $${totalCarritoFormateado}</strong></p>`;
+        <p class="total"><strong>Subtotal: $${totalCarritoFormateado}</strong></p>
+        <p class="descuento"><strong>Descuento 10%: -$${descuentoFormateado}</strong></p>
+        <p class="total-con-descuento"><strong>Total con descuento: $${totalConDescuentoFormateado}</strong></p>`;
     
     actualizarContadorCarrito();
 }
@@ -87,13 +131,11 @@ function abrirImagenEnNuevaVentana(url) {
     window.open(url, '_blank');
 }
 
-
-
 // Función para mostrar una notificación con SweetAlert2
 function mostrarNotificacion(nombre) {
     // Establecer el título y el mensaje en un solo idioma (español)
     const title = '¡Producto Agregado!';
-    const message = `${nombre} ha sido añadido al carrito.`;
+    const message = `${nombre} ha sido añadido al carrito. ¡Aprovecha el 10% de descuento por el Día de las Madres!`;
 
     // Mostrar alerta usando SweetAlert2 con el mensaje en español
     Swal.fire({
@@ -156,7 +198,6 @@ function actualizarContadorCarrito() {
     document.getElementById('contador-carrito').textContent = carrito.length;
 }
 
-
 function enviarPedido() {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     if (carrito.length === 0) {
@@ -170,11 +211,18 @@ function enviarPedido() {
     let direccionCliente = document.getElementById("direccion-cliente").value.trim();
     let telefonoCliente = document.getElementById("telefono-cliente").value.trim();
 
-
     if (!nombreCliente || !correoCliente || !direccionCliente || !telefonoCliente) {
         Swal.fire("Por favor, completa todos los datos de envío.");
         return;
     }
+
+    // Calcular totales con descuento
+    let subtotal = 0;
+    carrito.forEach(producto => {
+        subtotal += parseFloat(producto.precio);
+    });
+    let descuento = subtotal * 0.1;
+    let total = subtotal - descuento;
 
     // Guardar los datos del cliente en localStorage
     localStorage.setItem('datosCliente', JSON.stringify({
@@ -184,29 +232,33 @@ function enviarPedido() {
         telefono: telefonoCliente
     }));
 
-    let mensaje = '🎉🛍️ *¡Tu Pedido Está Listo!*\n\n';
+    // Mensaje de WhatsApp con emojis
+    let mensaje = '🎉🛍️ *¡Tu Pedido Está Listo!* 🎉\n\n';
     mensaje += `👤 *Cliente:* ${nombreCliente}\n`;
     mensaje += `📩 *Correo:* ${correoCliente}\n`;
     mensaje += `📍 *Dirección:* ${direccionCliente}\n`;
-    mensaje += `📞 *Teléfono:* ${telefonoCliente}\n`;
+    mensaje += `📞 *Teléfono:* ${telefonoCliente}\n\n`;
+    mensaje += '🛒 *Productos:*\n\n';
 
-
-    let total = 0;
     let datosPedido = {
         nombre: nombreCliente,
         correo: correoCliente,
         direccion: direccionCliente,
         telefono: telefonoCliente,
-        productos: []
+        productos: [],
+        subtotal: subtotal,
+        descuento: descuento,
+        total: total,
+        asunto: '🎉 Nuevo Pedido - Día de las Madres 🎉'
     };
 
     carrito.forEach((producto) => {
         let subtotalProducto = parseFloat(producto.precio);
         let precioFormateado = subtotalProducto.toLocaleString(undefined, { minimumFractionDigits: 3 });
 
-        mensaje += `🌟 ${producto.nombre}: *$${precioFormateado}*\n🖼️ ${producto.imagen || 'Sin imagen'}\n--------------------------------------------------------\n`;
-        total += subtotalProducto;
-
+        mensaje += `✨ *${producto.nombre}:* $${precioFormateado}\n`;
+        mensaje += `🖼️ ${producto.imagen || 'Sin imagen'}\n\n`;
+        
         // Agregar producto al JSON para el correo
         datosPedido.productos.push({
             nombre: producto.nombre,
@@ -215,8 +267,16 @@ function enviarPedido() {
         });
     });
 
+    // Formatear valores para mostrar
+    let subtotalFormateado = subtotal.toLocaleString(undefined, { minimumFractionDigits: 3 });
+    let descuentoFormateado = descuento.toLocaleString(undefined, { minimumFractionDigits: 3 });
     let totalFormateado = total.toLocaleString(undefined, { minimumFractionDigits: 3 });
-    mensaje += `\n✨ *Total:* $${totalFormateado}`;
+
+    mensaje += '💳 *Resumen de Pago:*\n\n';
+    mensaje += `💰 *Subtotal:* $${subtotalFormateado}\n`;
+    mensaje += `🎁 *Descuento 10% Día de las Madres:* -$${descuentoFormateado}\n`;
+    mensaje += `💖 *Total a pagar:* $${totalFormateado}\n\n`;
+    mensaje += '🙏 *¡Gracias por tu compra!* 💐';
 
     // ** Enviar pedido por correo usando Google Apps Script **
     let urlAppScript = "https://script.google.com/macros/s/AKfycbzG8kTUDQQU51D_yzOr23v8KNnx5lR4Cixv3bnYz5kOoIEmdtQek8X3ZJQ5_u59kxE/exec"; 
@@ -232,30 +292,48 @@ function enviarPedido() {
     const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
     window.open(urlWhatsApp, '_blank');
 
-    // SweetAlert para confirmar
+    // SweetAlert para confirmar con corazones
     Swal.fire({
-        title: '🎉 ¡Pedido Enviado! 🎉',
-        text: 'Gracias por tu compra. ¿Deseas vaciar el carrito?',
+        title: '🎉 ¡Pedido Enviado! 💖',
+        html: `Gracias por tu compra. <br><br>¡Aprovechaste nuestro <strong>10% de descuento</strong> por el Día de las Madres!<br><br>¿Deseas vaciar el carrito?`,
         icon: 'success',
         showCancelButton: true,
-        confirmButtonText: 'Sí, vaciar carrito',
+        confirmButtonText: 'Sí, vaciar carrito 💝',
         cancelButtonText: 'No, mantener carrito',
-        background: '#333333',
-        color: '#D4AF37',
+        background: '#ffcccb',
+        color: '#b5651d',
     }).then((result) => {
         if (result.isConfirmed) {
             vaciarCarrito();
+            // Explosión de corazones al vaciar el carrito
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 10,
+                        spread: 90,
+                        shapes: ['heart'],
+                        colors: ['#ff1493', '#ff69b4', '#d32f2f'],
+                        origin: { x: Math.random(), y: Math.random() - 0.2 },
+                    });
+                }, i * 100);
+            }
         }
     });
 
     document.getElementById('carrito').style.display = 'none';
 
-    confetti({
-        particleCount: 100,
-        startVelocity: 30,
-        spread: 360,
-        origin: { x: 0.5, y: 0.5 }
-    });
+    // Explosión de corazones al enviar el pedido
+    for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+            confetti({
+                particleCount: 10,
+                spread: 90,
+                shapes: ['heart'],
+                colors: ['#ff1493', '#ff69b4', '#d32f2f'],
+                origin: { x: Math.random(), y: Math.random() - 0.2 },
+            });
+        }, i * 100);
+    }
 }
 
 function cargarDatosCliente() {
@@ -271,9 +349,7 @@ function cargarDatosCliente() {
 // Llamar a la función al cargar la página
 document.addEventListener("DOMContentLoaded", cargarDatosCliente);
 
-
 // Función para vaciar el carrito
-
 function vaciarCarrito() {
     const carritoContenedor = document.getElementById('lista-carrito');
     localStorage.removeItem('carrito');
@@ -296,7 +372,6 @@ function vaciarCarrito() {
 
     lanzarConfeti(); // Lanza confeti al vaciar el carrito
 }
-
 
 // Añadir el evento al botón de vaciar carrito
 document.getElementById('btn-vaciar-carrito').addEventListener('click', () => {
@@ -473,7 +548,6 @@ document.addEventListener('DOMContentLoaded', function () {
         observer.observe(producto);
     });
 });
-
 
 // Desplazar suavemente al inicio de la página al hacer clic en el botón
 document.getElementById('btn-volver-inicio').addEventListener('click', function () {
