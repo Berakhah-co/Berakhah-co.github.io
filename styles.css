@@ -1,317 +1,324 @@
+/* Importar fuentes desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Dancing+Script:wght@700&display=swap');
 
-/* Importar la fuente Roboto Slab desde Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
-
-body {
-    font-family: 'Roboto Slab', serif; /* Aplicar la fuente Roboto Slab */
-    margin: 0;
-    padding: 0;
-    background-color: #faf6f6;
+:root {
+    /* Paleta de colores para el Día de la Madre */
+    --color-primary: #FFB6C1; /* Rosa claro */
+    --color-secondary: #FFDAB9; /* Melocotón */
+    --color-accent: #F4A460; /* Dorado suave */
+    --color-text: #555555; /* Gris oscuro para texto */
+    --color-white: #FFFFFF;
+    --color-light-bg: #FFF8F9; /* Fondo muy claro con tinte rosa */
+    --color-dark-pink: #FF69B4; /* Rosa más intenso */
+    --color-border: #FFDDE1; /* Borde rosa muy pálido */
+    --color-danger: #E63946; /* Rojo (usado en estilos originales del carrito) */
+    --color-gold: #D4AF37; /* Dorado original (para mantener compatibilidad si es necesario) */
 }
 
+/* --- Estilos Generales (Tema Día de la Madre) --- */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto Slab', serif; /* Fuente principal */
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-light-bg); /* Fondo suave */
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+/* --- Banner Superior (Tema Día de la Madre) --- */
 .banner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #000000;
-    color: white;
-    padding: 5px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); /* Gradiente suave */
+    color: var(--color-white); /* Texto blanco sobre gradiente */
+    padding: 15px 10px;
     text-align: center;
+    border-bottom: 5px solid var(--color-accent); /* Borde dorado */
+    position: relative;
 }
 
 .banner-content {
     text-align: center;
-}
-
-.banner .logo {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    margin: -25px 0 -30px;
-}
-
-.banner-buttons {
-    margin-top: 0px;
-}
-
-
-.banner-text h1 {
-    margin: 0;
-    font-size: 2.5rem;
-}
-
-.banner-text h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 300;
-}
-
-.banner-text p {
-    margin: 5px 0 0;
-    font-size: 12px;
-    font-weight: 300;
-}
-
-.categorias {
-    display: flex;
-    justify-content: center;
-    margin: -5px 0;
-    flex-wrap: wrap;
-}
-
-.buscador {
-    display: flex;
-    justify-content: center;
-    margin: 2px 0;
-}
-
-.buscador input {
-    padding: 10px;
-    font-size: 12px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 100px;
-    height: 5px;
-}
-
-.buscador button {
-    padding: 5px 10px;
-    font-size: 12px;
-    border: none;
-    background-color: #282727;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.buscador button:hover {
-    background-color: #555;
-    transform: scale(1.05);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.categorias button {
-    background-color: #000000;
-    color: #ffffff;
-    padding: 15px 20px;
-    border: none;
-    margin: 8px 2px 0px 2px; /* Cambia solo el margen superior a 20px */
-    cursor: pointer;
-    border-radius: 10px;
-    transition: background-color 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    flex: 1;
-    max-width: 200px;
-}
-
-.categorias button:hover {
-    background-color: #202020;
-    color: #D4AF37;
-    transform: scale(1.05);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Estilos para la disposición del catálogo */
-.catalogo {
-    display: grid;
-    gap: 20px;
-    padding: 20px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Contenedor del producto */
-.producto {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra más suave */
-    text-align: center;
-    opacity: 0;
-    transform: translateY(20px);
-    border: 2px solid #D4AF37; /* Borde dorado */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.banner .logo {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    margin: -50px auto -15px; /* Ajuste para que sobresalga */
+    border: 5px solid var(--color-white);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: block;
+    position: relative;
+    z-index: 2;
 }
 
-.producto.visible {
+.banner-text p {
+    margin: 20px 0 10px;
+    font-size: 1.1em;
+    color: var(--color-text); /* Texto más oscuro para contraste */
+    font-weight: 400;
+}
+
+/* --- Buscador (Tema Día de la Madre) --- */
+.buscador {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 10px;
+}
+
+.buscador input {
+    padding: 12px 15px;
+    font-size: 1em;
+    border: 1px solid var(--color-border);
+    border-radius: 25px; /* Bordes redondeados */
+    width: 250px;
+    height: auto;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Roboto Slab', serif; /* Asegurar fuente */
+}
+
+.buscador input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 8px rgba(255, 182, 193, 0.5); /* Sombra rosa */
+    outline: none;
+}
+
+.buscador button { /* Estilo general de botón, pero podría ser sobreescrito por .button si se aplica */
+    padding: 12px 20px;
+    font-size: 1em;
+    border: none;
+    background-color: var(--color-dark-pink); /* Rosa intenso */
+    color: var(--color-white);
+    border-radius: 25px; /* Bordes redondeados */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-family: 'Roboto Slab', serif; /* Asegurar fuente */
+}
+
+.buscador button:hover {
+    background-color: var(--color-primary);
+    transform: scale(1.05);
+}
+
+/* --- Botones de Categorías (Tema Día de la Madre) --- */
+.categorias {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px 10px;
+    margin: 0;
+}
+
+.categorias button {
+    background-color: var(--color-white);
+    color: var(--color-dark-pink);
+    padding: 12px 25px;
+    border: 2px solid var(--color-primary); /* Borde rosa */
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 30px; /* Bordes muy redondeados */
+    font-size: 1em;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    flex-grow: 1;
+    max-width: 180px;
+    font-family: 'Roboto Slab', serif; /* Asegurar fuente */
+}
+
+.categorias button:hover,
+.categorias button.active { /* Estilo para el botón activo */
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Catálogo de Productos (Grid Layout Original) --- */
+.catalogo {
+    display: grid;
+    gap: 20px; /* Espaciado original */
+    padding: 20px;
+    margin: 0 auto;
+    /* Columnas definidas en Media Queries originales */
+}
+
+/* --- Tarjeta de Producto (Tema Día de la Madre y Flexbox para botón) --- */
+.producto {
+    background-color: var(--color-white);
+    padding: 20px;
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Sombra suave */
+    text-align: center;
+    border: 1px solid var(--color-border); /* Borde rosa pálido */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease;
+    opacity: 0; /* Para animación de entrada (JS debe añadir clase 'visible') */
+    transform: translateY(20px);
+    display: flex; /* *** Habilitar Flexbox *** */
+    flex-direction: column; /* *** Apilar elementos verticalmente *** */
+    height: 100%; /* Ocupar altura disponible en grid */
+}
+
+/* Contenedor para el contenido que debe crecer (empujar botón hacia abajo) */
+.producto > div:not(.carousel) { /* Selecciona los divs que no son el carrusel */
+     flex-grow: 1; /* Permite que este div crezca */
+     display: flex; /* Usa flex interno para centrar texto si es necesario */
+     flex-direction: column; /* Apila título, descripción, precio */
+     justify-content: center; /* Centra verticalmente el contenido */
+}
+
+
+.producto.visible { /* Clase para animación de entrada */
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Imagen del producto */
-.producto img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 15px;
-    margin: 5px;
+.producto:hover {
+    transform: translateY(-5px); /* Efecto levitar */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* --- Carrusel (Estilos Combinados: Funcionalidad Original + Toques del Tema + Centrado) --- */
+.carousel {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 10px; /* Bordes redondeados del tema */
+    margin-bottom: 15px; /* Espacio del tema */
+}
+
+.carousel-images {
+    display: flex; /* Mantener flex */
+    justify-content: center; /* *** Centrar contenido horizontalmente (imágenes) *** */
+    align-items: center; /* Centrar verticalmente si la altura es fija */
+    position: relative; /* Necesario para imágenes absolutas/relativas */
+    min-height: 250px; /* Altura mínima */
+}
+
+.carousel-images img {
+    width: 100%; /* Ocupar todo el ancho */
+    height: auto; /* Altura automática */
+    max-height: 300px; /* Limitar altura */
+    object-fit: cover; /* Cubrir sin distorsionar */
+    border-radius: 10px; /* Bordes redondeados del tema */
     cursor: pointer;
-    transition: transform 0.3s ease;
+    display: none; /* Ocultar por defecto (JS controla 'active') */
+    vertical-align: middle;
+    transition: opacity 0.6s ease; /* Transición suave de opacidad */
+    margin: 0 auto; /* *** Añadido para centrar horizontalmente *** */
 }
 
-.producto img:hover {
-    transform: scale(1.05);
+.carousel-images img.active {
+    display: block; /* Mostrar imagen activa */
+    opacity: 1; /* Asegurar opacidad */
+    position: relative; /* Para que ocupe espacio */
+    animation: fadeIn 0.6s ease; /* Animación de entrada del tema */
 }
 
-/* Título del producto */
+/* Botones del carrusel (Estilos Combinados) */
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo semi-transparente del tema */
+    color: var(--color-primary); /* Color rosa del tema */
+    border: none;
+    cursor: pointer;
+    padding: 8px 10px; /* Padding ajustado */
+    border-radius: 50%; /* Redondo */
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    width: 35px; /* Tamaño fijo */
+    height: 35px; /* Tamaño fijo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+.carousel-button:hover {
+    background-color: var(--color-primary); /* Hover del tema */
+    color: var(--color-white);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-button.prev {
+    left: 8px; /* Posición ajustada */
+}
+
+.carousel-button.next {
+    right: 8px; /* Posición ajustada */
+}
+
+/* --- Contenido del Producto (Tema Día de la Madre) --- */
 .titulo-producto {
-    color: #333;
-    font-size: 1.2rem;
-    margin: 15px 0 10px;
+    font-family: 'Dancing Script', cursive; /* Fuente elegante */
+    color: var(--color-dark-pink); /* Rosa oscuro */
+    font-size: 1.6em;
+    margin: 10px 0 10px; /* Margen reducido */
+    cursor: pointer;
     transition: color 0.3s ease;
 }
 
-/* Descripción del producto */
-.producto p {
-    color: #666;
-    font-size: 0.9rem;
+.titulo-producto:hover {
+    color: var(--color-accent); /* Dorado al pasar el mouse */
 }
 
-/* Precio del producto */
+.producto p { /* Descripción */
+    color: var(--color-text);
+    font-size: 0.95em;
+    margin-bottom: 10px; /* Margen reducido */
+}
+
 .precio {
-    font-size: 1.4rem !important;
-    font-weight: bold;
-    color: #D4AF37 !important;
-    margin-top: 1px;
-}
-
-.button {
-    background-color: #000000; /* Negro profundo */
-    color: white;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #D4AF37; /* Borde dorado */
-    font-size: 18px;
-}
-
-.button:hover {
-    background-color: #D4AF37; /* Dorado */
-    color: #000000;
-    transform: scale(1.05);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Estilos personalizados para ajustar el tamaño de la alerta de SweetAlert2 */
-.swal2-small-popup {
-    width: 300px !important;
-    padding: 15px !important;
-}
-
-.swal2-small-title {
-    font-size: 18px !important;
-    margin-bottom: 10px !important;
-}
-
-.swal2-small-content {
-    font-size: 14px !important;
-}
-
-/* Estilos del carrito */
-/* Estilos del formulario del cliente */
-#datos-cliente {
-    margin-top: 15px;
-    padding: 15px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
-    font-family: Arial, sans-serif;
-}
-
-/* Título del formulario */
-#datos-cliente h3 {
-    font-size: 18px;
-    color: #FF4500;
-    text-align: center;
+    font-size: 1.5em !important; /* Tamaño grande */
+    font-weight: 700; /* Negrita */
+    color: var(--color-accent) !important; /* Dorado */
+    margin-top: 10px;
     margin-bottom: 15px;
-    font-weight: bold;
 }
 
-/* Etiquetas de los campos */
-#datos-cliente label {
-    font-weight: 600;
-    color: #333;
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-}
-
-/* Campos de entrada */
-#datos-cliente input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 14px;
-    transition: border-color 0.3s ease;
-    background-color: #f8f9fa;
-}
-
-#datos-cliente input:focus {
-    border-color: #FF4500;
-    outline: none;
-    box-shadow: 0px 0px 5px rgba(255, 69, 0, 0.5);
-}
-
-/* Espaciado entre campos */
-#datos-cliente input:not(:last-child) {
-    margin-bottom: 10px;
-}
-
-/* Sección del método de pago */
-#metodo-pago {
-    margin-top: 15px;
-    padding: 15px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
-    font-family: Arial, sans-serif;
-}
-
-/* Título del método de pago */
-#metodo-pago h3 {
-    font-size: 18px;
-    color: #FF4500;
-    text-align: center;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-/* Estilos para los radio buttons */
-#metodo-pago label {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 600;
-    color: #333;
+/* --- Botón Agregar al Carrito (Tema Día de la Madre y Posicionamiento) --- */
+.producto .button { /* Estilo específico para botón dentro de producto */
+    background: linear-gradient(135deg, var(--color-dark-pink), var(--color-primary));
+    color: var(--color-white);
+    border-radius: 25px;
+    padding: 12px 25px;
     cursor: pointer;
-    margin-bottom: 5px;
+    transition: all 0.3s ease;
+    border: none; /* Sin borde */
+    font-size: 1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: auto; /* *** CLAVE: Empujar el botón hacia abajo *** */
+    width: fit-content; /* Ajustar ancho */
+    align-self: center; /* Centrar */
+    flex-shrink: 0; /* Evitar que el botón se encoja */
+    font-family: 'Roboto Slab', serif; /* Asegurar fuente */
 }
 
-#metodo-pago input[type="radio"] {
-    margin-right: 8px;
-    transform: scale(1.2);
+.producto .button:hover {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-dark-pink));
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* ====================================================== */
+/* --- SECCIÓN DEL CARRITO (ESTILOS ORIGINALES FUNCIONALES) --- */
+/* ====================================================== */
 
-/* Estilos para el botón cerrar del carrito */
-.cerrar-carrito {
-    background-color: transparent;
-    border: none;
-    color: #d9534f;
-    font-size: 20px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-}
-
-.cerrar-carrito:hover {
-    color: #c9302c;
-}
-
-/* Estilos para el carrito */
 #carrito {
     position: fixed;
     right: 10px;
@@ -327,7 +334,7 @@ body {
     overflow-y: auto; /* Añadir scroll interno si el contenido sobrepasa la altura */
     background-image: linear-gradient(180deg, #f4f4f4, #ffffff); /* Fondo degradado suave */
     transition: all 0.3s ease; /* Transición suave al abrir o cerrar el carrito */
-    background-image: url('https://example.com/new-year-background.png'); /* Fondo con temática de Año Nuevo */
+    /* display: none; gestionado por JS */
 }
 
 /* Título del carrito */
@@ -335,10 +342,11 @@ body {
     margin-top: 0;
     font-size: 20px;
     font-weight: 600;
-    color: #FF4500; /* Naranja festivo */
+    color: #FF4500; /* Naranja festivo original */
     text-align: center;
     border-bottom: 2px solid #FF4500; /* Línea festiva debajo del título */
     padding-bottom: 10px; /* Espacio extra debajo del título */
+    font-family: 'Roboto Slab', serif; /* Asegurar fuente consistente */
 }
 
 /* Lista de productos en el carrito */
@@ -360,298 +368,476 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09); /* Sombra suave */
     transition: transform 0.2s ease;
     font-weight: 550; /* Negrita más delicada */
+    font-family: 'Roboto Slab', serif; /* Asegurar fuente consistente */
 }
 
-#lista-carrito button {
-    background-color: #d9534f;
+#lista-carrito img { /* Estilo para imagen dentro del carrito */
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 5px; /* Bordes redondeados para la imagen */
+    object-fit: cover;
+}
+
+
+#lista-carrito button { /* Botón Eliminar item */
+    background-color: #d9534f; /* Rojo original */
     color: white;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Añadido del original */
 }
+
+#lista-carrito button:hover { /* Hover del original */
+     background-color: #c9302c; /* Rojo más oscuro */
+}
+
+/* Estilos del formulario del cliente */
+#datos-cliente {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+    font-family: 'Roboto Slab', serif; /* Asegurar fuente */
+}
+
+#datos-cliente h3 {
+    font-size: 18px;
+    color: #FF4500; /* Naranja original */
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+#datos-cliente label {
+    font-weight: 600;
+    color: #333; /* Gris oscuro original */
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+#datos-cliente input {
+    width: calc(100% - 22px); /* Ajustar por padding y borde */
+    padding: 10px;
+    border: 1px solid #ccc; /* Borde gris original */
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    background-color: #f8f9fa; /* Fondo claro original */
+    margin-bottom: 10px; /* Añadido para espaciado */
+    font-family: 'Roboto Slab', serif; /* Asegurar fuente */
+}
+
+#datos-cliente input:focus {
+    border-color: #FF4500; /* Naranja original */
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(255, 69, 0, 0.5);
+}
+
+/* Total en el carrito (mantener selectores originales) */
+#total-carrito p { /* Estilo base para párrafos de total */
+    margin: 5px 0;
+    font-size: 1em;
+    text-align: right;
+    font-family: 'Roboto Slab', serif;
+}
+#total-carrito .total { /* Subtotal */
+    font-weight: bold;
+    color: #333; /* Color original */
+}
+#total-carrito .descuento {
+    color: var(--color-danger); /* Rojo del tema (coincide con original) */
+    font-weight: bold;
+}
+#total-carrito .total-con-descuento { /* Total final */
+    font-size: 1.1em; /* Ligeramente más grande */
+    font-weight: bold;
+    color: #FF4500; /* Naranja original */
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #eee; /* Borde separador original */
+}
+
 
 /* Botón Enviar Pedido */
 #btn-pedir {
     width: 100%;
-    background-color: #6C757D; /* Gris oscuro elegante */
+    background-color: #6C757D; /* Gris oscuro original */
     color: #FFFFFF;
     padding: 10px;
     border: none;
     cursor: pointer;
     border-radius: 20px;
-    margin-top: 0px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones más suaves */
+    margin-top: 10px; /* Ajustado */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'Roboto Slab', serif;
+    font-size: 1em; /* Tamaño consistente */
+    font-weight: 700;
 }
 
 #btn-pedir:hover {
-    background-color: #495057; /* Un gris ligeramente más oscuro */
-    transform: scale(1.02); /* Efecto de agrandamiento más sutil */
+    background-color: #495057; /* Gris más oscuro original */
+    transform: scale(1.02);
 }
 
 /* Botón Vaciar Carrito */
 #btn-vaciar-carrito {
     width: 100%;
-    background-color: #E63946; /* Rojo festivo */
+    background-color: var(--color-danger); /* Rojo (consistente) */
     color: #FFFFFF;
     padding: 10px;
     border: none;
     cursor: pointer;
     border-radius: 20px;
-    margin-top: 3px;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    margin-top: 5px; /* Espacio reducido */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-family: 'Roboto Slab', serif;
+    font-size: 1em;
+    font-weight: 700;
 }
 
 #btn-vaciar-carrito:hover {
-    background-color: #C92A38; /* Un rojo más oscuro */
+    background-color: #C92A38; /* Rojo más oscuro original */
     transform: scale(1.05);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Botón Eliminar (al lado de cada producto en el carrito) */
-#lista-carrito button {
-    background-color: #FFC107; /* Dorado suave */
-    color: white;
+/* Mensaje debajo de botones del carrito */
+#mensaje-pedido {
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center; /* Asegurar centrado */
+    color: var(--color-text); /* Color de texto del tema */
+    font-family: 'Roboto Slab', serif; /* Asegurar fuente */
+}
+
+
+/* Botón cerrar carrito (X) */
+.cerrar-carrito {
+    background-color: transparent;
     border: none;
-    padding: 5px 10px;
+    color: #d9534f; /* Rojo original */
+    font-size: 24px; /* Tamaño ajustado */
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 10px;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    padding: 5px;
+    line-height: 1;
 }
 
-#lista-carrito button:hover {
-    background-color: #E0A800; /* Dorado más oscuro */
-    transform: scale(1.05);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+.cerrar-carrito:hover {
+    color: #c9302c; /* Rojo oscuro original */
 }
 
+/* ====================================================== */
+/* --- SECCIÓN ICONOS FLOTANTES (ORIGINAL - SIN CAMBIOS) --- */
+/* ====================================================== */
 
-/* Estilos generales para los íconos flotantes */
-
-/* Estilo de la animación para el carrito */
-@keyframes inflarDesinflar {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.10); /* Aumentar ligeramente el tamaño */
-    }
-    100% {
-        transform: scale(1); /* Volver al tamaño original */
-    }
-}
-
-/* Contenedor para los íconos sociales y el carrito */
 .rrss-icons {
     position: fixed;
-    bottom: 50%; /* Coloca los íconos a la mitad de la página */
-    right: 10px; /* Los alinea a la derecha */
+    bottom: 85px; /* Ubicado justo arriba del botón volver-inicio */
+    right: 20px;
     display: flex;
-    flex-direction: column; /* Apila los íconos en columna */
-    align-items: center; /* Centra los íconos */
-    gap: 10px; /* Espacio igual entre los íconos */
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Espacio original */
     z-index: 1000;
-    transform: translateY(50%); /* Ajuste adicional para centrar perfectamente */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Transición original */
+    opacity: 1; /* Visible por defecto */
+    visibility: visible; /* Visible por defecto */
 }
 
-/* Estilo para cada enlace de los íconos sociales */
-.rrss-icons a, .boton-flotante {
-    width: 45px; /* Tamaño del ícono */
+/* Ocultar iconos de redes cuando se hace scroll (Clase original) */
+.rrss-icons.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Añadido para evitar interacción */
+}
+
+
+.rrss-icons a { /* Estilo específico para enlaces de iconos */
+    width: 45px; /* Tamaño original */
     height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #264653; /* Color atractivo */
+    background-color: #264653; /* Color original */
     border-radius: 50%;
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Tamaño de las imágenes dentro de los íconos */
-.rrss-icons a img, .boton-flotante img {
-    width: 24px; /* Ajustamos el tamaño de los íconos */
+.rrss-icons a img {
+    width: 24px; /* Tamaño original icono */
     height: 24px;
+    /* filter: brightness(0) invert(1); ELIMINADO */
+    display: block; /* Asegurar visibilidad */
 }
 
-/* Estilo de hover para los íconos */
-.rrss-icons a:hover, .boton-flotante:hover {
-    background-color: #2a9d8f; /* Color más vibrante al pasar el mouse */
+.rrss-icons a:hover {
+    background-color: #2a9d8f; /* Color hover original */
     transform: scale(1.1);
 }
 
-/* Estilos para el botón flotante del carrito */
+/* Botón flotante del carrito (Original) */
 .boton-flotante {
-    background-color: #264653; /* Color atractivo */
+    width: 45px; /* Tamaño original */
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #264653; /* Color original */
     color: #fff;
-    font-size: 18px;
+    font-size: 18px; /* Tamaño icono carrito original */
     border: none;
     border-radius: 50%;
     padding: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombras atractivas */
-    animation: inflarDesinflar 2s ease-in-out infinite; /* Añadimos la animación de inflar/desinflar */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    position: relative; /* Para el contador */
 }
 
-/* Contador de artículos en el carrito */
-.boton-flotante #contador-carrito {
+.boton-flotante:hover {
+    background-color: #2a9d8f; /* Color hover original */
+    transform: scale(1.1);
+}
+
+/* Contador de artículos en el carrito (Original) */
+#contador-carrito {
     position: absolute;
     top: -5px;
     right: -5px;
-    background-color: red;
+    background-color: red; /* Rojo original */
     color: white;
     border-radius: 50%;
-    padding: 4px;
-    font-size: 12px;
+    padding: 4px; /* Padding original */
+    font-size: 12px; /* Tamaño original */
+    min-width: 18px; /* Ancho mínimo */
+    text-align: center;
+    line-height: 1; /* Ajustar línea */
+    font-weight: bold; /* Negrita */
 }
 
-.carousel {
-    position: relative;
-    max-width: 100%;
-    overflow: hidden;
-}
+/* ====================================================== */
+/* --- FIN SECCIÓN ICONOS FLOTANTES (ORIGINAL) --- */
+/* ====================================================== */
 
-.carousel-images {
-    display: flex;
-    overflow: hidden;
-    position: relative;
-}
 
-.carousel-images img {
-    min-width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: transform 0.5s ease, opacity 0.5s ease;
-    opacity: 0;
-    transform: scale(0.8) translateX(100%);
-}
-
-.carousel-images img.active {
-    opacity: 1;
-    transform: scale(1) translateX(0);
-    position: relative;
-}
-
-.carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #aa8b27;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-}
-
-.carousel-button.prev {
-    left: 4px;
-}
-
-.carousel-button.next {
-    right: 0;
-}
-
-/* Scroll Suave */
-html {
-    scroll-behavior: smooth;
-}
-/* Estilos para los iconos de redes sociales */
-.rrss-icons {
+/* --- Botón Volver al Inicio (Estilos Originales Adaptados) --- */
+#btn-volver-inicio {
     position: fixed;
-    bottom: 85px; /* Ubicado justo arriba del carrito */
+    bottom: 20px; /* Posición debajo de iconos */
     right: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    z-index: 1000;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Ocultar iconos de redes cuando se hace scroll */
-.rrss-icons.hide {
-    opacity: 0;
-    visibility: hidden;
-}
-
-/* Botón de "Volver al Inicio" */
-.volver-inicio {
-    position: fixed;
-    bottom: 85px;
-    right: 20px;
-    background-color: var(--color-gold);
+    background-color: var(--color-accent); /* Dorado del tema */
     color: var(--color-white);
     border: none;
     border-radius: 50%;
-    padding: 15px;
-    width: 60px; /* Ajusta el tamaño del botón */
-    height: 60px; /* Ajusta el tamaño del botón */
-    font-size: 30px; /* Ajusta el tamaño de la flecha */
+    padding: 0;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 9998;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
-    opacity: 0;
+    opacity: 0; /* Oculto por defecto */
     visibility: hidden;
 }
 
-.volver-inicio.show {
+#btn-volver-inicio.show { /* Clase JS para mostrar */
     opacity: 1;
     visibility: visible;
 }
 
+#btn-volver-inicio:hover {
+    background-color: #d18c3a; /* Dorado más oscuro */
+    transform: scale(1.1);
+}
 
-/* Estilos de la barra de carga */
+/* --- Barra de Carga (Estilo Original Adaptado) --- */
 #barra-carga {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 5px; /* Altura de la barra */
-    background-color: rgba(0, 0, 0, 0.1); /* Color de fondo tenue */
-    z-index: 9999; /* Asegura que esté siempre encima de otros elementos */
+    height: 4px; /* Altura del tema */
+    background-color: rgba(255, 182, 193, 0.2); /* Fondo rosa tenue del tema */
+    z-index: 10001; /* Encima de todo */
+    pointer-events: none;
 }
 
 #barra-carga .carga {
-    width: 0;
+    width: 0; /* JS controla el progreso */
     height: 100%;
-    background-color: #D4AF37; /* Color de la barra de progreso */
-    animation: cargar 3s ease-out forwards; /* Animación de la barra */
+    background-color: var(--color-primary); /* Color rosa del tema */
+    transition: width 0.5s ease; /* Transición suave */
 }
 
-/* Animación de la barra de carga */
-@keyframes cargar {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
+/* --- Estilos SweetAlert Día de la Madre --- */
+.swal2-popup-madres {
+    border-radius: 20px !important;
+    border: 3px solid var(--color-primary) !important;
+    background-color: var(--color-light-bg) !important;
 }
 
-/* Media queries para dispositivos pequeños */
+.swal2-popup-madres .swal2-title {
+    color: var(--color-dark-pink) !important;
+    font-family: 'Dancing Script', cursive !important;
+    font-size: 2.5em !important;
+}
+
+.swal2-popup-madres .swal2-html-container {
+    color: var(--color-text) !important;
+    font-size: 1.1em !important;
+    font-family: 'Roboto Slab', serif !important; /* Asegurar fuente */
+}
+
+.swal2-popup-madres .swal2-icon.swal2-success .swal2-success-line-tip,
+.swal2-popup-madres .swal2-icon.swal2-success .swal2-success-line-long {
+    background-color: var(--color-dark-pink) !important;
+}
+
+.swal2-popup-madres .swal2-icon.swal2-success .swal2-success-ring {
+    border-color: rgba(255, 105, 180, 0.3) !important;
+}
+
+.swal2-popup-madres .swal2-confirm {
+    background-color: var(--color-primary) !important;
+    border-radius: 20px !important;
+    padding: 10px 20px !important;
+    font-size: 1.1em !important;
+    box-shadow: none !important;
+    font-family: 'Roboto Slab', serif !important; /* Asegurar fuente */
+}
+
+.swal2-popup-madres .swal2-confirm:hover {
+    background-color: var(--color-dark-pink) !important;
+}
+
+.swal2-popup-madres .swal2-timer-progress-bar {
+    background-color: var(--color-primary) !important;
+}
+
+/* --- Animaciones --- */
+@keyframes fadeIn {
+    from { opacity: 0.5; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --- Media Queries (Originales, con adaptaciones internas al tema si es necesario) --- */
+
+/* Dispositivos pequeños (móviles) */
 @media (max-width: 768px) {
     .catalogo {
-        grid-template-columns: repeat(1, 1fr);
-        max-width: 85%;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Ajuste del tema */
+        padding: 15px;
+        gap: 15px;
+        max-width: 95%; /* Ajuste para centrar mejor */
     }
 
     .categorias {
-        flex-direction: row;
+        gap: 8px; /* Espacio del tema */
+        padding: 15px 8px;
     }
 
     .categorias button {
-        max-width: 25%;
+        padding: 10px 15px; /* Padding del tema */
+        font-size: 0.9em; /* Tamaño del tema */
+        max-width: none; /* Ancho flexible del tema */
+        flex-basis: calc(50% - 8px); /* Dos por fila (tema) */
+        text-align: center;
+    }
+
+    .banner .logo {
+        width: 120px;
+        height: 120px;
+        margin-top: -40px;
+    }
+
+    .banner-text p {
+        font-size: 1em;
+        margin-top: 15px;
+    }
+
+    .buscador {
+        flex-direction: column; /* Apilar en móvil (tema) */
+        gap: 8px;
+    }
+
+    .buscador input {
+        width: 90%; /* Ancho ajustado (tema) */
+        max-width: 300px;
+        font-size: 1em; /* Tamaño consistente */
+        height: auto; /* Altura auto */
+        padding: 10px 15px; /* Padding ajustado */
+    }
+    .buscador button {
+         width: 90%;
+         max-width: 300px;
+         padding: 10px 15px; /* Padding ajustado */
+         font-size: 1em; /* Tamaño consistente */
+    }
+
+    /* Carrito (Estilos originales) */
+    #carrito {
+        width: 90%; /* Ancho carrito original adaptado */
+        right: 5%;
+        max-height: 75vh;
+        padding: 20px;
+    }
+
+    /* Iconos flotantes (Originales) */
+    .rrss-icons {
+        bottom: 70px; /* Ajustar posición si es necesario */
+        right: 15px;
+        gap: 10px;
+    }
+    .rrss-icons a, .boton-flotante {
+        width: 40px; /* Tamaño reducido original */
+        height: 40px;
+    }
+    .boton-flotante {
+        font-size: 16px; /* Icono carrito más pequeño */
+        padding: 8px; /* Padding ajustado */
+    }
+    #contador-carrito {
+        font-size: 10px; /* Contador más pequeño */
+        padding: 2px 5px;
+        top: -3px;
+        right: -3px;
+    }
+
+    #btn-volver-inicio {
+        bottom: 15px; /* Posición ajustada */
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .titulo-producto {
+        font-size: 1.4em;
+    }
+    .precio {
+        font-size: 1.3em !important;
+    }
+    .producto .button { /* Botón agregar carrito */
+        font-size: 0.9em;
+        padding: 10px 20px;
     }
 }
 
-/* Media queries para pantallas grandes */
+/* Pantallas grandes (Originales) */
 @media (min-width: 769px) {
     .catalogo {
         grid-template-columns: repeat(4, 1fr);
@@ -663,6 +849,31 @@ html {
     }
 
     .categorias button {
-        max-width: 150px;
+        max-width: 150px; /* Ancho original */
     }
 }
+
+/* Ajustes adicionales del tema para pantallas medianas/grandes si son necesarios */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .catalogo {
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    }
+     .categorias button {
+        max-width: 160px; /* Ancho intermedio */
+    }
+}
+
+@media (min-width: 1025px) {
+     .categorias button {
+        max-width: 180px; /* Ancho máximo del tema */
+    }
+}
+
+/* Ajuste fino carrito (Original) */
+@media (min-width: 1400px) {
+     #carrito {
+        /* Mantener ancho original o ajustar según necesidad */
+        width: 320px; /* Ancho original */
+     }
+}
+
