@@ -5,296 +5,365 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan de Alimentación para 15 Días con Generador</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth; /* Desplazamiento suave */
+            scroll-behavior: smooth;
+            background-color: #f0fdf4; /* fallback for gradient */
         }
-        .meal-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación para las tarjetas de comida */
+        .meal-card, .generated-meal-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Sombra más sutil por defecto */
         }
-        .meal-card:hover {
-            transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* Sombra más pronunciada */
+        .meal-card:hover, .generated-meal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Sombra más pronunciada y elegante */
         }
-        /* Estilo personalizado para los checkboxes */
         input[type="checkbox"] {
-            accent-color: #10b981; /* Color esmeralda para el checkbox */
+            accent-color: #10b981; /* emerald-500 */
+            border-radius: 0.25rem;
+            border: 1px solid #6ee7b7; /* emerald-300 */
         }
-        /* Estilo para encabezados de sección */
         .section-header {
             border-bottom-width: 2px;
-            border-color: #6ee7b7; /* Borde color esmeralda claro */
-            padding-bottom: 0.5rem;
+            border-color: #34d399; /* emerald-400 */
+            padding-bottom: 0.75rem; /* Aumentar un poco el padding */
+            margin-bottom: 2rem; /* Mayor separación */
         }
-        /* Estilos para el generador de menú */
+        /* Estilos específicos para el generador de menú */
         .generated-meal-card h4 {
             font-weight: 600; /* semibold */
             color: #059669; /* emerald-600 */
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.5rem; /* Ajuste de margen */
         }
         .generated-meal-card ul {
-            list-style-type: disc;
-            list-style-position: inside;
-            padding-left: 0.5rem;
+            list-style-type: none; /* Quitar viñetas por defecto */
+            padding-left: 0;
         }
         .generated-meal-card ul li {
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.375rem; /* 1.5 * 0.25rem */
+            padding-left: 1.25rem; /* Espacio para el icono */
+            position: relative;
+            font-size: 0.875rem; /* text-sm */
         }
+        /* Icono personalizado para listas de comida generada */
+        .generated-meal-card ul li::before {
+            content: '✓'; /* Icono de checkmark */
+            position: absolute;
+            left: 0;
+            color: #10b981; /* emerald-500 */
+            font-weight: 600;
+        }
+
+        /* Mejoras en botones e inputs */
+        .custom-input {
+            border: 1px solid #a7f3d0; /* emerald-200 */
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 0.75rem 1rem; /* py-3 px-4 */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .custom-input:focus {
+            border-color: #10b981; /* emerald-500 */
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); /* Ring effect */
+            outline: none;
+        }
+        .custom-btn {
+            padding: 0.75rem 1.5rem; /* py-3 px-6 */
+            border-radius: 0.5rem; /* rounded-lg */
+            font-weight: 600; /* font-semibold */
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        .custom-btn:hover {
+            transform: translateY(-1px);
+        }
+        .custom-btn-emerald {
+            background-color: #10b981; /* emerald-500 */
+            color: white;
+        }
+        .custom-btn-emerald:hover {
+            background-color: #059669; /* emerald-600 */
+        }
+        .custom-btn-sky {
+            background-color: #0ea5e9; /* sky-500 */
+            color: white;
+        }
+        .custom-btn-sky:hover {
+            background-color: #0284c7; /* sky-600 */
+        }
+
+        /* Responsive adjustments for shopping list columns */
+        #lista-compras .grid {
+            grid-template-columns: 1fr; /* Default to 1 column on small screens */
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            #lista-compras .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) { /* lg breakpoint */
+            #lista-compras .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
     </style>
 </head>
-<body class="bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 text-gray-800">
+<body class="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 text-gray-700 min-h-screen">
 
-    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl"> {/* Aumentado max-w para un look más espacioso */}
 
-        <header class="text-center mb-10 md:mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-emerald-700 mb-3">Plan de Alimentación para 15 Días</h1>
-            <p class="text-lg text-emerald-600">Para 2 personas | 7 menús diferentes por semana</p>
-            <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Cada menú incluye desayuno, media mañana, almuerzo, media tarde y cena, siguiendo las porciones de tu guía. Este plan está diseñado para ayudarte a mantener una alimentación equilibrada y variada.</p>
+        <header class="text-center mb-12 md:mb-16">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-emerald-700 mb-4">Plan de Alimentación Inteligente</h1>
+            <p class="text-lg sm:text-xl text-emerald-600">Para 2 personas | Menús semanales variados</p>
+            <p class="mt-4 text-gray-600 max-w-3xl mx-auto text-sm sm:text-base">
+                Descubre un plan de alimentación equilibrado y delicioso, diseñado para simplificar tus comidas.
+                Cada menú incluye desayuno, media mañana, almuerzo, media tarde y cena, siguiendo las porciones de tu guía nutricional.
+            </p>
         </header>
 
-        <section id="semana1" class="mb-12">
-            <h2 class="text-3xl font-semibold text-emerald-700 mb-6 section-header">Semana 1 (Ejemplo Fijo)</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="meal-card bg-white p-5 rounded-xl shadow-lg">
+        <section id="semana1" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-semibold text-emerald-700 section-header">Semana 1 (Ejemplo Fijo)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                {/* Lunes */}
+                <div class="meal-card bg-white p-6 rounded-xl"> {/* Aumentado padding */}
                     <h3 class="text-2xl font-semibold text-emerald-600 mb-4">Lunes</h3>
-                    <div class="space-y-3 text-sm">
+                    <div class="space-y-4 text-sm"> {/* Aumentado space-y */}
                         <div>
                             <h4 class="font-semibold text-emerald-500">Desayuno:</h4>
-                            <p class="text-gray-700">Arepa mediana + 1 huevo + 1 cucharadita de mantequilla + 1 vaso de leche semidescremada + 1 mandarina grande.</p>
+                            <p class="text-gray-600">Arepa mediana + 1 huevo + 1 cdt. mantequilla + 1 vaso leche semidescremada + 1 mandarina grande.</p>
                         </div>
                         <div>
                             <h4 class="font-semibold text-emerald-500">Media Mañana:</h4>
-                            <p class="text-gray-700">12 fresas + 1 cucharada de almendras.</p>
+                            <p class="text-gray-600">12 fresas + 1 cda. almendras.</p>
                         </div>
                         <div>
                             <h4 class="font-semibold text-emerald-500">Almuerzo:</h4>
-                            <p class="text-gray-700">Pechuga de pollo a la plancha + 6 cucharadas de arroz + ½ pocillo de lentejas + ensalada de tomate y lechuga + 1 cucharada de aceite de oliva + 1 rebanada de piña.</p>
+                            <p class="text-gray-600">Pechuga de pollo plancha + 6 cdas. arroz + ½ pocillo lentejas + ensalada tomate y lechuga + 1 cda. aceite oliva + 1 rebanada piña.</p>
                         </div>
                         <div>
                             <h4 class="font-semibold text-emerald-500">Media Tarde:</h4>
-                            <p class="text-gray-700">1 yogur dietético + 1 manzana pequeña.</p>
+                            <p class="text-gray-600">1 yogur dietético + 1 manzana pequeña.</p>
                         </div>
                         <div>
                             <h4 class="font-semibold text-emerald-500">Cena:</h4>
-                            <p class="text-gray-700">Filete de pescado al horno + ½ pocillo de pasta + espinacas al vapor + 1 cucharadita de aceite vegetal + 1 durazno mediano.</p>
+                            <p class="text-gray-600">Filete pescado horno + ½ pocillo pasta + espinacas vapor + 1 cdt. aceite vegetal + 1 durazno mediano.</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="meal-card bg-white p-5 rounded-xl shadow-lg">
+                {/* Martes */}
+                <div class="meal-card bg-white p-6 rounded-xl">
                     <h3 class="text-2xl font-semibold text-emerald-600 mb-4">Martes</h3>
-                    <div class="space-y-3 text-sm">
-                        <div><h4 class="font-semibold text-emerald-500">Desayuno:</h4><p class="text-gray-700">2 tostadas integrales + 2 tajadas de queso + 1 cucharadita de mermelada + 1 taza de té + 1 guayaba mediana.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Media Mañana:</h4><p class="text-gray-700">1 pera mediana + 1 cucharada de maní.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Almuerzo:</h4><p class="text-gray-700">Carne magra de res + 1 papa cocida + ½ pocillo de frijoles + ensalada de zanahoria y pepino + 1 cucharada de aceite + 2 maracuyás.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Media Tarde:</h4><p class="text-gray-700">1 vaso de kumis dietético + 12 uvas.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Cena:</h4><p class="text-gray-700">Atún en agua + 2 arepas pequeñas + brócoli al vapor + 1 cucharadita de mayonesa + 1 tajada de papaya.</p></div>
+                    <div class="space-y-4 text-sm">
+                        <div><h4 class="font-semibold text-emerald-500">Desayuno:</h4><p class="text-gray-600">2 tostadas integrales + 2 tajadas queso + 1 cdt. mermelada + 1 taza té + 1 guayaba mediana.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Media Mañana:</h4><p class="text-gray-600">1 pera mediana + 1 cda. maní.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Almuerzo:</h4><p class="text-gray-600">Carne magra res + 1 papa cocida + ½ pocillo frijoles + ensalada zanahoria y pepino + 1 cda. aceite + 2 maracuyás.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Media Tarde:</h4><p class="text-gray-600">1 vaso kumis dietético + 12 uvas.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Cena:</h4><p class="text-gray-600">Atún en agua + 2 arepas pequeñas + brócoli vapor + 1 cdt. mayonesa + 1 tajada papaya.</p></div>
                     </div>
                 </div>
-
-                <div class="meal-card bg-white p-5 rounded-xl shadow-lg">
+                {/* Miércoles */}
+                 <div class="meal-card bg-white p-6 rounded-xl">
                     <h3 class="text-2xl font-semibold text-emerald-600 mb-4">Miércoles</h3>
-                    <div class="space-y-3 text-sm">
-                        <div><h4 class="font-semibold text-emerald-500">Desayuno:</h4><p class="text-gray-700">Avena (3 cucharadas) + 1 cucharada de miel + 1 vaso de leche semidescremada + 1 banano pequeño.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Media Mañana:</h4><p class="text-gray-700">1 mango pequeño + 1 cucharada de nueces.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Almuerzo:</h4><p class="text-gray-700">Muslo de pollo sin piel + ½ pocillo de quinua + ensalada de aguacate (¼) y tomate + 1 cucharada de aceite + 1 naranja mediana.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Media Tarde:</h4><p class="text-gray-700">1 yogur + 7 uvas chilenas.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Cena:</h4><p class="text-gray-700">Tortilla de espinacas (1 huevo) + 1 tajada de pan integral + 1 cucharadita de aceite de oliva + 1 manzana pequeña.</p></div>
+                    <div class="space-y-4 text-sm">
+                        <div><h4 class="font-semibold text-emerald-500">Desayuno:</h4><p class="text-gray-600">Avena (3 cdas.) + 1 cda. miel + 1 vaso leche semidescremada + 1 banano pequeño.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Media Mañana:</h4><p class="text-gray-600">1 mango pequeño + 1 cda. nueces.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Almuerzo:</h4><p class="text-gray-600">Muslo pollo s/piel + ½ pocillo quinua + ensalada aguacate (¼) y tomate + 1 cda. aceite + 1 naranja mediana.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Media Tarde:</h4><p class="text-gray-600">1 yogur + 7 uvas chilenas.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Cena:</h4><p class="text-gray-600">Tortilla espinacas (1 huevo) + 1 tajada pan integral + 1 cdt. aceite oliva + 1 manzana pequeña.</p></div>
                     </div>
                 </div>
-
-                <div class="meal-card bg-white p-5 rounded-xl shadow-lg">
+                {/* Jueves */}
+                <div class="meal-card bg-white p-6 rounded-xl">
                     <h3 class="text-2xl font-semibold text-emerald-600 mb-4">Jueves</h3>
-                    <div class="space-y-3 text-sm">
-                        <div><h4 class="font-semibold text-emerald-500">Desayuno:</h4><p class="text-gray-700">1 arepa de maíz + 1 tajada de jamón + 1 cucharadita de margarina + 1 taza de café + 2 ciruelas pequeñas.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Media Mañana:</h4><p class="text-gray-700">1 durazno mediano + 1 cucharada de ajonjolí.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Almuerzo:</h4><p class="text-gray-700">Filete de cerdo magro + ½ pocillo de arroz integral + ensalada de remolacha + 1 cucharada de aceite + 1 tajada de sandía.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Media Tarde:</h4><p class="text-gray-700">1 vaso de leche + 12 uchuvas.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Cena:</h4><p class="text-gray-700">Sopa de verduras con 1 porción de pollo + 1 arepa pequeña + 1 cucharadita de crema de leche + 1 pera.</p></div>
+                    <div class="space-y-4 text-sm">
+                        <div><h4 class="font-semibold text-emerald-500">Desayuno:</h4><p class="text-gray-600">1 arepa maíz + 1 tajada jamón + 1 cdt. margarina + 1 taza café + 2 ciruelas pequeñas.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Media Mañana:</h4><p class="text-gray-600">1 durazno mediano + 1 cda. ajonjolí.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Almuerzo:</h4><p class="text-gray-600">Filete cerdo magro + ½ pocillo arroz integral + ensalada remolacha + 1 cda. aceite + 1 tajada sandía.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Media Tarde:</h4><p class="text-gray-600">1 vaso leche + 12 uchuvas.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Cena:</h4><p class="text-gray-600">Sopa verduras c/pollo + 1 arepa pequeña + 1 cdt. crema de leche + 1 pera.</p></div>
                     </div>
                 </div>
-
-                <div class="meal-card bg-white p-5 rounded-xl shadow-lg">
+                {/* Viernes */}
+                <div class="meal-card bg-white p-6 rounded-xl">
                     <h3 class="text-2xl font-semibold text-emerald-600 mb-4">Viernes</h3>
-                    <div class="space-y-3 text-sm">
-                        <div><h4 class="font-semibold text-emerald-500">Desayuno:</h4><p class="text-gray-700">1 pan integral + 1 huevo revuelto + 1 cucharadita de aceite + 1 vaso de leche + 1 mandarina.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Media Mañana:</h4><p class="text-gray-700">1 manzana + 1 cucharada de chía.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Almuerzo:</h4><p class="text-gray-700">Pescado al vapor + 1 papa criolla + ensalada de espinacas + 1 cucharada de aceite + 1 granadilla.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Media Tarde:</h4><p class="text-gray-700">1 yogur + 1 rebanada de papaya.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Cena:</h4><p class="text-gray-700">Pechuga de pavo + ½ pocillo de pasta + ensalada de pepino + 1 cucharadita de aceite + 1 durazno.</p></div>
+                    <div class="space-y-4 text-sm">
+                        <div><h4 class="font-semibold text-emerald-500">Desayuno:</h4><p class="text-gray-600">1 pan integral + 1 huevo revuelto + 1 cdt. aceite + 1 vaso leche + 1 mandarina.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Media Mañana:</h4><p class="text-gray-600">1 manzana + 1 cda. chía.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Almuerzo:</h4><p class="text-gray-600">Pescado vapor + 1 papa criolla + ensalada espinacas + 1 cda. aceite + 1 granadilla.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Media Tarde:</h4><p class="text-gray-600">1 yogur + 1 rebanada papaya.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Cena:</h4><p class="text-gray-600">Pechuga pavo + ½ pocillo pasta + ensalada pepino + 1 cdt. aceite + 1 durazno.</p></div>
                     </div>
                 </div>
-
-                <div class="meal-card bg-white p-5 rounded-xl shadow-lg">
+                {/* Sábado */}
+                <div class="meal-card bg-white p-6 rounded-xl">
                     <h3 class="text-2xl font-semibold text-emerald-600 mb-4">Sábado</h3>
-                    <div class="space-y-3 text-sm">
-                        <div><h4 class="font-semibold text-emerald-500">Desayuno:</h4><p class="text-gray-700">Cereal integral (½ pocillo) + 1 vaso de leche + 1 cucharada de miel + 1 banano.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Media Mañana:</h4><p class="text-gray-700">1 pera + 1 cucharada de almendras.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Almuerzo:</h4><p class="text-gray-700">Carne de ternera + ½ pocillo de puré de papa + ensalada de zanahoria + 1 cucharada de aceite + 1 manzana.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Media Tarde:</h4><p class="text-gray-700">1 yogur + 12 fresas.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Cena:</h4><p class="text-gray-700">Omelette de champiñones (1 huevo) + 1 tostada + 1 cucharadita de mantequilla + 1 mandarina.</p></div>
+                    <div class="space-y-4 text-sm">
+                        <div><h4 class="font-semibold text-emerald-500">Desayuno:</h4><p class="text-gray-600">Cereal integral (½ pocillo) + 1 vaso leche + 1 cda. miel + 1 banano.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Media Mañana:</h4><p class="text-gray-600">1 pera + 1 cda. almendras.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Almuerzo:</h4><p class="text-gray-600">Carne ternera + ½ pocillo puré papa + ensalada zanahoria + 1 cda. aceite + 1 manzana.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Media Tarde:</h4><p class="text-gray-600">1 yogur + 12 fresas.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Cena:</h4><p class="text-gray-600">Omelette champiñones (1 huevo) + 1 tostada + 1 cdt. mantequilla + 1 mandarina.</p></div>
                     </div>
                 </div>
-                
-                <div class="meal-card bg-white p-5 rounded-xl shadow-lg md:col-span-2 lg:col-span-1"> <h3 class="text-2xl font-semibold text-emerald-600 mb-4">Domingo</h3>
-                    <div class="space-y-3 text-sm">
-                        <div><h4 class="font-semibold text-emerald-500">Desayuno:</h4><p class="text-gray-700">2 panqueques pequeños (harina integral) + 1 cucharadita de miel + 1 vaso de leche + 1 guayaba.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Media Mañana:</h4><p class="text-gray-700">1 mango pequeño + 1 cucharada de nueces.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Almuerzo:</h4><p class="text-gray-700">Pechuga a la plancha + ½ pocillo de arroz + ensalada mixta + 1 cucharada de aceite + 1 rebanada de piña.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Media Tarde:</h4><p class="text-gray-700">1 yogur + 7 uvas chilenas.</p></div>
-                        <div><h4 class="font-semibold text-emerald-500">Cena:</h4><p class="text-gray-700">Sopa de lentejas + 1 arepa + 1 cucharadita de aceite + 1 pera.</p></div>
+                {/* Domingo */}
+                <div class="meal-card bg-white p-6 rounded-xl md:col-span-2 lg:col-span-1"> {/* Ajuste para que ocupe espacio restante en algunas vistas */}
+                    <h3 class="text-2xl font-semibold text-emerald-600 mb-4">Domingo</h3>
+                    <div class="space-y-4 text-sm">
+                        <div><h4 class="font-semibold text-emerald-500">Desayuno:</h4><p class="text-gray-600">2 panqueques peq. (harina integral) + 1 cdt. miel + 1 vaso leche + 1 guayaba.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Media Mañana:</h4><p class="text-gray-600">1 mango pequeño + 1 cda. nueces.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Almuerzo:</h4><p class="text-gray-600">Pechuga plancha + ½ pocillo arroz + ensalada mixta + 1 cda. aceite + 1 rebanada piña.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Media Tarde:</h4><p class="text-gray-600">1 yogur + 7 uvas chilenas.</p></div>
+                        <div><h4 class="font-semibold text-emerald-500">Cena:</h4><p class="text-gray-600">Sopa lentejas + 1 arepa + 1 cdt. aceite + 1 pera.</p></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="semana2" class="mb-12 p-6 bg-white rounded-xl shadow-lg">
-            <h2 class="text-3xl font-semibold text-emerald-700 mb-4 section-header">Semana 2 (Placeholder)</h2>
-            <p class="text-gray-700 leading-relaxed">Variaciones similares a la Semana 1, alternando proteínas y carbohidratos. Se sigue la misma estructura cambiando carnes, frutas y verduras.</p>
-            <p class="text-gray-600 mt-2 text-sm"><i>(El plan detallado para la Semana 2 puede ser elaborado bajo petición o generado con la herramienta de abajo, siguiendo la estructura de la Semana 1 con diferentes opciones de alimentos para mantener la variedad.)</i></p>
+        <section id="semana2-placeholder" class="mb-16 p-6 bg-white rounded-xl shadow-lg">
+            <h2 class="text-3xl md:text-4xl font-semibold text-emerald-700 section-header">Semana 2 (Placeholder)</h2>
+            <p class="text-gray-600 leading-relaxed">Utiliza el generador de menú de abajo para crear y visualizar el plan para la Semana 2 y subsecuentes. Los menús generados se guardarán para que puedas consultarlos después.</p>
+            <p class="text-gray-500 mt-2 text-sm"><i>Este plan es una guía. Ajusta las porciones y alimentos según tus necesidades y preferencias, y consulta a un profesional si es necesario.</i></p>
         </section>
 
-        <section id="generador-menu" class="mb-12 p-6 bg-white rounded-xl shadow-lg">
-            <h2 class="text-3xl font-semibold text-emerald-700 mb-6 section-header">Generador de Menú Semanal</h2>
-            <div class="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
-                <div class="flex items-center gap-2">
-                    <label for="weekNumberInput" class="text-emerald-600 font-semibold">Semana #:</label>
-                    <input type="number" id="weekNumberInput" value="2" min="1" class="p-2 border border-emerald-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500 w-20 text-center">
+        <section id="generador-menu" class="mb-16 p-6 bg-white rounded-xl shadow-xl"> {/* Sombra más prominente para esta sección */}
+            <h2 class="text-3xl md:text-4xl font-semibold text-emerald-700 section-header">Generador de Menú Semanal</h2>
+            <div class="flex flex-col sm:flex-row items-center justify-between mb-8 gap-4">
+                <div class="flex items-center gap-3 w-full sm:w-auto">
+                    <label for="weekNumberInput" class="text-emerald-600 font-semibold text-lg whitespace-nowrap">Semana #:</label>
+                    <input type="number" id="weekNumberInput" value="2" min="1" class="custom-input w-24 text-center text-lg">
                 </div>
-                <button id="generateMenuBtn" class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition-colors duration-300 w-full sm:w-auto">
-                    Generar Menú
-                </button>
-                <button id="loadMenuBtn" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition-colors duration-300 w-full sm:w-auto">
-                    Cargar Menú
-                </button>
+                <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                    <button id="generateMenuBtn" class="custom-btn custom-btn-emerald w-full sm:w-auto">
+                        Generar Menú
+                    </button>
+                    <button id="loadMenuBtn" class="custom-btn custom-btn-sky w-full sm:w-auto">
+                        Cargar Menú
+                    </button>
+                </div>
             </div>
             <div id="generatedWeekMenuContainer" class="mb-4">
-                 <h3 id="generatedMenuTitle" class="text-2xl font-semibold text-emerald-600 mb-4 text-center"></h3>
-                 <div id="generatedWeekMenu" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    </div>
+                 <h3 id="generatedMenuTitle" class="text-2xl md:text-3xl font-semibold text-emerald-600 mb-6 text-center"></h3>
+                 <div id="generatedWeekMenu" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {/* Las tarjetas de menú generado aparecerán aquí */}
+                </div>
             </div>
-            <p id="menuMessage" class="text-center text-emerald-600 mt-4 font-medium"></p>
+            <p id="menuMessage" class="text-center text-emerald-600 mt-6 font-medium text-base"></p>
         </section>
-        <section id="lista-compras" class="mb-12 p-6 bg-white rounded-xl shadow-lg">
-            <h2 class="text-3xl font-semibold text-emerald-700 mb-6 section-header">Lista de Compras para 15 Días (2 personas)</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6">
+
+        <section id="lista-compras" class="mb-16 p-6 bg-white rounded-xl shadow-lg">
+            <h2 class="text-3xl md:text-4xl font-semibold text-emerald-700 section-header">Lista de Compras Sugerida (15 Días / 2 Personas)</h2>
+            <div class="grid gap-x-8 gap-y-6"> {/* Responsive cols handled by CSS above */}
                 <div>
-                    <h4 class="text-xl font-semibold text-emerald-600 mb-3">Frutas</h4>
-                    <ul class="space-y-1.5 text-sm text-gray-700">
-                        <li class="flex items-center"><input type="checkbox" id="fruta1" class="mr-2 h-4 w-4"><label for="fruta1">Bananos (6 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="fruta2" class="mr-2 h-4 w-4"><label for="fruta2">Fresas (2 bandejas)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="fruta3" class="mr-2 h-4 w-4"><label for="fruta3">Manzanas (10 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="fruta4" class="mr-2 h-4 w-4"><label for="fruta4">Peras (8 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="fruta5" class="mr-2 h-4 w-4"><label for="fruta5">Mandarinas (10 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="fruta6" class="mr-2 h-4 w-4"><label for="fruta6">Naranjas (6 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="fruta7" class="mr-2 h-4 w-4"><label for="fruta7">Uvas (2 racimos)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="fruta8" class="mr-2 h-4 w-4"><label for="fruta8">Uvas chilenas (1 caja)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="fruta9" class="mr-2 h-4 w-4"><label for="fruta9">Piña (1 unidad)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="fruta10" class="mr-2 h-4 w-4"><label for="fruta10">Papaya (1 mediana)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="fruta11" class="mr-2 h-4 w-4"><label for="fruta11">Mango (4 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="fruta12" class="mr-2 h-4 w-4"><label for="fruta12">Maracuyá (6 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="fruta13" class="mr-2 h-4 w-4"><label for="fruta13">Duraznos (6 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="fruta14" class="mr-2 h-4 w-4"><label for="fruta14">Guayabas (6 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="fruta15" class="mr-2 h-4 w-4"><label for="fruta15">Ciruelas (1 bolsa pequeña)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="fruta16" class="mr-2 h-4 w-4"><label for="fruta16">Granadillas (4 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="fruta17" class="mr-2 h-4 w-4"><label for="fruta17">Aguacates (2 unidades)</label></li>
+                    <h4 class="text-xl font-semibold text-emerald-600 mb-3">Frutas Frescas y Variadas</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-center"><input type="checkbox" id="fruta1" class="mr-3 h-5 w-5"><label for="fruta1">Bananos (6-8 unidades)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="fruta2" class="mr-3 h-5 w-5"><label for="fruta2">Fresas (2 bandejas)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="fruta3" class="mr-3 h-5 w-5"><label for="fruta3">Manzanas (10-12 unidades)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="fruta4" class="mr-3 h-5 w-5"><label for="fruta4">Peras (8-10 unidades)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="fruta5" class="mr-3 h-5 w-5"><label for="fruta5">Mandarinas (10-12 unidades)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="fruta6" class="mr-3 h-5 w-5"><label for="fruta6">Naranjas (6-8 unidades)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="fruta7" class="mr-3 h-5 w-5"><label for="fruta7">Uvas (2 racimos)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="fruta9" class="mr-3 h-5 w-5"><label for="fruta9">Piña (1-2 unidades)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="fruta10" class="mr-3 h-5 w-5"><label for="fruta10">Papaya (1 mediana)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="fruta11" class="mr-3 h-5 w-5"><label for="fruta11">Mango (4-6 unidades)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="fruta17" class="mr-3 h-5 w-5"><label for="fruta17">Aguacates (2-3 unidades, tipo Hass)</label></li>
+                         {/* Se omiten algunas frutas repetitivas o muy específicas para simplificar la lista base */}
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-xl font-semibold text-emerald-600 mb-3">Verduras y Legumbres</h4>
-                    <ul class="space-y-1.5 text-sm text-gray-700">
-                        <li class="flex items-center"><input type="checkbox" id="ver1" class="mr-2 h-4 w-4"><label for="ver1">Lechuga (2 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="ver2" class="mr-2 h-4 w-4"><label for="ver2">Tomate (6 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="ver3" class="mr-2 h-4 w-4"><label for="ver3">Zanahoria (1 kg)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="ver4" class="mr-2 h-4 w-4"><label for="ver4">Pepino (3 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="ver5" class="mr-2 h-4 w-4"><label for="ver5">Espinaca (2 atados)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="ver6" class="mr-2 h-4 w-4"><label for="ver6">Brócoli (2 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="ver7" class="mr-2 h-4 w-4"><label for="ver7">Remolacha (2 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="ver8" class="mr-2 h-4 w-4"><label for="ver8">Papa común (2 kg)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="ver9" class="mr-2 h-4 w-4"><label for="ver9">Papa criolla (1 kg)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="ver10" class="mr-2 h-4 w-4"><label for="ver10">Yuca (½ kg)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="ver11" class="mr-2 h-4 w-4"><label for="ver11">Cebolla (1 kg)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="ver12" class="mr-2 h-4 w-4"><label for="ver12">Ajo (2 cabezas)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="ver13" class="mr-2 h-4 w-4"><label for="ver13">Champiñones (1 bandeja)</label></li>
+                    <h4 class="text-xl font-semibold text-emerald-600 mb-3">Verduras y Hortalizas</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-center"><input type="checkbox" id="ver1" class="mr-3 h-5 w-5"><label for="ver1">Lechuga (romana, crespa - 2 unidades)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="ver2" class="mr-3 h-5 w-5"><label for="ver2">Tomate (chonto/milano - 1 kg)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="ver3" class="mr-3 h-5 w-5"><label for="ver3">Zanahoria (1 kg)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="ver4" class="mr-3 h-5 w-5"><label for="ver4">Pepino cohombro (2-3 unidades)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="ver5" class="mr-3 h-5 w-5"><label for="ver5">Espinaca fresca (2 atados grandes)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="ver6" class="mr-3 h-5 w-5"><label for="ver6">Brócoli (1-2 unidades grandes)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="ver11" class="mr-3 h-5 w-5"><label for="ver11">Cebolla cabezona (blanca/roja - 1 kg)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="ver12" class="mr-3 h-5 w-5"><label for="ver12">Ajo (2-3 cabezas)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="ver13" class="mr-3 h-5 w-5"><label for="ver13">Champiñones (1 bandeja grande)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="ver14" class="mr-3 h-5 w-5"><label for="ver14">Pimentón (rojo/verde/amarillo - 2 unidades)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="ver15" class="mr-3 h-5 w-5"><label for="ver15">Calabacín (2 unidades)</label></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-xl font-semibold text-emerald-600 mb-3">Proteínas</h4>
-                    <ul class="space-y-1.5 text-sm text-gray-700">
-                        <li class="flex items-center"><input type="checkbox" id="prot1" class="mr-2 h-4 w-4"><label for="prot1">Pechuga de pollo (2 kg)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="prot2" class="mr-2 h-4 w-4"><label for="prot2">Carne de res magra (1.5 kg)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="prot3" class="mr-2 h-4 w-4"><label for="prot3">Pescado fresco/filetes (1 kg)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="prot4" class="mr-2 h-4 w-4"><label for="prot4">Atún en agua (4 latas)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="prot5" class="mr-2 h-4 w-4"><label for="prot5">Huevos (30 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="prot6" class="mr-2 h-4 w-4"><label for="prot6">Jamón (200 g)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="prot7" class="mr-2 h-4 w-4"><label for="prot7">Queso fresco (1 kg)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="prot8" class="mr-2 h-4 w-4"><label for="prot8">Yogur dietético (12 unidades)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="prot9" class="mr-2 h-4 w-4"><label for="prot9">Leche semidescremada (6 litros)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="prot10" class="mr-2 h-4 w-4"><label for="prot10">Kumis (4 unidades)</label></li>
+                    <h4 class="text-xl font-semibold text-emerald-600 mb-3">Proteínas Magras y Lácteos</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-center"><input type="checkbox" id="prot1" class="mr-3 h-5 w-5"><label for="prot1">Pechuga de pollo (2 kg, sin piel)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="prot2" class="mr-3 h-5 w-5"><label for="prot2">Carne de res magra (lomo, muchacho - 1.5 kg)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="prot3" class="mr-3 h-5 w-5"><label for="prot3">Pescado (tilapia, salmón - 1 kg filetes)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="prot4" class="mr-3 h-5 w-5"><label for="prot4">Atún en agua (4-6 latas)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="prot5" class="mr-3 h-5 w-5"><label for="prot5">Huevos AA (30 unidades)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="prot7" class="mr-3 h-5 w-5"><label for="prot7">Queso fresco/campesino (1 kg)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="prot8" class="mr-3 h-5 w-5"><label for="prot8">Yogur natural sin azúcar o griego (1 litro o varios individuales)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="prot9" class="mr-3 h-5 w-5"><label for="prot9">Leche semidescremada (4-6 litros)</label></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-xl font-semibold text-emerald-600 mb-3">Granos y Cereales</h4>
-                    <ul class="space-y-1.5 text-sm text-gray-700">
-                        <li class="flex items-center"><input type="checkbox" id="grano1" class="mr-2 h-4 w-4"><label for="grano1">Arroz blanco (2 kg)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grano2" class="mr-2 h-4 w-4"><label for="grano2">Quinua (500 g)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grano3" class="mr-2 h-4 w-4"><label for="grano3">Lentejas (500 g)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grano4" class="mr-2 h-4 w-4"><label for="grano4">Frijoles (500 g)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grano5" class="mr-2 h-4 w-4"><label for="grano5">Garbanzos (500 g)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grano6" class="mr-2 h-4 w-4"><label for="grano6">Avena (500 g)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grano7" class="mr-2 h-4 w-4"><label for="grano7">Pasta integral (500 g)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grano8" class="mr-2 h-4 w-4"><label for="grano8">Harina de maíz (1 kg)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grano9" class="mr-2 h-4 w-4"><label for="grano9">Pan integral (2 paquetes)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grano10" class="mr-2 h-4 w-4"><label for="grano10">Cereal integral (1 caja)</label></li>
+                    <h4 class="text-xl font-semibold text-emerald-600 mb-3">Granos, Cereales y Tubérculos</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-center"><input type="checkbox" id="grano1" class="mr-3 h-5 w-5"><label for="grano1">Arroz integral/blanco (1-2 kg)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="grano2" class="mr-3 h-5 w-5"><label for="grano2">Quinua (500 g)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="grano3" class="mr-3 h-5 w-5"><label for="grano3">Lentejas (500 g)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="grano4" class="mr-3 h-5 w-5"><label for="grano4">Fríjoles (bola roja, cargamanto - 500 g)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="grano6" class="mr-3 h-5 w-5"><label for="grano6">Avena en hojuelas (500 g)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="grano7" class="mr-3 h-5 w-5"><label for="grano7">Pasta integral (500 g)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="grano9" class="mr-3 h-5 w-5"><label for="grano9">Pan integral tajado (1-2 paquetes)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="grano8" class="mr-3 h-5 w-5"><label for="grano8">Arepas de maíz (paquete)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="ver8" class="mr-3 h-5 w-5"><label for="ver8">Papa común (2 kg)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="ver9" class="mr-3 h-5 w-5"><label for="ver9">Papa criolla (1 kg)</label></li>
+                         <li class="flex items-center"><input type="checkbox" id="ver10" class="mr-3 h-5 w-5"><label for="ver10">Yuca (1 kg)</label></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-xl font-semibold text-emerald-600 mb-3">Grasas y Frutos Secos</h4>
-                    <ul class="space-y-1.5 text-sm text-gray-700">
-                        <li class="flex items-center"><input type="checkbox" id="grasa1" class="mr-2 h-4 w-4"><label for="grasa1">Aceite de oliva (1 botella)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grasa2" class="mr-2 h-4 w-4"><label for="grasa2">Aceite vegetal (1 botella)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grasa3" class="mr-2 h-4 w-4"><label for="grasa3">Mantequilla (200 g)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grasa4" class="mr-2 h-4 w-4"><label for="grasa4">Margarina (200 g)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grasa5" class="mr-2 h-4 w-4"><label for="grasa5">Mayonesa light (1 frasco)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grasa6" class="mr-2 h-4 w-4"><label for="grasa6">Almendras (200 g)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grasa7" class="mr-2 h-4 w-4"><label for="grasa7">Nueces (200 g)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grasa8" class="mr-2 h-4 w-4"><label for="grasa8">Maní (200 g)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grasa9" class="mr-2 h-4 w-4"><label for="grasa9">Chía (100 g)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="grasa10" class="mr-2 h-4 w-4"><label for="grasa10">Ajonjolí (100 g)</label></li>
+                    <h4 class="text-xl font-semibold text-emerald-600 mb-3">Grasas Saludables y Frutos Secos</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-center"><input type="checkbox" id="grasa1" class="mr-3 h-5 w-5"><label for="grasa1">Aceite de oliva extra virgen (1 botella)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="grasa6" class="mr-3 h-5 w-5"><label for="grasa6">Almendras naturales (200 g)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="grasa7" class="mr-3 h-5 w-5"><label for="grasa7">Nueces del Brasil/nogal (200 g)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="grasa8" class="mr-3 h-5 w-5"><label for="grasa8">Maní natural sin sal (200g)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="grasa9" class="mr-3 h-5 w-5"><label for="grasa9">Semillas de chía (100 g)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="grasa10" class="mr-3 h-5 w-5"><label for="grasa10">Semillas de ajonjolí (100 g)</label></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-xl font-semibold text-emerald-600 mb-3">Otros</h4>
-                    <ul class="space-y-1.5 text-sm text-gray-700">
-                        <li class="flex items-center"><input type="checkbox" id="otro1" class="mr-2 h-4 w-4"><label for="otro1">Miel (1 frasco)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="otro2" class="mr-2 h-4 w-4"><label for="otro2">Gelatina sin azúcar (2 sobres)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="otro3" class="mr-2 h-4 w-4"><label for="otro3">Café/té (según preferencia)</label></li>
-                        <li class="flex items-center"><input type="checkbox" id="otro4" class="mr-2 h-4 w-4"><label for="otro4">Sal y especias (al gusto)</label></li>
+                    <h4 class="text-xl font-semibold text-emerald-600 mb-3">Condimentos y Otros</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-center"><input type="checkbox" id="otro1" class="mr-3 h-5 w-5"><label for="otro1">Miel de abejas pura (opcional)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="otro3" class="mr-3 h-5 w-5"><label for="otro3">Café en grano/molido, Té</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="otro4" class="mr-3 h-5 w-5"><label for="otro4">Sal marina/rosada, Pimienta</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="otro5" class="mr-3 h-5 w-5"><label for="otro5">Hierbas frescas (cilantro, perejil)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="otro6" class="mr-3 h-5 w-5"><label for="otro6">Especias (orégano, comino, paprika, cúrcuma)</label></li>
+                        <li class="flex items-center"><input type="checkbox" id="otro7" class="mr-3 h-5 w-5"><label for="otro7">Vinagre de manzana</label></li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section id="notas" class="p-6 bg-emerald-100 rounded-xl shadow-md border border-emerald-300">
-            <h3 class="text-2xl font-semibold text-emerald-700 mb-4">Notas Importantes:</h3>
-            <ul class="list-disc list-inside text-gray-700 space-y-2">
-                <li>Ajusta las cantidades de las porciones según tus necesidades individuales o si cocinas para más personas.</li>
-                <li>Considera congelar carnes, aves, pescados y algunas verduras preparadas (como sopas o guisos) para conservar su frescura y facilitar la preparación de comidas durante la quincena.</li>
-                <li>Si algún alimento específico no está disponible o no es de tu agrado, siéntete libre de reemplazarlo por otro similar dentro del mismo grupo alimenticio (ej. otra fruta, otro tipo de carne magra, otra verdura).</li>
-                <li>Recuerda mantener una buena hidratación bebiendo suficiente agua a lo largo del día.</li>
-                <li>Este plan es una guía; ajústalo a tus preferencias y necesidades específicas, y consulta a un profesional de la nutrición si tienes condiciones médicas particulares.</li>
+        <section id="notas" class="p-6 md:p-8 bg-emerald-50 rounded-xl border border-emerald-200">
+            <h3 class="text-2xl md:text-3xl font-semibold text-emerald-700 mb-5">Notas Importantes y Consejos</h3>
+            <ul class="list-disc list-inside text-gray-600 space-y-3 text-sm sm:text-base">
+                <li>Ajusta las cantidades de las porciones según tus necesidades calóricas individuales y nivel de actividad física. Este plan es una base para dos personas.</li>
+                <li>La variedad es clave. Rota los tipos de frutas, verduras y proteínas cada semana para asegurar un amplio espectro de nutrientes.</li>
+                <li>Prepara con anticipación (meal prep): Dedica unas horas el fin de semana a lavar y cortar verduras, cocinar granos (arroz, quinua) y porcionar proteínas. Esto ahorrará mucho tiempo durante la semana.</li>
+                <li>Congela inteligentemente: Carnes, aves, pescados pueden congelarse en porciones. Algunas sopas, guisos y legumbres cocidas también se congelan bien.</li>
+                <li>Sustituciones: Si un alimento no te gusta o no está disponible, reemplázalo por otro del mismo grupo nutricional. Ejemplo: si no hay salmón, usa trucha o atún fresco. Si no te gusta el brócoli, usa coliflor o espinaca.</li>
+                <li>Hidratación: No olvides beber suficiente agua a lo largo del día (mínimo 2 litros). Las infusiones de hierbas sin azúcar también cuentan.</li>
+                <li>Escucha a tu cuerpo: Si tienes hambre entre comidas, opta por un snack saludable como una fruta, un puñado pequeño de frutos secos, o un yogur natural.</li>
+                <li>Consulta profesional: Este plan es una guía general. Si tienes condiciones médicas específicas, alergias, o metas nutricionales particulares (pérdida de peso, ganancia muscular), consulta a un nutricionista o dietista registrado.</li>
             </ul>
         </section>
 
-        <footer class="text-center mt-12 py-6 border-t border-emerald-300">
-            <p class="text-sm text-emerald-600">&copy; <span id="currentYear"></span> Plan de Alimentación. Creado para tu bienestar.</p>
+        <footer class="text-center mt-12 md:mt-16 py-8 border-t border-emerald-300">
+            <p class="text-sm text-emerald-600">&copy; <span id="currentYear"></span> Plan de Alimentación Inteligente. Creado para tu bienestar.</p>
         </footer>
     </div>
 
@@ -304,27 +373,27 @@
 
         // Funcionalidad para guardar y cargar el estado de los checkboxes desde localStorage (lista de compras)
         document.addEventListener('DOMContentLoaded', () => {
-            const checkboxes = document.querySelectorAll('#lista-compras input[type="checkbox"]');
-            const localStorageKeyPrefix = 'checkboxState_'; 
+            const shoppingCheckboxes = document.querySelectorAll('#lista-compras input[type="checkbox"]');
+            const shoppingListKeyPrefix = 'shoppingCheckboxState_'; 
 
-            const loadCheckboxStates = () => {
-                checkboxes.forEach(checkbox => {
-                    const savedState = localStorage.getItem(localStorageKeyPrefix + checkbox.id);
+            const loadShoppingCheckboxStates = () => {
+                shoppingCheckboxes.forEach(checkbox => {
+                    const savedState = localStorage.getItem(shoppingListKeyPrefix + checkbox.id);
                     if (savedState !== null) {
                         checkbox.checked = savedState === 'true';
                     }
                 });
             };
 
-            const saveCheckboxState = (checkbox) => {
-                localStorage.setItem(localStorageKeyPrefix + checkbox.id, checkbox.checked);
+            const saveShoppingCheckboxState = (checkbox) => {
+                localStorage.setItem(shoppingListKeyPrefix + checkbox.id, checkbox.checked);
             };
 
-            loadCheckboxStates();
+            loadShoppingCheckboxStates();
 
-            checkboxes.forEach(checkbox => {
+            shoppingCheckboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', () => {
-                    saveCheckboxState(checkbox);
+                    saveShoppingCheckboxState(checkbox);
                 });
             });
         });
@@ -339,127 +408,148 @@
             const menuMessageP = document.getElementById('menuMessage');
             const generatedMenuTitleH3 = document.getElementById('generatedMenuTitle');
 
-            // --- DATOS DE ALIMENTACIÓN (transcritos de las imágenes) ---
+            // --- DATOS DE ALIMENTACIÓN (transcritos de las imágenes y ajustados) ---
             const guiaAlimentacion = {
-                "Desayuno": { "Queso o sustituto": 2, "Harinas": 2, "Grasas": 1, "Frutas": 1 }, // Fruta añadida para completar, aunque no explícita en guía de desayuno
-                "Media Mañana": { "Frutas": 1 },
-                "Almuerzo": { "Carnes": 1, "Harinas": 2, "Frutas": 1, "Verduras": 1, "Grasas": 3 },
-                "Media Tarde": { "Leche semidescremada": 1, "Frutas": 1, "Nueces": 1 },
-                "Cena": { "Carnes": 1, "Harinas": 2, "Verduras": 1, "Grasas": 2 }
+                "Desayuno": { "Queso o sustituto": 2, "Harinas": 2, "Grasas": 1, "Frutas": 1 },
+                "Media Mañana": { "Frutas": 1, "Nueces": 0.5 }, // Ajuste: Media porción de nueces opcional
+                "Almuerzo": { "Carnes": 1, "Harinas": 2, "Frutas": 1, "Verduras": 2, "Grasas": 2 }, // Aumentado verduras, ajustado grasas
+                "Media Tarde": { "Leche semidescremada": 1, "Frutas": 0.5, "Nueces": 0.5 }, // Ajuste: Media porción de fruta y nueces
+                "Cena": { "Carnes": 1, "Harinas": 1, "Verduras": 2, "Grasas": 1 } // Ajustado harinas, aumentado verduras, ajustado grasas
             };
 
             const alimentosPorGrupo = {
                 "Frutas": [
-                    { nombre: "Banano", porcion: "1/2 Pequeño" }, { nombre: "Ciruelas claudias", porcion: "2 Pequeñas" },
-                    { nombre: "Curuba", porcion: "2 Grandes" }, { nombre: "Durazno", porcion: "1 Mediano" },
-                    { nombre: "Fresas", porcion: "12 Unidades" }, { nombre: "Guanábana", porcion: "4 Cucharadas soperas" },
-                    { nombre: "Guayaba", porcion: "1 Mediana" }, { nombre: "Granadilla", porcion: "2 Medianas" }, // Ajustado Guayaba a 1
-                    { nombre: "Higo", porcion: "1 Mediano" }, { nombre: "Kiwi", porcion: "2 Unidades pequeñas" },
-                    { nombre: "Lulo", porcion: "2 Unidades pequeñas" }, { nombre: "Mandarina", porcion: "1 Grande" },
-                    { nombre: "Mango", porcion: "1 Pequeño" }, { nombre: "Manzana", porcion: "1 Pequeña" },
-                    { nombre: "Maracuyá", porcion: "1 Mediana" }, { nombre: "Mora", porcion: "12 Unidades" }, // Ajustado Maracuya a 1
-                    { nombre: "Naranja", porcion: "1 Mediana" }, { nombre: "Uchuvas", porcion: "12-15 Unidades" },
-                    { nombre: "Papaya", porcion: "1 Tajada pequeña" }, { nombre: "Papayuela", porcion: "1/2 Unidad pequeña" },
-                    { nombre: "Pera", porcion: "1 Mediana" }, { nombre: "Piña", porcion: "1 Rebanada" },
-                    { nombre: "Pitaya", porcion: "1 Unidad" }, { nombre: "Sandía", porcion: "1 Porción" },
-                    { nombre: "Tomate de árbol", porcion: "1 Mediano" }, { nombre: "Toronja", porcion: "1/2 Unidad pequeña" }, // Ajustado Tomate de arbol y Toronja
-                    { nombre: "Uvas", porcion: "12 Unidades" }, { nombre: "Uvas Chilenas", porcion: "7 Unidades" },
-                    { nombre: "Zapote", porcion: "1 Pequeño" }, { nombre: "Fruta picada", porcion: "1 Pocillo (aprox 150g)"}
+                    { nombre: "Banano", porcion: "1/2 Pequeño" }, { nombre: "Ciruelas", porcion: "2 Pequeñas" },
+                    { nombre: "Curuba", porcion: "1 Grande" }, { nombre: "Durazno", porcion: "1 Mediano" },
+                    { nombre: "Fresas", porcion: "1 pocillo (12-15 Unidades)" }, { nombre: "Guanábana", porcion: "1/2 pocillo trozos" },
+                    { nombre: "Guayaba", porcion: "1 Mediana" }, { nombre: "Granadilla", porcion: "2 Medianas" },
+                    { nombre: "Higo", porcion: "1 Mediano" }, { nombre: "Kiwi", porcion: "1 Unidad mediana" },
+                    { nombre: "Lulo", porcion: "2 Pequeños (para jugo)" }, { nombre: "Mandarina", porcion: "1 Grande o 2 peq." },
+                    { nombre: "Mango", porcion: "1 Pequeño (Tommy) / 1/2 grande" }, { nombre: "Manzana", porcion: "1 Pequeña/Mediana" },
+                    { nombre: "Maracuyá", porcion: "1 Mediana (para jugo)" }, { nombre: "Mora", porcion: "1 pocillo (12-15 Unidades)" },
+                    { nombre: "Naranja", porcion: "1 Mediana" }, { nombre: "Uchuvas", porcion: "1 pocillo (12-15 Unidades)" },
+                    { nombre: "Papaya", porcion: "1 Tajada Mediana (1 pocillo)" }, { nombre: "Pera", porcion: "1 Mediana" },
+                    { nombre: "Piña", porcion: "1 Rebanada (1 pocillo trozos)" }, { nombre: "Pitaya", porcion: "1 Unidad" },
+                    { nombre: "Sandía", porcion: "1 Tajada Mediana (1 pocillo)" }, { nombre: "Tomate de árbol", porcion: "1 Mediano (para jugo)" },
+                    { nombre: "Uvas (verdes/rojas)", porcion: "1 pocillo (12-15 Unidades)" }
                 ],
                 "Harinas": [
-                    { nombre: "Arepa delgada", porcion: "1 Mediana" }, { nombre: "Arepa redonda", porcion: "2 Pequeñas" },
-                    { nombre: "Arroz cocido", porcion: "6 Cucharadas soperas" }, { nombre: "Avena en hojuelas", porcion: "3 Cucharadas soperas" },
-                    { nombre: "Calados", porcion: "2 Unidades" }, { nombre: "Cereal (sin azúcar)", porcion: "1/2 Pocillo" },
-                    { nombre: "Crispetas (hechas en casa)", porcion: "1 Pocillo" }, { nombre: "Galletas de soda", porcion: "3 Unidades" },
-                    { nombre: "Maíz cocido", porcion: "1/2 Pocillo" }, { nombre: "Pasta cocida", porcion: "1/2 Pocillo" },
-                    { nombre: "Pan blanco/integral", porcion: "1 Tajada" },  { nombre: "Pan redondo", porcion: "1 Pequeño" },
-                    { nombre: "Quinua cocida", porcion: "7 Cucharadas soperas (1/2 pocillo aprox.)" }, { nombre: "Papa común", porcion: "1 Mediana" },
-                    { nombre: "Papa Criolla", porcion: "3 Medianas" }, { nombre: "Plátano (maduro/verde)", porcion: "1/2 Pequeño (trozo)" },
-                    { nombre: "Yuca", porcion: "1 Trozo pequeño" },
-                    { nombre: "Arvejas cocidas", porcion: "1/2 Pocillo" }, { nombre: "Fríjol cocido", porcion: "1/2 Pocillo" },
-                    { nombre: "Garbanzos cocidos", porcion: "1/2 Pocillo" }, { nombre: "Lentejas cocidas", porcion: "1/2 Pocillo" }
+                    { nombre: "Arepa de maíz (sin sal, sin grasa añadida)", porcion: "1 Mediana (50-60g)" },
+                    { nombre: "Arroz cocido (integral preferiblemente)", porcion: "1/2 Pocillo (6 Cdas. soperas)" },
+                    { nombre: "Avena en hojuelas (cocida o cruda)", porcion: "1/2 Pocillo (3 Cdas. soperas)" },
+                    { nombre: "Galletas de soda/integrales (bajas en sodio)", porcion: "3-4 Unidades" },
+                    { nombre: "Maíz cocido/mazorca", porcion: "1/2 Pocillo desgranado / 1 mazorca peq." },
+                    { nombre: "Pasta cocida (integral preferiblemente)", porcion: "1/2 Pocillo" },
+                    { nombre: "Pan integral", porcion: "1 Tajada" },
+                    { nombre: "Quinua cocida", porcion: "1/2 Pocillo (7 Cdas. soperas)" },
+                    { nombre: "Papa común/pastusa (cocida/asada)", porcion: "1 Mediana (tamaño puño)" },
+                    { nombre: "Papa criolla (cocida/asada)", porcion: "3-4 Medianas" },
+                    { nombre: "Plátano (verde/maduro cocido/asado)", porcion: "1/3 Unidad mediana" },
+                    { nombre: "Yuca (cocida/asada)", porcion: "1 Trozo pequeño (tamaño pulgar)" },
+                    { nombre: "Fríjol/Lenteja/Garbanzo (cocido)", porcion: "1/2 Pocillo" }
                 ],
                 "Queso o sustituto": [
-                    { nombre: "Queso fresco/blanco", porcion: "1 Tajada delgada (30g)" }, { nombre: "Quesito", porcion: "1 Tajada delgada (30g)" },
-                    { nombre: "Cuajada", porcion: "1 Tajada delgada (30g)" }, { nombre: "Queso en loncha (bajo en grasa)", porcion: "2 Unidades" },
-                    { nombre: "Huevo", porcion: "1 Unidad" }, { nombre: "Jamón (bajo en grasa)", porcion: "2 Tajadas delgadas" }
+                    { nombre: "Queso fresco/campesino (bajo en sal)", porcion: "1 Tajada delgada (30-40g)" },
+                    { nombre: "Cuajada (baja en sal)", porcion: "1 Tajada delgada (30-40g)" },
+                    { nombre: "Huevo (cocido, revuelto, omelette)", porcion: "1 Unidad" },
+                    { nombre: "Jamón de pavo/pollo (bajo en sodio)", porcion: "2 Tajadas delgadas" }
                 ],
                 "Carnes": [
-                    { nombre: "Cerdo (lomo/pierna)", porcion: "1 Porción (100-125g)" }, { nombre: "Pescado (blanco/azul)", porcion: "1 Porción (125-150g)" },
-                    { nombre: "Pollo (pechuga/muslo sin piel)", porcion: "1 Porción (125g)" }, { nombre: "Res (lomo/muchacho)", porcion: "1 Porción (100-125g)" },
-                    { nombre: "Ternera", porcion: "1 Porción (100-125g)" }, { nombre: "Atún en agua (escurrido)", porcion: "1 Lata pequeña (90-100g)" }
+                    { nombre: "Pescado blanco (merluza, tilapia)", porcion: "1 Filete mediano (120-150g)" },
+                    { nombre: "Pescado azul (salmón, trucha)", porcion: "1 Filete mediano (120-150g)" },
+                    { nombre: "Pollo (pechuga/contramuslo sin piel)", porcion: "1 Presa mediana (120-150g)" },
+                    { nombre: "Carne de res magra (lomo, centro de pierna)", porcion: "1 Filete mediano (100-120g)" },
+                    { nombre: "Cerdo (lomo, pierna magra)", porcion: "1 Filete mediano (100-120g)" },
+                    { nombre: "Atún en agua (escurrido)", porcion: "1 Lata mediana (90-120g)" }
                 ],
                 "Grasas": [
-                    { nombre: "Aceite vegetal (oliva, girasol)", porcion: "1 Cucharadita (5ml)" }, { nombre: "Mantequilla/margarina", porcion: "1 Cucharadita (5g)" },
-                    { nombre: "Aguacate", porcion: "1/4 Pequeño" }, { nombre: "Mayonesa (baja en grasa)", porcion: "1 Cucharadita" },
-                    { nombre: "Crema de Leche (light)", porcion: "1 Cucharada (15ml)" },
-                    { nombre: "Maní (natural)", porcion: "1 Cucharada (15g)" },
-                    { nombre: "Nueces (del nogal, macadamia)", porcion: "1 Cucharada (3-4 unidades)" },
-                    { nombre: "Almendras", porcion: "1 Cucharada (6-8 unidades)" }
+                    { nombre: "Aceite de oliva extra virgen", porcion: "1 Cucharadita (5ml)" },
+                    { nombre: "Aguacate Hass", porcion: "1/4 Unidad mediana" },
+                    { nombre: "Mantequilla (ocasional)", porcion: "1/2 Cucharadita (2.5g)" },
+                    // Frutos secos se manejan en su propia categoría para snacks
                 ],
                 "Leche semidescremada": [
-                    { nombre: "Leche líquida semidescremada", porcion: "1 Vaso (200ml)" },
-                    { nombre: "Kumis dietético", porcion: "1 Vaso (180ml)" },
-                    { nombre: "Yogurt dietético (natural)", porcion: "1 Vaso (150-180ml)" }
+                    { nombre: "Leche líquida semidescremada/deslactosada", porcion: "1 Vaso (200-240ml)" },
+                    { nombre: "Yogur natural sin azúcar/griego", porcion: "1 Vaso/unidad (150-200g)" },
+                    { nombre: "Kumis dietético (bajo en azúcar)", porcion: "1 Vaso (180-200ml)" }
                 ],
-                "Nueces": [ // Específico para "Media Tarde" (Algo)
-                    { nombre: "Ajonjolí (sésamo)", porcion: "1 Cucharada" }, { nombre: "Semillas de girasol", porcion: "1 Cucharada" },
-                    { nombre: "Semillas de chía", porcion: "1 Cucharada" }, { nombre: "Semillas de linaza", porcion: "1 Cucharada" },
-                    { nombre: "Maní (natural)", porcion: "1 Cucharada (15-20 unidades)" },
-                    { nombre: "Nueces (del nogal, etc.)", porcion: "1 Cucharada (3-5 unidades)" },
-                    { nombre: "Almendras", porcion: "1 Cucharada (8-10 unidades)" }
+                "Nueces": [ // Para snacks (Media Mañana, Media Tarde)
+                    { nombre: "Almendras naturales", porcion: "10-12 Unidades (15g)" },
+                    { nombre: "Nueces del Brasil/nogal", porcion: "3-4 Unidades (15g)" },
+                    { nombre: "Maní natural (sin sal)", porcion: "1 Cucharada (15-20 unidades)" },
+                    { nombre: "Semillas de girasol/calabaza", porcion: "1 Cucharada" },
+                    { nombre: "Mezcla de frutos secos (sin sal, sin azúcar añadida)", porcion: "1 Cucharada colmada (15-20g)"}
                 ],
-                "Verduras": [
-                    { nombre: "Lechuga (variada)", porcion: "1 Pocillo abundante" }, { nombre: "Tomate (chonto/milano)", porcion: "1/2 Unidad mediana" },
-                    { nombre: "Zanahoria", porcion: "1/2 Pocillo rallada/picada" }, { nombre: "Pepino cohombro", porcion: "1/2 Pocillo en rodajas" },
-                    { nombre: "Espinaca", porcion: "1 Pocillo cocida / 2 cruda" }, { nombre: "Brócoli", porcion: "1/2 Pocillo cocido" },
-                    { nombre: "Cebolla (cabezona/junca)", porcion: "1/4 Pocillo picada" }, { nombre: "Champiñones", porcion: "1/2 Pocillo laminados" },
-                    { nombre: "Pimentón (cualquier color)", porcion: "1/4 Unidad"}, { nombre: "Calabacín", porcion: "1/2 Pocillo en rodajas"},
-                    { nombre: "Berenjena", porcion: "1/2 Pocillo en cubos"}, { nombre: "Coliflor", porcion: "1/2 Pocillo cocida"},
-                    { nombre: "Habichuela", porcion: "1/2 Pocillo cocida"}, { nombre: "Apio", porcion: "1 tallo picado"}
+                "Verduras": [ // Porción general: 1 pocillo crudas de hoja, 1/2 pocillo cocidas densas
+                    { nombre: "Ensalada variada (lechuga, tomate, pepino)", porcion: "1-2 Pocillos" },
+                    { nombre: "Espinaca (cruda/cocida)", porcion: "2 pocillos cruda / 1 cocida" },
+                    { nombre: "Brócoli/Coliflor (cocido al vapor/salteado)", porcion: "1 Pocillo" },
+                    { nombre: "Zanahoria (rallada/en bastones)", porcion: "1/2 Pocillo" },
+                    { nombre: "Pimentón (asado/salteado)", porcion: "1/2 Unidad mediana" },
+                    { nombre: "Calabacín/Berenjena (asado/salteado)", porcion: "1 Pocillo en rodajas/cubos" },
+                    { nombre: "Champiñones (salteados)", porcion: "1 Pocillo" },
+                    { nombre: "Cebolla (en preparaciones)", porcion: "Al gusto, moderado" },
+                    { nombre: "Tomate (en ensalada/guiso)", porcion: "1/2 - 1 unidad mediana"},
+                    { nombre: "Habichuela/Arveja verde (cocida)", porcion: "1/2 Pocillo"}
                 ]
             };
             
-            // Función para obtener un elemento aleatorio de un array
             function getRandomItem(arr) {
-                if (!arr || arr.length === 0) return null;
+                if (!arr || arr.length === 0) return { nombre: "No disponible", porcion: ""}; // Fallback
                 return arr[Math.floor(Math.random() * arr.length)];
             }
 
-            // Función para generar una comida
             function generateMeal(mealType, foodGuide, foodData) {
                 const mealComposition = foodGuide[mealType];
                 if (!mealComposition) return [];
-
                 let mealDetails = [];
-                for (const foodGroup in mealComposition) {
-                    const portionsNeeded = mealComposition[foodGroup];
-                    const availableFoods = foodData[foodGroup];
 
+                for (const foodGroup in mealComposition) {
+                    let portionsNeeded = mealComposition[foodGroup];
+                    if (portionsNeeded === 0) continue; // Skip if 0 portions needed
+
+                    const availableFoods = foodData[foodGroup];
                     if (!availableFoods || availableFoods.length === 0) {
                         console.warn(`No hay alimentos disponibles para el grupo: ${foodGroup}`);
-                        mealDetails.push(`${foodGroup}: No hay opciones disponibles (${portionsNeeded} porción/es)`);
+                        mealDetails.push(`${foodGroup}: (No opciones)`);
                         continue;
                     }
-
-                    for (let i = 0; i < portionsNeeded; i++) {
+                    // Para porciones fraccionadas como 0.5, tomamos una porción completa y se indica que es media.
+                    // Esto es una simplificación; idealmente, se ajustaría la descripción de la porción.
+                    let itemsForGroup = [];
+                    for (let i = 0; i < Math.ceil(portionsNeeded); i++) { // Math.ceil para manejar 0.5
                         const randomFood = getRandomItem(availableFoods);
-                        if (randomFood) {
-                            mealDetails.push(`${randomFood.nombre} (${randomFood.porcion})`);
+                        let foodItemString = `${randomFood.nombre}`;
+                        if (portionsNeeded < 1 && portionsNeeded > 0) { // Si es 0.5
+                             foodItemString += ` (media porción de ${randomFood.porcion})`;
                         } else {
-                             mealDetails.push(`${foodGroup}: Error al seleccionar alimento`);
+                             foodItemString += ` (${randomFood.porcion})`;
                         }
+                        itemsForGroup.push(foodItemString);
+                    }
+                     // Evitar duplicados exactos en el mismo grupo para la misma comida, si es posible
+                    if (portionsNeeded > 1 && itemsForGroup.length > 1) {
+                        let uniqueItems = [...new Set(itemsForGroup)];
+                        // Si después de eliminar duplicados no tenemos suficientes, rellenamos
+                        while(uniqueItems.length < portionsNeeded && availableFoods.length > uniqueItems.length) {
+                            let newItem = getRandomItem(availableFoods);
+                            let newItemString = `${newItem.nombre} (${newItem.porcion})`;
+                            if(!uniqueItems.includes(newItemString)) {
+                                uniqueItems.push(newItemString);
+                            }
+                        }
+                        mealDetails.push(...uniqueItems);
+                    } else {
+                        mealDetails.push(...itemsForGroup);
                     }
                 }
                 return mealDetails;
             }
 
-            // Función para generar el menú de una semana completa
             function generateFullWeeklyMenu() {
                 const daysOfWeek = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
                 const mealTypes = ["Desayuno", "Media Mañana", "Almuerzo", "Media Tarde", "Cena"];
                 let weeklyMenu = {};
-
                 daysOfWeek.forEach(day => {
                     weeklyMenu[day] = {};
                     mealTypes.forEach(mealType => {
@@ -469,39 +559,32 @@
                 return weeklyMenu;
             }
 
-            // Función para mostrar el menú generado en el DOM
             function displayGeneratedMenu(menuData, weekNum) {
-                generatedWeekMenuDiv.innerHTML = ''; // Limpiar menú anterior
+                generatedWeekMenuDiv.innerHTML = ''; 
                 generatedMenuTitleH3.textContent = `Menú Generado para la Semana ${weekNum}`;
-
                 if (!menuData || Object.keys(menuData).length === 0) {
-                    generatedWeekMenuDiv.innerHTML = '<p class="col-span-full text-center text-gray-500">No hay menú para mostrar.</p>';
+                    generatedWeekMenuDiv.innerHTML = '<p class="col-span-full text-center text-gray-500 py-8">No hay menú para mostrar. Intenta generar uno.</p>';
                     return;
                 }
-
                 const daysOrder = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
-                
                 daysOrder.forEach(day => {
                     if (menuData[day]) {
                         const dayMeals = menuData[day];
                         const dayCard = document.createElement('div');
-                        dayCard.className = 'meal-card generated-meal-card bg-white p-5 rounded-xl shadow-lg';
-                        
-                        let cardHTML = `<h3 class="text-2xl font-semibold text-emerald-600 mb-4">${day}</h3><div class="space-y-4 text-sm">`;
-                        
+                        dayCard.className = 'generated-meal-card bg-white p-6 rounded-xl'; // Aumentado padding
+                        let cardHTML = `<h3 class="text-xl sm:text-2xl font-semibold text-emerald-700 mb-5">${day}</h3><div class="space-y-5">`; // Aumentado space-y y mb
                         const mealOrder = ["Desayuno", "Media Mañana", "Almuerzo", "Media Tarde", "Cena"];
                         mealOrder.forEach(mealName => {
                             if (dayMeals[mealName] && dayMeals[mealName].length > 0) {
-                                cardHTML += `<div><h4 class="font-semibold text-emerald-500">${mealName}:</h4><ul class="text-gray-700 list-disc list-inside pl-2">`;
+                                cardHTML += `<div><h4 class="text-emerald-600">${mealName}:</h4><ul>`;
                                 dayMeals[mealName].forEach(item => {
                                     cardHTML += `<li>${item}</li>`;
                                 });
                                 cardHTML += `</ul></div>`;
                             } else {
-                                cardHTML += `<div><h4 class="font-semibold text-emerald-500">${mealName}:</h4><p class="text-gray-700">No asignado.</p></div>`;
+                                cardHTML += `<div><h4 class="text-emerald-600">${mealName}:</h4><p class="text-gray-500 italic text-sm">No asignado o no aplica.</p></div>`;
                             }
                         });
-
                         cardHTML += `</div>`;
                         dayCard.innerHTML = cardHTML;
                         generatedWeekMenuDiv.appendChild(dayCard);
@@ -509,68 +592,64 @@
                 });
             }
 
-            // Función para guardar el menú en localStorage
             function saveMenuToLocalStorage(weekNum, menu) {
                 try {
                     localStorage.setItem(`generatedMenu_week${weekNum}`, JSON.stringify(menu));
                     menuMessageP.textContent = `Menú para la semana ${weekNum} guardado localmente.`;
-                    menuMessageP.className = 'text-center text-green-600 mt-4 font-medium';
+                    menuMessageP.className = 'text-center text-green-600 mt-6 font-medium text-base';
                 } catch (e) {
                     console.error("Error al guardar en localStorage:", e);
                     menuMessageP.textContent = `Error al guardar menú. Es posible que el almacenamiento esté lleno.`;
-                    menuMessageP.className = 'text-center text-red-600 mt-4 font-medium';
+                    menuMessageP.className = 'text-center text-red-600 mt-6 font-medium text-base';
                 }
             }
 
-            // Función para cargar el menú desde localStorage
             function loadMenuFromLocalStorage(weekNum) {
                 const savedMenu = localStorage.getItem(`generatedMenu_week${weekNum}`);
                 if (savedMenu) {
                     menuMessageP.textContent = `Menú para la semana ${weekNum} cargado desde el almacenamiento local.`;
-                    menuMessageP.className = 'text-center text-sky-600 mt-4 font-medium';
+                    menuMessageP.className = 'text-center text-sky-600 mt-6 font-medium text-base';
                     return JSON.parse(savedMenu);
                 }
-                menuMessageP.textContent = `No se encontró menú guardado para la semana ${weekNum}.`;
-                menuMessageP.className = 'text-center text-amber-600 mt-4 font-medium';
+                menuMessageP.textContent = `No se encontró menú guardado para la semana ${weekNum}. Puedes generar uno nuevo.`;
+                menuMessageP.className = 'text-center text-amber-600 mt-6 font-medium text-base';
                 return null;
             }
 
-            // Event Listeners
             generateMenuBtn.addEventListener('click', () => {
                 const weekNum = weekNumberInput.value;
                 if (!weekNum || weekNum < 1) {
-                    menuMessageP.textContent = "Por favor, ingrese un número de semana válido.";
-                    menuMessageP.className = 'text-center text-red-600 mt-4 font-medium';
+                    menuMessageP.textContent = "Por favor, ingrese un número de semana válido (mayor o igual a 1).";
+                    menuMessageP.className = 'text-center text-red-600 mt-6 font-medium text-base';
                     return;
                 }
                 menuMessageP.textContent = `Generando menú para la semana ${weekNum}...`;
-                menuMessageP.className = 'text-center text-emerald-600 mt-4 font-medium';
+                menuMessageP.className = 'text-center text-emerald-600 mt-6 font-medium text-base animate-pulse';
                 
-                // Usar setTimeout para simular carga y permitir que el mensaje se muestre
-                setTimeout(() => {
+                setTimeout(() => { // Simular carga
                     const newMenu = generateFullWeeklyMenu();
                     displayGeneratedMenu(newMenu, weekNum);
                     saveMenuToLocalStorage(weekNum, newMenu);
-                }, 50); // Pequeño retraso para la actualización de la UI
+                    menuMessageP.classList.remove('animate-pulse');
+                }, 150);
             });
 
             loadMenuBtn.addEventListener('click', () => {
                 const weekNum = weekNumberInput.value;
                  if (!weekNum || weekNum < 1) {
                     menuMessageP.textContent = "Por favor, ingrese un número de semana válido para cargar.";
-                    menuMessageP.className = 'text-center text-red-600 mt-4 font-medium';
+                    menuMessageP.className = 'text-center text-red-600 mt-6 font-medium text-base';
                     return;
                 }
                 const loadedMenu = loadMenuFromLocalStorage(weekNum);
                 if (loadedMenu) {
                     displayGeneratedMenu(loadedMenu, weekNum);
                 } else {
-                    generatedWeekMenuDiv.innerHTML = ''; // Limpiar si no hay menú
+                    generatedWeekMenuDiv.innerHTML = '<p class="col-span-full text-center text-gray-500 py-8">No hay menú guardado para esta semana. Intenta generar uno.</p>'; 
                     generatedMenuTitleH3.textContent = '';
                 }
             });
         });
-
     </script>
 </body>
 </html>
