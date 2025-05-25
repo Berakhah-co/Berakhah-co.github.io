@@ -79,33 +79,48 @@ img {
 
 /* --- Banner --- */
 .banner {
-    background-color: var(--color-primary);
-    color: var(--color-surface);
-    padding: 20px 0 40px; /* Increased bottom padding */
+    background-color: var(--color-primary); /* Color de fondo oscuro (casi negro) */
+    color: var(--color-surface); /* Color del texto (blanco) */
+    padding: 25px 0; /* Relleno vertical reducido para un banner más compacto */
     text-align: center;
     position: relative;
+    box-shadow: var(--shadow-md); /* Sombra suave para darle profundidad */
+    display: flex; /* Usamos flexbox para centrar contenido verticalmente si es necesario */
+    justify-content: center; /* Centrar contenido horizontalmente */
+    align-items: center; /* Centrar contenido verticalmente */
+    min-height: 180px; /* Altura mínima para asegurar que no se colapse */
 }
 
 .banner-content {
-    max-width: 700px;
+    max-width: 600px; /* Reducimos el ancho máximo para el contenido principal */
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 20px; /* Relleno horizontal */
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    align-items: center; /* Centra los elementos apilados */
+    gap: 12px; /* Espacio uniforme entre los elementos principales del banner */
 }
 
 .banner .logo {
-    width: 150px; /* Adjusted size */
-    height: 150px;
+    width: 120px; /* Reducido de 150px a 120px */
+    height: 120px;
     border-radius: 50%;
-    margin: 0 auto 15px; /* Centered logo */
-    border: 3px solid var(--color-accent);
-    box-shadow: var(--shadow-md);
+    margin: 0; /* Eliminamos el margen manual aquí para usar 'gap' del flex-container */
+    border: 3px solid var(--color-accent); /* Borde dorado alrededor del logo */
+    box-shadow: 0 0 0 5px rgba(176, 141, 87, 0.1); /* Anillo de sombra sutil alrededor del logo */
+    transition: transform 0.3s ease;
+}
+
+.banner .logo:hover {
+    transform: scale(1.05); /* Efecto de zoom sutil al pasar el mouse */
 }
 
 .banner-text p {
-    font-size: 1.1rem;
-    color: #E0E0E0; /* Lighter text on dark background */
-    margin-bottom: 20px;
+    font-size: 1rem; /* Reducido ligeramente de 1.1rem */
+    color: #DCDCDC; /* Tono de gris un poco más claro para el texto */
+    margin-bottom: 0; /* Controlamos el espacio con 'gap' del flex-container */
     font-family: var(--font-special);
+    line-height: 1.4;
 }
 
 /* Search in Banner */
@@ -113,8 +128,9 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 10px; /* Espacio entre el input y el botón de búsqueda */
+    margin-top: 15px; /* Margen superior para separarlo del texto */
+    width: 100%; /* Asegura que el buscador pueda expandirse si es un item de flexbox */
 }
 
 .buscador input[type="text"] {
@@ -124,14 +140,57 @@ img {
     border-radius: var(--border-radius);
     background-color: var(--color-surface);
     color: var(--color-text);
-    width: 250px; /* Adjust width as needed */
-    transition: border-color var(--transition-speed) ease;
+    width: 250px; /* Ancho fijo para el campo de búsqueda en pantallas grandes */
+    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 
 .buscador input[type="text"]:focus {
     outline: none;
     border-color: var(--color-accent);
     box-shadow: 0 0 0 2px rgba(176, 141, 87, 0.3);
+}
+
+.buscador button {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background-color: var(--color-accent);
+    color: var(--color-surface);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+.buscador button:hover {
+    background-color: var(--color-accent-dark);
+    transform: translateY(-2px);
+}
+
+/* --- Responsive Design para el banner (ajustes específicos) --- */
+@media (max-width: 575px) { /* Extra small devices (portrait phones) */
+    .banner {
+        padding: 20px 0; /* Ajuste para el banner en móvil */
+        min-height: 150px;
+    }
+    .banner .logo {
+        width: 90px; /* Más pequeño para móvil */
+        height: 90px;
+    }
+    .banner-text p {
+        font-size: 0.9rem; /* Texto más pequeño para móvil */
+        padding: 0 10px; /* Un poco de padding horizontal para texto */
+    }
+    .buscador {
+        flex-direction: column; /* Apila el input y el botón del buscador */
+        gap: 8px; /* Espacio entre el input y el botón apilados */
+        padding: 0 20px; /* Relleno lateral para el buscador apilado */
+    }
+    .buscador input[type="text"],
+    .buscador button {
+        width: 100%; /* Ocupan todo el ancho disponible al estar apilados */
+        max-width: 280px; /* Evita que sean demasiado anchos en tabletas pequeñas */
+    }
 }
 
 .buscador button {
