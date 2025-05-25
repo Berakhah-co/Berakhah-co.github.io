@@ -522,26 +522,35 @@ img {
     box-shadow: 0 0 0 2px rgba(176, 141, 87, 0.2);
 }
 
-/* Cart Action Buttons */
+/* Botón Enviar Pedido */
 #btn-pedir {
     width: 100%;
-    margin-bottom: 10px;
-    background-color: var(--color-success);
-    border-color: var(--color-success);
-}
-#btn-pedir:hover {
-    background-color: darken(var(--color-success), 10%);
-    border-color: darken(var(--color-success), 10%);
+    background-color: #6C757D; /* Gris oscuro elegante */
+    color: #FFFFFF;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-top: 0px;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones más suaves */
 }
 
+#btn-pedir:hover {
+    background-color: #495057; /* Un gris ligeramente más oscuro */
+    transform: scale(1.02); /* Efecto de agrandamiento más sutil */
+}
+
+/* Botón Vaciar Carrito */
 #btn-vaciar-carrito {
     width: 100%;
-    background-color: var(--color-danger);
-    border-color: var(--color-danger);
-}
-#btn-vaciar-carrito:hover {
-    background-color: darken(var(--color-danger), 10%);
-    border-color: darken(var(--color-danger), 10%);
+    background-color: #E63946; /* Rojo festivo */
+    color: #FFFFFF;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-top: 3px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
 }
 
 
