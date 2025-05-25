@@ -228,7 +228,7 @@ function enviarPedido() {
     }).then(() => console.log("Correo enviado con éxito")).catch(error => console.log("Error:", error));
 
     // ** Enviar pedido por WhatsApp **
-    const numeroWhatsApp = "+573184818218";
+    const numeroWhatsApp = "+573208042101";
     const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
     window.open(urlWhatsApp, '_blank');
 
