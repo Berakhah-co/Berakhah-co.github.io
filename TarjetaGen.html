@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudio de Diseño de Tarjetas (Versión Corregida)</title>
+    <title>Estudio de Diseño de Tarjetas (Versión Final)</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
@@ -37,29 +37,29 @@
         .result-image { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 1rem; }
         .result-text { font-size: 0.9rem; font-family: 'Segoe UI', sans-serif; }
         .preview-panel { display: flex; justify-content: center; align-items: center; background-color: #f8f8f8; border-radius: 10px; }
-        #image-canvas { width: 550px; height: 550px; background-color: var(--color-fondo); display: flex; justify-content: center; align-items: center; box-sizing: border-box; box-shadow: 0 5px 25px var(--color-sombra); position: relative; padding: 40px; transition: all 0.4s ease-in-out; overflow: hidden; }
+        #image-canvas { width: 550px; height: 550px; background-color: var(--color-fondo); display: flex; justify-content: center; align-items: center; box-sizing: border-box; box-shadow: 0 5px 25px var(--color-sombra); position: relative; overflow: hidden; transition: all 0.4s ease-in-out; padding: 55px; /* Padding generoso para todos los diseños */ }
         #text-container { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-sizing: border-box; z-index: 2; position: relative; }
-        #title-display { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--color-texto); margin-bottom: 1rem; transition: color 0.4s ease; }
-        #body-display { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.6; color: var(--color-texto); white-space: pre-wrap; transition: color 0.4s ease;}
+        #title-display, #body-display { color: var(--color-texto); transition: color 0.4s ease; }
+        #title-display { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
+        #body-display { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.6; white-space: pre-wrap; }
         
-        /* --- Marca de Agua --- */
+        /* Clase para cambiar el color del texto a blanco */
+        .text-on-dark { color: #FFFFFF !important; }
+
         #watermark-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logoblanco.jpg'); background-position: center; background-repeat: no-repeat; background-size: 60%; opacity: 0; z-index: 1; transition: opacity 0.5s ease, background-image 0.1s; }
         #image-canvas.watermark-active #watermark-logo { opacity: 0.06; }
         .frame-negro.watermark-active #watermark-logo { opacity: 0.15; background-image: url('https://i.ibb.co/XzB0tW6/logoblanco-letrasblancas.png'); }
-
-        /* --- MARCOS CSS --- */
-        .frame-clasico { padding: 20px; border: 1px solid var(--color-oro-claro); background-color: var(--color-fondo); }
-        .frame-clasico::before { content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px; border: 2px solid var(--color-oro); z-index: 0; background: transparent; }
-        .frame-artistico { padding: 30px; border: 1px solid var(--color-oro-claro); background-color: var(--color-fondo); }
-        .frame-artistico::before, .frame-artistico::after { content: ''; position: absolute; width: 50px; height: 50px; border-color: var(--color-oro); border-style: solid; z-index: 0; background: transparent; }
-        .frame-artistico::before { top: 15px; left: 15px; border-width: 3px 0 0 3px; }
-        .frame-artistico::after { bottom: 15px; right: 15px; border-width: 0 3px 3px 0; }
-
-        /* --- ESTILO: MARCO NEGRO (CORREGIDO) --- */
-        .frame-negro { padding: 60px; /* Aumentamos el padding */ background-color: black; border: none; }
-        .frame-negro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('https://berakhah.site/marco2.png'); background-size: cover; background-position: center; background-repeat: no-repeat; z-index: 0; }
-        .frame-negro #title-display, .frame-negro #body-display { color: #FFFFFF; }
-
+        
+        /* MARCOS CSS */
+        .frame-clasico { background-color: var(--color-fondo); border: 1px solid var(--color-oro-claro); }
+        .frame-clasico::before { content: ''; position: absolute; top: 25px; left: 25px; right: 25px; bottom: 25px; border: 2px solid var(--color-oro); z-index: 0; background: transparent; }
+        .frame-artistico { background-color: var(--color-fondo); border: 1px solid var(--color-oro-claro); }
+        .frame-artistico::before, .frame-artistico::after { content: ''; position: absolute; width: 60px; height: 60px; border-color: var(--color-oro); border-style: solid; z-index: 0; background: transparent; }
+        .frame-artistico::before { top: 30px; left: 30px; border-width: 3px 0 0 3px; }
+        .frame-artistico::after { bottom: 30px; right: 30px; border-width: 0 3px 3px 0; }
+        .frame-negro { background-color: black; border: none; }
+        .frame-negro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('https://berakhah.site/marco1.png'); background-size: cover; background-position: center; background-repeat: no-repeat; z-index: 0; }
+        
         #print-area { display: none; }
         @media print { body > *:not(#print-area) { display: none !important; } #print-area { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; width: 100%; height: 100%; } .print-card { width: 3in; height: 3in; margin: 0.2in; page-break-inside: avoid; } @page { size: letter; margin: 0.5in; } }
     </style>
@@ -203,10 +203,19 @@
             if (e.target.tagName === 'BUTTON') {
                 styleSelector.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
                 e.target.classList.add('active');
+                
+                const style = e.target.dataset.style;
                 const watermarkClass = imageCanvas.classList.contains('watermark-active') ? 'watermark-active' : '';
-                imageCanvas.className = '';
-                imageCanvas.classList.add(e.target.dataset.style);
-                if (watermarkClass) { imageCanvas.classList.add(watermarkClass); }
+                imageCanvas.className = `${style} ${watermarkClass}`;
+
+                // --- LÓGICA DE COLOR DE TEXTO CORREGIDA ---
+                if (style === 'frame-negro') {
+                    titleDisplay.classList.add('text-on-dark');
+                    bodyDisplay.classList.add('text-on-dark');
+                } else {
+                    titleDisplay.classList.remove('text-on-dark');
+                    bodyDisplay.classList.remove('text-on-dark');
+                }
             }
         });
         
