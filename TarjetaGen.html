@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudio de Diseño de Tarjetas (con Impresión)</title>
+    <title>Estudio de Diseño de Tarjetas (Marco Negro)</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
@@ -24,67 +24,54 @@
         .style-selector button.active { background-color: var(--color-oro); color: white; border-color: var(--color-oro); font-weight: 600; }
         .checkbox-label { display: flex; align-items: center; font-size: 0.9rem; color: #555; cursor: pointer; }
         .checkbox-label input { width: auto; margin-right: 0.75rem; accent-color: var(--color-oro); }
-        
         .action-buttons { display: flex; gap: 1rem; }
         .action-buttons button { flex: 1; margin-top: 1.5rem; }
-
         #downloadBtn { background-image: linear-gradient(45deg, #28a745, #248a38); color: white; width: 100%; border: none; padding: 1rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2); }
         #downloadBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3); }
         #printBtn { background-image: linear-gradient(45deg, #007bff, #0056b3); color: white; width: 100%; border: none; padding: 1rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); }
         #printBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3); }
-        
         #search-results { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); max-height: 300px; overflow-y: auto; z-index: 100; }
         .search-result-item { display: flex; align-items: center; padding: 0.75rem; cursor: pointer; border-bottom: 1px solid #f0f0f0; }
         .search-result-item:last-child { border-bottom: none; }
         .search-result-item:hover { background-color: #f7f7f7; }
         .result-image { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 1rem; }
         .result-text { font-size: 0.9rem; font-family: 'Segoe UI', sans-serif; }
-        
         .preview-panel { display: flex; justify-content: center; align-items: center; background-color: #f8f8f8; border-radius: 10px; }
         #image-canvas { width: 550px; height: 550px; background-color: var(--color-fondo); display: flex; justify-content: center; align-items: center; box-sizing: border-box; box-shadow: 0 5px 25px var(--color-sombra); position: relative; padding: 40px; transition: all 0.4s ease-in-out; overflow: hidden; }
-        #text-container { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-sizing: border-box; z-index: 1; position: relative; }
-        #title-display { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--color-texto); margin-bottom: 1rem; }
-        #body-display { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.6; color: var(--color-texto); white-space: pre-wrap; }
-        #watermark-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logoblanco.jpg'); background-position: center; background-repeat: no-repeat; background-size: 60%; opacity: 0; z-index: 0; transition: opacity 0.5s ease; }
-        #image-canvas.watermark-active #watermark-logo { opacity: 0.06; }
-        .frame-clasico { padding: 20px; border: 1px solid var(--color-oro-claro); }
-        .frame-clasico::before { content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px; border: 2px solid var(--color-oro); z-index: 0; }
-        .frame-artistico { padding: 30px; border: 1px solid var(--color-oro-claro); }
-        .frame-artistico::before, .frame-artistico::after { content: ''; position: absolute; width: 50px; height: 50px; border-color: var(--color-oro); border-style: solid; z-index: 0; }
+        #text-container { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-sizing: border-box; z-index: 2; position: relative; }
+        #title-display { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--color-texto); margin-bottom: 1rem; transition: color 0.4s ease; }
+        #body-display { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.6; color: var(--color-texto); white-space: pre-wrap; transition: color 0.4s ease;}
+        #watermark-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logoblanco.jpg'); background-position: center; background-repeat: no-repeat; background-size: 60%; opacity: 0; z-index: 1; transition: opacity 0.5s ease; filter: brightness(3); }
+        #image-canvas.watermark-active #watermark-logo { opacity: 0.08; }
+        
+        /* --- MARCOS CSS --- */
+        .frame-clasico { padding: 20px; border: 1px solid var(--color-oro-claro); background-color: var(--color-fondo); }
+        .frame-clasico::before { content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px; border: 2px solid var(--color-oro); z-index: 0; background: transparent; }
+        .frame-artistico { padding: 30px; border: 1px solid var(--color-oro-claro); background-color: var(--color-fondo); }
+        .frame-artistico::before, .frame-artistico::after { content: ''; position: absolute; width: 50px; height: 50px; border-color: var(--color-oro); border-style: solid; z-index: 0; background: transparent; }
         .frame-artistico::before { top: 15px; left: 15px; border-width: 3px 0 0 3px; }
         .frame-artistico::after { bottom: 15px; right: 15px; border-width: 0 3px 3px 0; }
-        .frame-monograma { border-radius: 50%; padding: 50px; box-shadow: 0 0 0 3px var(--color-oro), 0 0 30px var(--color-sombra); }
-        .frame-monograma::before { content: ''; position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border: 1px dotted var(--color-oro); border-radius: 50%; z-index: 0; }
-        .frame-clasico::after, .frame-monograma::after, .frame-artistico #text-container::before, .frame-artistico #text-container::after { content: none; }
 
-        /* --- ESTILOS EXCLUSIVOS PARA LA IMPRESIÓN --- */
-        #print-area {
-            display: none; /* Oculto en la vista normal */
+        /* --- NUEVO ESTILO: MARCO NEGRO --- */
+        .frame-negro { padding: 50px; background-color: black; border: none; }
+        .frame-negro::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('https://berakhah.site/marco1.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+        /* Cambia el color del texto cuando el marco negro está activo */
+        .frame-negro #title-display, .frame-negro #body-display {
+            color: #FFFFFF;
         }
 
-        @media print {
-            body > *:not(#print-area) {
-                display: none !important; /* Oculta todo excepto el área de impresión */
-            }
-            #print-area {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                height: 100%;
-            }
-            .print-card {
-                width: 3in; /* Ancho de la tarjeta en la hoja */
-                height: 3in; /* Alto de la tarjeta en la hoja */
-                margin: 0.2in;
-                page-break-inside: avoid; /* Evita que una tarjeta se corte entre páginas */
-            }
-            @page {
-                size: letter; /* Define el tamaño del papel */
-                margin: 0.5in; /* Márgenes de la hoja */
-            }
-        }
+        /* --- ESTILOS PARA IMPRESIÓN --- */
+        #print-area { display: none; }
+        @media print { body > *:not(#print-area) { display: none !important; } #print-area { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; width: 100%; height: 100%; } .print-card { width: 3in; height: 3in; margin: 0.2in; page-break-inside: avoid; } @page { size: letter; margin: 0.5in; } }
     </style>
 </head>
 <body>
@@ -102,7 +89,7 @@
                 <div class="style-selector" id="style-select">
                     <button class="active" data-style="frame-clasico">Dorado Clásico</button>
                     <button data-style="frame-artistico">Marco Artístico</button>
-                    <button data-style="frame-monograma">Monograma</button>
+                    <button data-style="frame-negro">Marco Negro</button>
                 </div>
             </div>
             <div class="control-group">
@@ -135,8 +122,6 @@
             </div>
         </div>
     </div>
-    
-    <!-- Contenedor oculto que se usará para la impresión -->
     <div id="print-area"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -144,6 +129,9 @@
         let productosData = [];
         const productSearch = document.getElementById('product-search');
         const searchResults = document.getElementById('search-results');
+        const imageCanvas = document.getElementById('image-canvas');
+        const titleDisplay = document.getElementById('title-display');
+        const bodyDisplay = document.getElementById('body-display');
 
         document.addEventListener('DOMContentLoaded', () => {
             fetch('index.html')
@@ -219,9 +207,6 @@
         const fontSizeSlider = document.getElementById('fontSizeSlider');
         const styleSelector = document.getElementById('style-select');
         const watermarkToggle = document.getElementById('watermarkToggle');
-        const titleDisplay = document.getElementById('title-display');
-        const bodyDisplay = document.getElementById('body-display');
-        const imageCanvas = document.getElementById('image-canvas');
         const downloadBtn = document.getElementById('downloadBtn');
         const printBtn = document.getElementById('printBtn');
 
@@ -240,7 +225,12 @@
                 styleSelector.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
                 e.target.classList.add('active');
                 const watermarkClass = imageCanvas.classList.contains('watermark-active') ? 'watermark-active' : '';
-                imageCanvas.className = `${e.target.dataset.style} ${watermarkClass}`;
+                // Limpiar clases anteriores y añadir la nueva
+                imageCanvas.className = '';
+                imageCanvas.classList.add(e.target.dataset.style);
+                if (watermarkClass) {
+                    imageCanvas.classList.add(watermarkClass);
+                }
             }
         });
         
@@ -258,26 +248,19 @@
             });
         });
 
-        // --- LÓGICA DE IMPRESIÓN ---
         printBtn.addEventListener('click', function() {
             printBtn.textContent = 'Generando...';
             html2canvas(imageCanvas, { useCORS: true, backgroundColor: null, scale: 2 })
             .then(canvas => {
                 const imageDataUrl = canvas.toDataURL('image/png');
                 const printArea = document.getElementById('print-area');
-                
-                // Limpiar área de impresión anterior
                 printArea.innerHTML = '';
-
-                // Añadir 6 imágenes a la hoja
                 for (let i = 0; i < 6; i++) {
                     const img = document.createElement('img');
                     img.className = 'print-card';
                     img.src = imageDataUrl;
                     printArea.appendChild(img);
                 }
-
-                // Esperar un momento para que las imágenes se carguen en el DOM y luego imprimir
                 setTimeout(() => {
                     window.print();
                     printBtn.textContent = 'Imprimir';
