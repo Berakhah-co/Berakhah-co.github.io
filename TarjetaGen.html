@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudio de Diseño de Tarjetas (Analizador de Catálogo)</title>
+    <title>Estudio de Diseño de Tarjetas (Búsqueda Visual)</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
@@ -15,11 +15,10 @@
         .studio-container { display: grid; grid-template-columns: 360px 1fr; gap: 2.5rem; max-width: 1250px; width: 100%; background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 10px 40px var(--color-sombra); }
         .controls-panel { padding-right: 2.5rem; border-right: 1px solid #e9e9e9; }
         .controls-panel h1 { font-family: 'Playfair Display', serif; color: #333; margin-top: 0; font-size: 2.2rem; }
-        .control-group { margin-bottom: 1.5rem; }
+        .control-group { margin-bottom: 1.5rem; position: relative; } /* Position relative para el contenedor de búsqueda */
         .control-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: #555; }
         input[type="text"], textarea, select { width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s, box-shadow 0.3s; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.1rem; }
         input[type="text"]:focus, textarea:focus, select:focus { outline: none; border-color: var(--color-oro); box-shadow: 0 0 8px rgba(191, 161, 122, 0.4); }
-        select { -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e"); background-position: right 0.5rem center; background-repeat: no-repeat; background-size: 1.5em 1.5em; padding-right: 2.5rem; }
         textarea { height: 120px; resize: vertical; }
         .style-selector button { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; border: 1px solid #ddd; padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; margin-right: 0.5rem; transition: all 0.3s ease; }
         .style-selector button.active { background-color: var(--color-oro); color: white; border-color: var(--color-oro); font-weight: 600; }
@@ -27,6 +26,41 @@
         .checkbox-label input { width: auto; margin-right: 0.75rem; accent-color: var(--color-oro); }
         #downloadBtn { background-image: linear-gradient(45deg, #28a745, #248a38); color: white; width: 100%; border: none; padding: 1rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin-top: 1.5rem; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2); }
         #downloadBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3); }
+        
+        /* --- ESTILOS PARA LA BÚSQUEDA VISUAL --- */
+        #search-results {
+            display: none; /* Oculto por defecto */
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 100;
+        }
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .search-result-item:last-child { border-bottom: none; }
+        .search-result-item:hover { background-color: #f7f7f7; }
+        .result-image {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 1rem;
+        }
+        .result-text { font-size: 0.9rem; font-family: 'Segoe UI', sans-serif; }
+        
+        /* --- Lienzo de Vista Previa y Marcos (sin cambios) --- */
         .preview-panel { display: flex; justify-content: center; align-items: center; background-color: #f8f8f8; border-radius: 10px; }
         #image-canvas { width: 550px; height: 550px; background-color: var(--color-fondo); display: flex; justify-content: center; align-items: center; box-sizing: border-box; box-shadow: 0 5px 25px var(--color-sombra); position: relative; padding: 40px; transition: all 0.4s ease-in-out; overflow: hidden; }
         #text-container { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-sizing: border-box; z-index: 1; position: relative; }
@@ -50,39 +84,44 @@
     <div class="studio-container">
         <div class="controls-panel">
             <h1>Diseña tu Tarjeta</h1>
+            
             <div class="control-group">
-                <label for="product-search">1. Buscar Producto</label>
+                <label for="product-search">1. Buscar y Cargar Producto</label>
                 <input type="text" id="product-search" placeholder="Escribe un código o nombre...">
+                <div id="search-results"></div>
             </div>
+
             <div class="control-group">
-                <label for="product-selector">2. Cargar Producto</label>
-                <select id="product-selector"><option value="">— Analizando catálogo... —</option></select>
-            </div>
-            <div class="control-group">
-                <label for="style-select">3. Elige un Estilo</label>
+                <label for="style-select">2. Elige un Estilo</label>
                 <div class="style-selector" id="style-select">
                     <button class="active" data-style="frame-clasico">Dorado Clásico</button>
                     <button data-style="frame-artistico">Marco Artístico</button>
                     <button data-style="frame-monograma">Monograma</button>
                 </div>
             </div>
+
             <div class="control-group">
-                <label for="titleInput">4. Título</label>
+                <label for="titleInput">3. Título</label>
                 <input type="text" id="titleInput" placeholder="Un Regalo Especial">
             </div>
+
             <div class="control-group">
-                <label for="bodyInput">5. Mensaje Principal</label>
+                <label for="bodyInput">4. Mensaje Principal</label>
                 <textarea id="bodyInput">Este producto fue preparado con especial cuidado para ti. Esperamos que lo disfrutes.</textarea>
             </div>
+
             <div class="control-group">
-                <label for="fontSizeSlider">6. Tamaño del Mensaje</label>
+                <label for="fontSizeSlider">5. Tamaño del Mensaje</label>
                 <input type="range" id="fontSizeSlider" min="16" max="32" value="22" style="width: 100%;">
             </div>
+
             <div class="control-group">
                 <label class="checkbox-label"><input type="checkbox" id="watermarkToggle" checked>Añadir logo como marca de agua</label>
             </div>
+
             <button id="downloadBtn">Descargar Tarjeta</button>
         </div>
+        
         <div class="preview-panel">
             <div id="image-canvas" class="frame-clasico watermark-active">
                 <div id="watermark-logo"></div>
@@ -97,11 +136,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         let productosData = [];
-        const productSelector = document.getElementById('product-selector');
         const productSearch = document.getElementById('product-search');
+        const searchResults = document.getElementById('search-results');
 
         document.addEventListener('DOMContentLoaded', () => {
-            fetch('index.html') // Carga el catálogo principal
+            fetch('index.html')
                 .then(response => {
                     if (!response.ok) throw new Error('No se pudo cargar index.html.');
                     return response.text();
@@ -109,63 +148,72 @@
                 .then(htmlString => {
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(htmlString, 'text/html');
-                    
                     const productElements = doc.querySelectorAll('.producto');
                     
                     productElements.forEach(prodElement => {
                         const titleElement = prodElement.querySelector('h3.titulo-producto');
                         const descriptionContainer = titleElement.nextElementSibling;
+                        const imageElement = prodElement.querySelector('.carousel-images img');
                         
-                        if (titleElement && descriptionContainer) {
+                        if (titleElement && descriptionContainer && imageElement) {
                             const title = titleElement.textContent.trim();
                             const paragraphs = Array.from(descriptionContainer.querySelectorAll('p')).map(p => p.textContent.trim());
                             const description = paragraphs.join('\n\n');
                             const id = title.split(' ').pop();
+                            const imageUrl = imageElement.getAttribute('src').replace(/\\/g, '/'); // Asegura URLs con /
 
-                            productosData.push({ id, title, description });
+                            productosData.push({ id, title, description, imageUrl });
                         }
                     });
-
-                    populateProductSelector(productosData);
+                    productSearch.placeholder = "Busca entre " + productosData.length + " productos...";
                 })
                 .catch(error => {
                     console.error('Error fatal al analizar el catálogo:', error);
-                    productSelector.innerHTML = `<option value="">${error.message}</option>`;
+                    productSearch.placeholder = "Error al cargar productos.";
                 });
         });
 
-        function populateProductSelector(products) {
-            productSelector.innerHTML = '<option value="">— Elige un producto para autocompletar —</option>';
-            products.forEach(producto => {
-                const option = document.createElement('option');
-                option.value = producto.id;
-                option.textContent = `${producto.id} - ${producto.title}`;
-                productSelector.appendChild(option);
-            });
-        }
-        
         productSearch.addEventListener('input', (e) => {
             const searchTerm = e.target.value.toLowerCase();
+            if (!searchTerm) {
+                searchResults.style.display = 'none';
+                return;
+            }
+
             const filteredProducts = productosData.filter(p => 
                 p.id.toLowerCase().includes(searchTerm) || 
                 p.title.toLowerCase().includes(searchTerm)
             );
-            populateProductSelector(filteredProducts);
-        });
-
-        productSelector.addEventListener('change', (e) => {
-            const selectedId = e.target.value;
-            if (selectedId) {
-                const producto = productosData.find(p => p.id === selectedId);
-                if (producto) {
-                    titleInput.value = producto.title;
-                    bodyInput.value = producto.description;
-                    updatePreview();
-                }
+            
+            searchResults.innerHTML = ''; // Limpiar resultados anteriores
+            if (filteredProducts.length > 0) {
+                filteredProducts.forEach(producto => {
+                    const item = document.createElement('div');
+                    item.className = 'search-result-item';
+                    item.innerHTML = `<img src="${producto.imageUrl}" class="result-image"><span class="result-text">${producto.title}</span>`;
+                    item.addEventListener('click', () => {
+                        titleInput.value = producto.title;
+                        bodyInput.value = producto.description;
+                        productSearch.value = producto.title; // Poner el nombre en la barra de búsqueda
+                        searchResults.style.display = 'none'; // Ocultar resultados
+                        updatePreview();
+                    });
+                    searchResults.appendChild(item);
+                });
+                searchResults.style.display = 'block';
+            } else {
+                searchResults.style.display = 'none';
             }
         });
 
-        // El resto del script es el mismo de las versiones anteriores
+        // Ocultar resultados si se hace clic fuera
+        document.addEventListener('click', function(event) {
+            if (!productSearch.contains(event.target)) {
+                searchResults.style.display = 'none';
+            }
+        });
+        
+        // El resto del script es el mismo
         const titleInput = document.getElementById('titleInput');
         const bodyInput = document.getElementById('bodyInput');
         const fontSizeSlider = document.getElementById('fontSizeSlider');
@@ -203,7 +251,7 @@
             html2canvas(imageCanvas, { useCORS: true, backgroundColor: null, scale: 4 })
             .then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'tarjeta-elegante-producto.png';
+                link.download = `tarjeta-${titleInput.value.replace(/ /g, "_")}.png`;
                 link.href = canvas.toDataURL('image/png');
                 link.click();
             });
