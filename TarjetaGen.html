@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio de Diseño de Tarjetas Final</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-oro: #BFA17A;
+            --color-oro-claro: #D7C6B0;
+            --color-fondo: #FDFBF7;
+            --color-texto: #4B4B4B;
+            --color-sombra: rgba(0, 0, 0, 0.07);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f2ef;
+            margin: 0;
+            padding: 2rem;
+            color: var(--color-texto);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .studio-container {
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 2.5rem;
+            max-width: 1250px;
+            width: 100%;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px var(--color-sombra);
+        }
+
+        /* --- Panel de Controles --- */
+        .controls-panel { padding-right: 2.5rem; border-right: 1px solid #e9e9e9; }
+        .controls-panel h1 { font-family: 'Playfair Display', serif; color: #333; margin-top: 0; font-size: 2.2rem; }
+        .control-group { margin-bottom: 1.5rem; }
+        .control-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: #555; }
+        input[type="text"], textarea { width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s, box-shadow 0.3s; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.1rem; }
+        input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--color-oro); box-shadow: 0 0 8px rgba(191, 161, 122, 0.4); }
+        textarea { height: 120px; resize: vertical; }
+        .style-selector button { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; border: 1px solid #ddd; padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; margin-right: 0.5rem; transition: all 0.3s ease; }
+        .style-selector button.active { background-color: var(--color-oro); color: white; border-color: var(--color-oro); font-weight: 600; }
+        .checkbox-label { display: flex; align-items: center; font-size: 0.9rem; color: #555; cursor: pointer; }
+        .checkbox-label input { width: auto; margin-right: 0.75rem; accent-color: var(--color-oro); }
+        #downloadBtn { background-image: linear-gradient(45deg, #28a745, #248a38); color: white; width: 100%; border: none; padding: 1rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin-top: 1.5rem; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2); }
+        #downloadBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3); }
+
+        /* --- Lienzo de Vista Previa --- */
+        .preview-panel { display: flex; justify-content: center; align-items: center; background-color: #f8f8f8; border-radius: 10px; }
+        #image-canvas { width: 550px; height: 550px; background-color: var(--color-fondo); display: flex; justify-content: center; align-items: center; box-sizing: border-box; box-shadow: 0 5px 25px var(--color-sombra); position: relative; padding: 40px; transition: all 0.4s ease-in-out; overflow: hidden; }
+        #text-container { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-sizing: border-box; z-index: 1; position: relative; }
+        #title-display { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--color-texto); margin-bottom: 1rem; }
+        #body-display { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.6; color: var(--color-texto); white-space: pre-wrap; }
+
+        /* --- Marca de Agua --- */
+        #watermark-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://berakhah.site/logoblanco.jpg'); background-position: center; background-repeat: no-repeat; background-size: 60%; opacity: 0; z-index: 0; transition: opacity 0.5s ease; }
+        #image-canvas.watermark-active #watermark-logo { opacity: 0.06; }
+        
+        /* --- MARCOS CSS REFINADOS --- */
+
+        /* Estilo 1: Dorado Clásico (RESTAURADO al diseño de doble línea) */
+        #image-canvas.frame-clasico {
+            padding: 20px;
+            border: 1px solid var(--color-oro-claro);
+        }
+        .frame-clasico::before {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 2px solid var(--color-oro);
+            z-index: 0;
+        }
+
+        /* Estilo 2: Marco Artístico (NUEVO DISEÑO) */
+        #image-canvas.frame-artistico {
+            padding: 30px;
+            border: 1px solid var(--color-oro-claro);
+        }
+        .frame-artistico::before, .frame-artistico::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-color: var(--color-oro);
+            border-style: solid;
+            z-index: 0;
+        }
+        .frame-artistico::before { top: 15px; left: 15px; border-width: 3px 0 0 3px; }
+        .frame-artistico::after { bottom: 15px; right: 15px; border-width: 0 3px 3px 0; }
+
+        /* Estilo 3: Monograma Formal (sin cambios) */
+        #image-canvas.frame-monograma { border-radius: 50%; padding: 50px; box-shadow: 0 0 0 3px var(--color-oro), 0 0 30px var(--color-sombra); }
+        .frame-monograma::before { content: ''; position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border: 1px dotted var(--color-oro); border-radius: 50%; z-index: 0; }
+        
+        /* Limpiamos pseudo-elementos no usados para evitar conflictos */
+        .frame-clasico::after, .frame-monograma::after, .frame-artistico #text-container::before, .frame-artistico #text-container::after { content: none; }
+
+    </style>
+</head>
+<body>
+
+    <div class="studio-container">
+        
+        <div class="controls-panel">
+            <h1>Diseña tu Tarjeta</h1>
+            
+            <div class="control-group">
+                <label for="style-select">1. Elige un Estilo</label>
+                <div class="style-selector" id="style-select">
+                    <button class="active" data-style="frame-clasico">Dorado Clásico</button>
+                    <button data-style="frame-artistico">Marco Artístico</button>
+                    <button data-style="frame-monograma">Monograma</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="titleInput">2. Título (Opcional)</label>
+                <input type="text" id="titleInput" placeholder="Un Regalo Especial">
+            </div>
+
+            <div class="control-group">
+                <label for="bodyInput">3. Mensaje Principal</label>
+                <textarea id="bodyInput">Este producto fue preparado con especial cuidado para ti. Esperamos que lo disfrutes.</textarea>
+            </div>
+
+            <div class="control-group">
+                <label for="fontSizeSlider">4. Tamaño del Mensaje</label>
+                <input type="range" id="fontSizeSlider" min="16" max="32" value="22" style="width: 100%;">
+            </div>
+
+            <div class="control-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="watermarkToggle" checked>
+                    Añadir logo como marca de agua
+                </label>
+            </div>
+
+            <button id="downloadBtn">Descargar Tarjeta</button>
+        </div>
+        
+        <div class="preview-panel">
+            <div id="image-canvas" class="frame-clasico watermark-active">
+                <div id="watermark-logo"></div>
+                <div id="text-container">
+                    <div id="title-display"></div>
+                    <div id="body-display"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        // ... (El código JavaScript no necesita cambios, es el mismo de la versión anterior) ...
+        const titleInput = document.getElementById('titleInput');
+        const bodyInput = document.getElementById('bodyInput');
+        const fontSizeSlider = document.getElementById('fontSizeSlider');
+        const styleSelector = document.getElementById('style-select');
+        const watermarkToggle = document.getElementById('watermarkToggle');
+        
+        const titleDisplay = document.getElementById('title-display');
+        const bodyDisplay = document.getElementById('body-display');
+        const imageCanvas = document.getElementById('image-canvas');
+        
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        function updatePreview() {
+            titleDisplay.innerText = titleInput.value;
+            bodyDisplay.innerText = bodyInput.value;
+            bodyDisplay.style.fontSize = `${fontSizeSlider.value}px`;
+        }
+
+        titleInput.addEventListener('input', updatePreview);
+        bodyInput.addEventListener('input', updatePreview);
+        fontSizeSlider.addEventListener('input', updatePreview);
+
+        styleSelector.addEventListener('click', function(e) {
+            if (e.target.tagName === 'BUTTON') {
+                styleSelector.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                const watermarkClass = imageCanvas.classList.contains('watermark-active') ? 'watermark-active' : '';
+                imageCanvas.className = `${e.target.dataset.style} ${watermarkClass}`;
+            }
+        });
+        
+        watermarkToggle.addEventListener('change', function() {
+            imageCanvas.classList.toggle('watermark-active', this.checked);
+        });
+
+        downloadBtn.addEventListener('click', function() {
+            html2canvas(imageCanvas, {
+                useCORS: true,
+                backgroundColor: null,
+                scale: 4
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'tarjeta-elegante-producto.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        });
+
+        updatePreview();
+    </script>
+
+</body>
+</html>
