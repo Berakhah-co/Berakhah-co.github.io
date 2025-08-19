@@ -23,7 +23,9 @@ function mezclarArray(array) {
       }
   
       // Limpiar el contenedor del catálogo para evitar duplicados
-      contenedor.innerHTML = '';
+      if (contenedor) {
+        contenedor.innerHTML = '';
+      }
   
       // Determinar el array de productos a usar (mezclado u original)
       const productosAMostrar = categoria === 'todo' ? productosAleatorios : productosOriginales;
@@ -32,7 +34,9 @@ function mezclarArray(array) {
       productosAMostrar.forEach(producto => {
           if (categoria === 'todo' || producto.getAttribute('data-categoria') === categoria) {
               producto.style.display = 'block';
-              contenedor.appendChild(producto); // Agregar producto al contenedor
+              if (contenedor) {
+                contenedor.appendChild(producto); // Agregar producto al contenedor
+              }
           } else {
               producto.style.display = 'none';
           }
@@ -48,7 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     mostrarCategoria('todo');
     mostrarCarrito();
-    document.getElementById('btn-pedir').addEventListener('click', enviarPedido);
+    const btnPedir = document.getElementById('btn-pedir');
+    if (btnPedir) {
+        btnPedir.addEventListener('click', enviarPedido);
+    }
 });
 
 // Función para mostrar el carrito y actualizar el contador
@@ -56,6 +63,8 @@ function mostrarCarrito() {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     let listaCarrito = document.getElementById('lista-carrito');
     let totalCarrito = 0;
+    if (!listaCarrito) return; // Salir si el elemento no existe
+    
     listaCarrito.innerHTML = '';
 
     carrito.forEach((producto, index) => {
@@ -76,8 +85,10 @@ function mostrarCarrito() {
     let totalCarritoFormateado = totalCarrito.toLocaleString(undefined, { minimumFractionDigits: 3 });
 
     const totalCarritoElemento = document.getElementById('total-carrito');
-    totalCarritoElemento.innerHTML = `
-        <p class="total"><strong>Total: $${totalCarritoFormateado}</strong></p>`;
+    if (totalCarritoElemento) {
+        totalCarritoElemento.innerHTML = `
+            <p class="total"><strong>Total: $${totalCarritoFormateado}</strong></p>`;
+    }
     
     actualizarContadorCarrito();
 }
@@ -110,12 +121,14 @@ function mostrarNotificacion(nombre) {
 
 // Función para lanzar confeti desde el centro de la pantalla
 function lanzarConfeti() {
-    confetti({
-        particleCount: 100,
-        startVelocity: 30,
-        spread: 360,
-        origin: { x: 0.5, y: 0.5 } // Explota desde el centro de la pantalla
-    });
+    if (typeof confetti === 'function') {
+        confetti({
+            particleCount: 100,
+            startVelocity: 30,
+            spread: 360,
+            origin: { x: 0.5, y: 0.5 } // Explota desde el centro de la pantalla
+        });
+    }
 }
 
 
@@ -164,8 +177,11 @@ function eliminarDelCarrito(index) {
 
 // Función para actualizar el contador del carrito
 function actualizarContadorCarrito() {
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    document.getElementById('contador-carrito').textContent = carrito.length;
+    const contador = document.getElementById('contador-carrito');
+    if (contador) {
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        contador.textContent = carrito.length;
+    }
 }
 
 
@@ -260,23 +276,19 @@ function enviarPedido() {
         }
     });
 
-    document.getElementById('carrito').style.display = 'none';
-
-    confetti({
-        particleCount: 100,
-        startVelocity: 30,
-        spread: 360,
-        origin: { x: 0.5, y: 0.5 }
-    });
+    if (document.getElementById('carrito')) {
+        document.getElementById('carrito').style.display = 'none';
+    }
+    lanzarConfeti();
 }
 
 function cargarDatosCliente() {
     let datosGuardados = JSON.parse(localStorage.getItem('datosCliente'));
     if (datosGuardados) {
-        document.getElementById("nombre-cliente").value = datosGuardados.nombre || "";
-        document.getElementById("correo-cliente").value = datosGuardados.correo || "";
-        document.getElementById("direccion-cliente").value = datosGuardados.direccion || "";
-        document.getElementById("telefono-cliente").value = datosGuardados.telefono || "";
+        if(document.getElementById("nombre-cliente")) document.getElementById("nombre-cliente").value = datosGuardados.nombre || "";
+        if(document.getElementById("correo-cliente")) document.getElementById("correo-cliente").value = datosGuardados.correo || "";
+        if(document.getElementById("direccion-cliente")) document.getElementById("direccion-cliente").value = datosGuardados.direccion || "";
+        if(document.getElementById("telefono-cliente")) document.getElementById("telefono-cliente").value = datosGuardados.telefono || "";
     }
 }
 
@@ -285,16 +297,17 @@ document.addEventListener("DOMContentLoaded", cargarDatosCliente);
 
 
 // Función para vaciar el carrito
-
 function vaciarCarrito() {
     const carritoContenedor = document.getElementById('lista-carrito');
     localStorage.removeItem('carrito');
     mostrarCarrito();
 
-    carritoContenedor.classList.add('animacion-existente');
-    setTimeout(() => {
-        carritoContenedor.classList.remove('animacion-existente');
-    }, 500); // Duración de la animación
+    if (carritoContenedor) {
+        carritoContenedor.classList.add('animacion-existente');
+        setTimeout(() => {
+            carritoContenedor.classList.remove('animacion-existente');
+        }, 500); // Duración de la animación
+    }
 
     Swal.fire({
         title: '¡Carrito Vacío!',
@@ -311,63 +324,70 @@ function vaciarCarrito() {
 
 
 // Añadir el evento al botón de vaciar carrito
-document.getElementById('btn-vaciar-carrito').addEventListener('click', () => {
-    
-    // Cerrar el carrito antes de mostrar la alerta
-    document.getElementById('carrito').style.display = 'none';
-
-    Swal.fire({
-        title: '¿Estás seguro?',
-        text: 'Estás a punto de vaciar tu carrito.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Sí, vaciar',
-        cancelButtonText: 'No, mantener',
-        background: '#333333', // Color oscuro de fondo
-        color: '#D4AF37', // Color dorado para el texto
-    }).then((result) => {
-        if (result.isConfirmed) {
-            vaciarCarrito(); // Llama a la función de vaciar el carrito si el usuario confirma
-        } else {
-            // Si el usuario cancela, puedes volver a mostrar el carrito si es necesario
-            document.getElementById('carrito').style.display = 'block';
+const btnVaciar = document.getElementById('btn-vaciar-carrito');
+if (btnVaciar) {
+    btnVaciar.addEventListener('click', () => {
+        
+        // Cerrar el carrito antes de mostrar la alerta
+        if (document.getElementById('carrito')) {
+            document.getElementById('carrito').style.display = 'none';
         }
+
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'Estás a punto de vaciar tu carrito.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, vaciar',
+            cancelButtonText: 'No, mantener',
+            background: '#333333', // Color oscuro de fondo
+            color: '#D4AF37', // Color dorado para el texto
+        }).then((result) => {
+            if (result.isConfirmed) {
+                vaciarCarrito(); // Llama a la función de vaciar el carrito si el usuario confirma
+            } else {
+                // Si el usuario cancela, puedes volver a mostrar el carrito si es necesario
+                if (document.getElementById('carrito')) {
+                    document.getElementById('carrito').style.display = 'block';
+                }
+            }
+        });
     });
-});
+}
 
 // Selecciona el contenedor del carrito
 const carritoContenedor = document.getElementById('carrito');
 const productos = document.querySelectorAll('.producto'); // Selecciona todos los contenedores de productos
-const btnCerrarCarrito = document.getElementById('cerrar-carrito');
 
 // Función para mostrar u ocultar el carrito
 function toggleCarrito() {
     let carrito = document.getElementById('carrito');
-    carrito.style.display = carrito.style.display === 'none' ? 'block' : 'none';
-    
+    if (carrito) {
+        carrito.style.display = carrito.style.display === 'none' || carrito.style.display === '' ? 'block' : 'none';
+    }
 }
 // evento para mostrar u ocultar el carrito con la X
-document.getElementById('cerrar-carrito').addEventListener('click', toggleCarrito);
+const cerrarCarritoBtn = document.getElementById('cerrar-carrito');
+if (cerrarCarritoBtn) {
+    cerrarCarritoBtn.addEventListener('click', toggleCarrito);
+}
 
 // Función para verificar si el carrito está abierto
 function isCarritoAbierto() {
-    return carritoContenedor.style.display === 'block';
+    return carritoContenedor && carritoContenedor.style.display === 'block';
 }
 
 // Evento para cerrar el carrito al hacer clic en cualquier contenedor de producto
 productos.forEach(producto => {
     producto.addEventListener('click', (event) => {
         if (isCarritoAbierto()) {
-            carritoContenedor.style.display = 'none'; // Cierra el carrito
+            if (carritoContenedor) {
+                carritoContenedor.style.display = 'none'; // Cierra el carrito
+            }
         }
     });
 });
 
-// Cargar el contador al iniciar la página
-document.addEventListener('DOMContentLoaded', () => {
-    mostrarCarrito();
-    document.getElementById('btn-pedir').addEventListener('click', enviarPedido);
-});
 
 // Función para filtrar productos por categoría
 function filtrarCategoria(categoria) {
@@ -379,7 +399,10 @@ function filtrarCategoria(categoria) {
 
 // Función para filtrar productos por nombre
 function buscarProducto() {
-    const terminoBusqueda = document.getElementById('campo-busqueda').value.toLowerCase();
+    const campoBusqueda = document.getElementById('campo-busqueda');
+    if (!campoBusqueda) return;
+    
+    const terminoBusqueda = campoBusqueda.value.toLowerCase();
     const productos = document.querySelectorAll('.producto');
     
     productos.forEach(producto => {
@@ -393,24 +416,34 @@ function buscarProducto() {
 }
 
 // Añadir el evento al botón de búsqueda
-document.getElementById('btn-buscar').addEventListener('click', buscarProducto);
+const btnBuscar = document.getElementById('btn-buscar');
+if (btnBuscar) {
+    btnBuscar.addEventListener('click', buscarProducto);
+}
 
 // Opcional: permitir búsqueda al presionar "Enter" en el campo de búsqueda
-document.getElementById('campo-busqueda').addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-        buscarProducto();
-    }
-});
+const campoBusqueda = document.getElementById('campo-busqueda');
+if (campoBusqueda) {
+    campoBusqueda.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            buscarProducto();
+        }
+    });
+}
 
 // JavaScript para cambiar las imágenes del carrusel de forma independiente
 function changeImage(step, carouselId) {
     const carousel = document.getElementById(carouselId);
+    if (!carousel) return;
+
     const images = carousel.querySelectorAll('.carousel-images img');
     let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
     
-    images[currentIndex].classList.remove('active');
-    currentIndex = (currentIndex + step + images.length) % images.length;
-    images[currentIndex].classList.add('active');
+    if (currentIndex !== -1) {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + step + images.length) % images.length;
+        images[currentIndex].classList.add('active');
+    }
 }
 
 // Movimiento automático en el carrusel
@@ -422,75 +455,101 @@ document.addEventListener('DOMContentLoaded', function () {
     // Función para mostrar la siguiente imagen en cada carousel
     function showNextImage(carousel) {
         const images = carousel.querySelectorAll('img');
+        if (images.length === 0) return;
         let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
 
-        // Remueve la clase 'active' de la imagen actual
-        images[currentIndex].classList.remove('active');
-
-        // Incrementa el índice de la imagen, volviendo a 0 si llega al final
-        currentIndex = (currentIndex + 1) % images.length;
-
-        // Añade la clase 'active' a la nueva imagen
-        images[currentIndex].classList.add('active');
+        if (currentIndex !== -1) {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+        }
     }
 
-    // Función para iniciar el ciclo automático de cambio de imágenes
     function startCarousel() {
+        stopCarousel(); // Asegurarse de que no haya intervalos duplicados
         intervalID = setInterval(() => {
             carousels.forEach(carousel => showNextImage(carousel));
         }, intervalTime);
     }
 
-    // Función para detener el ciclo automático
     function stopCarousel() {
         clearInterval(intervalID);
     }
 
-    // Inicia el carrusel automáticamente
     startCarousel();
 
-    // Detectar cuando el usuario cambia las imágenes manualmente
     carousels.forEach(carousel => {
         const prevButton = carousel.parentElement.querySelector('.carousel-button.prev');
         const nextButton = carousel.parentElement.querySelector('.carousel-button.next');
-
-        // Detener el carrusel si el usuario hace clic en los botones
-        prevButton.addEventListener('click', () => {
-            stopCarousel(); // Detener el cambio automático
-        });
-
-        nextButton.addEventListener('click', () => {
-            stopCarousel(); // Detener el cambio automático
-        });
-
-        // Detener también si el usuario desliza imágenes (en dispositivos táctiles)
-        carousel.addEventListener('touchstart', () => {
-            stopCarousel(); // Detener el cambio automático
-        });
+        if(prevButton) prevButton.addEventListener('click', stopCarousel);
+        if(nextButton) nextButton.addEventListener('click', stopCarousel);
+        carousel.addEventListener('touchstart', stopCarousel);
     });
 });
 
 document.addEventListener('DOMContentLoaded', function () {
     const productos = document.querySelectorAll('.producto');
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+        productos.forEach(producto => {
+            observer.observe(producto);
         });
-    }, { threshold: 0.1 });
-
-    productos.forEach(producto => {
-        observer.observe(producto);
-    });
+    }
 });
 
 
 // Desplazar suavemente al inicio de la página al hacer clic en el botón
-document.getElementById('btn-volver-inicio').addEventListener('click', function () {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+const btnVolverInicio = document.getElementById('btn-volver-inicio');
+if (btnVolverInicio) {
+    btnVolverInicio.addEventListener('click', function () {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
-});
+}
+
+// =======================================================================
+// === CÓDIGO PARA EL ACCESO DIRECTO SECRETO AL PANEL DE ADMINISTRACIÓN ===
+// =======================================================================
+
+(function() {
+    // 1. Define tu palabra secreta y la URL de tu panel de edición.
+    // ¡Puedes cambiar 'admin' por la palabra que quieras!
+    const secretCode = 'admin'; 
+    const adminUrl = 'https://berakhahmedellin.pythonanywhere.com/';
+
+    // 2. Esta variable guardará las teclas que el usuario va presionando.
+    let userSequence = [];
+
+    // 3. Escucha cada vez que el usuario presiona una tecla en cualquier parte de la página.
+    document.addEventListener('keydown', function(event) {
+        
+        // Añade la tecla presionada (en minúscula) a la secuencia del usuario.
+        userSequence.push(event.key.toLowerCase());
+
+        // 4. Mantiene la secuencia del usuario con la misma longitud que el código secreto.
+        // Si el usuario escribe "holaadmin", la secuencia se irá recortando hasta quedar solo "admin".
+        if (userSequence.length > secretCode.length) {
+            userSequence.shift(); // Elimina la primera tecla (la más antigua)
+        }
+
+        // 5. Comprueba si la secuencia actual del usuario coincide con el código secreto.
+        if (userSequence.join('') === secretCode) {
+            
+            // Si coincide, muestra un mensaje en la consola (opcional, para depuración)
+            console.log('Acceso secreto activado. Redirigiendo al panel de administración...');
+
+            // ¡Redirige al usuario a la página de edición!
+            window.location.href = adminUrl;
+        }
+    });
+
+})(); // La función se auto-ejecuta para no contaminar otras variables.
