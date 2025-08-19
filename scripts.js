@@ -118,29 +118,41 @@ function lanzarConfeti() {
     });
 }
 
-// Función para agregar productos al carrito y mostrar la notificación con confeti
-function agregarAlCarrito(nombre, precio, imagenURL) {
-    const imagenProducto = document.querySelector(`[alt='${nombre}']`)?.src || '';
-    const rutaImagen = imagenProducto.split('/').slice(-2).join('/');
-    const urlCompletaImagen = `https://berakhah.site/${rutaImagen}`;
 
+// =======================================================================
+// === FUNCIÓN CORREGIDA ===
+// =======================================================================
+function agregarAlCarrito(nombre, precio) {
+    // 1. Encuentra el elemento de la imagen del producto en la página.
+    //    Usamos el atributo 'alt', que debe coincidir con el nombre del producto.
+    const imagenProducto = document.querySelector(`img[alt='${nombre}']`);
+
+    // 2. Obtenemos la URL COMPLETA y CORRECTA directamente del atributo 'src'.
+    //    Si por alguna razón la imagen no se encuentra, usamos una cadena vacía como respaldo.
+    const urlCompletaImagen = imagenProducto ? imagenProducto.src : '';
+
+    // 3. Obtenemos el carrito actual desde el almacenamiento local.
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-    // Agregar el producto al carrito sin verificar si ya existe
+    // 4. Agregamos el nuevo producto al carrito con la URL de imagen correcta.
     carrito.push({ nombre, precio, imagen: urlCompletaImagen });
 
-    // Guardar el carrito actualizado
+    // 5. Guardamos el carrito actualizado de vuelta en el almacenamiento local.
     localStorage.setItem('carrito', JSON.stringify(carrito));
 
-    // Actualizar la vista del carrito
+    // 6. Actualizamos la vista del carrito en la página.
     mostrarCarrito();
 
-    // Mostrar notificación
+    // 7. Mostramos la notificación de éxito.
     mostrarNotificacion(nombre);
 
-    // Lanzar confeti
+    // 8. Lanzamos el confeti.
     lanzarConfeti();
 }
+// =======================================================================
+// === FIN DE LA FUNCIÓN CORREGIDA ===
+// =======================================================================
+
 
 // Función para eliminar un producto del carrito y actualizar el contador
 function eliminarDelCarrito(index) {
