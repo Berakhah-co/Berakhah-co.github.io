@@ -1,715 +1,2332 @@
-
 <!DOCTYPE html>
-
-<body class="es"></body>
-<html lang="es">
-<head>
-<link href="iconos/Logo.ico" rel="icon" type="image/x-icon"/>
-<title>Berakhah Valle Of Blesing</title>
-<link href="Logo.jpg" rel="icon" type="image/png"/>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Catálogo de Productos - Berakhah</title>
-<meta content="Descubre nuestra colección de joyería fina y accesorios personalizados. Ofrecemos collares, pulseras y anillos únicos, perfectos para regalar en ocasiones especiales." name="description"/>
-<meta content="joyería artesanal, collares elegantes, pulseras de moda, anillos únicos, joyería personalizada, regalos especiales, joyas hechas a mano, accesorios modernos, joyas de alta calidad, collares de plata, joyería de lujo, joyas para regalar, regalos para ella, joyas femeninas, collares con significado, anillos de compromiso, joyas con estilo, joyería minimalista, pulseras delicadas, joyas exclusivas, joyería para ocasiones especiales, detalles elegantes, joyería para mujer, collares para regalo, regalos originales, accesorios elegantes, pulseras modernas, joyería fina, joyas para aniversario, accesorios personalizados, collares para mujer, joyas para todos los días, detalles únicos, joyas de moda, joyería creativa, joyas con encanto, pulseras elegantes, joyería de diseño, regalos únicos, collares delicados, anillos elegantes, joyería sofisticada, joyas de alta gama, collares de oro, pulseras ajustables, joyas perfectas para regalar" name="keywords"/>
-<link href="styles.css" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4/dist/fancybox.css" rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4/dist/fancybox.umd.js"></script>
-</head>
-<body>
-<!-- Banner -->
-<header class="banner">
-<div class="banner-content">
-<img alt="Logo de Berakhah" class="logo" src="Logo.jpg"/>
-<div class="banner-text">
-<p>En Berakhah encontrarás accesorios con significado y propósito. 💖 ¿Ya tienes el tuyo?</p>
-</div>
-<!-- Campo de búsqueda -->
-<div class="buscador">
-<input id="campo-busqueda" placeholder="Buscar por codigo" type="text"/>
-<button class="button" id="btn-buscar">Buscar</button>
-</div>
-</div>
-</header>
-<!-- Categorías -->
-<div class="categorias">
-<button onclick="mostrarCategoria('todo')">Todo</button>
-<button onclick="mostrarCategoria('collares')">Collares</button>
-<button onclick="mostrarCategoria('pulseras')">Pulseras</button>
-<button onclick="mostrarCategoria('anillos')">Anillos</button>
-<button onclick="mostrarCategoria('zarcillos')">Zarcillos</button>
-<button onclick="mostrarCategoria('caballeros')">Caballeros</button>
-</div>
-<!-- Catálogo de Productos -->
-<main class="catalogo" id="catalogo">
-<!-- Categoria: collares - Producto: Collar Berakhah B-25 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-25"><div class="carousel-images"><a data-caption="Collar Berakhah B-25" data-fancybox="gallery-Collar Berakhah B-25" href="images/collares/b9fb326a-3ffa-4b5d-8125-af490a570075.jpg"><img alt="Collar Berakhah B-25" class="active" src="images/collares/b9fb326a-3ffa-4b5d-8125-af490a570075.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-25')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-25')">❯</button></div>
-<h3 class="titulo-producto">Collar Berakhah B-25</h3><p>Esta pulsera dorada, con un delicado dije que une la palabra “Fe” y un corazón, es un símbolo de confianza absoluta en el cuidado divino. Inspirada en Isaías 41:13 — “Porque yo Jehová soy tu Dios, quien te sostiene de tu mano derecha…” — esta joya representa la ternura con la que Dios nos guía, nos fortalece y nos recuerda que nunca estamos solos.</p><p>El diseño combina elegancia con significado profundo, ideal para quienes desean llevar consigo un recordatorio constante de que, incluso en los momentos de incertidumbre, hay una mano celestial que sostiene la suya. Perfecta para regalar a alguien que necesita ánimo, o para reafirmar tu propia fe en el amor que no falla</p>
-<div></div>
-<p class="precio">$47.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-25', 47.999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Collar Berakhah B-19 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-19"><div class="carousel-images"><a data-caption="Collar Berakhah B-19" data-fancybox="gallery-Collar Berakhah B-19" href="images/collares/d4428e27-236a-4803-84cd-72c9b834eec0.jpg"><img alt="Collar Berakhah B-19" class="active" src="images/collares/d4428e27-236a-4803-84cd-72c9b834eec0.jpg"/></a><a data-caption="Collar Berakhah B-19" data-fancybox="gallery-Collar Berakhah B-19" href="images/collares/9a4c6755-6f2e-480f-afd3-a9448d7d5949.jpg"><img alt="Collar Berakhah B-19" src="images/collares/9a4c6755-6f2e-480f-afd3-a9448d7d5949.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-19')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-19')">❯</button></div>
-<h3 class="titulo-producto">Collar Berakhah B-19</h3>
-<div><p>Este collar dorado con dije de guitarra, realzado con brillantes incrustados, es una celebración de la fe que se expresa en melodía. Inspirado en Salmo 108:1 — “Mi corazón está confiado en ti, oh Dios; no puedo evitar cantar tus alabanzas.” — esta pieza simboliza el gozo que brota del alma cuando se vive con confianza en Dios.</p><p>La guitarra, emblema de expresión y armonía, se convierte aquí en un recordatorio de que cada nota, cada paso, cada día puede ser una alabanza. Perfecto para músicos, adoradores o cualquier persona que encuentra en la música una forma de conectar con lo divino.</p></div>
-<p class="precio">$0</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-19', 0)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Collar Berakhah B-16 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-16"><div class="carousel-images"><a data-caption="Collar Berakhah B-16" data-fancybox="gallery-Collar Berakhah B-16" href="images/collares/b9b0923f-04a3-4fe3-b85c-df374dde3bc6 (1).jpg"><img alt="Collar Berakhah B-16" class="active" src="images/collares/b9b0923f-04a3-4fe3-b85c-df374dde3bc6 (1).jpg"/></a><a data-caption="Collar Berakhah B-16" data-fancybox="gallery-Collar Berakhah B-16" href="images/collares/ae0d31db-63f2-4b0d-814d-1493dde6d3d3 (2).jpg"><img alt="Collar Berakhah B-16" src="images/collares/ae0d31db-63f2-4b0d-814d-1493dde6d3d3 (2).jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-16')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-16')">❯</button></div>
-<h3 class="titulo-producto">Collar Berakhah B-16</h3>
-<div><p>Este collar dorado con dije de avión evoca la fuerza y la esperanza que vienen de confiar plenamente en Dios. Inspirado en Isaías 40:31 — “Pero los que confían en el Señor renovarán sus fuerzas; volarán como las águilas…” — este accesorio simboliza el impulso divino que nos eleva por encima de los desafíos.</p><p>Con su diseño elegante y su mensaje poderoso, es perfecto para quienes creen que la fe es el motor que los lleva más alto, más lejos, sin cansancio ni temor. Ideal para regalar a soñadores, viajeros y creyentes que saben que cada vuelo comienza con confianza.</p><p>¿Quieres que te prepare otra descripción para otro producto? Estoy listo para despegar contigo 🛫</p></div>
-<p class="precio">$0</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-16', 0)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Collar Berakhah B-18 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-18"><div class="carousel-images"><a data-caption="Collar Berakhah B-18" data-fancybox="gallery-Collar Berakhah B-18" href="images/collares/6d5b75ce-cb12-4508-a522-044cbe262565.jpg"><img alt="Collar Berakhah B-18" class="active" src="images/collares/6d5b75ce-cb12-4508-a522-044cbe262565.jpg"/></a><a data-caption="Collar Berakhah B-18" data-fancybox="gallery-Collar Berakhah B-18" href="images/collares/ac3922de-7333-49ec-a4ae-9152caa88224.jpg"><img alt="Collar Berakhah B-18" src="images/collares/ac3922de-7333-49ec-a4ae-9152caa88224.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-18')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-18')">❯</button></div>
-<h3 class="titulo-producto">Collar Berakhah B-18</h3>
-<div><p>Este collar dorado, de diseño sobrio y elegante, representa la serenidad que nace de una fe constante. Inspirado en Isaías 26:3 — “Tú guardarás en perfecta paz a aquel cuyo pensamiento en ti persevera…” — este accesorio es un recordatorio tangible de que la verdadera paz no viene del mundo, sino de confiar plenamente en Dios.</p><p>Ideal para quienes buscan equilibrio en medio del caos, y desean llevar cerca del corazón una promesa de calma, firmeza y confianza divina. Un detalle perfecto para regalar a alguien que vive con fe inquebrantable o que necesita recordar que la paz está al alcance de quien persevera.</p></div>
-<p class="precio">$0</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-18', 0)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Collar Berakhah B-24 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-24"><div class="carousel-images"><a data-caption="Collar Berakhah B-24" data-fancybox="gallery-Collar Berakhah B-24" href="Collares\B24.jpg"><img alt="Collar Berakhah B-24" class="active" src="Collares\B24.jpg"/></a><a data-caption="Collar Berakhah B-24" data-fancybox="gallery-Collar Berakhah B-24" href="Pulseras\B25.jpg"><img alt="Collar Berakhah B-24" src="Pulseras\B25.jpg"/></a><a data-caption="Collar Berakhah B-24" data-fancybox="gallery-Collar Berakhah B-24" href="Collares\B24-2.jpg"><img alt="Collar Berakhah B-24" src="Collares\B24-2.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-24')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-24')">❯</button></div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-24')">Collar Berakhah B-24</h3><p>Este juego de collar y pulsera dorados, con delicados dijes grabados con la palabra “Dios”, es una expresión de fe que se lleva con elegancia y propósito. Inspirado en Salmos 91:2 — “Diré yo a Jehová: Esperanza mía, y castillo mío; mi Dios, en él confiaré.” — cada pieza transmite la seguridad de estar bajo la protección divina.</p><p>Diseñado para quienes confían plenamente en el poder de Dios, este set es ideal para acompañarte en tu día a día como un recordatorio constante de fortaleza, refugio y esperanza. Perfecto para regalar a alguien que camina con fe o para reafirmar tu propia confianza en el amor que nunca falla</p>
-<div></div>
-<p class="precio">$61.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-24', 61.999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Collar Berakhah B-46 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-46"><div class="carousel-images"><a data-caption="Collar Berakhah B-46" data-fancybox="gallery-Collar Berakhah B-46" href="Collares\B46.jpg"><img alt="Collar Berakhah B-46" class="active" src="Collares\B46.jpg"/></a><a data-caption="Collar Berakhah B-46" data-fancybox="gallery-Collar Berakhah B-46" href="Collares\B46-2.jpg"><img alt="Collar Berakhah B-46" src="Collares\B46-2.jpg"/></a><a data-caption="Collar Berakhah B-46" data-fancybox="gallery-Collar Berakhah B-46" href="Collares\B46-1.jpg"><img alt="Collar Berakhah B-46" src="Collares\B46-1.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-46')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-46')">❯</button></div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-46')">Collar Berakhah B-46</h3>
-<div><p>Este elegante collar dorado presenta un dije del mundo con un avión volando sobre él, simbolizando la fe para alcanzar grandes destinos. Inspirado en Mateo 21:22: "Y todo lo que pidiereis en oración, creyendo, lo recibiréis." </p><p>Un accesorio perfecto para quienes confían en sus sueños y en la guía divina en cada viaje.</p></div>
-<p class="precio">$31.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-46', 31.999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Collar Berakhah B-42 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-42"><div class="carousel-images"><a data-caption="Collar Berakhah B-42" data-fancybox="gallery-Collar Berakhah B-42" href="Collares\B42.jpg"><img alt="Collar Berakhah B-42" class="active" src="Collares\B42.jpg"/></a><a data-caption="Collar Berakhah B-42" data-fancybox="gallery-Collar Berakhah B-42" href="Collares\B42-1.jpg"><img alt="Collar Berakhah B-42" src="Collares\B42-1.jpg"/></a><a data-caption="Collar Berakhah B-42" data-fancybox="gallery-Collar Berakhah B-42" href="Collares\B42-2.jpg"><img alt="Collar Berakhah B-42" src="Collares\B42-2.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-42')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-42')">❯</button></div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-42')">Collar Berakhah B-42</h3><p>Este hermoso collar de perlas doradas y blancas simboliza la valentía y fortaleza que provienen de confiar en Dios. Inspirado en Salmos 31:24: "Todos ustedes, los que confían en Dios, ¡anímense y sean valientes!" </p><p>Es un accesorio elegante que refleja el coraje y la fe en cada paso de tu camino.</p>
-<div></div>
-<p class="precio">$41.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-42', 41.999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Collar Berakhah B-62 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-62"><div class="carousel-images"><a data-caption="Collar Berakhah B-62" data-fancybox="gallery-Collar Berakhah B-62" href="Collares\B62.jpg"><img alt="Collar Berakhah B-62" class="active" src="Collares\B62.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-62')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-62')">❯</button></div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-62')">Collar Berakhah B-62</h3><p>Este collar dorado con un elegante dije en forma de cruz y brillantes en su interior simboliza valor y firmeza frente a las adversidades.</p><p>Inspirado en Deuteronomio 31:6: "Tengan valor y firmeza; no tengan miedo ni se asusten cuando se enfrenten con ellas, porque el Señor su Dios está con ustedes y no los dejará ni los abandonará." Este accesorio es un recordatorio constante de la presencia y fortaleza que Dios brinda.</p>
-<div></div>
-<p class="precio">$34.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-62', 34.999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Collar Berakhah B-61 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-61"><div class="carousel-images"><a data-caption="Collar Berakhah B-61" data-fancybox="gallery-Collar Berakhah B-61" href="Collares\B61-1.jpg"><img alt="Collar Berakhah B-61" class="active" src="Collares\B61-1.jpg"/></a><a data-caption="Collar Berakhah B-61" data-fancybox="gallery-Collar Berakhah B-61" href="Collares\B61.jpg"><img alt="Collar Berakhah B-61" src="Collares\B61.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-61')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-61')">❯</button></div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-61')">Collar Berakhah B-61</h3>
-<div><p>Inspirado en Salmos 121:8: «Jehová guardará tu salida y tu entrada desde ahora y para siempre,»</p><p>Este collar dorado con un delicado dije en forma de avión simboliza la protección y guía divina en cada trayecto de la vida. Perfecto para quienes buscan llevar consigo un recordatorio de la seguridad que Dios provee en todos sus caminos.</p></div>
-<p class="precio">$31.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-61', 31.999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Collar Berakhah B-60 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-60"><div class="carousel-images"><a data-caption="Collar Berakhah B-60" data-fancybox="gallery-Collar Berakhah B-60" href="Collares\B60-1.jpg"><img alt="Collar Berakhah B-60" class="active" src="Collares\B60-1.jpg"/></a><a data-caption="Collar Berakhah B-60" data-fancybox="gallery-Collar Berakhah B-60" href="Collares\B60.jpg"><img alt="Collar Berakhah B-60" src="Collares\B60.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-60')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-60')">❯</button></div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-60')">Collar Berakhah B-60</h3>
-<div><p>Este collar dorado, inspirado en Salmos 1:3: «Será como árbol plantado junto a corrientes de aguas, que da su fruto en su tiempo, y su hoja no cae; y todo lo que hace, prosperará,»</p><p>Presenta un diseño en forma de árbol con hojas adornadas de brillantes. Es un símbolo de crecimiento, estabilidad y prosperidad, ideal para quienes desean llevar consigo un recordatorio de la abundancia que Dios promete.</p></div>
-<p class="precio">$26.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-60', 26.999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Collar Berakhah B-59 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-59"><div class="carousel-images"><a data-caption="Collar Berakhah B-59" data-fancybox="gallery-Collar Berakhah B-59" href="Collares\B59.jpg"><img alt="Collar Berakhah B-59" class="active" src="Collares\B59.jpg"/></a><a data-caption="Collar Berakhah B-59" data-fancybox="gallery-Collar Berakhah B-59" href="Collares\B59-3.jpg"><img alt="Collar Berakhah B-59" src="Collares\B59-3.jpg"/></a><a data-caption="Collar Berakhah B-59" data-fancybox="gallery-Collar Berakhah B-59" href="Collares\B59-2.jpg"><img alt="Collar Berakhah B-59" src="Collares\B59-2.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-59')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-59')">❯</button></div>
-<h3 class="titulo-producto">Collar Berakhah B-59</h3>
-<div><p>La Gargantilla Amor Eterno está inspirada en Proverbios 8:17: «Yo amo a los que me aman, y me hallan los que temprano me buscan.» </p><p>Esta delicada pieza dorada está formada por corazones entrelazados, representando el amor divino y constante. Es un accesorio elegante que recuerda la belleza del amor que Dios tiene hacia aquellos que lo buscan sinceramente.</p></div>
-<p class="precio">$49.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-59', 49.999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Collar Berakhah B-58 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-58"><div class="carousel-images"><a data-caption="Collar Berakhah B-58" data-fancybox="gallery-Collar Berakhah B-58" href="Collares\B58.jpg"><img alt="Collar Berakhah B-58" class="active" src="Collares\B58.jpg"/></a><a data-caption="Collar Berakhah B-58" data-fancybox="gallery-Collar Berakhah B-58" href="Collares\B58-1.jpg"><img alt="Collar Berakhah B-58" src="Collares\B58-1.jpg"/></a><a data-caption="Collar Berakhah B-58" data-fancybox="gallery-Collar Berakhah B-58" href="Collares\B58-2.jpg"><img alt="Collar Berakhah B-58" src="Collares\B58-2.jpg"/></a><a data-caption="Collar Berakhah B-58" data-fancybox="gallery-Collar Berakhah B-58" href="Collares\B58-3.jpg"><img alt="Collar Berakhah B-58" src="Collares\B58-3.jpg"/></a><a data-caption="Collar Berakhah B-58" data-fancybox="gallery-Collar Berakhah B-58" href="Collares\B58-4.jpg"><img alt="Collar Berakhah B-58" src="Collares\B58-4.jpg"/></a><a data-caption="Collar Berakhah B-58" data-fancybox="gallery-Collar Berakhah B-58" href="Collares\B58-5.jpg"><img alt="Collar Berakhah B-58" src="Collares\B58-5.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-58')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-58')">❯</button></div>
-<h3 class="titulo-producto">Collar Berakhah B-58</h3>
-<div><p>El Set de Collares Luz del Día y Noche está inspirado en Génesis 1:16: «E hizo Dios las dos grandes lumbreras, la lumbrera mayor para dominio del día y la lumbrera menor para dominio de la noche; hizo también las estrellas.» </p><p>Este conjunto de dos collares dorados simboliza la unión perfecta del sol y la luna, representando el equilibrio y la conexión entre dos personas especiales. Los dijes se atraen y se unen, creando un accesorio significativo para parejas o amigos cercanos, recordando la luz y la guía de Dios.</p></div>
-<p class="precio">$58.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-58', 58.999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Collar Berakhah B-22 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-22"><div class="carousel-images"><a data-caption="Collar Berakhah B-22" data-fancybox="gallery-Collar Berakhah B-22" href="Collares\B22-.jpg"><img alt="Collar Berakhah B-22" class="active" src="Collares\B22-.jpg"/></a><a data-caption="Collar Berakhah B-22" data-fancybox="gallery-Collar Berakhah B-22" href="Collares\B22-1.jpg"><img alt="Collar Berakhah B-22" src="Collares\B22-1.jpg"/></a><a data-caption="Collar Berakhah B-22" data-fancybox="gallery-Collar Berakhah B-22" href="Collares\B22-3.jpg"><img alt="Collar Berakhah B-22" src="Collares\B22-3.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-22')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-22')">❯</button></div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-22')">Collar Berakhah B-22</h3><p>La Gargantilla Flores de Confianza está inspirada en Mateo 6:30: «Si Dios hace tan hermosas a las flores, que viven tan poco tiempo, ¿acaso no hará más por ustedes?» </p><p>Esta delicada pieza simboliza la belleza y la provisión divina, recordándonos confiar en el cuidado amoroso de Dios. Su diseño floral elegante es perfecto para quienes buscan llevar consigo un mensaje de fe y esperanza.</p>
-<div></div>
-<p class="precio">$46.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-22', 46.999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Collar Berakhah B-45 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-45"><div class="carousel-images"><a data-caption="Collar Berakhah B-45" data-fancybox="gallery-Collar Berakhah B-45" href="Collares\B45.jpg"><img alt="Collar Berakhah B-45" class="active" src="Collares\B45.jpg"/></a><a data-caption="Collar Berakhah B-45" data-fancybox="gallery-Collar Berakhah B-45" href="Collares\B45-1.jpg"><img alt="Collar Berakhah B-45" src="Collares\B45-1.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-45')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-45')">❯</button></div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-45')">Collar Berakhah B-45</h3>
-<div><p>El Collar Corazón de Unidad, Es un collar dorado con un peculiar dije en forma de corazón, está inspirado en Filipenses 2:2: "Completad mi gozo, sintiendo lo mismo, teniendo el mismo amor, unánimes, sintiendo una misma cosa." </p><p>Este collar simboliza la armonía y la unidad en el amor, siendo un recordatorio de la importancia de compartir un mismo sentir y propósito. Es un accesorio elegante y significativo, ideal para aquellos que desean llevar consigo un símbolo de amor y unión.</p></div>
-<p class="precio">$44.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-45', 44.999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Collar Berakhah B-27 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-27"><div class="carousel-images"><a data-caption="Collar Berakhah B-27" data-fancybox="gallery-Collar Berakhah B-27" href="Collares\B27.jpg"><img alt="Collar Berakhah B-27" class="active" src="Collares\B27.jpg"/></a><a data-caption="Collar Berakhah B-27" data-fancybox="gallery-Collar Berakhah B-27" href="Collares\B27-1.jpg"><img alt="Collar Berakhah B-27" src="Collares\B27-1.jpg"/></a><a data-caption="Collar Berakhah B-27" data-fancybox="gallery-Collar Berakhah B-27" href="Collares\B27-2.jpg"><img alt="Collar Berakhah B-27" src="Collares\B27-2.jpg"/></a><a data-caption="Collar Berakhah B-27" data-fancybox="gallery-Collar Berakhah B-27" href="Collares\B27-3.jpg"><img alt="Collar Berakhah B-27" src="Collares\B27-3.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-27')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-27')">❯</button></div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-27')">Collar Berakhah B-27</h3>
-<div><p>El Collar Belleza del Corazón, elaborado con elegantes perlas y un dije de acero en forma de corazón dorado, se inspira en 1 Pedro 3:3-4. "La belleza no depende de las apariencias, sino de lo que hay en el corazón." </p><p>Este collar es un recordatorio de que la verdadera belleza proviene de nuestro interior, resaltando la importancia de cultivar un corazón puro y auténtico. Es una pieza sofisticada y significativa, perfecta para quienes valoran la esencia sobre las apariencias.</p></div>
-<p class="precio">$79.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-27', 79.999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Berakhah B-13 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-13"><div class="carousel-images"><a data-caption="Collar Berakhah B-13" data-fancybox="gallery-Collar Berakhah B-13" href="Collares\B13.jpg"><img alt="Collar Berakhah B-13" class="active" src="Collares\B13.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-13')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-13')">❯</button></div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-13')">Collar Berakhah B-13</h3>
-<div><p>Proverbios 4:23 Sobre todas las cosas cuida tu corazón, porque este determina el rumbo de tu vida.</p><p>Este delicado collar representa la importancia de proteger lo más valioso: tu corazón. En este contexto, corazón es sinónimo de mente, emociones, pensamientos, es decir, debes cuidar lo que piensas y sientes. Cuando utilices esta pieza recordarás lo mucho que debes cuidar tu corazón para poder vivir una vida plena y significativa.</p></div>
-<p class="precio">$39.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-13', 39.999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Collar Berakhah B-54 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-54">
-<div class="carousel-images"><a data-caption="Collar Berakhah B-54" data-fancybox="gallery-Collar Berakhah B-54" href="Collares\B54.jpg"><img alt="Collar Berakhah B-54" class="active" src="Collares\B54.jpg"/></a><a data-caption="Collar Berakhah B-54" data-fancybox="gallery-Collar Berakhah B-54" href="Collares\B54-1.jpg"><img alt="Collar Berakhah B-54" src="Collares\B54-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-54')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B-54')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-54')">Collar Berakhah B-54</h3>
-<div><p>1 Juan 4:9 En esto se mostró el amor de Dios para con nosotros, en que Dios envió a su Hijo unigénito al mundo, para que vivamos por él.</p><p>Este collar dorado simboliza el amor divino y la gracia que nos cubre. Un accesorio elegante que te recuerda diariamente la luz y el amor incondicional de Dios.</p></div>
-<p class="precio">$36.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-54', 36.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: collares - Producto: Berakhah B-44 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-44">
-<div class="carousel-images"><a data-caption="Collar Berakhah B-44" data-fancybox="gallery-Collar Berakhah B-44" href="Collares\B44.jpg"><img alt="Collar Berakhah B-44" class="active" src="Collares\B44.jpg"/></a><a data-caption="Collar Berakhah B-44" data-fancybox="gallery-Collar Berakhah B-44" href="Collares\B44-1.jpg"><img alt="Collar Berakhah B-44" src="Collares\B44-1.jpg"/></a><a data-caption="Collar Berakhah B-44" data-fancybox="gallery-Collar Berakhah B-44" href="Collares\B44-2.jpg"><img alt="Collar Berakhah B-44" src="Collares\B44-2.jpg"/></a><a data-caption="Collar Berakhah B-44" data-fancybox="gallery-Collar Berakhah B-44" href="Anillos\B-35.jpg"><img alt="Collar Berakhah B-44" src="Anillos\B-35.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-44')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B-44')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-44')">Collar Berakhah B-44</h3>
-<div><p>Juan 15:3 Ya vosotros estáis limpios por la palabra que os he hablado.</p><p>Este collar simboliza la pureza y la limpieza que obtenemos por la palabra de Dios, recordándonos que somos renovados y transformados por Su verdad.</p></div>
-<p class="precio">$44.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-44', 44.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: collares - Producto: Collar Collar Berakhah B-36 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B-36"><div class="carousel-images"><a data-caption="Collar Berakhah B-36" data-fancybox="gallery-Collar Berakhah B-36" href="Collares\B36.jpg"><img alt="Collar Berakhah B-36" class="active" src="Collares\B36.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-36')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-36')">❯</button></div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Collar Berakhah B-36')">Collar Berakhah B-36</h3>
-<div><p>Jeremías 29:13 Me buscarán y me encontrarán cuando me busquen de todo corazón.</p><p>Este collar simboliza la promesa de encontrar a Dios cuando lo buscamos con sinceridad y todo nuestro corazón.</p></div>
-<p class="precio">$44.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-36', 44.999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: collares - Producto: Berakhah B-11 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B11">
-<div class="carousel-images"><a data-caption="Collar Berakhah B-11" data-fancybox="gallery-Collar Berakhah B-11" href="Collares\B11.jpg"><img alt="Collar Berakhah B-11" class="active" src="Collares\B11.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B11')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B11')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-11')">Collar Berakhah B-11</h3>
-<div><p>Juan 3:17 Porque no envió Dios a su Hijo al mundo para condenar al mundo, sino para que el mundo sea salvo por él.</p><p>Este collar simboliza la salvación y el amor de Dios, recordándonos que Jesús no vino a condenar, sino a salvar a la humanidad a través de Su sacrificio.</p></div>
-<p class="precio">$31.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-11', 31.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: collares - Producto: Berakhah B-6 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B6">
-<div class="carousel-images"><a data-caption="Collar Berakhah B-06" data-fancybox="gallery-Collar Berakhah B-06" href="Collares\B6.jpg"><img alt="Collar Berakhah B-06" class="active" src="Collares\B6.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B6')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B6')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-6')">Collar Berakhah B-06</h3>
-<div><p>Hebreos 11:1 Es, pues, la fe la certeza de lo que se espera, la convicción de lo que no se ve.</p><p>Este collar simboliza la fe inquebrantable en lo que no podemos ver pero sabemos que existe. Un recordatorio constante de la confianza que debemos tener en Dios y en sus promesas.</p></div>
-<p class="precio">$29.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-06', 29.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: collares - Producto: Berakhah B-4 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B4">
-<div class="carousel-images"><a data-caption="Collar Berakhah B-04" data-fancybox="gallery-Collar Berakhah B-04" href="Collares\B4.jpg"><img alt="Collar Berakhah B-04" class="active" src="Collares\B4.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B4')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B4')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-4')">Collar Berakhah B-04</h3>
-<div><p>Juan 14:6 Jesús le dijo: Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí.</p><p>Este collar simboliza el camino y la vida que solo podemos encontrar en Jesús. Un recordatorio de que Él es nuestra guía y nuestra única verdad hacia la eternidad.</p></div>
-<p class="precio">$44.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-04', 44.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: collares - Producto: Berakhah B-10 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B10">
-<div class="carousel-images"><a data-caption="Collar Berakhah B-10" data-fancybox="gallery-Collar Berakhah B-10" href="Collares\B10.jpg"><img alt="Collar Berakhah B-10" class="active" src="Collares\B10.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B10')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B10')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-10')">Collar Berakhah B-10</h3>
-<div><p>Juan 14:27 La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da...</p><p>Este collar simboliza la paz divina que sobrepasa todo entendimiento. Un recordatorio de que la verdadera paz viene de Dios, una paz que el mundo no puede ofrecer.</p></div>
-<p class="precio">$29.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-10', 29.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: collares - Producto: Berakhah B-2 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B2">
-<div class="carousel-images"><a data-caption="Collar Berakhah B-02" data-fancybox="gallery-Collar Berakhah B-02" href="Collares\B02.jpg"><img alt="Collar Berakhah B-02" class="active" src="Collares\B02.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B2')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B2')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-2')">Collar Berakhah B-02</h3>
-<div><p>Juan 3:16 Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito...</p><p>Este collar simboliza el amor incondicional de Dios hacia la humanidad. Un accesorio que recuerda el sacrificio de Jesús, la máxima expresión de amor divino.</p></div>
-<p class="precio">$28.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-02', 28.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: collares - Producto: Berakhah B-26 -->
-<div class="producto" data-categoria="collares">
-<div class="carousel" id="carousel-B26">
-<div class="carousel-images"><a data-caption="Collar Berakhah B-26" data-fancybox="gallery-Collar Berakhah B-26" href="Collares\B26.jpg"><img alt="Collar Berakhah B-26" class="active" src="Collares\B26.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B26')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B26')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-26')">Collar Berakhah B-26</h3>
-<div><p>2 Reyes 6:15-16 No tengas miedo, porque más son los que están con nosotros que los que están con ellos.</p><p>Este collar simboliza la protección divina. Un recordatorio de que, aunque enfrentemos situaciones difíciles, Dios está con nosotros y somos más fuertes con Él.</p></div>
-<p class="precio">$34.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-26', 34.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: pulseras - Producto: Pulsera Berakhah B-17 -->
-<div class="producto" data-categoria="pulseras">
-<div class="carousel" id="carousel-B-17"><div class="carousel-images"><a data-caption="Pulsera Berakhah B-17" data-fancybox="gallery-Pulsera Berakhah B-17" href="images/pulseras/782f7b8a-f977-4468-b1cc-776361758634.jpg"><img alt="Pulsera Berakhah B-17" class="active" src="images/pulseras/782f7b8a-f977-4468-b1cc-776361758634.jpg"/></a><a data-caption="Pulsera Berakhah B-17" data-fancybox="gallery-Pulsera Berakhah B-17" href="images/pulseras/a2a52c40-a4f5-4900-aa18-8d18ce09a6fb.jpg"><img alt="Pulsera Berakhah B-17" src="images/pulseras/a2a52c40-a4f5-4900-aa18-8d18ce09a6fb.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-17')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-17')">❯</button></div>
-<h3 class="titulo-producto">Pulsera Berakhah B-17</h3>
-<div><p>Esta delicada pulsera dorada presenta un dije de mariposa con alas adornadas por pequeños diamantes de fantasía, símbolo de transformación y renovación espiritual. Inspirada en Romanos 12:2 — “No se conformen a este mundo, sino transfórmense mediante la renovación de su mente…” — esta joya representa el poder de la fe para guiarnos hacia una vida auténtica y alineada con la voluntad divina.</p><p>Un accesorio elegante para quienes eligen volar alto, romper moldes y abrazar el cambio con propósito y esperanza.</p></div>
-<p class="precio">$0</p>
-<button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-17', 0)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: pulseras - Producto: Pulsera Berakhah B-21 -->
-<div class="producto" data-categoria="pulseras">
-<div class="carousel" id="carousel-B-21"><div class="carousel-images"><a data-caption="Pulsera Berakhah B-21" data-fancybox="gallery-Pulsera Berakhah B-21" href="Pulseras\B21.jpg"><img alt="Pulsera Berakhah B-21" class="active" src="Pulseras\B21.jpg"/></a><a data-caption="Pulsera Berakhah B-21" data-fancybox="gallery-Pulsera Berakhah B-21" href="Pulseras\B21-1.jpg"><img alt="Pulsera Berakhah B-21" src="Pulseras\B21-1.jpg"/></a><a data-caption="Pulsera Berakhah B-21" data-fancybox="gallery-Pulsera Berakhah B-21" href="Pulseras\B21-2.jpg"><img alt="Pulsera Berakhah B-21" src="Pulseras\B21-2.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-21')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-B-21')">❯</button></div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Pulsera Berakhah B-21')">Pulsera Berakhah B-21</h3>
-<div><p>La Pulsera Infinito Divino, en tono dorado, lleva un símbolo del infinito inspirado en Apocalipsis 1:8: «Yo soy el Alfa y la Omega, principio y fin, dice el Señor, el que es y que era y que ha de venir, el Todopoderoso.»</p><p>Esta pulsera representa la eternidad y el poder sin fin de Dios, un accesorio elegante que recuerda Su naturaleza infinita y eterna.</p></div>
-<p class="precio">$31.999</p>
-<button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-21', 31.999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: pulseras - Producto: Berakhah B-40 -->
-<div class="producto" data-categoria="pulseras">
-<div class="carousel" id="carousel-B40">
-<div class="carousel-images"><a data-caption="Pulsera Berakhah B-40" data-fancybox="gallery-Pulsera Berakhah B-40" href="Caballeros/B40.jpg"><img alt="Pulsera Berakhah B-40" class="active" src="Caballeros/B40.jpg"/></a><a data-caption="Pulsera Berakhah B-40" data-fancybox="gallery-Pulsera Berakhah B-40" href="Caballeros/B40-1.jpg"><img alt="Pulsera Berakhah B-40" src="Caballeros/B40-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B40')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B40')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-40')">Pulsera Berakhah B-40</h3>
-<div><p>Apocalipsis 1:6 Nos hizo reyes y sacerdotes para Dios, su Padre; a él sea gloria e imperio por los siglos de los siglos. Amén.</p><p>Esta pulsera simboliza la autoridad y la posición que Dios nos ha dado como hijos suyos. Un recordatorio de nuestro llamado a vivir como reyes y sacerdotes, reflejando Su gloria.</p></div>
-<p class="precio">$36.999</p>
-<button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-40', 36.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: pulseras - Producto: Berakhah B-41 -->
-<div class="producto" data-categoria="pulseras">
-<div class="carousel" id="carousel-B41">
-<div class="carousel-images"><a data-caption="Pulsera Berakhah B-41" data-fancybox="gallery-Pulsera Berakhah B-41" href="Caballeros/B41.jpg"><img alt="Pulsera Berakhah B-41" class="active" src="Caballeros/B41.jpg"/></a><a data-caption="Pulsera Berakhah B-41" data-fancybox="gallery-Pulsera Berakhah B-41" href="Caballeros/B41-1.jpg"><img alt="Pulsera Berakhah B-41" src="Caballeros/B41-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B41')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B41')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-41')">Pulsera Berakhah B-41</h3>
-<div><p>Apocalipsis 1:6 Nos hizo reyes y sacerdotes para Dios, su Padre; a él sea gloria e imperio por los siglos de los siglos. Amén.</p><p>Esta pulsera simboliza nuestro llamado a ser reyes y sacerdotes en el reino de Dios, reflejando la gloria de nuestro Padre celestial en todo lo que hacemos.</p></div>
-<p class="precio">$36.999</p>
-<button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-41', 36.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: pulseras - Producto: Berakhah B-12 -->
-<div class="producto" data-categoria="pulseras">
-<div class="carousel" id="carousel-B12">
-<div class="carousel-images"><a data-caption="Pulsera Berakhah B-12" data-fancybox="gallery-Pulsera Berakhah B-12" href="Pulseras\B12.jpg"><img alt="Pulsera Berakhah B-12" class="active" src="Pulseras\B12.jpg"/></a><a data-caption="Pulsera Berakhah B-12" data-fancybox="gallery-Pulsera Berakhah B-12" href="Pulseras\B12-1.jpg"><img alt="Pulsera Berakhah B-12" src="Pulseras\B12-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B12')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B12')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-12')">Pulsera Berakhah B-12</h3>
-<div><p>Marcos 16:15 Y les dijo: Id por todo el mundo y predicad el evangelio a toda criatura.</p><p>Esta pulsera simboliza el mandato de llevar el mensaje de salvación a todos los rincones del mundo. Un recordatorio constante de nuestro llamado como discípulos de Cristo.</p></div>
-<p class="precio">$31.999</p>
-<button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-12', 31.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: pulseras - Producto: Berakhah B-3 -->
-<div class="producto" data-categoria="pulseras">
-<div class="carousel" id="carousel-B3">
-<div class="carousel-images"><a data-caption="Pulsera Berakhah B-03" data-fancybox="gallery-Pulsera Berakhah B-03" href="Pulseras\B3-1.jpg"><img alt="Pulsera Berakhah B-03" class="active" src="Pulseras\B3-1.jpg"/></a><a data-caption="Pulsera Berakhah B-03" data-fancybox="gallery-Pulsera Berakhah B-03" href="Pulseras\B3.jpg"><img alt="Pulsera Berakhah B-03" src="Pulseras\B3.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B3')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B3')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-3')">Pulsera Berakhah B-03</h3>
-<div><p>Isaías 1:18 Venid luego, dice Jehová, y estemos a cuenta: si vuestros pecados fueren como la grana, como la nieve serán emblanquecidos; si fueren rojos como el carmesí, vendrán a ser como blanca lana.</p><p>Esta pulsera simboliza el poder redentor de Dios, quien nos purifica y limpia de todo pecado. Un recordatorio constante del perdón y la misericordia divinos.</p></div>
-<p class="precio">$31.999</p>
-<button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-03', 31.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: pulseras - Producto: Berakhah B-1 -->
-<div class="producto" data-categoria="pulseras">
-<div class="carousel" id="carousel-B1">
-<div class="carousel-images"><a data-caption="Pulsera Berakhah B-01" data-fancybox="gallery-Pulsera Berakhah B-01" href="Pulseras\B1-2.jpg"><img alt="Pulsera Berakhah B-01" class="active" src="Pulseras\B1-2.jpg"/></a><a data-caption="Pulsera Berakhah B-01" data-fancybox="gallery-Pulsera Berakhah B-01" href="Pulseras\B1.jpg"><img alt="Pulsera Berakhah B-01" src="Pulseras\B1.jpg"/></a><a data-caption="Pulsera Berakhah B-01" data-fancybox="gallery-Pulsera Berakhah B-01" href="Pulseras\B1-1.jpg"><img alt="Pulsera Berakhah B-01" src="Pulseras\B1-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B1')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B1')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-1')">Pulsera Berakhah B-01</h3>
-<div><p>Salmos 1:3 Será como árbol plantado junto a corrientes de aguas, Que da su fruto en su tiempo, Y su hoja no cae; Y todo lo que hace, prosperará.</p><p>Esta pulsera simboliza la estabilidad y bendición de quienes caminan en los caminos de Dios, prosperando y dando fruto a su debido tiempo.</p></div>
-<p class="precio">$31.999</p>
-<button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-01', 31.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: pulseras - Producto: Berakhah B-8 -->
-<div class="producto" data-categoria="pulseras">
-<div class="carousel" id="carousel-B8">
-<div class="carousel-images"><a data-caption="Pulsera Berakhah B-08" data-fancybox="gallery-Pulsera Berakhah B-08" href="Pulseras\B8.jpg"><img alt="Pulsera Berakhah B-08" class="active" src="Pulseras\B8.jpg"/></a><a data-caption="Pulsera Berakhah B-08" data-fancybox="gallery-Pulsera Berakhah B-08" href="Pulseras\B8-1.jpg"><img alt="Pulsera Berakhah B-08" src="Pulseras\B8-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B8')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B8')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-8')">Pulsera Berakhah B-08</h3>
-<div><p>Proverbios 4:23 Sobre toda cosa guardada, guarda tu corazón; Porque de él mana la vida.</p><p>Esta pulsera simboliza la importancia de proteger el corazón, fuente de la vida, y mantenerlo alineado con los principios de Dios.</p></div>
-<p class="precio">$31.999</p>
-<button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-08', 31.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: pulseras - Producto: Berakhah B-7 -->
-<div class="producto" data-categoria="pulseras">
-<div class="carousel" id="carousel-B7">
-<div class="carousel-images"><a data-caption="Pulsera Berakhah B-07" data-fancybox="gallery-Pulsera Berakhah B-07" href="Pulseras/B7.jpg"><img alt="Pulsera Berakhah B-07" class="active" src="Pulseras/B7.jpg"/></a><a data-caption="Pulsera Berakhah B-07" data-fancybox="gallery-Pulsera Berakhah B-07" href="Pulseras/B7-1.jpg"><img alt="Pulsera Berakhah B-07" src="Pulseras/B7-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B7')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B7')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-7')">Pulsera Berakhah B-07</h3>
-<div><p>Marcos 11:24 Por tanto, os digo que todo lo que pidiereis orando, creed que lo recibiréis, y os vendrá.</p><p>Esta pulsera simboliza el poder de la fe y la oración, recordándonos que lo que pedimos con fe, lo recibiremos.</p></div>
-<p class="precio">$31.999</p>
-<button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-07', 31.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: pulseras - Producto: Berakhah B-9 -->
-<div class="producto" data-categoria="pulseras">
-<div class="carousel" id="carousel-B9">
-<div class="carousel-images"><a data-caption="Pulsera Berakhah B-09" data-fancybox="gallery-Pulsera Berakhah B-09" href="Pulseras\B9.jpg"><img alt="Pulsera Berakhah B-09" class="active" src="Pulseras\B9.jpg"/></a><a data-caption="Pulsera Berakhah B-09" data-fancybox="gallery-Pulsera Berakhah B-09" href="Pulseras\B9-1.jpg"><img alt="Pulsera Berakhah B-09" src="Pulseras\B9-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B9')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B9')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-9')">Pulsera Berakhah B-09</h3>
-<div><p>Romanos 1:16 Porque no me avergüenzo del evangelio, porque es poder de Dios para salvación a todo aquel que cree; al judío primeramente, y también al griego.</p><p>Esta pulsera simboliza la valentía y el poder de declarar nuestra fe sin vergüenza, sabiendo que el evangelio es el poder de Dios para la salvación.</p></div>
-<p class="precio">$31.999</p>
-<button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-9', 22.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: pulseras - Producto: Berakhah B-23 -->
-<div class="producto" data-categoria="pulseras">
-<div class="carousel" id="carousel-B23">
-<div class="carousel-images"><a data-caption="Pulsera Berakhah B-23" data-fancybox="gallery-Pulsera Berakhah B-23" href="Pulseras\B23.jpg"><img alt="Pulsera Berakhah B-23" class="active" src="Pulseras\B23.jpg"/></a><a data-caption="Pulsera Berakhah B-23" data-fancybox="gallery-Pulsera Berakhah B-23" href="Pulseras\B23-1.jpg"><img alt="Pulsera Berakhah B-23" src="Pulseras\B23-1.jpg"/></a><a data-caption="Pulsera Berakhah B-23" data-fancybox="gallery-Pulsera Berakhah B-23" href="Pulseras\B23-2.jpg"><img alt="Pulsera Berakhah B-23" src="Pulseras\B23-2.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B23')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B23')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-23')">Pulsera Berakhah B-23</h3>
-<div><p>Hechos 13:47 Así nos lo ha mandado el Señor: "Te he puesto por luz para las naciones, a fin de que lleves mi salvación hasta los confines de la tierra".</p><p>Esta pulsera simboliza nuestro llamado a ser luz en medio de las naciones, llevando el mensaje de salvación a todos los lugares donde vayamos.</p></div>
-<p class="precio">$31.999</p>
-<button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-23', 31.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: anillos - Producto: Anillo Berakhah BA-11 -->
-<div class="producto" data-categoria="anillos">
-<div class="carousel" id="carousel-BA-11"><div class="carousel-images"><a data-caption="Anillo Berakhah BA-11" data-fancybox="gallery-Anillo Berakhah BA-11" href="images/anillos/4981508434218299314.jpg"><img alt="Anillo Berakhah BA-11" class="active" src="images/anillos/4981508434218299314.jpg"/></a><a data-caption="Anillo Berakhah BA-11" data-fancybox="gallery-Anillo Berakhah BA-11" href="images/anillos/4981508434218299315.jpg"><img alt="Anillo Berakhah BA-11" src="images/anillos/4981508434218299315.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-BA-11')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-BA-11')">❯</button></div>
-<h3 class="titulo-producto">Anillo Berakhah BA-11</h3>
-<div><p>Este anillo dorado, con forma de corazón y brillantes que reflejan la luz con cada movimiento, es un tributo al amor eterno y la fidelidad inquebrantable de Dios. Inspirado en Lam 3:22–23 — “El fiel amor del Señor nunca se acaba; sus misericordias jamás terminan…” — esta joya simboliza la promesa de que cada día comienza con gracia renovada.</p><p>El corazón, adornado con destellos de esperanza, representa el refugio seguro en el amor divino que nunca falla. Ideal para quienes desean llevar consigo un recordatorio constante de que, sin importar las circunstancias, el amor de Dios permanece firme y sus misericordias se renuevan con cada amanecer.</p></div>
-<p class="precio">$47999</p>
-<button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-11', 47999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: anillos - Producto: Anillo Berakhah BA-10 -->
-<div class="producto" data-categoria="anillos">
-<div class="carousel" id="carousel-BA-10"><div class="carousel-images"><a data-caption="Anillo Berakhah BA-10" data-fancybox="gallery-Anillo Berakhah BA-10" href="images/anillos/83f613bd-a237-4749-9410-7439beab757a.jpg"><img alt="Anillo Berakhah BA-10" class="active" src="images/anillos/83f613bd-a237-4749-9410-7439beab757a.jpg"/></a><a data-caption="Anillo Berakhah BA-10" data-fancybox="gallery-Anillo Berakhah BA-10" href="images/anillos/e25b606f-847b-4f15-a37a-ad0d8d5e9140.jpg"><img alt="Anillo Berakhah BA-10" src="images/anillos/e25b606f-847b-4f15-a37a-ad0d8d5e9140.jpg"/></a><a data-caption="Anillo Berakhah BA-10" data-fancybox="gallery-Anillo Berakhah BA-10" href="images/anillos/6232d49a-ad69-4d9d-bd51-a199f240741b.jpg"><img alt="Anillo Berakhah BA-10" src="images/anillos/6232d49a-ad69-4d9d-bd51-a199f240741b.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-BA-10')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-BA-10')">❯</button></div>
-<h3 class="titulo-producto">Anillo Berakhah BA-10</h3>
-<div><p>Este anillo dorado, con una delicada piedra rosada claro en el centro, encarna la pureza del alma y la promesa de una conexión divina. Inspirado en Mateo 5:8 — “Dios bendice a los que tienen corazón puro, porque ellos verán a Dios.” — esta joya es un símbolo de fe transparente, amor sincero y la belleza que florece desde lo más profundo del corazón.</p><p>La piedra rosada, suave y luminosa, representa la ternura de un espíritu limpio y la esperanza de ver lo eterno con ojos de fe. Ideal para quienes buscan vivir con autenticidad, humildad y una mirada clara hacia lo sagrado.</p></div>
-<p class="precio">$47999</p>
-<button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-10', 47999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: anillos - Producto: Anillo Berakhah BA-09 -->
-<div class="producto" data-categoria="anillos">
-<div class="carousel" id="carousel-BA-09"><div class="carousel-images"><a data-caption="Anillo Berakhah BA-09" data-fancybox="gallery-Anillo Berakhah BA-09" href="images/anillos/f902d446-6532-4543-85d5-3bc55c43dcf0.jpg"><img alt="Anillo Berakhah BA-09" class="active" src="images/anillos/f902d446-6532-4543-85d5-3bc55c43dcf0.jpg"/></a><a data-caption="Anillo Berakhah BA-09" data-fancybox="gallery-Anillo Berakhah BA-09" href="images/anillos/9fe13d2e-e4bd-4caa-8990-1b0346121534.jpg"><img alt="Anillo Berakhah BA-09" src="images/anillos/9fe13d2e-e4bd-4caa-8990-1b0346121534.jpg"/></a><a data-caption="Anillo Berakhah BA-09" data-fancybox="gallery-Anillo Berakhah BA-09" href="images/anillos/92958368-232e-4996-87c3-6e4ce1e9d36b.jpg"><img alt="Anillo Berakhah BA-09" src="images/anillos/92958368-232e-4996-87c3-6e4ce1e9d36b.jpg"/></a></div><button class="carousel-button prev" onclick="changeImage(-1, 'carousel-BA-09')">❮</button><button class="carousel-button next" onclick="changeImage(1, 'carousel-BA-09')">❯</button></div>
-<h3 class="titulo-producto">Anillo Berakhah BA-09</h3>
-<div><p>- 1 Pedro 1:15–16 </p><p>“Ahora sean santos en todo lo que hagan, tal como Dios, quien los eligió, es santo. Pues las Escrituras dicen: ‘Sean santos, porque yo soy santo.’</p></div>
-<p class="precio">$47999</p>
-<button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-09', 47999)">¡Agregar al Carrito!</button></div>
-<!-- Categoria: anillos - Producto: Berakhah B-33 -->
-<div class="producto" data-categoria="anillos">
-<div class="carousel" id="carousel-B-33">
-<div class="carousel-images"><a data-caption="Anillo Berakhah BA-06" data-fancybox="gallery-Anillo Berakhah BA-06" href="Anillos/B33.jpg"><img alt="Anillo Berakhah BA-06" class="active" src="Anillos/B33.jpg"/></a><a data-caption="Anillo Berakhah BA-06" data-fancybox="gallery-Anillo Berakhah BA-06" href="Anillos/B33-1.jpg"><img alt="Anillo Berakhah BA-06" src="Anillos/B33-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-33')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B-33')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-33')">Anillo Berakhah BA-06</h3><p>Hechos 4:12 Y en ningún otro hay salvación; porque no hay otro nombre bajo el cielo, dado a los hombres, en que podamos ser salvos.</p><p>Este anillo simboliza la exclusividad de la salvación en Jesús, un recordatorio constante de nuestra fe en Él como nuestro único salvador.</p>
-<div></div>
-<p class="precio">$47.999</p>
-<button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-06', 47.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: anillos - Producto: Berakhah B-53 -->
-<div class="producto" data-categoria="anillos">
-<div class="carousel" id="carousel-B-53">
-<div class="carousel-images"><a data-caption="Anillo Berakhah BA-08" data-fancybox="gallery-Anillo Berakhah BA-08" href="Anillos/B53.jpg"><img alt="Anillo Berakhah BA-08" class="active" src="Anillos/B53.jpg"/></a><a data-caption="Anillo Berakhah BA-08" data-fancybox="gallery-Anillo Berakhah BA-08" href="Anillos/B53-1.jpg"><img alt="Anillo Berakhah BA-08" src="Anillos/B53-1.jpg"/></a><a data-caption="Anillo Berakhah BA-08" data-fancybox="gallery-Anillo Berakhah BA-08" href="Anillos/B53-2.jpg"><img alt="Anillo Berakhah BA-08" src="Anillos/B53-2.jpg"/></a><a data-caption="Anillo Berakhah BA-08" data-fancybox="gallery-Anillo Berakhah BA-08" href="Anillos/B53-3.jpg"><img alt="Anillo Berakhah BA-08" src="Anillos/B53-3.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-53')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B-53')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-53')">Anillo Berakhah BA-08</h3><p>Marcos 10:27 Entonces Jesús, mirándolos, dijo: Para los hombres es imposible, mas para Dios, no; porque todas las cosas son posibles para Dios.</p><p>Este anillo simboliza la fe en lo imposible, un recordatorio de que con Dios no hay límites para lo que se puede lograr.</p>
-<div></div>
-<p class="precio">$47.999</p>
-<button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-08', 47.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: anillos - Producto: Berakhah B-34 -->
-<div class="producto" data-categoria="anillos">
-<div class="carousel" id="carousel-B34">
-<div class="carousel-images"><a data-caption="Anillo Berakhah BA-07" data-fancybox="gallery-Anillo Berakhah BA-07" href="Anillos/B-34.jpg"><img alt="Anillo Berakhah BA-07" class="active" src="Anillos/B-34.jpg"/></a><a data-caption="Anillo Berakhah BA-07" data-fancybox="gallery-Anillo Berakhah BA-07" href="Anillos/B-34-1.jpg"><img alt="Anillo Berakhah BA-07" src="Anillos/B-34-1.jpg"/></a><a data-caption="Anillo Berakhah BA-07" data-fancybox="gallery-Anillo Berakhah BA-07" href="Anillos/B-34-2.jpg"><img alt="Anillo Berakhah BA-07" src="Anillos/B-34-2.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B34')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B34')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-34')">Anillo Berakhah BA-07</h3><p>1 Samuel 16:7 Y Jehová respondió a Samuel: No mires a su parecer, ni a lo grande de su estatura, porque yo lo desecho; porque Jehová no mira lo que mira el hombre; pues el hombre mira lo que está delante de sus ojos, pero Jehová mira el corazón.</p><p>Este anillo simboliza la importancia de lo que hay en el corazón, más allá de las apariencias exteriores. Un recordatorio de que Dios ve lo más profundo de nosotros.</p>
-<div></div>
-<p class="precio">$47.999</p>
-<button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-07', 47.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: anillos - Producto: Berakhah B-32 -->
-<div class="producto" data-categoria="anillos">
-<div class="carousel" id="carousel-B32">
-<div class="carousel-images"><a data-caption="Anillo Berakhah BA-05" data-fancybox="gallery-Anillo Berakhah BA-05" href="Anillos\B32.jpg"><img alt="Anillo Berakhah BA-05" class="active" src="Anillos\B32.jpg"/></a><a data-caption="Anillo Berakhah BA-05" data-fancybox="gallery-Anillo Berakhah BA-05" href="Anillos\B32-1.jpg"><img alt="Anillo Berakhah BA-05" src="Anillos\B32-1.jpg"/></a><a data-caption="Anillo Berakhah BA-05" data-fancybox="gallery-Anillo Berakhah BA-05" href="Anillos\B32-2.jpg"><img alt="Anillo Berakhah BA-05" src="Anillos\B32-2.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B32')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B32')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-32')">Anillo Berakhah BA-05</h3><p>Salmos 31:3 Guíame, pues eres mi roca y mi fortaleza, dirígeme por amor a tu nombre.</p><p>Este anillo simboliza la guía y protección divina, recordándonos que en Dios encontramos fortaleza y dirección en nuestras vidas.</p>
-<div></div>
-<p class="precio">$47.999</p>
-<button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-05', 47.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: anillos - Producto: Berakhah B-16 -->
-<div class="producto" data-categoria="anillos">
-<div class="carousel" id="carousel-B16">
-<div class="carousel-images"><a data-caption="Anillo Berakhah BA-01" data-fancybox="gallery-Anillo Berakhah BA-01" href="Anillos\B16-1.jpg"><img alt="Anillo Berakhah BA-01" class="active" src="Anillos\B16-1.jpg"/></a><a data-caption="Anillo Berakhah BA-01" data-fancybox="gallery-Anillo Berakhah BA-01" href="Anillos\B16.jpg"><img alt="Anillo Berakhah BA-01" src="Anillos\B16.jpg"/></a><a data-caption="Anillo Berakhah BA-01" data-fancybox="gallery-Anillo Berakhah BA-01" href="Anillos\B16-2.jpg"><img alt="Anillo Berakhah BA-01" src="Anillos\B16-2.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B16')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B16')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-16')">Anillo Berakhah BA-01</h3><p>Cantares 8:6 Ponme como un sello sobre tu corazón, como una marca sobre tu brazo; Porque fuerte es como la muerte el amor.</p><p>Este anillo simboliza la fuerza del amor, inmutable y eterno, como una marca que llevamos en lo profundo de nuestro ser.</p>
-<div></div>
-<p class="precio">$47.999</p>
-<button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-01', 47.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: anillos - Producto: Berakhah B-17 -->
-<div class="producto" data-categoria="anillos">
-<div class="carousel" id="carousel-B17">
-<div class="carousel-images"><a data-caption="Anillo Berakhah BA-02" data-fancybox="gallery-Anillo Berakhah BA-02" href="Anillos\B17.jpg"><img alt="Anillo Berakhah BA-02" class="active" src="Anillos\B17.jpg"/></a><a data-caption="Anillo Berakhah BA-02" data-fancybox="gallery-Anillo Berakhah BA-02" href="Anillos\B17-1.jpg"><img alt="Anillo Berakhah BA-02" src="Anillos\B17-1.jpg"/></a><a data-caption="Anillo Berakhah BA-02" data-fancybox="gallery-Anillo Berakhah BA-02" href="Anillos\B17-2.jpg"><img alt="Anillo Berakhah BA-02" src="Anillos\B17-2.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B17')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B17')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-17')">Anillo Berakhah BA-02</h3><p>Salmos 92:2 El justo florecerá como la palmera; Crecerá como cedro en el Líbano.</p><p>Este anillo simboliza el crecimiento espiritual y la bendición divina, floreciendo y fortaleciéndose bajo la guía de Dios.</p>
-<div></div>
-<p class="precio">$47.999</p>
-<button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-02', 47.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: anillos - Producto: Berakhah B-18 -->
-<div class="producto" data-categoria="anillos">
-<div class="carousel" id="carousel-B18">
-<div class="carousel-images"><a data-caption="Anillo Berakhah BA-03" data-fancybox="gallery-Anillo Berakhah BA-03" href="Anillos\B18-1.jpg"><img alt="Anillo Berakhah BA-03" class="active" src="Anillos\B18-1.jpg"/></a><a data-caption="Anillo Berakhah BA-03" data-fancybox="gallery-Anillo Berakhah BA-03" href="Anillos\B18.jpg"><img alt="Anillo Berakhah BA-03" src="Anillos\B18.jpg"/></a><a data-caption="Anillo Berakhah BA-03" data-fancybox="gallery-Anillo Berakhah BA-03" href="Anillos\B18-2.jpg"><img alt="Anillo Berakhah BA-03" src="Anillos\B18-2.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B18')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B18')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-18')">Anillo Berakhah BA-03</h3><p>Salmos 56:3 En el día que temo, Yo en ti confío.</p><p>Este anillo simboliza la confianza y la fe en Dios, aun en momentos de temor, como una expresión de nuestra total dependencia en Él.</p>
-<div></div>
-<p class="precio">$47.999</p>
-<button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-03', 47.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: anillos - Producto: Berakhah B-19 -->
-<div class="producto" data-categoria="anillos">
-<div class="carousel" id="carousel-B19">
-<div class="carousel-images"><a data-caption="Anillo Berakhah BA-04" data-fancybox="gallery-Anillo Berakhah BA-04" href="Anillos\B19.jpg"><img alt="Anillo Berakhah BA-04" class="active" src="Anillos\B19.jpg"/></a><a data-caption="Anillo Berakhah BA-04" data-fancybox="gallery-Anillo Berakhah BA-04" href="Anillos\B19-1.jpg"><img alt="Anillo Berakhah BA-04" src="Anillos\B19-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B19')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B19')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-19')">Anillo Berakhah BA-04</h3><p>Colosenses 3:14 Sobre todo revístanse de amor, que es el lazo de la perfecta unión.</p><p>Este anillo simboliza el amor como el vínculo perfecto que une y fortalece nuestras relaciones, reflejando el amor divino.</p>
-<div></div>
-<p class="precio">$47.999</p>
-<button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-04', 47.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: zarcillos - Producto: Berakhah B-20 -->
-<div class="producto" data-categoria="zarcillos">
-<div class="carousel" id="carousel-B20">
-<div class="carousel-images"><a data-caption="Zarcillos Berakhah B-20" data-fancybox="gallery-Zarcillos Berakhah B-20" href="Zarcillos/B20.jpg"><img alt="Zarcillos Berakhah B-20" class="active" src="Zarcillos/B20.jpg"/></a><a data-caption="Zarcillos Berakhah B-20" data-fancybox="gallery-Zarcillos Berakhah B-20" href="Zarcillos/B20-1.jpg"><img alt="Zarcillos Berakhah B-20" src="Zarcillos/B20-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B20')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B20')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-20')">Zarcillos Berakhah B-20</h3>
-<div><p>Proverbios 27:19 El agua refleja el rostro; el corazón refleja la persona.</p><p>Estos zarcillos simbolizan la reflexión del corazón, un accesorio que destaca la pureza y el carácter interior de quien los lleva.</p></div>
-<p class="precio">$31.999</p>
-<button class="button" onclick="agregarAlCarrito('Zarcillos Berakhah B-20', 31.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: zarcillos - Producto: Berakhah B-29 -->
-<div class="producto" data-categoria="zarcillos">
-<div class="carousel" id="carousel-B29">
-<div class="carousel-images"><a data-caption="Zarcillos Berakhah B-29" data-fancybox="gallery-Zarcillos Berakhah B-29" href="Zarcillos\B29.jpg"><img alt="Zarcillos Berakhah B-29" class="active" src="Zarcillos\B29.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B29')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B29')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-29')">Zarcillos Berakhah B-29</h3>
-<div><p>Salmos 20:4 Que te conceda el deseo de tu corazón, y cumpla todos tus anhelos.</p><p>Estos zarcillos simbolizan la gratitud y los deseos cumplidos, recordándonos que Dios concede los anhelos de nuestros corazones.</p></div>
-<p class="precio">$27.999</p>
-<button class="button" onclick="agregarAlCarrito('Zarcillos Berakhah B-29', 27.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: zarcillos - Producto: Berakhah B-30 -->
-<div class="producto" data-categoria="zarcillos">
-<div class="carousel" id="carousel-B30">
-<div class="carousel-images"><a data-caption="Zarcillos Berakhah B-30" data-fancybox="gallery-Zarcillos Berakhah B-30" href="Zarcillos\B30.jpg"><img alt="Zarcillos Berakhah B-30" class="active" src="Zarcillos\B30.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B30')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B30')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-30')">Zarcillos Berakhah B-30</h3>
-<div><p>Proverbios 3:3 Nunca se aparten de ti la misericordia y la verdad; Átalas a tu cuello, Escríbelas en la tabla de tu corazón.</p><p>Estos zarcillos simbolizan la verdad y la misericordia, valores fundamentales que debemos llevar siempre con nosotros.</p></div>
-<p class="precio">$27.999</p>
-<button class="button" onclick="agregarAlCarrito('Zarcillos Berakhah B-30', 27.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: zarcillos - Producto: Berakhah B-31 -->
-<div class="producto" data-categoria="zarcillos">
-<div class="carousel" id="carousel-B31">
-<div class="carousel-images"><a data-caption="Zarcillos Berakhah B-31" data-fancybox="gallery-Zarcillos Berakhah B-31" href="Zarcillos\B31.jpg"><img alt="Zarcillos Berakhah B-31" class="active" src="Zarcillos\B31.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B31')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B31')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-31')">Zarcillos Berakhah B-31</h3>
-<div><p>Mateo 6:21 Porque donde esté tu tesoro, allí estará también tu corazón.</p><p>Estos zarcillos simbolizan que nuestros tesoros espirituales deben estar donde esté nuestro corazón, reflejando lo que valoramos verdaderamente.</p></div>
-<p class="precio">$27.999</p>
-<button class="button" onclick="agregarAlCarrito('Zarcillos Berakhah B-31', 27.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: caballeros - Producto: Berakhah B-36 -->
-<div class="producto" data-categoria="caballeros">
-<div class="carousel" id="carousel-B36">
-<div class="carousel-images"><a data-caption="Collar Berakhah B-36" data-fancybox="gallery-Collar Berakhah B-36" href="Collares\B36.jpg"><img alt="Collar Berakhah B-36" class="active" src="Collares\B36.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B36')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B36')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-36')">Collar Berakhah B-36</h3>
-<div><p>Jeremías 29:13 Me buscarán y me encontrarán cuando me busquen de todo corazón.</p><p>Este collar simboliza la promesa de encontrar a Dios cuando lo buscamos con sinceridad y todo nuestro corazón.</p></div>
-<p class="precio">$44.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-36', 26.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: caballeros - Producto: Berakhah B-40 -->
-<div class="producto" data-categoria="caballeros">
-<div class="carousel" id="carousel-B40">
-<div class="carousel-images">
-<a data-caption="Pulsera Berakhah B-40" data-fancybox="gallery-Pulsera Berakhah B-40" href="Caballeros/B40.jpg">
-<img alt="Pulsera Berakhah B-40" class="active" src="Caballeros/B40.jpg"/>
-</a>
-<a data-caption="Pulsera Berakhah B-40" data-fancybox="gallery-Pulsera Berakhah B-40" href="Caballeros/B40-1.jpg">
-<img alt="Pulsera Berakhah B-40" src="Caballeros/B40-1.jpg"/>
-</a>
-</div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B40')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B40')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-40')">Pulsera Berakhah B-40</h3>
-<div>
-<p>Apocalipsis 1:6 Nos hizo reyes y sacerdotes para Dios, su Padre; a él sea gloria e imperio por los siglos de los siglos. Amén.</p>
-<p>Esta pulsera simboliza nuestra identidad como reyes y sacerdotes, dándonos fuerza y poder en nuestra vida espiritual.</p>
-</div>
-<p class="precio">$36.999</p>
-<button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-40', 26.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: caballeros - Producto: Berakhah B-41 -->
-<div class="producto" data-categoria="caballeros">
-<div class="carousel" id="carousel-B41">
-<div class="carousel-images">
-<a data-caption="Pulsera Berakhah B-41" data-fancybox="gallery-Pulsera Berakhah B-41" href="Caballeros/B41.jpg">
-<img alt="Pulsera Berakhah B-41" class="active" src="Caballeros/B41.jpg"/>
-</a>
-<a data-caption="Pulsera Berakhah B-41" data-fancybox="gallery-Pulsera Berakhah B-41" href="Caballeros/B41-1.jpg">
-<img alt="Pulsera Berakhah B-41" src="Caballeros/B41-1.jpg"/>
-</a>
-</div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B41')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B41')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-41')">Pulsera Berakhah B-41</h3>
-<div>
-<p>Apocalipsis 1:6 Nos hizo reyes y sacerdotes para Dios, su Padre; a él sea gloria e imperio por los siglos de los siglos. Amén.</p>
-<p>Esta pulsera simboliza nuestro llamado como reyes y sacerdotes de Dios, un recordatorio de la grandeza de nuestro propósito divino.</p>
-</div>
-<p class="precio">$36.999</p>
-<button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-41', 26.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: caballeros - Producto: Collar Berakhah B-56 -->
-<div class="producto" data-categoria="caballeros">
-<div class="carousel" id="carousel-B-56">
-<div class="carousel-images"><a data-caption="Collar Berakhah B-56" data-fancybox="gallery-Collar Berakhah B-56" href="Caballeros/B56.jpg"><img alt="Collar Berakhah B-56" class="active" src="Caballeros/B56.jpg"/></a><a data-caption="Collar Berakhah B-56" data-fancybox="gallery-Collar Berakhah B-56" href="Caballeros/B56-1.jpg"><img alt="Collar Berakhah B-56" src="Caballeros/B56-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-56')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B-56')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-56')">Collar Berakhah B-56</h3>
-<div><p>Romanos 10:9 Si confesares con tu boca que Jesús es el Señor, y creyeres en tu corazón que Dios le levantó de los muertos, serás salvo.</p><p>Este collar simboliza la fe y la salvación a través de la confesión y la creencia en Jesús como Señor.</p></div>
-<p class="precio">$44.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-56', 44.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: caballeros - Producto: Collar Berakhah B-55 -->
-<div class="producto" data-categoria="caballeros">
-<div class="carousel" id="carousel-B-55">
-<div class="carousel-images"><a data-caption="Collar Berakhah B-55" data-fancybox="gallery-Collar Berakhah B-55" href="Caballeros/B55.jpg"><img alt="Collar Berakhah B-55" class="active" src="Caballeros/B55.jpg"/></a><a data-caption="Collar Berakhah B-55" data-fancybox="gallery-Collar Berakhah B-55" href="Caballeros/B55-1.jpg"><img alt="Collar Berakhah B-55" src="Caballeros/B55-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-55')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B-55')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-55')">Collar Berakhah B-55</h3>
-<div><p>Juan 15:12 Este es mi mandamiento: Que os améis los unos a los otros, como yo os he amado.</p><p>Este collar simboliza el amor fraternal, un recordatorio de seguir el mandamiento de amar a los demás como Cristo nos amó.</p></div>
-<p class="precio">$44.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-55', 44.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: caballeros - Producto: Berakhah B-52 -->
-<div class="producto" data-categoria="caballeros">
-<div class="carousel" id="carousel-B-52">
-<div class="carousel-images"><a data-caption="Collar Berakhah B-52" data-fancybox="gallery-Collar Berakhah B-52" href="Caballeros/B52.jpg"><img alt="Collar Berakhah B-52" class="active" src="Caballeros/B52.jpg"/></a><a data-caption="Collar Berakhah B-52" data-fancybox="gallery-Collar Berakhah B-52" href="Caballeros/B52-1.jpg"><img alt="Collar Berakhah B-52" src="Caballeros/B52-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-52')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B-52')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-52')">Collar Berakhah B-52</h3>
-<div><p>Hebreos 6:19 Esta esperanza mantiene firme y segura nuestra alma, igual que el ancla mantiene firme al barco.</p><p>Este collar simboliza la esperanza firme en Cristo, una ancla que mantiene nuestra fe segura en tiempos difíciles.</p></div>
-<p class="precio">$41.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-52', 41.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: caballeros - Producto: Berakhah B-51 -->
-<div class="producto" data-categoria="caballeros">
-<div class="carousel" id="carousel-B-51">
-<div class="carousel-images"><a data-caption="Collar Berakhah B-51" data-fancybox="gallery-Collar Berakhah B-51" href="Caballeros/B51.jpg"><img alt="Collar Berakhah B-51" class="active" src="Caballeros/B51.jpg"/></a><a data-caption="Collar Berakhah B-51" data-fancybox="gallery-Collar Berakhah B-51" href="Caballeros/B51-1.jpg"><img alt="Collar Berakhah B-51" src="Caballeros/B51-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-51')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B-51')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-51')">Collar Berakhah B-51</h3>
-<div><p>1 Pedro 2:24 Por sus heridas ustedes han sido sanados.</p><p>Este collar simboliza la sanidad que recibimos por medio de las heridas de Jesús, recordándonos su sacrificio por nosotros.</p></div>
-<p class="precio">$41.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-51', 41.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: caballeros - Producto: Berakhah B-39 -->
-<div class="producto" data-categoria="caballeros">
-<div class="carousel" id="carousel-B39">
-<div class="carousel-images"><a data-caption="Pulsera Berakhah B-39" data-fancybox="gallery-Pulsera Berakhah B-39" href="Caballeros/B39.jpg"><img alt="Pulsera Berakhah B-39" class="active" src="Caballeros/B39.jpg"/></a><a data-caption="Pulsera Berakhah B-39" data-fancybox="gallery-Pulsera Berakhah B-39" href="Caballeros/B39-1.jpg"><img alt="Pulsera Berakhah B-39" src="Caballeros/B39-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B39')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B39')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-39')">Pulsera Berakhah B-39</h3>
-<div><p>Apocalipsis 1:6 Nos hizo reyes y sacerdotes para Dios, su Padre; a él sea gloria e imperio por los siglos de los siglos. Amén.</p><p>Esta pulsera simboliza nuestra posición como reyes y sacerdotes para Dios, un recordatorio de la dignidad y el honor que Él nos ha concedido.</p></div>
-<p class="precio">$36.999</p>
-<button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-39', 36.999)">¡Agregar al Carrito!</button>
-</div>
-<!-- Categoria: caballeros - Producto: Berakhah B-14 -->
-<div class="producto" data-categoria="caballeros">
-<div class="carousel" id="carousel-B14">
-<div class="carousel-images"><a data-caption="Collar Berakhah B-14" data-fancybox="gallery-Collar Berakhah B-14" href="Caballeros\B14.jpg"><img alt="Collar Berakhah B-14" class="active" src="Caballeros\B14.jpg"/></a><a data-caption="Collar Berakhah B-14" data-fancybox="gallery-Collar Berakhah B-14" href="Caballeros\B14-1.jpg"><img alt="Collar Berakhah B-14" src="Caballeros\B14-1.jpg"/></a></div>
-<button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B14')">❮</button>
-<button class="carousel-button next" onclick="changeImage(1, 'carousel-B14')">❯</button>
-</div>
-<h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-14')">Collar Berakhah B-14</h3>
-<div><p>Juan 11:25-26 Le dijo Jesús: Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá. Y todo aquel que vive y cree en mí, no morirá eternamente. ¿Crees esto?</p><p>Este collar simboliza la vida eterna que recibimos a través de la fe en Cristo, quien es la resurrección y la vida.</p></div>
-<p class="precio">$31.999</p>
-<button class="button" onclick="agregarAlCarrito('Collar Berakhah B-14', 31.999)">¡Agregar al Carrito!</button>
-</div></main>
-<!-- Carrito de compras -->
-<div id="carrito" style="display: none;">
-<button class="cerrar-carrito" id="cerrar-carrito">X</button>
-<h2>Tu carrito</h2>
-<ul id="lista-carrito"></ul>
-<p><span id="total-carrito">0</span></p>
-<!-- Datos del cliente -->
-<div id="datos-cliente">
-<h3>Información del Cliente</h3>
-<label for="nombre-cliente">Nombre:</label>
-<input id="nombre-cliente" placeholder="Tu nombre" required="" type="text"/>
-<label for="correo-cliente">Correo Electrónico:</label>
-<input id="correo-cliente" placeholder="Tu correo" required="" type="email"/>
-<label for="direccion-cliente">Dirección:</label>
-<input id="direccion-cliente" placeholder="Direccion en Medellin" required="" type="text"/>
-<label for="telefono-cliente">Teléfono:</label>
-<input id="telefono-cliente" placeholder="Tu teléfono" required="" type="tel"/>
-</div>
-<button class="button" id="btn-pedir">Enviar pedido</button>
-<button class="button" id="btn-vaciar-carrito">Vaciar Carrito</button>
-</div>
-<!-- Contenedor de los íconos sociales y el carrito -->
-<div class="rrss-icons">
-<!-- Icono de Instagram -->
-<a aria-label="Instagram" href="https://www.instagram.com/berakhah_co/" target="_blank">
-<img alt="Instagram" src="iconos/instagram.png"/>
-</a>
-<!-- Icono de WhatsApp -->
-<a aria-label="WhatsApp" href="https://api.whatsapp.com/send?phone=573208042101&amp;text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n..." target="_blank">
-<img alt="WhatsApp" src="iconos/whatsapp.png"/>
-</a>
-<!-- Botón flotante del carrito -->
-<button aria-label="Ver carrito" class="boton-flotante" id="btn-ver-carrito" onclick="toggleCarrito()">
-        🛒 <span id="contador-carrito">0</span>
-</button>
-</div>
-<script src="scripts.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1/dist/confetti.browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<body class="es">
 </body>
+<html lang="es">
+ <head>
+  <link href="iconos/Logo.ico" rel="icon" type="image/x-icon">
+  <title>
+   Berakhah Valle Of Blesing
+  </title>
+  <link href="Logo.jpg" rel="icon" type="image/png">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>
+   Cat&aacute;logo de Productos - Berakhah
+  </title>
+  <meta content="Descubre nuestra colecci&oacute;n de joyer&iacute;a fina y accesorios personalizados. Ofrecemos collares, pulseras y anillos &uacute;nicos, perfectos para regalar en ocasiones especiales." name="description">
+  <meta content="joyer&iacute;a artesanal, collares elegantes, pulseras de moda, anillos &uacute;nicos, joyer&iacute;a personalizada, regalos especiales, joyas hechas a mano, accesorios modernos, joyas de alta calidad, collares de plata, joyer&iacute;a de lujo, joyas para regalar, regalos para ella, joyas femeninas, collares con significado, anillos de compromiso, joyas con estilo, joyer&iacute;a minimalista, pulseras delicadas, joyas exclusivas, joyer&iacute;a para ocasiones especiales, detalles elegantes, joyer&iacute;a para mujer, collares para regalo, regalos originales, accesorios elegantes, pulseras modernas, joyer&iacute;a fina, joyas para aniversario, accesorios personalizados, collares para mujer, joyas para todos los d&iacute;as, detalles &uacute;nicos, joyas de moda, joyer&iacute;a creativa, joyas con encanto, pulseras elegantes, joyer&iacute;a de dise&ntilde;o, regalos &uacute;nicos, collares delicados, anillos elegantes, joyer&iacute;a sofisticada, joyas de alta gama, collares de oro, pulseras ajustables, joyas perfectas para regalar" name="keywords">
+  <link href="styles.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4/dist/fancybox.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4/dist/fancybox.umd.js">
+  </script>
+ </head>
+ <body>
+  <!-- Banner -->
+  <header class="banner">
+   <div class="banner-content">
+    <img alt="Logo de Berakhah" class="logo" src="Logo.jpg">
+    <div class="banner-text">
+     <p>
+      En Berakhah encontrar&aacute;s accesorios con significado y prop&oacute;sito. 💖 &iquest;Ya tienes el tuyo?
+     </p>
+    </div>
+    <!-- Campo de búsqueda -->
+    <div class="buscador">
+     <input id="campo-busqueda" placeholder="Buscar por codigo" type="text">
+     <button class="button" id="btn-buscar">
+      Buscar
+     </button>
+    </div>
+   </div>
+  </header>
+  <!-- Categorías -->
+  <div class="categorias">
+   <button onclick="mostrarCategoria('todo')">
+    Todo
+   </button>
+   <button onclick="mostrarCategoria('collares')">
+    Collares
+   </button>
+   <button onclick="mostrarCategoria('pulseras')">
+    Pulseras
+   </button>
+   <button onclick="mostrarCategoria('anillos')">
+    Anillos
+   </button>
+   <button onclick="mostrarCategoria('zarcillos')">
+    Zarcillos
+   </button>
+   <button onclick="mostrarCategoria('caballeros')">
+    Caballeros
+   </button>
+  </div>
+  <!-- Catálogo de Productos -->
+  <main class="catalogo" id="catalogo">
+   <!-- Categoria: collares - Producto: Collar Berakhah B-25 -->
+   <!--<div class="producto" data-categoria="collares">
+ <div class="carousel" id="carousel-B-25">
+  <div class="carousel-images">
+   <a data-caption="Collar Berakhah B-25" data-fancybox="gallery-Collar Berakhah B-25" href="images/collares/b9fb326a-3ffa-4b5d-8125-af490a570075.jpg">
+    <img alt="Collar Berakhah B-25" class="active" src="images/collares/b9fb326a-3ffa-4b5d-8125-af490a570075.jpg"/>
+   </a>
+  </div>
+  <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-25')">
+   ❮
+  </button>
+  <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-25')">
+   ❯
+  </button>
+ </div>
+ <h3 class="titulo-producto">
+  Collar Berakhah B-25
+ </h3>
+ <p>
+  Esta pulsera dorada, con un delicado dije que une la palabra “Fe” y un corazón, es un símbolo de confianza absoluta en el cuidado divino. Inspirada en Isaías 41:13 — “Porque yo Jehová soy tu Dios, quien te sostiene de tu mano derecha…” — esta joya representa la ternura con la que Dios nos guía, nos fortalece y nos recuerda que nunca estamos solos.
+ </p>
+ <p>
+  El diseño combina elegancia con significado profundo, ideal para quienes desean llevar consigo un recordatorio constante de que, incluso en los momentos de incertidumbre, hay una mano celestial que sostiene la suya. Perfecta para regalar a alguien que necesita ánimo, o para reafirmar tu propia fe en el amor que no falla
+ </p>
+ <div>
+ </div>
+ <p class="precio">
+  $47.999
+ </p>
+ <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-25', 47.999)">
+  ¡Agregar al Carrito!
+ </button>
+</div>
+-->
+   <!-- Categoria: collares - Producto: Collar Berakhah B-19 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-19">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-19" data-fancybox="gallery-Collar Berakhah B-19" href="images/collares/d4428e27-236a-4803-84cd-72c9b834eec0.jpg">
+       <img alt="Collar Berakhah B-19" class="active" src="images/collares/d4428e27-236a-4803-84cd-72c9b834eec0.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-19" data-fancybox="gallery-Collar Berakhah B-19" href="images/collares/9a4c6755-6f2e-480f-afd3-a9448d7d5949.jpg">
+       <img alt="Collar Berakhah B-19" src="images/collares/9a4c6755-6f2e-480f-afd3-a9448d7d5949.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-19')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-19')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto">
+     Collar Berakhah B-19
+    </h3>
+    <div>
+     <p>
+      Este collar dorado con dije de guitarra, realzado con brillantes incrustados, es una celebraci&oacute;n de la fe que se expresa en melod&iacute;a. Inspirado en Salmo 108:1 &mdash; &ldquo;Mi coraz&oacute;n est&aacute; confiado en ti, oh Dios; no puedo evitar cantar tus alabanzas.&rdquo; &mdash; esta pieza simboliza el gozo que brota del alma cuando se vive con confianza en Dios.
+     </p>
+     <p>
+      La guitarra, emblema de expresi&oacute;n y armon&iacute;a, se convierte aqu&iacute; en un recordatorio de que cada nota, cada paso, cada d&iacute;a puede ser una alabanza. Perfecto para m&uacute;sicos, adoradores o cualquier persona que encuentra en la m&uacute;sica una forma de conectar con lo divino.
+     </p>
+    </div>
+    <p class="precio">
+     $0
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-19', 0)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Collar Berakhah B-16 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-16">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-16" data-fancybox="gallery-Collar Berakhah B-16" href="images/collares/b9b0923f-04a3-4fe3-b85c-df374dde3bc6 (1).jpg">
+       <img alt="Collar Berakhah B-16" class="active" src="images/collares/b9b0923f-04a3-4fe3-b85c-df374dde3bc6 (1).jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-16" data-fancybox="gallery-Collar Berakhah B-16" href="images/collares/ae0d31db-63f2-4b0d-814d-1493dde6d3d3 (2).jpg">
+       <img alt="Collar Berakhah B-16" src="images/collares/ae0d31db-63f2-4b0d-814d-1493dde6d3d3 (2).jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-16')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-16')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto">
+     Collar Berakhah B-16
+    </h3>
+    <div>
+     <p>
+      Este collar dorado con dije de avi&oacute;n evoca la fuerza y la esperanza que vienen de confiar plenamente en Dios. Inspirado en Isa&iacute;as 40:31 &mdash; &ldquo;Pero los que conf&iacute;an en el Se&ntilde;or renovar&aacute;n sus fuerzas; volar&aacute;n como las &aacute;guilas&hellip;&rdquo; &mdash; este accesorio simboliza el impulso divino que nos eleva por encima de los desaf&iacute;os.
+     </p>
+     <p>
+      Con su dise&ntilde;o elegante y su mensaje poderoso, es perfecto para quienes creen que la fe es el motor que los lleva m&aacute;s alto, m&aacute;s lejos, sin cansancio ni temor. Ideal para regalar a so&ntilde;adores, viajeros y creyentes que saben que cada vuelo comienza con confianza.
+     </p>
+     <p>
+      &iquest;Quieres que te prepare otra descripci&oacute;n para otro producto? Estoy listo para despegar contigo 🛫
+     </p>
+    </div>
+    <p class="precio">
+     $0
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-16', 0)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Collar Berakhah B-18 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-18">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-18" data-fancybox="gallery-Collar Berakhah B-18" href="images/collares/6d5b75ce-cb12-4508-a522-044cbe262565.jpg">
+       <img alt="Collar Berakhah B-18" class="active" src="images/collares/6d5b75ce-cb12-4508-a522-044cbe262565.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-18" data-fancybox="gallery-Collar Berakhah B-18" href="images/collares/ac3922de-7333-49ec-a4ae-9152caa88224.jpg">
+       <img alt="Collar Berakhah B-18" src="images/collares/ac3922de-7333-49ec-a4ae-9152caa88224.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-18')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-18')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto">
+     Collar Berakhah B-18
+    </h3>
+    <div>
+     <p>
+      Este collar dorado, de dise&ntilde;o sobrio y elegante, representa la serenidad que nace de una fe constante. Inspirado en Isa&iacute;as 26:3 &mdash; &ldquo;T&uacute; guardar&aacute;s en perfecta paz a aquel cuyo pensamiento en ti persevera&hellip;&rdquo; &mdash; este accesorio es un recordatorio tangible de que la verdadera paz no viene del mundo, sino de confiar plenamente en Dios.
+     </p>
+     <p>
+      Ideal para quienes buscan equilibrio en medio del caos, y desean llevar cerca del coraz&oacute;n una promesa de calma, firmeza y confianza divina. Un detalle perfecto para regalar a alguien que vive con fe inquebrantable o que necesita recordar que la paz est&aacute; al alcance de quien persevera.
+     </p>
+    </div>
+    <p class="precio">
+     $0
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-18', 0)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Collar Berakhah B-24 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-24">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-24" data-fancybox="gallery-Collar Berakhah B-24" href="Collares\B24.jpg">
+       <img alt="Collar Berakhah B-24" class="active" src="Collares\B24.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-24" data-fancybox="gallery-Collar Berakhah B-24" href="Pulseras\B25.jpg">
+       <img alt="Collar Berakhah B-24" src="Pulseras\B25.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-24" data-fancybox="gallery-Collar Berakhah B-24" href="Collares\B24-2.jpg">
+       <img alt="Collar Berakhah B-24" src="Collares\B24-2.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-24')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-24')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-24')">
+     Collar Berakhah B-24
+    </h3>
+    <p>
+     Este juego de collar y pulsera dorados, con delicados dijes grabados con la palabra &ldquo;Dios&rdquo;, es una expresi&oacute;n de fe que se lleva con elegancia y prop&oacute;sito. Inspirado en Salmos 91:2 &mdash; &ldquo;Dir&eacute; yo a Jehov&aacute;: Esperanza m&iacute;a, y castillo m&iacute;o; mi Dios, en &eacute;l confiar&eacute;.&rdquo; &mdash; cada pieza transmite la seguridad de estar bajo la protecci&oacute;n divina.
+    </p>
+    <p>
+     Dise&ntilde;ado para quienes conf&iacute;an plenamente en el poder de Dios, este set es ideal para acompa&ntilde;arte en tu d&iacute;a a d&iacute;a como un recordatorio constante de fortaleza, refugio y esperanza. Perfecto para regalar a alguien que camina con fe o para reafirmar tu propia confianza en el amor que nunca falla
+    </p>
+    <div>
+    </div>
+    <p class="precio">
+     $61.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-24', 61.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Collar Berakhah B-46 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-46">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-46" data-fancybox="gallery-Collar Berakhah B-46" href="Collares\B46.jpg">
+       <img alt="Collar Berakhah B-46" class="active" src="Collares\B46.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-46" data-fancybox="gallery-Collar Berakhah B-46" href="Collares\B46-2.jpg">
+       <img alt="Collar Berakhah B-46" src="Collares\B46-2.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-46" data-fancybox="gallery-Collar Berakhah B-46" href="Collares\B46-1.jpg">
+       <img alt="Collar Berakhah B-46" src="Collares\B46-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-46')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-46')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-46')">
+     Collar Berakhah B-46
+    </h3>
+    <div>
+     <p>
+      Este elegante collar dorado presenta un dije del mundo con un avi&oacute;n volando sobre &eacute;l, simbolizando la fe para alcanzar grandes destinos. Inspirado en Mateo 21:22: "Y todo lo que pidiereis en oraci&oacute;n, creyendo, lo recibir&eacute;is."
+     </p>
+     <p>
+      Un accesorio perfecto para quienes conf&iacute;an en sus sue&ntilde;os y en la gu&iacute;a divina en cada viaje.
+     </p>
+    </div>
+    <p class="precio">
+     $31.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-46', 31.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Collar Berakhah B-42 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-42">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-42" data-fancybox="gallery-Collar Berakhah B-42" href="Collares\B42.jpg">
+       <img alt="Collar Berakhah B-42" class="active" src="Collares\B42.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-42" data-fancybox="gallery-Collar Berakhah B-42" href="Collares\B42-1.jpg">
+       <img alt="Collar Berakhah B-42" src="Collares\B42-1.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-42" data-fancybox="gallery-Collar Berakhah B-42" href="Collares\B42-2.jpg">
+       <img alt="Collar Berakhah B-42" src="Collares\B42-2.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-42')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-42')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-42')">
+     Collar Berakhah B-42
+    </h3>
+    <p>
+     Este hermoso collar de perlas doradas y blancas simboliza la valent&iacute;a y fortaleza que provienen de confiar en Dios. Inspirado en Salmos 31:24: "Todos ustedes, los que conf&iacute;an en Dios, &iexcl;an&iacute;mense y sean valientes!"
+    </p>
+    <p>
+     Es un accesorio elegante que refleja el coraje y la fe en cada paso de tu camino.
+    </p>
+    <div>
+    </div>
+    <p class="precio">
+     $41.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-42', 41.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Collar Berakhah B-62 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-62">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-62" data-fancybox="gallery-Collar Berakhah B-62" href="Collares\B62.jpg">
+       <img alt="Collar Berakhah B-62" class="active" src="Collares\B62.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-62')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-62')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-62')">
+     Collar Berakhah B-62
+    </h3>
+    <p>
+     Este collar dorado con un elegante dije en forma de cruz y brillantes en su interior simboliza valor y firmeza frente a las adversidades.
+    </p>
+    <p>
+     Inspirado en Deuteronomio 31:6: "Tengan valor y firmeza; no tengan miedo ni se asusten cuando se enfrenten con ellas, porque el Se&ntilde;or su Dios est&aacute; con ustedes y no los dejar&aacute; ni los abandonar&aacute;." Este accesorio es un recordatorio constante de la presencia y fortaleza que Dios brinda.
+    </p>
+    <div>
+    </div>
+    <p class="precio">
+     $34.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-62', 34.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Collar Berakhah B-61 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-61">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-61" data-fancybox="gallery-Collar Berakhah B-61" href="Collares\B61-1.jpg">
+       <img alt="Collar Berakhah B-61" class="active" src="Collares\B61-1.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-61" data-fancybox="gallery-Collar Berakhah B-61" href="Collares\B61.jpg">
+       <img alt="Collar Berakhah B-61" src="Collares\B61.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-61')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-61')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-61')">
+     Collar Berakhah B-61
+    </h3>
+    <div>
+     <p>
+      Inspirado en Salmos 121:8: &laquo;Jehov&aacute; guardar&aacute; tu salida y tu entrada desde ahora y para siempre,&raquo;
+     </p>
+     <p>
+      Este collar dorado con un delicado dije en forma de avi&oacute;n simboliza la protecci&oacute;n y gu&iacute;a divina en cada trayecto de la vida. Perfecto para quienes buscan llevar consigo un recordatorio de la seguridad que Dios provee en todos sus caminos.
+     </p>
+    </div>
+    <p class="precio">
+     $31.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-61', 31.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Collar Berakhah B-60 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-60">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-60" data-fancybox="gallery-Collar Berakhah B-60" href="Collares\B60-1.jpg">
+       <img alt="Collar Berakhah B-60" class="active" src="Collares\B60-1.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-60" data-fancybox="gallery-Collar Berakhah B-60" href="Collares\B60.jpg">
+       <img alt="Collar Berakhah B-60" src="Collares\B60.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-60')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-60')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-60')">
+     Collar Berakhah B-60
+    </h3>
+    <div>
+     <p>
+      Este collar dorado, inspirado en Salmos 1:3: &laquo;Ser&aacute; como &aacute;rbol plantado junto a corrientes de aguas, que da su fruto en su tiempo, y su hoja no cae; y todo lo que hace, prosperar&aacute;,&raquo;
+     </p>
+     <p>
+      Presenta un dise&ntilde;o en forma de &aacute;rbol con hojas adornadas de brillantes. Es un s&iacute;mbolo de crecimiento, estabilidad y prosperidad, ideal para quienes desean llevar consigo un recordatorio de la abundancia que Dios promete.
+     </p>
+    </div>
+    <p class="precio">
+     $26.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-60', 26.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Collar Berakhah B-59 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-59">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-59" data-fancybox="gallery-Collar Berakhah B-59" href="Collares\B59.jpg">
+       <img alt="Collar Berakhah B-59" class="active" src="Collares\B59.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-59" data-fancybox="gallery-Collar Berakhah B-59" href="Collares\B59-3.jpg">
+       <img alt="Collar Berakhah B-59" src="Collares\B59-3.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-59" data-fancybox="gallery-Collar Berakhah B-59" href="Collares\B59-2.jpg">
+       <img alt="Collar Berakhah B-59" src="Collares\B59-2.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-59')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-59')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto">
+     Collar Berakhah B-59
+    </h3>
+    <div>
+     <p>
+      La Gargantilla Amor Eterno est&aacute; inspirada en Proverbios 8:17: &laquo;Yo amo a los que me aman, y me hallan los que temprano me buscan.&raquo;
+     </p>
+     <p>
+      Esta delicada pieza dorada est&aacute; formada por corazones entrelazados, representando el amor divino y constante. Es un accesorio elegante que recuerda la belleza del amor que Dios tiene hacia aquellos que lo buscan sinceramente.
+     </p>
+    </div>
+    <p class="precio">
+     $49.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-59', 49.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Collar Berakhah B-58 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-58">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-58" data-fancybox="gallery-Collar Berakhah B-58" href="Collares\B58.jpg">
+       <img alt="Collar Berakhah B-58" class="active" src="Collares\B58.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-58" data-fancybox="gallery-Collar Berakhah B-58" href="Collares\B58-1.jpg">
+       <img alt="Collar Berakhah B-58" src="Collares\B58-1.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-58" data-fancybox="gallery-Collar Berakhah B-58" href="Collares\B58-2.jpg">
+       <img alt="Collar Berakhah B-58" src="Collares\B58-2.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-58" data-fancybox="gallery-Collar Berakhah B-58" href="Collares\B58-3.jpg">
+       <img alt="Collar Berakhah B-58" src="Collares\B58-3.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-58" data-fancybox="gallery-Collar Berakhah B-58" href="Collares\B58-4.jpg">
+       <img alt="Collar Berakhah B-58" src="Collares\B58-4.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-58" data-fancybox="gallery-Collar Berakhah B-58" href="Collares\B58-5.jpg">
+       <img alt="Collar Berakhah B-58" src="Collares\B58-5.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-58')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-58')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto">
+     Collar Berakhah B-58
+    </h3>
+    <div>
+     <p>
+      El Set de Collares Luz del D&iacute;a y Noche est&aacute; inspirado en G&eacute;nesis 1:16: &laquo;E hizo Dios las dos grandes lumbreras, la lumbrera mayor para dominio del d&iacute;a y la lumbrera menor para dominio de la noche; hizo tambi&eacute;n las estrellas.&raquo;
+     </p>
+     <p>
+      Este conjunto de dos collares dorados simboliza la uni&oacute;n perfecta del sol y la luna, representando el equilibrio y la conexi&oacute;n entre dos personas especiales. Los dijes se atraen y se unen, creando un accesorio significativo para parejas o amigos cercanos, recordando la luz y la gu&iacute;a de Dios.
+     </p>
+    </div>
+    <p class="precio">
+     $58.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-58', 58.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Collar Berakhah B-22 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-22">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-22" data-fancybox="gallery-Collar Berakhah B-22" href="Collares\B22-.jpg">
+       <img alt="Collar Berakhah B-22" class="active" src="Collares\B22-.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-22" data-fancybox="gallery-Collar Berakhah B-22" href="Collares\B22-1.jpg">
+       <img alt="Collar Berakhah B-22" src="Collares\B22-1.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-22" data-fancybox="gallery-Collar Berakhah B-22" href="Collares\B22-3.jpg">
+       <img alt="Collar Berakhah B-22" src="Collares\B22-3.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-22')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-22')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-22')">
+     Collar Berakhah B-22
+    </h3>
+    <p>
+     La Gargantilla Flores de Confianza est&aacute; inspirada en Mateo 6:30: &laquo;Si Dios hace tan hermosas a las flores, que viven tan poco tiempo, &iquest;acaso no har&aacute; m&aacute;s por ustedes?&raquo;
+    </p>
+    <p>
+     Esta delicada pieza simboliza la belleza y la provisi&oacute;n divina, record&aacute;ndonos confiar en el cuidado amoroso de Dios. Su dise&ntilde;o floral elegante es perfecto para quienes buscan llevar consigo un mensaje de fe y esperanza.
+    </p>
+    <div>
+    </div>
+    <p class="precio">
+     $46.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-22', 46.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Collar Berakhah B-45 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-45">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-45" data-fancybox="gallery-Collar Berakhah B-45" href="Collares\B45.jpg">
+       <img alt="Collar Berakhah B-45" class="active" src="Collares\B45.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-45" data-fancybox="gallery-Collar Berakhah B-45" href="Collares\B45-1.jpg">
+       <img alt="Collar Berakhah B-45" src="Collares\B45-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-45')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-45')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-45')">
+     Collar Berakhah B-45
+    </h3>
+    <div>
+     <p>
+      El Collar Coraz&oacute;n de Unidad, Es un collar dorado con un peculiar dije en forma de coraz&oacute;n, est&aacute; inspirado en Filipenses 2:2: "Completad mi gozo, sintiendo lo mismo, teniendo el mismo amor, un&aacute;nimes, sintiendo una misma cosa."
+     </p>
+     <p>
+      Este collar simboliza la armon&iacute;a y la unidad en el amor, siendo un recordatorio de la importancia de compartir un mismo sentir y prop&oacute;sito. Es un accesorio elegante y significativo, ideal para aquellos que desean llevar consigo un s&iacute;mbolo de amor y uni&oacute;n.
+     </p>
+    </div>
+    <p class="precio">
+     $44.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-45', 44.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Collar Berakhah B-27 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-27">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-27" data-fancybox="gallery-Collar Berakhah B-27" href="Collares\B27.jpg">
+       <img alt="Collar Berakhah B-27" class="active" src="Collares\B27.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-27" data-fancybox="gallery-Collar Berakhah B-27" href="Collares\B27-1.jpg">
+       <img alt="Collar Berakhah B-27" src="Collares\B27-1.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-27" data-fancybox="gallery-Collar Berakhah B-27" href="Collares\B27-2.jpg">
+       <img alt="Collar Berakhah B-27" src="Collares\B27-2.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-27" data-fancybox="gallery-Collar Berakhah B-27" href="Collares\B27-3.jpg">
+       <img alt="Collar Berakhah B-27" src="Collares\B27-3.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-27')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-27')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-27')">
+     Collar Berakhah B-27
+    </h3>
+    <div>
+     <p>
+      El Collar Belleza del Coraz&oacute;n, elaborado con elegantes perlas y un dije de acero en forma de coraz&oacute;n dorado, se inspira en 1 Pedro 3:3-4. "La belleza no depende de las apariencias, sino de lo que hay en el coraz&oacute;n."
+     </p>
+     <p>
+      Este collar es un recordatorio de que la verdadera belleza proviene de nuestro interior, resaltando la importancia de cultivar un coraz&oacute;n puro y aut&eacute;ntico. Es una pieza sofisticada y significativa, perfecta para quienes valoran la esencia sobre las apariencias.
+     </p>
+    </div>
+    <p class="precio">
+     $79.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-27', 79.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Berakhah B-13 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-13">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-13" data-fancybox="gallery-Collar Berakhah B-13" href="Collares\B13.jpg">
+       <img alt="Collar Berakhah B-13" class="active" src="Collares\B13.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-13')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-13')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-13')">
+     Collar Berakhah B-13
+    </h3>
+    <div>
+     <p>
+      Proverbios 4:23 Sobre todas las cosas cuida tu coraz&oacute;n, porque este determina el rumbo de tu vida.
+     </p>
+     <p>
+      Este delicado collar representa la importancia de proteger lo m&aacute;s valioso: tu coraz&oacute;n. En este contexto, coraz&oacute;n es sin&oacute;nimo de mente, emociones, pensamientos, es decir, debes cuidar lo que piensas y sientes. Cuando utilices esta pieza recordar&aacute;s lo mucho que debes cuidar tu coraz&oacute;n para poder vivir una vida plena y significativa.
+     </p>
+    </div>
+    <p class="precio">
+     $39.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-13', 39.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Collar Berakhah B-54 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-54">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-54" data-fancybox="gallery-Collar Berakhah B-54" href="Collares\B54.jpg">
+       <img alt="Collar Berakhah B-54" class="active" src="Collares\B54.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-54" data-fancybox="gallery-Collar Berakhah B-54" href="Collares\B54-1.jpg">
+       <img alt="Collar Berakhah B-54" src="Collares\B54-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-54')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-54')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-54')">
+     Collar Berakhah B-54
+    </h3>
+    <div>
+     <p>
+      1 Juan 4:9 En esto se mostr&oacute; el amor de Dios para con nosotros, en que Dios envi&oacute; a su Hijo unig&eacute;nito al mundo, para que vivamos por &eacute;l.
+     </p>
+     <p>
+      Este collar dorado simboliza el amor divino y la gracia que nos cubre. Un accesorio elegante que te recuerda diariamente la luz y el amor incondicional de Dios.
+     </p>
+    </div>
+    <p class="precio">
+     $36.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-54', 36.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Berakhah B-44 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-44">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-44" data-fancybox="gallery-Collar Berakhah B-44" href="Collares\B44.jpg">
+       <img alt="Collar Berakhah B-44" class="active" src="Collares\B44.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-44" data-fancybox="gallery-Collar Berakhah B-44" href="Collares\B44-1.jpg">
+       <img alt="Collar Berakhah B-44" src="Collares\B44-1.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-44" data-fancybox="gallery-Collar Berakhah B-44" href="Collares\B44-2.jpg">
+       <img alt="Collar Berakhah B-44" src="Collares\B44-2.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-44" data-fancybox="gallery-Collar Berakhah B-44" href="Anillos\B-35.jpg">
+       <img alt="Collar Berakhah B-44" src="Anillos\B-35.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-44')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-44')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-44')">
+     Collar Berakhah B-44
+    </h3>
+    <div>
+     <p>
+      Juan 15:3 Ya vosotros est&aacute;is limpios por la palabra que os he hablado.
+     </p>
+     <p>
+      Este collar simboliza la pureza y la limpieza que obtenemos por la palabra de Dios, record&aacute;ndonos que somos renovados y transformados por Su verdad.
+     </p>
+    </div>
+    <p class="precio">
+     $44.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-44', 44.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Collar Collar Berakhah B-36 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B-36">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-36" data-fancybox="gallery-Collar Berakhah B-36" href="Collares\B36.jpg">
+       <img alt="Collar Berakhah B-36" class="active" src="Collares\B36.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-36')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-36')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Collar Berakhah B-36')">
+     Collar Berakhah B-36
+    </h3>
+    <div>
+     <p>
+      Jerem&iacute;as 29:13 Me buscar&aacute;n y me encontrar&aacute;n cuando me busquen de todo coraz&oacute;n.
+     </p>
+     <p>
+      Este collar simboliza la promesa de encontrar a Dios cuando lo buscamos con sinceridad y todo nuestro coraz&oacute;n.
+     </p>
+    </div>
+    <p class="precio">
+     $44.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-36', 44.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Berakhah B-11 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B11">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-11" data-fancybox="gallery-Collar Berakhah B-11" href="Collares\B11.jpg">
+       <img alt="Collar Berakhah B-11" class="active" src="Collares\B11.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B11')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B11')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-11')">
+     Collar Berakhah B-11
+    </h3>
+    <div>
+     <p>
+      Juan 3:17 Porque no envi&oacute; Dios a su Hijo al mundo para condenar al mundo, sino para que el mundo sea salvo por &eacute;l.
+     </p>
+     <p>
+      Este collar simboliza la salvaci&oacute;n y el amor de Dios, record&aacute;ndonos que Jes&uacute;s no vino a condenar, sino a salvar a la humanidad a trav&eacute;s de Su sacrificio.
+     </p>
+    </div>
+    <p class="precio">
+     $31.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-11', 31.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Berakhah B-6 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B6">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-06" data-fancybox="gallery-Collar Berakhah B-06" href="Collares\B6.jpg">
+       <img alt="Collar Berakhah B-06" class="active" src="Collares\B6.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B6')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B6')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-6')">
+     Collar Berakhah B-06
+    </h3>
+    <div>
+     <p>
+      Hebreos 11:1 Es, pues, la fe la certeza de lo que se espera, la convicci&oacute;n de lo que no se ve.
+     </p>
+     <p>
+      Este collar simboliza la fe inquebrantable en lo que no podemos ver pero sabemos que existe. Un recordatorio constante de la confianza que debemos tener en Dios y en sus promesas.
+     </p>
+    </div>
+    <p class="precio">
+     $29.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-06', 29.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Berakhah B-4 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B4">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-04" data-fancybox="gallery-Collar Berakhah B-04" href="Collares\B4.jpg">
+       <img alt="Collar Berakhah B-04" class="active" src="Collares\B4.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B4')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B4')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-4')">
+     Collar Berakhah B-04
+    </h3>
+    <div>
+     <p>
+      Juan 14:6 Jes&uacute;s le dijo: Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por m&iacute;.
+     </p>
+     <p>
+      Este collar simboliza el camino y la vida que solo podemos encontrar en Jes&uacute;s. Un recordatorio de que &Eacute;l es nuestra gu&iacute;a y nuestra &uacute;nica verdad hacia la eternidad.
+     </p>
+    </div>
+    <p class="precio">
+     $44.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-04', 44.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Berakhah B-10 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B10">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-10" data-fancybox="gallery-Collar Berakhah B-10" href="Collares\B10.jpg">
+       <img alt="Collar Berakhah B-10" class="active" src="Collares\B10.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B10')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B10')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-10')">
+     Collar Berakhah B-10
+    </h3>
+    <div>
+     <p>
+      Juan 14:27 La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da...
+     </p>
+     <p>
+      Este collar simboliza la paz divina que sobrepasa todo entendimiento. Un recordatorio de que la verdadera paz viene de Dios, una paz que el mundo no puede ofrecer.
+     </p>
+    </div>
+    <p class="precio">
+     $29.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-10', 29.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Berakhah B-2 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B2">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-02" data-fancybox="gallery-Collar Berakhah B-02" href="Collares\B02.jpg">
+       <img alt="Collar Berakhah B-02" class="active" src="Collares\B02.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B2')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B2')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-2')">
+     Collar Berakhah B-02
+    </h3>
+    <div>
+     <p>
+      Juan 3:16 Porque de tal manera am&oacute; Dios al mundo, que ha dado a su Hijo unig&eacute;nito...
+     </p>
+     <p>
+      Este collar simboliza el amor incondicional de Dios hacia la humanidad. Un accesorio que recuerda el sacrificio de Jes&uacute;s, la m&aacute;xima expresi&oacute;n de amor divino.
+     </p>
+    </div>
+    <p class="precio">
+     $28.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-02', 28.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: collares - Producto: Berakhah B-26 -->
+   <div class="producto" data-categoria="collares">
+    <div class="carousel" id="carousel-B26">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-26" data-fancybox="gallery-Collar Berakhah B-26" href="Collares\B26.jpg">
+       <img alt="Collar Berakhah B-26" class="active" src="Collares\B26.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B26')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B26')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-26')">
+     Collar Berakhah B-26
+    </h3>
+    <div>
+     <p>
+      2 Reyes 6:15-16 No tengas miedo, porque m&aacute;s son los que est&aacute;n con nosotros que los que est&aacute;n con ellos.
+     </p>
+     <p>
+      Este collar simboliza la protecci&oacute;n divina. Un recordatorio de que, aunque enfrentemos situaciones dif&iacute;ciles, Dios est&aacute; con nosotros y somos m&aacute;s fuertes con &Eacute;l.
+     </p>
+    </div>
+    <p class="precio">
+     $34.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-26', 34.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: pulseras - Producto: Pulsera Berakhah B-17 -->
+   <div class="producto" data-categoria="pulseras">
+    <div class="carousel" id="carousel-B-17">
+     <div class="carousel-images">
+      <a data-caption="Pulsera Berakhah B-17" data-fancybox="gallery-Pulsera Berakhah B-17" href="images/pulseras/782f7b8a-f977-4468-b1cc-776361758634.jpg">
+       <img alt="Pulsera Berakhah B-17" class="active" src="images/pulseras/782f7b8a-f977-4468-b1cc-776361758634.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-17" data-fancybox="gallery-Pulsera Berakhah B-17" href="images/pulseras/a2a52c40-a4f5-4900-aa18-8d18ce09a6fb.jpg">
+       <img alt="Pulsera Berakhah B-17" src="images/pulseras/a2a52c40-a4f5-4900-aa18-8d18ce09a6fb.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-17')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-17')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto">
+     Pulsera Berakhah B-17
+    </h3>
+    <div>
+     <p>
+      Esta delicada pulsera dorada presenta un dije de mariposa con alas adornadas por peque&ntilde;os diamantes de fantas&iacute;a, s&iacute;mbolo de transformaci&oacute;n y renovaci&oacute;n espiritual. Inspirada en Romanos 12:2 &mdash; &ldquo;No se conformen a este mundo, sino transf&oacute;rmense mediante la renovaci&oacute;n de su mente&hellip;&rdquo; &mdash; esta joya representa el poder de la fe para guiarnos hacia una vida aut&eacute;ntica y alineada con la voluntad divina.
+     </p>
+     <p>
+      Un accesorio elegante para quienes eligen volar alto, romper moldes y abrazar el cambio con prop&oacute;sito y esperanza.
+     </p>
+    </div>
+    <p class="precio">
+     $0
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-17', 0)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: pulseras - Producto: Pulsera Berakhah B-21 -->
+   <div class="producto" data-categoria="pulseras">
+    <div class="carousel" id="carousel-B-21">
+     <div class="carousel-images">
+      <a data-caption="Pulsera Berakhah B-21" data-fancybox="gallery-Pulsera Berakhah B-21" href="Pulseras\B21.jpg">
+       <img alt="Pulsera Berakhah B-21" class="active" src="Pulseras\B21.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-21" data-fancybox="gallery-Pulsera Berakhah B-21" href="Pulseras\B21-1.jpg">
+       <img alt="Pulsera Berakhah B-21" src="Pulseras\B21-1.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-21" data-fancybox="gallery-Pulsera Berakhah B-21" href="Pulseras\B21-2.jpg">
+       <img alt="Pulsera Berakhah B-21" src="Pulseras\B21-2.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-21')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-21')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Pulsera Berakhah B-21')">
+     Pulsera Berakhah B-21
+    </h3>
+    <div>
+     <p>
+      La Pulsera Infinito Divino, en tono dorado, lleva un s&iacute;mbolo del infinito inspirado en Apocalipsis 1:8: &laquo;Yo soy el Alfa y la Omega, principio y fin, dice el Se&ntilde;or, el que es y que era y que ha de venir, el Todopoderoso.&raquo;
+     </p>
+     <p>
+      Esta pulsera representa la eternidad y el poder sin fin de Dios, un accesorio elegante que recuerda Su naturaleza infinita y eterna.
+     </p>
+    </div>
+    <p class="precio">
+     $31.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-21', 31.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: pulseras - Producto: Berakhah B-40 -->
+   <div class="producto" data-categoria="pulseras">
+    <div class="carousel" id="carousel-B40">
+     <div class="carousel-images">
+      <a data-caption="Pulsera Berakhah B-40" data-fancybox="gallery-Pulsera Berakhah B-40" href="Caballeros/B40.jpg">
+       <img alt="Pulsera Berakhah B-40" class="active" src="Caballeros/B40.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-40" data-fancybox="gallery-Pulsera Berakhah B-40" href="Caballeros/B40-1.jpg">
+       <img alt="Pulsera Berakhah B-40" src="Caballeros/B40-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B40')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B40')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-40')">
+     Pulsera Berakhah B-40
+    </h3>
+    <div>
+     <p>
+      Apocalipsis 1:6 Nos hizo reyes y sacerdotes para Dios, su Padre; a &eacute;l sea gloria e imperio por los siglos de los siglos. Am&eacute;n.
+     </p>
+     <p>
+      Esta pulsera simboliza la autoridad y la posici&oacute;n que Dios nos ha dado como hijos suyos. Un recordatorio de nuestro llamado a vivir como reyes y sacerdotes, reflejando Su gloria.
+     </p>
+    </div>
+    <p class="precio">
+     $36.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-40', 36.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: pulseras - Producto: Berakhah B-41 -->
+   <div class="producto" data-categoria="pulseras">
+    <div class="carousel" id="carousel-B41">
+     <div class="carousel-images">
+      <a data-caption="Pulsera Berakhah B-41" data-fancybox="gallery-Pulsera Berakhah B-41" href="Caballeros/B41.jpg">
+       <img alt="Pulsera Berakhah B-41" class="active" src="Caballeros/B41.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-41" data-fancybox="gallery-Pulsera Berakhah B-41" href="Caballeros/B41-1.jpg">
+       <img alt="Pulsera Berakhah B-41" src="Caballeros/B41-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B41')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B41')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-41')">
+     Pulsera Berakhah B-41
+    </h3>
+    <div>
+     <p>
+      Apocalipsis 1:6 Nos hizo reyes y sacerdotes para Dios, su Padre; a &eacute;l sea gloria e imperio por los siglos de los siglos. Am&eacute;n.
+     </p>
+     <p>
+      Esta pulsera simboliza nuestro llamado a ser reyes y sacerdotes en el reino de Dios, reflejando la gloria de nuestro Padre celestial en todo lo que hacemos.
+     </p>
+    </div>
+    <p class="precio">
+     $36.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-41', 36.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: pulseras - Producto: Berakhah B-12 -->
+   <div class="producto" data-categoria="pulseras">
+    <div class="carousel" id="carousel-B12">
+     <div class="carousel-images">
+      <a data-caption="Pulsera Berakhah B-12" data-fancybox="gallery-Pulsera Berakhah B-12" href="Pulseras\B12.jpg">
+       <img alt="Pulsera Berakhah B-12" class="active" src="Pulseras\B12.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-12" data-fancybox="gallery-Pulsera Berakhah B-12" href="Pulseras\B12-1.jpg">
+       <img alt="Pulsera Berakhah B-12" src="Pulseras\B12-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B12')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B12')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-12')">
+     Pulsera Berakhah B-12
+    </h3>
+    <div>
+     <p>
+      Marcos 16:15 Y les dijo: Id por todo el mundo y predicad el evangelio a toda criatura.
+     </p>
+     <p>
+      Esta pulsera simboliza el mandato de llevar el mensaje de salvaci&oacute;n a todos los rincones del mundo. Un recordatorio constante de nuestro llamado como disc&iacute;pulos de Cristo.
+     </p>
+    </div>
+    <p class="precio">
+     $31.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-12', 31.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: pulseras - Producto: Berakhah B-3 -->
+   <div class="producto" data-categoria="pulseras">
+    <div class="carousel" id="carousel-B3">
+     <div class="carousel-images">
+      <a data-caption="Pulsera Berakhah B-03" data-fancybox="gallery-Pulsera Berakhah B-03" href="Pulseras\B3-1.jpg">
+       <img alt="Pulsera Berakhah B-03" class="active" src="Pulseras\B3-1.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-03" data-fancybox="gallery-Pulsera Berakhah B-03" href="Pulseras\B3.jpg">
+       <img alt="Pulsera Berakhah B-03" src="Pulseras\B3.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B3')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B3')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-3')">
+     Pulsera Berakhah B-03
+    </h3>
+    <div>
+     <p>
+      Isa&iacute;as 1:18 Venid luego, dice Jehov&aacute;, y estemos a cuenta: si vuestros pecados fueren como la grana, como la nieve ser&aacute;n emblanquecidos; si fueren rojos como el carmes&iacute;, vendr&aacute;n a ser como blanca lana.
+     </p>
+     <p>
+      Esta pulsera simboliza el poder redentor de Dios, quien nos purifica y limpia de todo pecado. Un recordatorio constante del perd&oacute;n y la misericordia divinos.
+     </p>
+    </div>
+    <p class="precio">
+     $31.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-03', 31.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: pulseras - Producto: Berakhah B-1 -->
+   <div class="producto" data-categoria="pulseras">
+    <div class="carousel" id="carousel-B1">
+     <div class="carousel-images">
+      <a data-caption="Pulsera Berakhah B-01" data-fancybox="gallery-Pulsera Berakhah B-01" href="Pulseras\B1-2.jpg">
+       <img alt="Pulsera Berakhah B-01" class="active" src="Pulseras\B1-2.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-01" data-fancybox="gallery-Pulsera Berakhah B-01" href="Pulseras\B1.jpg">
+       <img alt="Pulsera Berakhah B-01" src="Pulseras\B1.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-01" data-fancybox="gallery-Pulsera Berakhah B-01" href="Pulseras\B1-1.jpg">
+       <img alt="Pulsera Berakhah B-01" src="Pulseras\B1-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B1')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B1')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-1')">
+     Pulsera Berakhah B-01
+    </h3>
+    <div>
+     <p>
+      Salmos 1:3 Ser&aacute; como &aacute;rbol plantado junto a corrientes de aguas, Que da su fruto en su tiempo, Y su hoja no cae; Y todo lo que hace, prosperar&aacute;.
+     </p>
+     <p>
+      Esta pulsera simboliza la estabilidad y bendici&oacute;n de quienes caminan en los caminos de Dios, prosperando y dando fruto a su debido tiempo.
+     </p>
+    </div>
+    <p class="precio">
+     $31.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-01', 31.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: pulseras - Producto: Berakhah B-8 -->
+   <div class="producto" data-categoria="pulseras">
+    <div class="carousel" id="carousel-B8">
+     <div class="carousel-images">
+      <a data-caption="Pulsera Berakhah B-08" data-fancybox="gallery-Pulsera Berakhah B-08" href="Pulseras\B8.jpg">
+       <img alt="Pulsera Berakhah B-08" class="active" src="Pulseras\B8.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-08" data-fancybox="gallery-Pulsera Berakhah B-08" href="Pulseras\B8-1.jpg">
+       <img alt="Pulsera Berakhah B-08" src="Pulseras\B8-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B8')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B8')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-8')">
+     Pulsera Berakhah B-08
+    </h3>
+    <div>
+     <p>
+      Proverbios 4:23 Sobre toda cosa guardada, guarda tu coraz&oacute;n; Porque de &eacute;l mana la vida.
+     </p>
+     <p>
+      Esta pulsera simboliza la importancia de proteger el coraz&oacute;n, fuente de la vida, y mantenerlo alineado con los principios de Dios.
+     </p>
+    </div>
+    <p class="precio">
+     $31.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-08', 31.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: pulseras - Producto: Berakhah B-7 -->
+   <div class="producto" data-categoria="pulseras">
+    <div class="carousel" id="carousel-B7">
+     <div class="carousel-images">
+      <a data-caption="Pulsera Berakhah B-07" data-fancybox="gallery-Pulsera Berakhah B-07" href="Pulseras/B7.jpg">
+       <img alt="Pulsera Berakhah B-07" class="active" src="Pulseras/B7.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-07" data-fancybox="gallery-Pulsera Berakhah B-07" href="Pulseras/B7-1.jpg">
+       <img alt="Pulsera Berakhah B-07" src="Pulseras/B7-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B7')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B7')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-7')">
+     Pulsera Berakhah B-07
+    </h3>
+    <div>
+     <p>
+      Marcos 11:24 Por tanto, os digo que todo lo que pidiereis orando, creed que lo recibir&eacute;is, y os vendr&aacute;.
+     </p>
+     <p>
+      Esta pulsera simboliza el poder de la fe y la oraci&oacute;n, record&aacute;ndonos que lo que pedimos con fe, lo recibiremos.
+     </p>
+    </div>
+    <p class="precio">
+     $31.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-07', 31.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: pulseras - Producto: Berakhah B-9 -->
+   <div class="producto" data-categoria="pulseras">
+    <div class="carousel" id="carousel-B9">
+     <div class="carousel-images">
+      <a data-caption="Pulsera Berakhah B-09" data-fancybox="gallery-Pulsera Berakhah B-09" href="Pulseras\B9.jpg">
+       <img alt="Pulsera Berakhah B-09" class="active" src="Pulseras\B9.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-09" data-fancybox="gallery-Pulsera Berakhah B-09" href="Pulseras\B9-1.jpg">
+       <img alt="Pulsera Berakhah B-09" src="Pulseras\B9-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B9')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B9')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-9')">
+     Pulsera Berakhah B-09
+    </h3>
+    <div>
+     <p>
+      Romanos 1:16 Porque no me averg&uuml;enzo del evangelio, porque es poder de Dios para salvaci&oacute;n a todo aquel que cree; al jud&iacute;o primeramente, y tambi&eacute;n al griego.
+     </p>
+     <p>
+      Esta pulsera simboliza la valent&iacute;a y el poder de declarar nuestra fe sin verg&uuml;enza, sabiendo que el evangelio es el poder de Dios para la salvaci&oacute;n.
+     </p>
+    </div>
+    <p class="precio">
+     $31.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-9', 22.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: pulseras - Producto: Berakhah B-23 -->
+   <div class="producto" data-categoria="pulseras">
+    <div class="carousel" id="carousel-B23">
+     <div class="carousel-images">
+      <a data-caption="Pulsera Berakhah B-23" data-fancybox="gallery-Pulsera Berakhah B-23" href="Pulseras\B23.jpg">
+       <img alt="Pulsera Berakhah B-23" class="active" src="Pulseras\B23.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-23" data-fancybox="gallery-Pulsera Berakhah B-23" href="Pulseras\B23-1.jpg">
+       <img alt="Pulsera Berakhah B-23" src="Pulseras\B23-1.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-23" data-fancybox="gallery-Pulsera Berakhah B-23" href="Pulseras\B23-2.jpg">
+       <img alt="Pulsera Berakhah B-23" src="Pulseras\B23-2.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B23')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B23')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-23')">
+     Pulsera Berakhah B-23
+    </h3>
+    <div>
+     <p>
+      Hechos 13:47 As&iacute; nos lo ha mandado el Se&ntilde;or: "Te he puesto por luz para las naciones, a fin de que lleves mi salvaci&oacute;n hasta los confines de la tierra".
+     </p>
+     <p>
+      Esta pulsera simboliza nuestro llamado a ser luz en medio de las naciones, llevando el mensaje de salvaci&oacute;n a todos los lugares donde vayamos.
+     </p>
+    </div>
+    <p class="precio">
+     $31.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-23', 31.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: anillos - Producto: Anillo Berakhah BA-11 -->
+   <div class="producto" data-categoria="anillos">
+    <div class="carousel" id="carousel-BA-11">
+     <div class="carousel-images">
+      <a data-caption="Anillo Berakhah BA-11" data-fancybox="gallery-Anillo Berakhah BA-11" href="images/anillos/4981508434218299314.jpg">
+       <img alt="Anillo Berakhah BA-11" class="active" src="images/anillos/4981508434218299314.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-11" data-fancybox="gallery-Anillo Berakhah BA-11" href="images/anillos/4981508434218299315.jpg">
+       <img alt="Anillo Berakhah BA-11" src="images/anillos/4981508434218299315.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-BA-11')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-BA-11')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto">
+     Anillo Berakhah BA-11
+    </h3>
+    <div>
+     <p>
+      Este anillo dorado, con forma de coraz&oacute;n y brillantes que reflejan la luz con cada movimiento, es un tributo al amor eterno y la fidelidad inquebrantable de Dios. Inspirado en Lam 3:22&ndash;23 &mdash; &ldquo;El fiel amor del Se&ntilde;or nunca se acaba; sus misericordias jam&aacute;s terminan&hellip;&rdquo; &mdash; esta joya simboliza la promesa de que cada d&iacute;a comienza con gracia renovada.
+     </p>
+     <p>
+      El coraz&oacute;n, adornado con destellos de esperanza, representa el refugio seguro en el amor divino que nunca falla. Ideal para quienes desean llevar consigo un recordatorio constante de que, sin importar las circunstancias, el amor de Dios permanece firme y sus misericordias se renuevan con cada amanecer.
+     </p>
+    </div>
+    <p class="precio">
+     $47999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-11', 47999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: anillos - Producto: Anillo Berakhah BA-10 -->
+   <div class="producto" data-categoria="anillos">
+    <div class="carousel" id="carousel-BA-10">
+     <div class="carousel-images">
+      <a data-caption="Anillo Berakhah BA-10" data-fancybox="gallery-Anillo Berakhah BA-10" href="images/anillos/83f613bd-a237-4749-9410-7439beab757a.jpg">
+       <img alt="Anillo Berakhah BA-10" class="active" src="images/anillos/83f613bd-a237-4749-9410-7439beab757a.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-10" data-fancybox="gallery-Anillo Berakhah BA-10" href="images/anillos/e25b606f-847b-4f15-a37a-ad0d8d5e9140.jpg">
+       <img alt="Anillo Berakhah BA-10" src="images/anillos/e25b606f-847b-4f15-a37a-ad0d8d5e9140.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-10" data-fancybox="gallery-Anillo Berakhah BA-10" href="images/anillos/6232d49a-ad69-4d9d-bd51-a199f240741b.jpg">
+       <img alt="Anillo Berakhah BA-10" src="images/anillos/6232d49a-ad69-4d9d-bd51-a199f240741b.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-BA-10')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-BA-10')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto">
+     Anillo Berakhah BA-10
+    </h3>
+    <div>
+     <p>
+      Este anillo dorado, con una delicada piedra rosada claro en el centro, encarna la pureza del alma y la promesa de una conexi&oacute;n divina. Inspirado en Mateo 5:8 &mdash; &ldquo;Dios bendice a los que tienen coraz&oacute;n puro, porque ellos ver&aacute;n a Dios.&rdquo; &mdash; esta joya es un s&iacute;mbolo de fe transparente, amor sincero y la belleza que florece desde lo m&aacute;s profundo del coraz&oacute;n.
+     </p>
+     <p>
+      La piedra rosada, suave y luminosa, representa la ternura de un esp&iacute;ritu limpio y la esperanza de ver lo eterno con ojos de fe. Ideal para quienes buscan vivir con autenticidad, humildad y una mirada clara hacia lo sagrado.
+     </p>
+    </div>
+    <p class="precio">
+     $47999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-10', 47999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: anillos - Producto: Anillo Berakhah BA-09 -->
+   <div class="producto" data-categoria="anillos">
+    <div class="carousel" id="carousel-BA-09">
+     <div class="carousel-images">
+      <a data-caption="Anillo Berakhah BA-09" data-fancybox="gallery-Anillo Berakhah BA-09" href="images/anillos/f902d446-6532-4543-85d5-3bc55c43dcf0.jpg">
+       <img alt="Anillo Berakhah BA-09" class="active" src="images/anillos/f902d446-6532-4543-85d5-3bc55c43dcf0.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-09" data-fancybox="gallery-Anillo Berakhah BA-09" href="images/anillos/9fe13d2e-e4bd-4caa-8990-1b0346121534.jpg">
+       <img alt="Anillo Berakhah BA-09" src="images/anillos/9fe13d2e-e4bd-4caa-8990-1b0346121534.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-09" data-fancybox="gallery-Anillo Berakhah BA-09" href="images/anillos/92958368-232e-4996-87c3-6e4ce1e9d36b.jpg">
+       <img alt="Anillo Berakhah BA-09" src="images/anillos/92958368-232e-4996-87c3-6e4ce1e9d36b.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-BA-09')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-BA-09')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto">
+     Anillo Berakhah BA-09
+    </h3>
+    <div>
+     <p>
+      - 1 Pedro 1:15&ndash;16
+     </p>
+     <p>
+      &ldquo;Ahora sean santos en todo lo que hagan, tal como Dios, quien los eligi&oacute;, es santo. Pues las Escrituras dicen: &lsquo;Sean santos, porque yo soy santo.&rsquo;
+     </p>
+    </div>
+    <p class="precio">
+     $47999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-09', 47999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: anillos - Producto: Berakhah B-33 -->
+   <div class="producto" data-categoria="anillos">
+    <div class="carousel" id="carousel-B-33">
+     <div class="carousel-images">
+      <a data-caption="Anillo Berakhah BA-06" data-fancybox="gallery-Anillo Berakhah BA-06" href="Anillos/B33.jpg">
+       <img alt="Anillo Berakhah BA-06" class="active" src="Anillos/B33.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-06" data-fancybox="gallery-Anillo Berakhah BA-06" href="Anillos/B33-1.jpg">
+       <img alt="Anillo Berakhah BA-06" src="Anillos/B33-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-33')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-33')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-33')">
+     Anillo Berakhah BA-06
+    </h3>
+    <p>
+     Hechos 4:12 Y en ning&uacute;n otro hay salvaci&oacute;n; porque no hay otro nombre bajo el cielo, dado a los hombres, en que podamos ser salvos.
+    </p>
+    <p>
+     Este anillo simboliza la exclusividad de la salvaci&oacute;n en Jes&uacute;s, un recordatorio constante de nuestra fe en &Eacute;l como nuestro &uacute;nico salvador.
+    </p>
+    <div>
+    </div>
+    <p class="precio">
+     $47.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-06', 47.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: anillos - Producto: Berakhah B-53 -->
+   <div class="producto" data-categoria="anillos">
+    <div class="carousel" id="carousel-B-53">
+     <div class="carousel-images">
+      <a data-caption="Anillo Berakhah BA-08" data-fancybox="gallery-Anillo Berakhah BA-08" href="Anillos/B53.jpg">
+       <img alt="Anillo Berakhah BA-08" class="active" src="Anillos/B53.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-08" data-fancybox="gallery-Anillo Berakhah BA-08" href="Anillos/B53-1.jpg">
+       <img alt="Anillo Berakhah BA-08" src="Anillos/B53-1.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-08" data-fancybox="gallery-Anillo Berakhah BA-08" href="Anillos/B53-2.jpg">
+       <img alt="Anillo Berakhah BA-08" src="Anillos/B53-2.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-08" data-fancybox="gallery-Anillo Berakhah BA-08" href="Anillos/B53-3.jpg">
+       <img alt="Anillo Berakhah BA-08" src="Anillos/B53-3.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-53')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-53')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-53')">
+     Anillo Berakhah BA-08
+    </h3>
+    <p>
+     Marcos 10:27 Entonces Jes&uacute;s, mir&aacute;ndolos, dijo: Para los hombres es imposible, mas para Dios, no; porque todas las cosas son posibles para Dios.
+    </p>
+    <p>
+     Este anillo simboliza la fe en lo imposible, un recordatorio de que con Dios no hay l&iacute;mites para lo que se puede lograr.
+    </p>
+    <div>
+    </div>
+    <p class="precio">
+     $47.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-08', 47.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: anillos - Producto: Berakhah B-34 -->
+   <div class="producto" data-categoria="anillos">
+    <div class="carousel" id="carousel-B34">
+     <div class="carousel-images">
+      <a data-caption="Anillo Berakhah BA-07" data-fancybox="gallery-Anillo Berakhah BA-07" href="Anillos/B-34.jpg">
+       <img alt="Anillo Berakhah BA-07" class="active" src="Anillos/B-34.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-07" data-fancybox="gallery-Anillo Berakhah BA-07" href="Anillos/B-34-1.jpg">
+       <img alt="Anillo Berakhah BA-07" src="Anillos/B-34-1.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-07" data-fancybox="gallery-Anillo Berakhah BA-07" href="Anillos/B-34-2.jpg">
+       <img alt="Anillo Berakhah BA-07" src="Anillos/B-34-2.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B34')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B34')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-34')">
+     Anillo Berakhah BA-07
+    </h3>
+    <p>
+     1 Samuel 16:7 Y Jehov&aacute; respondi&oacute; a Samuel: No mires a su parecer, ni a lo grande de su estatura, porque yo lo desecho; porque Jehov&aacute; no mira lo que mira el hombre; pues el hombre mira lo que est&aacute; delante de sus ojos, pero Jehov&aacute; mira el coraz&oacute;n.
+    </p>
+    <p>
+     Este anillo simboliza la importancia de lo que hay en el coraz&oacute;n, m&aacute;s all&aacute; de las apariencias exteriores. Un recordatorio de que Dios ve lo m&aacute;s profundo de nosotros.
+    </p>
+    <div>
+    </div>
+    <p class="precio">
+     $47.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-07', 47.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: anillos - Producto: Berakhah B-32 -->
+   <div class="producto" data-categoria="anillos">
+    <div class="carousel" id="carousel-B32">
+     <div class="carousel-images">
+      <a data-caption="Anillo Berakhah BA-05" data-fancybox="gallery-Anillo Berakhah BA-05" href="Anillos\B32.jpg">
+       <img alt="Anillo Berakhah BA-05" class="active" src="Anillos\B32.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-05" data-fancybox="gallery-Anillo Berakhah BA-05" href="Anillos\B32-1.jpg">
+       <img alt="Anillo Berakhah BA-05" src="Anillos\B32-1.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-05" data-fancybox="gallery-Anillo Berakhah BA-05" href="Anillos\B32-2.jpg">
+       <img alt="Anillo Berakhah BA-05" src="Anillos\B32-2.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B32')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B32')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-32')">
+     Anillo Berakhah BA-05
+    </h3>
+    <p>
+     Salmos 31:3 Gu&iacute;ame, pues eres mi roca y mi fortaleza, dir&iacute;geme por amor a tu nombre.
+    </p>
+    <p>
+     Este anillo simboliza la gu&iacute;a y protecci&oacute;n divina, record&aacute;ndonos que en Dios encontramos fortaleza y direcci&oacute;n en nuestras vidas.
+    </p>
+    <div>
+    </div>
+    <p class="precio">
+     $47.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-05', 47.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: anillos - Producto: Berakhah B-16 -->
+   <div class="producto" data-categoria="anillos">
+    <div class="carousel" id="carousel-B16">
+     <div class="carousel-images">
+      <a data-caption="Anillo Berakhah BA-01" data-fancybox="gallery-Anillo Berakhah BA-01" href="Anillos\B16-1.jpg">
+       <img alt="Anillo Berakhah BA-01" class="active" src="Anillos\B16-1.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-01" data-fancybox="gallery-Anillo Berakhah BA-01" href="Anillos\B16.jpg">
+       <img alt="Anillo Berakhah BA-01" src="Anillos\B16.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-01" data-fancybox="gallery-Anillo Berakhah BA-01" href="Anillos\B16-2.jpg">
+       <img alt="Anillo Berakhah BA-01" src="Anillos\B16-2.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B16')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B16')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-16')">
+     Anillo Berakhah BA-01
+    </h3>
+    <p>
+     Cantares 8:6 Ponme como un sello sobre tu coraz&oacute;n, como una marca sobre tu brazo; Porque fuerte es como la muerte el amor.
+    </p>
+    <p>
+     Este anillo simboliza la fuerza del amor, inmutable y eterno, como una marca que llevamos en lo profundo de nuestro ser.
+    </p>
+    <div>
+    </div>
+    <p class="precio">
+     $47.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-01', 47.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: anillos - Producto: Berakhah B-17 -->
+   <div class="producto" data-categoria="anillos">
+    <div class="carousel" id="carousel-B17">
+     <div class="carousel-images">
+      <a data-caption="Anillo Berakhah BA-02" data-fancybox="gallery-Anillo Berakhah BA-02" href="Anillos\B17.jpg">
+       <img alt="Anillo Berakhah BA-02" class="active" src="Anillos\B17.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-02" data-fancybox="gallery-Anillo Berakhah BA-02" href="Anillos\B17-1.jpg">
+       <img alt="Anillo Berakhah BA-02" src="Anillos\B17-1.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-02" data-fancybox="gallery-Anillo Berakhah BA-02" href="Anillos\B17-2.jpg">
+       <img alt="Anillo Berakhah BA-02" src="Anillos\B17-2.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B17')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B17')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-17')">
+     Anillo Berakhah BA-02
+    </h3>
+    <p>
+     Salmos 92:2 El justo florecer&aacute; como la palmera; Crecer&aacute; como cedro en el L&iacute;bano.
+    </p>
+    <p>
+     Este anillo simboliza el crecimiento espiritual y la bendici&oacute;n divina, floreciendo y fortaleci&eacute;ndose bajo la gu&iacute;a de Dios.
+    </p>
+    <div>
+    </div>
+    <p class="precio">
+     $47.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-02', 47.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: anillos - Producto: Berakhah B-18 -->
+   <div class="producto" data-categoria="anillos">
+    <div class="carousel" id="carousel-B18">
+     <div class="carousel-images">
+      <a data-caption="Anillo Berakhah BA-03" data-fancybox="gallery-Anillo Berakhah BA-03" href="Anillos\B18-1.jpg">
+       <img alt="Anillo Berakhah BA-03" class="active" src="Anillos\B18-1.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-03" data-fancybox="gallery-Anillo Berakhah BA-03" href="Anillos\B18.jpg">
+       <img alt="Anillo Berakhah BA-03" src="Anillos\B18.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-03" data-fancybox="gallery-Anillo Berakhah BA-03" href="Anillos\B18-2.jpg">
+       <img alt="Anillo Berakhah BA-03" src="Anillos\B18-2.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B18')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B18')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-18')">
+     Anillo Berakhah BA-03
+    </h3>
+    <p>
+     Salmos 56:3 En el d&iacute;a que temo, Yo en ti conf&iacute;o.
+    </p>
+    <p>
+     Este anillo simboliza la confianza y la fe en Dios, aun en momentos de temor, como una expresi&oacute;n de nuestra total dependencia en &Eacute;l.
+    </p>
+    <div>
+    </div>
+    <p class="precio">
+     $47.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-03', 47.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: anillos - Producto: Berakhah B-19 -->
+   <div class="producto" data-categoria="anillos">
+    <div class="carousel" id="carousel-B19">
+     <div class="carousel-images">
+      <a data-caption="Anillo Berakhah BA-04" data-fancybox="gallery-Anillo Berakhah BA-04" href="Anillos\B19.jpg">
+       <img alt="Anillo Berakhah BA-04" class="active" src="Anillos\B19.jpg">
+      </a>
+      <a data-caption="Anillo Berakhah BA-04" data-fancybox="gallery-Anillo Berakhah BA-04" href="Anillos\B19-1.jpg">
+       <img alt="Anillo Berakhah BA-04" src="Anillos\B19-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B19')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B19')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-19')">
+     Anillo Berakhah BA-04
+    </h3>
+    <p>
+     Colosenses 3:14 Sobre todo rev&iacute;stanse de amor, que es el lazo de la perfecta uni&oacute;n.
+    </p>
+    <p>
+     Este anillo simboliza el amor como el v&iacute;nculo perfecto que une y fortalece nuestras relaciones, reflejando el amor divino.
+    </p>
+    <div>
+    </div>
+    <p class="precio">
+     $47.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Anillo Berakhah BA-04', 47.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: zarcillos - Producto: Berakhah B-20 -->
+   <div class="producto" data-categoria="zarcillos">
+    <div class="carousel" id="carousel-B20">
+     <div class="carousel-images">
+      <a data-caption="Zarcillos Berakhah B-20" data-fancybox="gallery-Zarcillos Berakhah B-20" href="Zarcillos/B20.jpg">
+       <img alt="Zarcillos Berakhah B-20" class="active" src="Zarcillos/B20.jpg">
+      </a>
+      <a data-caption="Zarcillos Berakhah B-20" data-fancybox="gallery-Zarcillos Berakhah B-20" href="Zarcillos/B20-1.jpg">
+       <img alt="Zarcillos Berakhah B-20" src="Zarcillos/B20-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B20')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B20')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-20')">
+     Zarcillos Berakhah B-20
+    </h3>
+    <div>
+     <p>
+      Proverbios 27:19 El agua refleja el rostro; el coraz&oacute;n refleja la persona.
+     </p>
+     <p>
+      Estos zarcillos simbolizan la reflexi&oacute;n del coraz&oacute;n, un accesorio que destaca la pureza y el car&aacute;cter interior de quien los lleva.
+     </p>
+    </div>
+    <p class="precio">
+     $31.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Zarcillos Berakhah B-20', 31.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: zarcillos - Producto: Berakhah B-29 -->
+   <div class="producto" data-categoria="zarcillos">
+    <div class="carousel" id="carousel-B29">
+     <div class="carousel-images">
+      <a data-caption="Zarcillos Berakhah B-29" data-fancybox="gallery-Zarcillos Berakhah B-29" href="Zarcillos\B29.jpg">
+       <img alt="Zarcillos Berakhah B-29" class="active" src="Zarcillos\B29.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B29')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B29')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-29')">
+     Zarcillos Berakhah B-29
+    </h3>
+    <div>
+     <p>
+      Salmos 20:4 Que te conceda el deseo de tu coraz&oacute;n, y cumpla todos tus anhelos.
+     </p>
+     <p>
+      Estos zarcillos simbolizan la gratitud y los deseos cumplidos, record&aacute;ndonos que Dios concede los anhelos de nuestros corazones.
+     </p>
+    </div>
+    <p class="precio">
+     $27.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Zarcillos Berakhah B-29', 27.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: zarcillos - Producto: Berakhah B-30 -->
+   <div class="producto" data-categoria="zarcillos">
+    <div class="carousel" id="carousel-B30">
+     <div class="carousel-images">
+      <a data-caption="Zarcillos Berakhah B-30" data-fancybox="gallery-Zarcillos Berakhah B-30" href="Zarcillos\B30.jpg">
+       <img alt="Zarcillos Berakhah B-30" class="active" src="Zarcillos\B30.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B30')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B30')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-30')">
+     Zarcillos Berakhah B-30
+    </h3>
+    <div>
+     <p>
+      Proverbios 3:3 Nunca se aparten de ti la misericordia y la verdad; &Aacute;talas a tu cuello, Escr&iacute;belas en la tabla de tu coraz&oacute;n.
+     </p>
+     <p>
+      Estos zarcillos simbolizan la verdad y la misericordia, valores fundamentales que debemos llevar siempre con nosotros.
+     </p>
+    </div>
+    <p class="precio">
+     $27.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Zarcillos Berakhah B-30', 27.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: zarcillos - Producto: Berakhah B-31 -->
+   <div class="producto" data-categoria="zarcillos">
+    <div class="carousel" id="carousel-B31">
+     <div class="carousel-images">
+      <a data-caption="Zarcillos Berakhah B-31" data-fancybox="gallery-Zarcillos Berakhah B-31" href="Zarcillos\B31.jpg">
+       <img alt="Zarcillos Berakhah B-31" class="active" src="Zarcillos\B31.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B31')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B31')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-31')">
+     Zarcillos Berakhah B-31
+    </h3>
+    <div>
+     <p>
+      Mateo 6:21 Porque donde est&eacute; tu tesoro, all&iacute; estar&aacute; tambi&eacute;n tu coraz&oacute;n.
+     </p>
+     <p>
+      Estos zarcillos simbolizan que nuestros tesoros espirituales deben estar donde est&eacute; nuestro coraz&oacute;n, reflejando lo que valoramos verdaderamente.
+     </p>
+    </div>
+    <p class="precio">
+     $27.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Zarcillos Berakhah B-31', 27.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: caballeros - Producto: Berakhah B-36 -->
+   <div class="producto" data-categoria="caballeros">
+    <div class="carousel" id="carousel-B36">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-36" data-fancybox="gallery-Collar Berakhah B-36" href="Collares\B36.jpg">
+       <img alt="Collar Berakhah B-36" class="active" src="Collares\B36.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B36')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B36')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-36')">
+     Collar Berakhah B-36
+    </h3>
+    <div>
+     <p>
+      Jerem&iacute;as 29:13 Me buscar&aacute;n y me encontrar&aacute;n cuando me busquen de todo coraz&oacute;n.
+     </p>
+     <p>
+      Este collar simboliza la promesa de encontrar a Dios cuando lo buscamos con sinceridad y todo nuestro coraz&oacute;n.
+     </p>
+    </div>
+    <p class="precio">
+     $44.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-36', 26.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: caballeros - Producto: Berakhah B-40 -->
+   <div class="producto" data-categoria="caballeros">
+    <div class="carousel" id="carousel-B40">
+     <div class="carousel-images">
+      <a data-caption="Pulsera Berakhah B-40" data-fancybox="gallery-Pulsera Berakhah B-40" href="Caballeros/B40.jpg">
+       <img alt="Pulsera Berakhah B-40" class="active" src="Caballeros/B40.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-40" data-fancybox="gallery-Pulsera Berakhah B-40" href="Caballeros/B40-1.jpg">
+       <img alt="Pulsera Berakhah B-40" src="Caballeros/B40-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B40')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B40')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-40')">
+     Pulsera Berakhah B-40
+    </h3>
+    <div>
+     <p>
+      Apocalipsis 1:6 Nos hizo reyes y sacerdotes para Dios, su Padre; a &eacute;l sea gloria e imperio por los siglos de los siglos. Am&eacute;n.
+     </p>
+     <p>
+      Esta pulsera simboliza nuestra identidad como reyes y sacerdotes, d&aacute;ndonos fuerza y poder en nuestra vida espiritual.
+     </p>
+    </div>
+    <p class="precio">
+     $36.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-40', 26.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: caballeros - Producto: Berakhah B-41 -->
+   <div class="producto" data-categoria="caballeros">
+    <div class="carousel" id="carousel-B41">
+     <div class="carousel-images">
+      <a data-caption="Pulsera Berakhah B-41" data-fancybox="gallery-Pulsera Berakhah B-41" href="Caballeros/B41.jpg">
+       <img alt="Pulsera Berakhah B-41" class="active" src="Caballeros/B41.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-41" data-fancybox="gallery-Pulsera Berakhah B-41" href="Caballeros/B41-1.jpg">
+       <img alt="Pulsera Berakhah B-41" src="Caballeros/B41-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B41')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B41')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-41')">
+     Pulsera Berakhah B-41
+    </h3>
+    <div>
+     <p>
+      Apocalipsis 1:6 Nos hizo reyes y sacerdotes para Dios, su Padre; a &eacute;l sea gloria e imperio por los siglos de los siglos. Am&eacute;n.
+     </p>
+     <p>
+      Esta pulsera simboliza nuestro llamado como reyes y sacerdotes de Dios, un recordatorio de la grandeza de nuestro prop&oacute;sito divino.
+     </p>
+    </div>
+    <p class="precio">
+     $36.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-41', 26.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: caballeros - Producto: Collar Berakhah B-56 -->
+   <div class="producto" data-categoria="caballeros">
+    <div class="carousel" id="carousel-B-56">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-56" data-fancybox="gallery-Collar Berakhah B-56" href="Caballeros/B56.jpg">
+       <img alt="Collar Berakhah B-56" class="active" src="Caballeros/B56.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-56" data-fancybox="gallery-Collar Berakhah B-56" href="Caballeros/B56-1.jpg">
+       <img alt="Collar Berakhah B-56" src="Caballeros/B56-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-56')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-56')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-56')">
+     Collar Berakhah B-56
+    </h3>
+    <div>
+     <p>
+      Romanos 10:9 Si confesares con tu boca que Jes&uacute;s es el Se&ntilde;or, y creyeres en tu coraz&oacute;n que Dios le levant&oacute; de los muertos, ser&aacute;s salvo.
+     </p>
+     <p>
+      Este collar simboliza la fe y la salvaci&oacute;n a trav&eacute;s de la confesi&oacute;n y la creencia en Jes&uacute;s como Se&ntilde;or.
+     </p>
+    </div>
+    <p class="precio">
+     $44.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-56', 44.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: caballeros - Producto: Collar Berakhah B-55 -->
+   <div class="producto" data-categoria="caballeros">
+    <div class="carousel" id="carousel-B-55">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-55" data-fancybox="gallery-Collar Berakhah B-55" href="Caballeros/B55.jpg">
+       <img alt="Collar Berakhah B-55" class="active" src="Caballeros/B55.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-55" data-fancybox="gallery-Collar Berakhah B-55" href="Caballeros/B55-1.jpg">
+       <img alt="Collar Berakhah B-55" src="Caballeros/B55-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-55')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-55')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Collar Berakhah B-55')">
+     Collar Berakhah B-55
+    </h3>
+    <div>
+     <p>
+      Juan 15:12 Este es mi mandamiento: Que os am&eacute;is los unos a los otros, como yo os he amado.
+     </p>
+     <p>
+      Este collar simboliza el amor fraternal, un recordatorio de seguir el mandamiento de amar a los dem&aacute;s como Cristo nos am&oacute;.
+     </p>
+    </div>
+    <p class="precio">
+     $44.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-55', 44.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: caballeros - Producto: Berakhah B-52 -->
+   <div class="producto" data-categoria="caballeros">
+    <div class="carousel" id="carousel-B-52">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-52" data-fancybox="gallery-Collar Berakhah B-52" href="Caballeros/B52.jpg">
+       <img alt="Collar Berakhah B-52" class="active" src="Caballeros/B52.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-52" data-fancybox="gallery-Collar Berakhah B-52" href="Caballeros/B52-1.jpg">
+       <img alt="Collar Berakhah B-52" src="Caballeros/B52-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-52')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-52')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-52')">
+     Collar Berakhah B-52
+    </h3>
+    <div>
+     <p>
+      Hebreos 6:19 Esta esperanza mantiene firme y segura nuestra alma, igual que el ancla mantiene firme al barco.
+     </p>
+     <p>
+      Este collar simboliza la esperanza firme en Cristo, una ancla que mantiene nuestra fe segura en tiempos dif&iacute;ciles.
+     </p>
+    </div>
+    <p class="precio">
+     $41.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-52', 41.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: caballeros - Producto: Berakhah B-51 -->
+   <div class="producto" data-categoria="caballeros">
+    <div class="carousel" id="carousel-B-51">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-51" data-fancybox="gallery-Collar Berakhah B-51" href="Caballeros/B51.jpg">
+       <img alt="Collar Berakhah B-51" class="active" src="Caballeros/B51.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-51" data-fancybox="gallery-Collar Berakhah B-51" href="Caballeros/B51-1.jpg">
+       <img alt="Collar Berakhah B-51" src="Caballeros/B51-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B-51')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B-51')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-51')">
+     Collar Berakhah B-51
+    </h3>
+    <div>
+     <p>
+      1 Pedro 2:24 Por sus heridas ustedes han sido sanados.
+     </p>
+     <p>
+      Este collar simboliza la sanidad que recibimos por medio de las heridas de Jes&uacute;s, record&aacute;ndonos su sacrificio por nosotros.
+     </p>
+    </div>
+    <p class="precio">
+     $41.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-51', 41.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: caballeros - Producto: Berakhah B-39 -->
+   <div class="producto" data-categoria="caballeros">
+    <div class="carousel" id="carousel-B39">
+     <div class="carousel-images">
+      <a data-caption="Pulsera Berakhah B-39" data-fancybox="gallery-Pulsera Berakhah B-39" href="Caballeros/B39.jpg">
+       <img alt="Pulsera Berakhah B-39" class="active" src="Caballeros/B39.jpg">
+      </a>
+      <a data-caption="Pulsera Berakhah B-39" data-fancybox="gallery-Pulsera Berakhah B-39" href="Caballeros/B39-1.jpg">
+       <img alt="Pulsera Berakhah B-39" src="Caballeros/B39-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B39')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B39')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-39')">
+     Pulsera Berakhah B-39
+    </h3>
+    <div>
+     <p>
+      Apocalipsis 1:6 Nos hizo reyes y sacerdotes para Dios, su Padre; a &eacute;l sea gloria e imperio por los siglos de los siglos. Am&eacute;n.
+     </p>
+     <p>
+      Esta pulsera simboliza nuestra posici&oacute;n como reyes y sacerdotes para Dios, un recordatorio de la dignidad y el honor que &Eacute;l nos ha concedido.
+     </p>
+    </div>
+    <p class="precio">
+     $36.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Pulsera Berakhah B-39', 36.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+   <!-- Categoria: caballeros - Producto: Berakhah B-14 -->
+   <div class="producto" data-categoria="caballeros">
+    <div class="carousel" id="carousel-B14">
+     <div class="carousel-images">
+      <a data-caption="Collar Berakhah B-14" data-fancybox="gallery-Collar Berakhah B-14" href="Caballeros\B14.jpg">
+       <img alt="Collar Berakhah B-14" class="active" src="Caballeros\B14.jpg">
+      </a>
+      <a data-caption="Collar Berakhah B-14" data-fancybox="gallery-Collar Berakhah B-14" href="Caballeros\B14-1.jpg">
+       <img alt="Collar Berakhah B-14" src="Caballeros\B14-1.jpg">
+      </a>
+     </div>
+     <button class="carousel-button prev" onclick="changeImage(-1, 'carousel-B14')">
+      ❮
+     </button>
+     <button class="carousel-button next" onclick="changeImage(1, 'carousel-B14')">
+      ❯
+     </button>
+    </div>
+    <h3 class="titulo-producto" onclick="enviarWhatsApp('Berakhah B-14')">
+     Collar Berakhah B-14
+    </h3>
+    <div>
+     <p>
+      Juan 11:25-26 Le dijo Jes&uacute;s: Yo soy la resurrecci&oacute;n y la vida; el que cree en m&iacute;, aunque est&eacute; muerto, vivir&aacute;. Y todo aquel que vive y cree en m&iacute;, no morir&aacute; eternamente. &iquest;Crees esto?
+     </p>
+     <p>
+      Este collar simboliza la vida eterna que recibimos a trav&eacute;s de la fe en Cristo, quien es la resurrecci&oacute;n y la vida.
+     </p>
+    </div>
+    <p class="precio">
+     $31.999
+    </p>
+    <button class="button" onclick="agregarAlCarrito('Collar Berakhah B-14', 31.999)">
+     &iexcl;Agregar al Carrito!
+    </button>
+   </div>
+  </main>
+  <!-- Carrito de compras -->
+  <div id="carrito" style="display: none;">
+   <button class="cerrar-carrito" id="cerrar-carrito">
+    X
+   </button>
+   <h2>
+    Tu carrito
+   </h2>
+   <ul id="lista-carrito">
+   </ul>
+   <p>
+    <span id="total-carrito">
+     0
+    </span>
+   </p>
+   <!-- Datos del cliente -->
+   <div id="datos-cliente">
+    <h3>
+     Informaci&oacute;n del Cliente
+    </h3>
+    <label for="nombre-cliente">
+     Nombre:
+    </label>
+    <input id="nombre-cliente" placeholder="Tu nombre" required type="text">
+    <label for="correo-cliente">
+     Correo Electr&oacute;nico:
+    </label>
+    <input id="correo-cliente" placeholder="Tu correo" required type="email">
+    <label for="direccion-cliente">
+     Direcci&oacute;n:
+    </label>
+    <input id="direccion-cliente" placeholder="Direccion en Medellin" required type="text">
+    <label for="telefono-cliente">
+     Tel&eacute;fono:
+    </label>
+    <input id="telefono-cliente" placeholder="Tu tel&eacute;fono" required type="tel">
+   </div>
+   <button class="button" id="btn-pedir">
+    Enviar pedido
+   </button>
+   <button class="button" id="btn-vaciar-carrito">
+    Vaciar Carrito
+   </button>
+  </div>
+  <!-- Contenedor de los íconos sociales y el carrito -->
+  <div class="rrss-icons">
+   <!-- Icono de Instagram -->
+   <a aria-label="Instagram" href="https://www.instagram.com/berakhah_co/" target="_blank">
+    <img alt="Instagram" src="iconos/instagram.png">
+   </a>
+   <!-- Icono de WhatsApp -->
+   <a aria-label="WhatsApp" href="https://api.whatsapp.com/send?phone=573208042101&text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n..." target="_blank">
+    <img alt="WhatsApp" src="iconos/whatsapp.png">
+   </a>
+   <!-- Botón flotante del carrito -->
+   <button aria-label="Ver carrito" class="boton-flotante" id="btn-ver-carrito" onclick="toggleCarrito()">
+    🛒
+    <span id="contador-carrito">
+     0
+    </span>
+   </button>
+  </div>
+  <script src="scripts.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1/dist/confetti.browser.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
+ </body>
 </html>
