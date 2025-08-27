@@ -118,6 +118,7 @@
         const titleDisplay = document.getElementById('title-display');
         const bodyDisplay = document.getElementById('body-display');
 
+        // --- CÓDIGO CORREGIDO PARA LEER LA DESCRIPCIÓN ---
         document.addEventListener('DOMContentLoaded', () => {
             fetch('index.html')
                 .then(response => {
@@ -131,17 +132,37 @@
                     
                     productElements.forEach(prodElement => {
                         const titleElement = prodElement.querySelector('h3.titulo-producto');
-                        const descriptionContainer = titleElement.nextElementSibling;
                         const imageElement = prodElement.querySelector('.carousel-images img');
                         
-                        if (titleElement && descriptionContainer && imageElement) {
+                        if (titleElement && imageElement) {
                             const title = titleElement.textContent.trim();
-                            const paragraphs = Array.from(descriptionContainer.querySelectorAll('p')).map(p => p.textContent.trim());
-                            const description = paragraphs.join('\n\n');
-                            const idMatch = title.match(/B-\d+/);
+                            
+                            let descriptionParts = [];
+                            let currentElement = titleElement.nextElementSibling;
+
+                            // Recorremos los elementos hermanos que siguen al título
+                            while (currentElement) {
+                                // Si es un párrafo y NO tiene la clase 'precio', lo añadimos a la descripción
+                                if (currentElement.tagName === 'P' && !currentElement.classList.contains('precio')) {
+                                    descriptionParts.push(currentElement.textContent.trim());
+                                }
+                                // Si encontramos un div o el precio, paramos de buscar
+                                if (currentElement.classList.contains('precio') || currentElement.tagName === 'DIV') {
+                                    break;
+                                }
+                                currentElement = currentElement.nextElementSibling;
+                            }
+                            
+                            const description = descriptionParts.join('\n\n');
+
+                            const idMatch = title.match(/B-\d+|BA-\d+/);
                             const id = idMatch ? idMatch[0] : title.split(' ').pop();
                             const imageUrl = imageElement.getAttribute('src').replace(/\\/g, '/');
-                            productosData.push({ id, title, description, imageUrl });
+                            
+                            // Nos aseguramos de no añadir productos sin descripción
+                            if(description) {
+                                productosData.push({ id, title, description, imageUrl });
+                            }
                         }
                     });
                     productSearch.placeholder = "Busca entre " + productosData.length + " productos...";
@@ -204,9 +225,7 @@
                 const watermarkClass = imageCanvas.classList.contains('watermark-active') ? 'watermark-active' : '';
                 imageCanvas.className = `${style} ${watermarkClass}`;
 
-                // --- LÓGICA DE COLOR DE TEXTO CORREGIDA ---
-                // Se elimina la condición que cambiaba el texto a blanco.
-                // Siempre usará el color por defecto a menos que se añada una clase específica.
+                // Reinicia el color del texto a su valor por defecto
                 titleDisplay.classList.remove('text-on-dark');
                 bodyDisplay.classList.remove('text-on-dark');
             }
@@ -244,6 +263,7 @@
             });
         });
 
+        // Carga inicial de la vista previa
         updatePreview();
     </script>
 
