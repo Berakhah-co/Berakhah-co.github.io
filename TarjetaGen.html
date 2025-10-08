@@ -10,25 +10,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
     <style>
-        :root { --color-oro: #BFA17A; --color-oro-claro: #D7C6B0; --color-fondo: #FDFBF7; --color-texto: #4B4B4B; --color-sombra: rgba(0, 0, 0, 0.07); }
+        /* --- COLORES MEJORADOS --- */
+        :root { 
+            --color-oro: #BFA17A; 
+            --color-oro-claro: #D1BBA3; /* Ligeramente más oscuro */
+            --color-fondo: #F9F5EF; /* Un beige más cálido */
+            --color-texto: #4B4B4B; 
+            --color-sombra: rgba(0, 0, 0, 0.07); 
+        }
+
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f2ef; margin: 0; padding: 2rem; color: var(--color-texto); display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box; }
         .studio-container { display: grid; grid-template-columns: 360px 1fr; gap: 2.5rem; max-width: 1250px; width: 100%; background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 10px 40px var(--color-sombra); }
         .controls-panel { padding-right: 2.5rem; border-right: 1px solid #e9e9e9; }
         .controls-panel h1 { font-family: 'Playfair Display', serif; color: #333; margin-top: 0; font-size: 2.2rem; }
         .control-group { margin-bottom: 1.5rem; position: relative; }
         .control-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: #555; }
-        input[type="text"], textarea, select { width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s, box-shadow 0.3s; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.1rem; }
-        input[type="text"]:focus, textarea:focus, select:focus { outline: none; border-color: var(--color-oro); box-shadow: 0 0 8px rgba(191, 161, 122, 0.4); }
+        input[type="text"], input[type="number"], textarea, select { width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s, box-shadow 0.3s; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.1rem; }
+        input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus { outline: none; border-color: var(--color-oro); box-shadow: 0 0 8px rgba(191, 161, 122, 0.4); }
+        .size-inputs { display: flex; gap: 1rem; }
         textarea { height: 120px; resize: vertical; }
         .style-selector button { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; border: 1px solid #ddd; padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; margin-right: 0.5rem; transition: all 0.3s ease; }
         .style-selector button.active { background-color: var(--color-oro); color: white; border-color: var(--color-oro); font-weight: 600; }
         .checkbox-label { display: flex; align-items: center; font-size: 0.9rem; color: #555; cursor: pointer; }
         .checkbox-label input { width: auto; margin-right: 0.75rem; accent-color: var(--color-oro); }
-        .action-buttons { display: flex; gap: 1rem; }
-        .action-buttons button { flex: 1; margin-top: 1.5rem; }
-        #downloadBtn { background-image: linear-gradient(45deg, #28a745, #248a38); color: white; width: 100%; border: none; padding: 1rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2); }
+        .action-buttons { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .action-buttons button { flex: 1; }
+        #downloadBtn { background-image: linear-gradient(45deg, #28a745, #248a38); color: white; border: none; padding: 1rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2); }
         #downloadBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3); }
-        #printBtn { background-image: linear-gradient(45deg, #007bff, #0056b3); color: white; width: 100%; border: none; padding: 1rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); }
+        #printBtn { background-image: linear-gradient(45deg, #007bff, #0056b3); color: white; border: none; padding: 1rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); }
         #printBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3); }
         #search-results { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); max-height: 300px; overflow-y: auto; z-index: 100; }
         .search-result-item { display: flex; align-items: center; padding: 0.75rem; cursor: pointer; border-bottom: 1px solid #f0f0f0; }
@@ -36,15 +45,19 @@
         .search-result-item:hover { background-color: #f7f7f7; }
         .result-image { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 1rem; }
         .result-text { font-size: 0.9rem; font-family: 'Segoe UI', sans-serif; }
-        .preview-panel { display: flex; justify-content: center; align-items: center; background-color: #f8f8f8; border-radius: 10px; }
-        #image-canvas { width: 550px; height: 550px; background-color: var(--color-fondo); display: flex; justify-content: center; align-items: center; box-sizing: border-box; box-shadow: 0 5px 25px var(--color-sombra); position: relative; overflow: hidden; transition: all 0.4s ease-in-out; padding: 55px; }
+        .preview-panel { display: flex; justify-content: center; align-items: center; background-color: #f0f0f0; border-radius: 10px; padding: 2rem; }
+        
+        /* El tamaño del canvas ahora es dinámico, controlado por JS */
+        #image-canvas { background-color: var(--color-fondo); display: flex; justify-content: center; align-items: center; box-sizing: border-box; box-shadow: 0 5px 25px var(--color-sombra); position: relative; overflow: hidden; transition: all 0.4s ease-in-out; padding: 10%; /* Padding relativo para escalar con el tamaño */ }
         #text-container { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-sizing: border-box; z-index: 2; position: relative; }
         #title-display, #body-display { color: var(--color-texto); transition: color 0.4s ease; }
         #title-display { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
         #body-display { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.6; white-space: pre-wrap; }
         .text-on-dark { color: #FFFFFF !important; }
         #watermark-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logoblanco.jpg'); background-position: center; background-repeat: no-repeat; background-size: 60%; opacity: 0; z-index: 1; transition: opacity 0.5s ease, background-image 0.1s; }
-        #image-canvas.watermark-active #watermark-logo { opacity: 0.06; }
+        
+        /* --- MARCA DE AGUA MÁS VISIBLE --- */
+        #image-canvas.watermark-active #watermark-logo { opacity: 0.15; }
         
         /* MARCOS CSS */
         .frame-clasico { background-color: var(--color-fondo); border: 1px solid var(--color-oro-claro); }
@@ -53,11 +66,31 @@
         .frame-artistico::before, .frame-artistico::after { content: ''; position: absolute; width: 60px; height: 60px; border-color: var(--color-oro); border-style: solid; z-index: 0; background: transparent; }
         .frame-artistico::before { top: 30px; left: 30px; border-width: 3px 0 0 3px; }
         .frame-artistico::after { bottom: 30px; right: 30px; border-width: 0 3px 3px 0; }
-        .frame-negro { background-color: white; border: none; } /* Fondo blanco para este marco */
+        .frame-negro { background-color: white; border: none; }
         .frame-negro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('images/marco.png'); background-size: cover; background-position: center; background-repeat: no-repeat; z-index: 0; }
         
+        /* --- ESTILOS DE IMPRESIÓN MEJORADOS --- */
         #print-area { display: none; }
-        @media print { body > *:not(#print-area) { display: none !important; } #print-area { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; width: 100%; height: 100%; } .print-card { width: 3in; height: 3in; margin: 0.2in; page-break-inside: avoid; } @page { size: letter; margin: 0.5in; } }
+        @media print { 
+            body > *:not(#print-area) { display: none !important; } 
+            #print-area { 
+                display: flex; 
+                flex-wrap: wrap; 
+                justify-content: flex-start; /* Alinear items al inicio */
+                align-items: flex-start;   /* Alinear items al inicio */
+                width: 100%; 
+                height: 100%; 
+            }
+            .print-card { 
+                page-break-inside: avoid; /* Evitar que una tarjeta se corte entre páginas */
+                box-sizing: border-box; /* Asegurar que el tamaño sea preciso */
+                /* El tamaño (width/height) y margen (margin) se aplican dinámicamente con JS */
+            } 
+            @page { 
+                size: letter; 
+                margin: 0.5in; /* Margen de la hoja */
+            } 
+        }
     </style>
 </head>
 <body>
@@ -65,12 +98,22 @@
         <div class="controls-panel">
             <h1>Diseña tu Tarjeta</h1>
             <div class="control-group">
-                <label for="product-search">1. Buscar y Cargar Producto</label>
+                <label for="product-search">1. Buscar Producto (Opcional)</label>
                 <input type="text" id="product-search" placeholder="Escribe un código o nombre...">
                 <div id="search-results"></div>
             </div>
+
+            <!-- NUEVO: Selector de tamaño -->
             <div class="control-group">
-                <label for="style-select">2. Elige un Estilo</label>
+                <label>2. Tamaño de la Tarjeta (Pulgadas)</label>
+                <div class="size-inputs">
+                    <input type="number" id="cardWidth" value="4" min="1" title="Ancho en pulgadas">
+                    <input type="number" id="cardHeight" value="4" min="1" title="Alto en pulgadas">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="style-select">3. Elige un Estilo</label>
                 <div class="style-selector" id="style-select">
                     <button class="active" data-style="frame-clasico">Dorado Clásico</button>
                     <button data-style="frame-artistico">Marco Artístico</button>
@@ -78,15 +121,15 @@
                 </div>
             </div>
             <div class="control-group">
-                <label for="titleInput">3. Título</label>
+                <label for="titleInput">4. Título</label>
                 <input type="text" id="titleInput" placeholder="Un Regalo Especial">
             </div>
             <div class="control-group">
-                <label for="bodyInput">4. Mensaje Principal</label>
+                <label for="bodyInput">5. Mensaje Principal</label>
                 <textarea id="bodyInput">Este producto fue preparado con especial cuidado para ti. Esperamos que lo disfrutes.</textarea>
             </div>
             <div class="control-group">
-                <label for="fontSizeSlider">5. Tamaño del Mensaje</label>
+                <label for="fontSizeSlider">6. Tamaño del Mensaje</label>
                 <input type="range" id="fontSizeSlider" min="16" max="32" value="22" style="width: 100%;">
             </div>
             <div class="control-group">
@@ -117,7 +160,7 @@
         const imageCanvas = document.getElementById('image-canvas');
         const titleDisplay = document.getElementById('title-display');
         const bodyDisplay = document.getElementById('body-display');
-
+        
         // --- CÓDIGO CORREGIDO PARA LEER LA DESCRIPCIÓN ---
         document.addEventListener('DOMContentLoaded', () => {
             fetch('index.html')
@@ -129,43 +172,28 @@
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(htmlString, 'text/html');
                     const productElements = doc.querySelectorAll('.producto');
-                    
                     productElements.forEach(prodElement => {
                         const titleElement = prodElement.querySelector('h3.titulo-producto');
                         const imageElement = prodElement.querySelector('.carousel-images img');
-                        
                         if (titleElement && imageElement) {
                             const title = titleElement.textContent.trim();
-                            
                             let descriptionParts = [];
                             let currentElement = titleElement.nextElementSibling;
-
-                            // Recorremos los elementos hermanos que siguen al título
                             while (currentElement) {
-                                // Si es un párrafo y NO tiene la clase 'precio', lo añadimos a la descripción
                                 if (currentElement.tagName === 'P' && !currentElement.classList.contains('precio')) {
                                     descriptionParts.push(currentElement.textContent.trim());
                                 }
-                                // Si encontramos un div o el precio, paramos de buscar
-                                if (currentElement.classList.contains('precio') || currentElement.tagName === 'DIV') {
-                                    break;
-                                }
+                                if (currentElement.classList.contains('precio') || currentElement.tagName === 'DIV') break;
                                 currentElement = currentElement.nextElementSibling;
                             }
-                            
                             const description = descriptionParts.join('\n\n');
-
                             const idMatch = title.match(/B-\d+|BA-\d+/);
                             const id = idMatch ? idMatch[0] : title.split(' ').pop();
                             const imageUrl = imageElement.getAttribute('src').replace(/\\/g, '/');
-                            
-                            // Nos aseguramos de no añadir productos sin descripción
-                            if(description) {
-                                productosData.push({ id, title, description, imageUrl });
-                            }
+                            if(description) productosData.push({ id, title, description, imageUrl });
                         }
                     });
-                    productSearch.placeholder = "Busca entre " + productosData.length + " productos...";
+                    productSearch.placeholder = `Busca entre ${productosData.length} productos...`;
                 })
                 .catch(error => {
                     console.error('Error fatal al analizar el catálogo:', error);
@@ -205,16 +233,44 @@
         const watermarkToggle = document.getElementById('watermarkToggle');
         const downloadBtn = document.getElementById('downloadBtn');
         const printBtn = document.getElementById('printBtn');
+        const cardWidthInput = document.getElementById('cardWidth');
+        const cardHeightInput = document.getElementById('cardHeight');
+
+        function updatePreviewSize() {
+            const width = parseFloat(cardWidthInput.value) || 4;
+            const height = parseFloat(cardHeightInput.value) || 4;
+            
+            // Mantenemos la previsualización en un tamaño manejable (máximo 550px)
+            // pero respetando la proporción (aspect-ratio).
+            const maxWidth = 550;
+            const aspect = width / height;
+            
+            let displayWidth, displayHeight;
+
+            if (width >= height) {
+                displayWidth = maxWidth;
+                displayHeight = maxWidth / aspect;
+            } else {
+                displayHeight = maxWidth;
+                displayWidth = maxWidth * aspect;
+            }
+
+            imageCanvas.style.width = `${displayWidth}px`;
+            imageCanvas.style.height = `${displayHeight}px`;
+        }
 
         function updatePreview() {
             titleDisplay.innerText = titleInput.value;
             bodyDisplay.innerText = bodyInput.value;
             bodyDisplay.style.fontSize = `${fontSizeSlider.value}px`;
+            updatePreviewSize();
         }
 
         titleInput.addEventListener('input', updatePreview);
         bodyInput.addEventListener('input', updatePreview);
         fontSizeSlider.addEventListener('input', updatePreview);
+        cardWidthInput.addEventListener('input', updatePreviewSize);
+        cardHeightInput.addEventListener('input', updatePreviewSize);
 
         styleSelector.addEventListener('click', function(e) {
             if (e.target.tagName === 'BUTTON') {
@@ -225,7 +281,6 @@
                 const watermarkClass = imageCanvas.classList.contains('watermark-active') ? 'watermark-active' : '';
                 imageCanvas.className = `${style} ${watermarkClass}`;
 
-                // Reinicia el color del texto a su valor por defecto
                 titleDisplay.classList.remove('text-on-dark');
                 bodyDisplay.classList.remove('text-on-dark');
             }
@@ -243,23 +298,56 @@
             });
         });
 
+        // --- LÓGICA DE IMPRESIÓN MEJORADA ---
         printBtn.addEventListener('click', function() {
             printBtn.textContent = 'Generando...';
-            html2canvas(imageCanvas, { useCORS: true, backgroundColor: null, scale: 2 })
+            printBtn.disabled = true;
+
+            const cardWidthIn = parseFloat(cardWidthInput.value) || 4;
+            const cardHeightIn = parseFloat(cardHeightInput.value) || 4;
+            
+            // Dimensiones de hoja carta en pulgadas, con márgenes de 0.5in
+            const paperWidthIn = 8.5;
+            const paperHeightIn = 11;
+            const marginIn = 0.5;
+
+            const printableWidth = paperWidthIn - (marginIn * 2); // 7.5in
+            const printableHeight = paperHeightIn - (marginIn * 2); // 10in
+
+            // Calcular cuántas tarjetas caben
+            const cols = Math.floor(printableWidth / cardWidthIn);
+            const rows = Math.floor(printableHeight / cardHeightIn);
+            const totalCards = cols * rows;
+
+            if (totalCards === 0) {
+                alert("La tarjeta es demasiado grande para caber en una hoja carta. Por favor, reduce el tamaño.");
+                printBtn.textContent = 'Imprimir';
+                printBtn.disabled = false;
+                return;
+            }
+
+            html2canvas(imageCanvas, { useCORS: true, backgroundColor: null, scale: 3 })
             .then(canvas => {
                 const imageDataUrl = canvas.toDataURL('image/png');
                 const printArea = document.getElementById('print-area');
-                printArea.innerHTML = '';
-                for (let i = 0; i < 6; i++) {
+                printArea.innerHTML = ''; // Limpiar área de impresión
+
+                // Añadir las imágenes a la hoja de impresión
+                for (let i = 0; i < totalCards; i++) {
                     const img = document.createElement('img');
                     img.className = 'print-card';
                     img.src = imageDataUrl;
+                    img.style.width = `${cardWidthIn}in`;
+                    img.style.height = `${cardHeightIn}in`;
+                    img.style.margin = "0"; // El espaciado lo gestiona flexbox
                     printArea.appendChild(img);
                 }
+
                 setTimeout(() => {
                     window.print();
                     printBtn.textContent = 'Imprimir';
-                }, 100);
+                    printBtn.disabled = false;
+                }, 200);
             });
         });
 
