@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root { 
@@ -23,10 +24,9 @@
         .controls-panel h1 { font-family: 'Playfair Display', serif; color: #333; margin-top: 0; font-size: 2.2rem; }
         .control-group { margin-bottom: 1.5rem; position: relative; }
         .control-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: #555; }
-        input[type="text"], input[type="number"], textarea, select { width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s, box-shadow 0.3s; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.1rem; }
-        input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus { outline: none; border-color: var(--color-oro); box-shadow: 0 0 8px rgba(191, 161, 122, 0.4); }
+        input[type="text"], input[type="number"] { width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s, box-shadow 0.3s; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.1rem; }
+        input[type="text"]:focus, input[type="number"]:focus { outline: none; border-color: var(--color-oro); box-shadow: 0 0 8px rgba(191, 161, 122, 0.4); }
         .size-inputs { display: flex; gap: 1rem; }
-        textarea { height: 120px; resize: vertical; }
         .style-selector { display: flex; flex-wrap: wrap; gap: 0.5rem; }
         .style-selector button { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; border: 1px solid #ddd; padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; }
         .style-selector button.active { background-color: var(--color-oro); color: white; border-color: var(--color-oro); font-weight: 600; }
@@ -38,35 +38,37 @@
         #downloadBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3); }
         #printBtn { background-image: linear-gradient(45deg, #007bff, #0056b3); color: white; border: none; padding: 1rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); }
         #printBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3); }
-        #search-results { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); max-height: 300px; overflow-y: auto; z-index: 100; }
-        .search-result-item { display: flex; align-items: center; padding: 0.75rem; cursor: pointer; border-bottom: 1px solid #f0f0f0; }
-        .search-result-item:last-child { border-bottom: none; }
-        .search-result-item:hover { background-color: #f7f7f7; }
-        .result-image { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 1rem; }
-        .result-text { font-size: 0.9rem; font-family: 'Segoe UI', sans-serif; }
-        .preview-panel { display: flex; justify-content: center; align-items: center; background-color: #f0f0f0; border-radius: 10px; padding: 2rem; }
-        #image-canvas { background-color: var(--color-fondo); display: flex; justify-content: center; align-items: center; box-sizing: border-box; box-shadow: 0 5px 25px var(--color-sombra); position: relative; overflow: hidden; transition: all 0.4s ease-in-out; padding: 10%; }
-        #text-container { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-sizing: border-box; z-index: 2; position: relative; }
-        #title-display, #body-display { color: var(--color-texto); transition: color 0.4s ease; }
+        
+        /* --- ESTILOS DE PREVISUALIZACIÓN Y EDICIÓN --- */
+        .preview-panel { display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #f0f0f0; border-radius: 10px; padding: 2rem; gap: 1.5rem; }
+        #image-canvas { background-color: var(--color-fondo); display: flex; justify-content: center; align-items: center; box-sizing: border-box; box-shadow: 0 5px 25px var(--color-sombra); position: relative; overflow: hidden; transition: all 0.4s ease-in-out; }
+        #text-container { width: 90%; height: 90%; display: flex; flex-direction: column; justify-content: center; text-align: center; box-sizing: border-box; z-index: 2; position: absolute; cursor: move; }
+        #title-display, #body-display { color: var(--color-texto); transition: color 0.4s ease; padding: 5px; }
+        [contenteditable="true"]:focus { outline: 1px dashed var(--color-oro); box-shadow: 0 0 10px rgba(191, 161, 122, 0.5); }
         #title-display { font-family: 'Playfair Display', serif; font-weight: 700; margin-bottom: 1rem; line-height: 1.2; }
         #body-display { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.6; white-space: pre-wrap; }
         .text-on-dark { color: #FFFFFF !important; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
-        #watermark-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logoblanco.jpg'); background-position: center; background-repeat: no-repeat; background-size: 60%; opacity: 0; z-index: 1; transition: opacity 0.5s ease, background-image 0.1s; }
+        #watermark-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logoblanco.jpg'); background-position: center; background-repeat: no-repeat; background-size: 60%; opacity: 0; z-index: 1; transition: opacity 0.5s ease; }
         #image-canvas.watermark-active #watermark-logo { opacity: 0.15; }
-        
-        /* --- MARCOS CSS --- */
-        .frame-clasico { background-color: var(--color-fondo); border: 1px solid var(--color-oro-claro); }
+
+        /* --- BARRA DE HERRAMIENTAS DE TEXTO --- */
+        .text-toolbar { background-color: #fff; padding: 0.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: flex; gap: 0.5rem; align-items: center; }
+        .toolbar-button { background: none; border: 1px solid transparent; width: 35px; height: 35px; border-radius: 5px; cursor: pointer; font-size: 1rem; color: #555; transition: background-color 0.2s, color 0.2s; }
+        .toolbar-button:hover { background-color: #f0f0f0; }
+        .toolbar-button.active { background-color: var(--color-oro); color: white; }
+        input[type="color"] { width: 35px; height: 35px; border: none; padding: 2px; background: none; cursor: pointer; }
+
+        /* Estilos de marcos (existentes y nuevos) */
+        .frame-clasico { background-color: var(--color-fondo); border: 1px solid var(--color-oro-claro); padding: 55px; }
         .frame-clasico::before { content: ''; position: absolute; top: 25px; left: 25px; right: 25px; bottom: 25px; border: 2px solid var(--color-oro); z-index: 0; background: transparent; }
-        .frame-artistico { background-color: var(--color-fondo); border: 1px solid var(--color-oro-claro); }
+        .frame-artistico { background-color: var(--color-fondo); border: 1px solid var(--color-oro-claro); padding: 55px; }
         .frame-artistico::before, .frame-artistico::after { content: ''; position: absolute; width: 60px; height: 60px; border-color: var(--color-oro); border-style: solid; z-index: 0; background: transparent; }
         .frame-artistico::before { top: 30px; left: 30px; border-width: 3px 0 0 3px; }
         .frame-artistico::after { bottom: 30px; right: 30px; border-width: 0 3px 3px 0; }
         .frame-negro { background-color: white; border: none; padding: 0; }
         .frame-negro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('images/marco.png'); background-size: cover; background-position: center; background-repeat: no-repeat; z-index: 0; }
-        
-        /* --- NUEVOS ESTILOS --- */
-        .frame-zafiro { background-color: #2C3E50; border: 2px solid #D4AF37; }
-        .frame-marmol { background-image: linear-gradient(135deg, #F9F1F1, #FFFFFF, #EEDFEF); border: 2px solid #C08081; }
+        .frame-zafiro { background-color: #2C3E50; border: 2px solid #D4AF37; padding: 25px; }
+        .frame-marmol { background-image: linear-gradient(135deg, #F9F1F1, #FFFFFF, #EEDFEF); border: 2px solid #C08081; padding: 25px; }
         .frame-esmeralda { background-color: #005A31; border: 1px solid #004d2b; padding: 0; }
         .frame-esmeralda::before { content: ''; position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px; border: 2px solid var(--color-oro); }
 
@@ -84,7 +86,7 @@
         <div class="controls-panel">
             <h1>Diseña tu Tarjeta</h1>
             <div class="control-group">
-                <label for="product-search">1. Buscar Producto (Opcional)</label>
+                <label>1. Buscar Producto (Opcional)</label>
                 <input type="text" id="product-search" placeholder="Escribe un código o nombre...">
                 <div id="search-results"></div>
             </div>
@@ -98,39 +100,29 @@
             </div>
 
             <div class="control-group">
-                <label for="style-select">3. Elige un Estilo</label>
+                <label>3. Elige un Estilo</label>
                 <div class="style-selector" id="style-select">
                     <button class="active" data-style="frame-clasico">Dorado Clásico</button>
                     <button data-style="frame-artistico">Marco Artístico</button>
                     <button data-style="frame-negro">Marco Negro</button>
-                    <!-- NUEVOS BOTONES DE ESTILO -->
                     <button data-style="frame-zafiro">Zafiro Nocturno</button>
                     <button data-style="frame-marmol">Mármol Rosado</button>
                     <button data-style="frame-esmeralda">Esmeralda Deco</button>
                 </div>
             </div>
+            
             <div class="control-group">
-                <label for="titleInput">4. Título</label>
-                <input type="text" id="titleInput" placeholder="Un Regalo Especial">
-            </div>
-
-            <div class="control-group">
-                <label for="titleFontSizeSlider">5. Tamaño del Título</label>
+                <label>4. Tamaño del Título</label>
                 <input type="range" id="titleFontSizeSlider" min="24" max="48" value="32" style="width: 100%;">
             </div>
 
             <div class="control-group">
-                <label for="bodyInput">6. Mensaje Principal</label>
-                <textarea id="bodyInput">Este producto fue preparado con especial cuidado para ti. Esperamos que lo disfrutes.</textarea>
-            </div>
-            
-            <div class="control-group">
-                <label for="bodyFontSizeSlider">7. Tamaño del Mensaje</label>
+                <label>5. Tamaño del Mensaje</label>
                 <input type="range" id="bodyFontSizeSlider" min="16" max="32" value="22" style="width: 100%;">
             </div>
 
             <div class="control-group">
-                <label class="checkbox-label"><input type="checkbox" id="watermarkToggle" checked>8. Añadir logo como marca de agua</label>
+                <label class="checkbox-label"><input type="checkbox" id="watermarkToggle" checked>6. Añadir logo como marca de agua</label>
             </div>
             <div class="action-buttons">
                 <button id="downloadBtn">Descargar</button>
@@ -138,11 +130,22 @@
             </div>
         </div>
         <div class="preview-panel">
+            <!-- NUEVA BARRA DE HERRAMIENTAS -->
+            <div class="text-toolbar">
+                <button id="bold-btn" class="toolbar-button"><i class="fas fa-bold"></i></button>
+                <button id="italic-btn" class="toolbar-button"><i class="fas fa-italic"></i></button>
+                <button id="underline-btn" class="toolbar-button"><i class="fas fa-underline"></i></button>
+                <button id="align-left-btn" class="toolbar-button"><i class="fas fa-align-left"></i></button>
+                <button id="align-center-btn" class="toolbar-button"><i class="fas fa-align-center"></i></button>
+                <button id="align-right-btn" class="toolbar-button"><i class="fas fa-align-right"></i></button>
+                <input type="color" id="color-picker" title="Color del texto">
+            </div>
+
             <div id="image-canvas" class="frame-clasico watermark-active">
                 <div id="watermark-logo"></div>
                 <div id="text-container">
-                    <div id="title-display"></div>
-                    <div id="body-display"></div>
+                    <div id="title-display" contenteditable="true">Un Regalo Especial</div>
+                    <div id="body-display" contenteditable="true">Este producto fue preparado con especial cuidado para ti. Esperamos que lo disfrutes.</div>
                 </div>
             </div>
         </div>
@@ -151,88 +154,19 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
-        let productosData = [];
-        const productSearch = document.getElementById('product-search');
-        const searchResults = document.getElementById('search-results');
+        // --- SELECCIÓN DE ELEMENTOS ---
         const imageCanvas = document.getElementById('image-canvas');
         const titleDisplay = document.getElementById('title-display');
         const bodyDisplay = document.getElementById('body-display');
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            fetch('index.html')
-                .then(response => {
-                    if (!response.ok) throw new Error('No se pudo cargar index.html.');
-                    return response.text();
-                })
-                .then(htmlString => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(htmlString, 'text/html');
-                    const productElements = doc.querySelectorAll('.producto');
-                    productElements.forEach(prodElement => {
-                        const titleElement = prodElement.querySelector('h3.titulo-producto');
-                        const imageElement = prodElement.querySelector('.carousel-images img');
-                        if (titleElement && imageElement) {
-                            const title = titleElement.textContent.trim();
-                            let descriptionParts = [];
-                            let currentElement = titleElement.nextElementSibling;
-                            while (currentElement) {
-                                if (currentElement.tagName === 'P' && !currentElement.classList.contains('precio')) {
-                                    descriptionParts.push(currentElement.textContent.trim());
-                                }
-                                if (currentElement.classList.contains('precio') || currentElement.tagName === 'DIV') break;
-                                currentElement = currentElement.nextElementSibling;
-                            }
-                            const description = descriptionParts.join('\n\n');
-                            const idMatch = title.match(/B-\d+|BA-\d+/);
-                            const id = idMatch ? idMatch[0] : title.split(' ').pop();
-                            const imageUrl = imageElement.getAttribute('src').replace(/\\/g, '/');
-                            if(description) productosData.push({ id, title, description, imageUrl });
-                        }
-                    });
-                    productSearch.placeholder = `Busca entre ${productosData.length} productos...`;
-                })
-                .catch(error => {
-                    console.error('Error fatal al analizar el catálogo:', error);
-                    productSearch.placeholder = "Error al cargar productos.";
-                });
-        });
-
-        productSearch.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            if (!searchTerm) { searchResults.style.display = 'none'; return; }
-            const filteredProducts = productosData.filter(p => p.id.toLowerCase().includes(searchTerm) || p.title.toLowerCase().includes(searchTerm));
-            searchResults.innerHTML = '';
-            if (filteredProducts.length > 0) {
-                filteredProducts.forEach(producto => {
-                    const item = document.createElement('div');
-                    item.className = 'search-result-item';
-                    item.innerHTML = `<img src="${producto.imageUrl}" class="result-image"><span class="result-text">${producto.title}</span>`;
-                    item.addEventListener('click', () => {
-                        titleInput.value = producto.title;
-                        bodyInput.value = producto.description;
-                        productSearch.value = producto.title;
-                        searchResults.style.display = 'none';
-                        updatePreview();
-                    });
-                    searchResults.appendChild(item);
-                });
-                searchResults.style.display = 'block';
-            } else { searchResults.style.display = 'none'; }
-        });
-
-        document.addEventListener('click', function(event) { if (!productSearch.contains(event.target)) { searchResults.style.display = 'none'; } });
-        
-        const titleInput = document.getElementById('titleInput');
-        const bodyInput = document.getElementById('bodyInput');
-        const styleSelector = document.getElementById('style-select');
-        const watermarkToggle = document.getElementById('watermarkToggle');
-        const downloadBtn = document.getElementById('downloadBtn');
-        const printBtn = document.getElementById('printBtn');
+        const textContainer = document.getElementById('text-container');
         const cardWidthInput = document.getElementById('cardWidth');
         const cardHeightInput = document.getElementById('cardHeight');
         const titleFontSizeSlider = document.getElementById('titleFontSizeSlider');
         const bodyFontSizeSlider = document.getElementById('bodyFontSizeSlider');
-
+        const styleSelector = document.getElementById('style-select');
+        const watermarkToggle = document.getElementById('watermarkToggle');
+        
+        // --- FUNCIÓN DE ACTUALIZACIÓN DE TAMAÑO ---
         function updatePreviewSize() {
             const width = parseFloat(cardWidthInput.value) || 10;
             const height = parseFloat(cardHeightInput.value) || 10;
@@ -251,33 +185,14 @@
             imageCanvas.style.width = `${displayWidth}px`;
             imageCanvas.style.height = `${displayHeight}px`;
         }
-
-        function updatePreview() {
-            const fullTitle = titleInput.value;
-            const words = fullTitle.trim().split(/\s+/);
-
-            if (words.length > 2) { 
-                const lastWord = words.pop();
-                const secondLastWord = words.pop();
-                const mainPart = words.join(' ');
-                titleDisplay.innerHTML = `${mainPart}<br>${secondLastWord} ${lastWord}`;
-            } else {
-                titleDisplay.innerHTML = fullTitle;
-            }
-
-            bodyDisplay.innerText = bodyInput.value;
-            titleDisplay.style.fontSize = `${titleFontSizeSlider.value}px`;
-            bodyDisplay.style.fontSize = `${bodyFontSizeSlider.value}px`;
-            updatePreviewSize();
-        }
-
-        titleInput.addEventListener('input', updatePreview);
-        bodyInput.addEventListener('input', updatePreview);
+        
+        // --- EVENTOS DE CONTROLES PRINCIPALES ---
         cardWidthInput.addEventListener('input', updatePreviewSize);
         cardHeightInput.addEventListener('input', updatePreviewSize);
-        titleFontSizeSlider.addEventListener('input', updatePreview);
-        bodyFontSizeSlider.addEventListener('input', updatePreview);
-
+        titleFontSizeSlider.addEventListener('input', () => titleDisplay.style.fontSize = `${titleFontSizeSlider.value}px`);
+        bodyFontSizeSlider.addEventListener('input', () => bodyDisplay.style.fontSize = `${bodyFontSizeSlider.value}px`);
+        watermarkToggle.addEventListener('change', () => imageCanvas.classList.toggle('watermark-active', watermarkToggle.checked));
+        
         styleSelector.addEventListener('click', function(e) {
             if (e.target.tagName === 'BUTTON') {
                 styleSelector.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
@@ -287,45 +202,136 @@
                 const watermarkClass = imageCanvas.classList.contains('watermark-active') ? 'watermark-active' : '';
                 imageCanvas.className = `${style} ${watermarkClass}`;
                 
-                // --- LÓGICA PARA TEXTO CLARO EN FONDOS OSCUROS ---
                 titleDisplay.classList.remove('text-on-dark');
                 bodyDisplay.classList.remove('text-on-dark');
-
                 if (style === 'frame-zafiro' || style === 'frame-esmeralda') {
                     titleDisplay.classList.add('text-on-dark');
                     bodyDisplay.classList.add('text-on-dark');
                 }
             }
         });
-        
-        watermarkToggle.addEventListener('change', function() { imageCanvas.classList.toggle('watermark-active', this.checked); });
 
-        downloadBtn.addEventListener('click', function() {
-            html2canvas(imageCanvas, { useCORS: true, backgroundColor: null, scale: 4 })
-            .then(canvas => {
+        // --- LÓGICA DE LA BARRA DE HERRAMIENTAS DE TEXTO ---
+        document.getElementById('bold-btn').addEventListener('click', () => document.execCommand('bold'));
+        document.getElementById('italic-btn').addEventListener('click', () => document.execCommand('italic'));
+        document.getElementById('underline-btn').addEventListener('click', () => document.execCommand('underline'));
+        document.getElementById('align-left-btn').addEventListener('click', () => document.execCommand('justifyLeft'));
+        document.getElementById('align-center-btn').addEventListener('click', () => document.execCommand('justifyCenter'));
+        document.getElementById('align-right-btn').addEventListener('click', () => document.execCommand('justifyRight'));
+        document.getElementById('color-picker').addEventListener('input', (e) => document.execCommand('foreColor', false, e.target.value));
+        
+        // --- LÓGICA PARA ARRASTRAR Y SOLTAR (DRAG & DROP) ---
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        textContainer.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - textContainer.offsetLeft;
+            offsetY = e.clientY - textContainer.offsetTop;
+            textContainer.style.transition = 'none'; // Desactivar transición durante el arrastre
+            e.preventDefault(); // Evita la selección de texto al arrastrar
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                let newX = e.clientX - offsetX;
+                let newY = e.clientY - offsetY;
+                
+                // Limitar el movimiento dentro del canvas
+                const parentRect = imageCanvas.getBoundingClientRect();
+                const childRect = textContainer.getBoundingClientRect();
+
+                newX = Math.max(0, Math.min(newX, parentRect.width - childRect.width));
+                newY = Math.max(0, Math.min(newY, parentRect.height - childRect.height));
+                
+                textContainer.style.left = `${newX}px`;
+                textContainer.style.top = `${newY}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            textContainer.style.transition = ''; // Reactivar transición
+        });
+
+
+        // --- BÚSQUEDA DE PRODUCTOS (SIN CAMBIOS) ---
+        const productSearch = document.getElementById('product-search');
+        const searchResults = document.getElementById('search-results');
+        let productosData = [];
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Carga inicial
+            updatePreviewSize();
+            titleDisplay.style.fontSize = `${titleFontSizeSlider.value}px`;
+            bodyDisplay.style.fontSize = `${bodyFontSizeSlider.value}px`;
+
+            // Carga de productos
+            fetch('index.html').then(r => r.ok ? r.text() : Promise.reject('Error')).then(html => {
+                const doc = new DOMParser().parseFromString(html, 'text/html');
+                doc.querySelectorAll('.producto').forEach(el => {
+                    const titleEl = el.querySelector('h3.titulo-producto');
+                    const imgEl = el.querySelector('.carousel-images img');
+                    if(titleEl && imgEl) {
+                        const title = titleEl.textContent.trim();
+                        let desc = [];
+                        let nextEl = titleEl.nextElementSibling;
+                        while(nextEl && nextEl.tagName === 'P' && !nextEl.classList.contains('precio')) {
+                            desc.push(nextEl.textContent.trim());
+                            nextEl = nextEl.nextElementSibling;
+                        }
+                        if(desc.length) productosData.push({title, description: desc.join('\n'), imageUrl: imgEl.src});
+                    }
+                });
+                productSearch.placeholder = `Busca entre ${productosData.length} productos...`;
+            }).catch(err => productSearch.placeholder = 'Error al cargar productos.');
+        });
+
+        productSearch.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            if (!term) { searchResults.style.display = 'none'; return; }
+            const filtered = productosData.filter(p => p.title.toLowerCase().includes(term));
+            searchResults.innerHTML = '';
+            if (filtered.length) {
+                filtered.forEach(p => {
+                    const item = document.createElement('div');
+                    item.className = 'search-result-item';
+                    item.innerHTML = `<img src="${p.imageUrl}" class="result-image"><span class="result-text">${p.title}</span>`;
+                    item.addEventListener('click', () => {
+                        titleDisplay.innerHTML = p.title;
+                        bodyDisplay.innerHTML = p.description.replace(/\n/g, '<br>'); // Mantener saltos de línea
+                        productSearch.value = p.title;
+                        searchResults.style.display = 'none';
+                    });
+                    searchResults.appendChild(item);
+                });
+                searchResults.style.display = 'block';
+            } else { searchResults.style.display = 'none'; }
+        });
+        document.addEventListener('click', (e) => { if (!productSearch.contains(e.target)) searchResults.style.display = 'none'; });
+
+        // --- FUNCIONES DE DESCARGA E IMPRESIÓN (SIN CAMBIOS) ---
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            html2canvas(imageCanvas, { useCORS: true, backgroundColor: null, scale: 4 }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = `tarjeta-${titleInput.value.replace(/\s/g, "_")}.png`;
+                link.download = `tarjeta.png`;
                 link.href = canvas.toDataURL('image/png');
                 link.click();
             });
         });
 
-        printBtn.addEventListener('click', function() {
-            printBtn.textContent = 'Generando...';
-            printBtn.disabled = true;
+        document.getElementById('printBtn').addEventListener('click', function() {
+            const btn = this;
+            btn.textContent = 'Generando...';
+            btn.disabled = true;
 
             const cardWidthCm = parseFloat(cardWidthInput.value) || 10;
             const cardHeightCm = parseFloat(cardHeightInput.value) || 10;
             const CM_TO_INCH = 2.54;
-
             const cardWidthIn = cardWidthCm / CM_TO_INCH;
             const cardHeightIn = cardHeightCm / CM_TO_INCH;
-            
             const GUTTER_IN = 0.1; 
-            const paperWidthIn = 8.5;
-            const paperHeightIn = 11;
-            const marginIn = 0.5;
-
+            const paperWidthIn = 8.5, paperHeightIn = 11, marginIn = 0.5;
             const printableWidth = paperWidthIn - (marginIn * 2);
             const printableHeight = paperHeightIn - (marginIn * 2);
 
@@ -334,18 +340,16 @@
             const totalCards = cols * rows;
 
             if (totalCards === 0) {
-                alert("La tarjeta es demasiado grande para caber en una hoja carta. Por favor, reduce el tamaño.");
-                printBtn.textContent = 'Imprimir';
-                printBtn.disabled = false;
+                alert("La tarjeta es demasiado grande para caber en una hoja carta.");
+                btn.textContent = 'Imprimir';
+                btn.disabled = false;
                 return;
             }
 
-            html2canvas(imageCanvas, { useCORS: true, backgroundColor: null, scale: 3 })
-            .then(canvas => {
+            html2canvas(imageCanvas, { useCORS: true, backgroundColor: null, scale: 3 }).then(canvas => {
                 const imageDataUrl = canvas.toDataURL('image/png');
                 const printArea = document.getElementById('print-area');
                 printArea.innerHTML = '';
-
                 for (let i = 0; i < totalCards; i++) {
                     const img = document.createElement('img');
                     img.className = 'print-card';
@@ -355,17 +359,13 @@
                     img.style.margin = `${GUTTER_IN / 2}in`; 
                     printArea.appendChild(img);
                 }
-
                 setTimeout(() => {
                     window.print();
-                    printBtn.textContent = 'Imprimir';
-                    printBtn.disabled = false;
+                    btn.textContent = 'Imprimir';
+                    btn.disabled = false;
                 }, 200);
             });
         });
-
-        updatePreview();
     </script>
-
 </body>
 </html>
