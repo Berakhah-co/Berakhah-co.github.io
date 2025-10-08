@@ -27,7 +27,8 @@
         input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus { outline: none; border-color: var(--color-oro); box-shadow: 0 0 8px rgba(191, 161, 122, 0.4); }
         .size-inputs { display: flex; gap: 1rem; }
         textarea { height: 120px; resize: vertical; }
-        .style-selector button { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; border: 1px solid #ddd; padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; margin-right: 0.5rem; transition: all 0.3s ease; }
+        .style-selector { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .style-selector button { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; border: 1px solid #ddd; padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; }
         .style-selector button.active { background-color: var(--color-oro); color: white; border-color: var(--color-oro); font-weight: 600; }
         .checkbox-label { display: flex; align-items: center; font-size: 0.9rem; color: #555; cursor: pointer; }
         .checkbox-label input { width: auto; margin-right: 0.75rem; accent-color: var(--color-oro); }
@@ -49,17 +50,26 @@
         #title-display, #body-display { color: var(--color-texto); transition: color 0.4s ease; }
         #title-display { font-family: 'Playfair Display', serif; font-weight: 700; margin-bottom: 1rem; line-height: 1.2; }
         #body-display { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.6; white-space: pre-wrap; }
-        .text-on-dark { color: #FFFFFF !important; }
+        .text-on-dark { color: #FFFFFF !important; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
         #watermark-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logoblanco.jpg'); background-position: center; background-repeat: no-repeat; background-size: 60%; opacity: 0; z-index: 1; transition: opacity 0.5s ease, background-image 0.1s; }
         #image-canvas.watermark-active #watermark-logo { opacity: 0.15; }
+        
+        /* --- MARCOS CSS --- */
         .frame-clasico { background-color: var(--color-fondo); border: 1px solid var(--color-oro-claro); }
         .frame-clasico::before { content: ''; position: absolute; top: 25px; left: 25px; right: 25px; bottom: 25px; border: 2px solid var(--color-oro); z-index: 0; background: transparent; }
         .frame-artistico { background-color: var(--color-fondo); border: 1px solid var(--color-oro-claro); }
         .frame-artistico::before, .frame-artistico::after { content: ''; position: absolute; width: 60px; height: 60px; border-color: var(--color-oro); border-style: solid; z-index: 0; background: transparent; }
         .frame-artistico::before { top: 30px; left: 30px; border-width: 3px 0 0 3px; }
         .frame-artistico::after { bottom: 30px; right: 30px; border-width: 0 3px 3px 0; }
-        .frame-negro { background-color: white; border: none; }
+        .frame-negro { background-color: white; border: none; padding: 0; }
         .frame-negro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('images/marco.png'); background-size: cover; background-position: center; background-repeat: no-repeat; z-index: 0; }
+        
+        /* --- NUEVOS ESTILOS --- */
+        .frame-zafiro { background-color: #2C3E50; border: 2px solid #D4AF37; }
+        .frame-marmol { background-image: linear-gradient(135deg, #F9F1F1, #FFFFFF, #EEDFEF); border: 2px solid #C08081; }
+        .frame-esmeralda { background-color: #005A31; border: 1px solid #004d2b; padding: 0; }
+        .frame-esmeralda::before { content: ''; position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px; border: 2px solid var(--color-oro); }
+
         #print-area { display: none; }
         @media print { 
             body > *:not(#print-area) { display: none !important; } 
@@ -93,6 +103,10 @@
                     <button class="active" data-style="frame-clasico">Dorado Clásico</button>
                     <button data-style="frame-artistico">Marco Artístico</button>
                     <button data-style="frame-negro">Marco Negro</button>
+                    <!-- NUEVOS BOTONES DE ESTILO -->
+                    <button data-style="frame-zafiro">Zafiro Nocturno</button>
+                    <button data-style="frame-marmol">Mármol Rosado</button>
+                    <button data-style="frame-esmeralda">Esmeralda Deco</button>
                 </div>
             </div>
             <div class="control-group">
@@ -272,9 +286,15 @@
                 const style = e.target.dataset.style;
                 const watermarkClass = imageCanvas.classList.contains('watermark-active') ? 'watermark-active' : '';
                 imageCanvas.className = `${style} ${watermarkClass}`;
-
+                
+                // --- LÓGICA PARA TEXTO CLARO EN FONDOS OSCUROS ---
                 titleDisplay.classList.remove('text-on-dark');
                 bodyDisplay.classList.remove('text-on-dark');
+
+                if (style === 'frame-zafiro' || style === 'frame-esmeralda') {
+                    titleDisplay.classList.add('text-on-dark');
+                    bodyDisplay.classList.add('text-on-dark');
+                }
             }
         });
         
@@ -301,8 +321,7 @@
             const cardWidthIn = cardWidthCm / CM_TO_INCH;
             const cardHeightIn = cardHeightCm / CM_TO_INCH;
             
-            // --- LÓGICA DE IMPRESIÓN CON MARGEN ---
-            const GUTTER_IN = 0.1; // Espacio de 0.1 pulgadas (aprox 2.5mm) entre tarjetas
+            const GUTTER_IN = 0.1; 
             const paperWidthIn = 8.5;
             const paperHeightIn = 11;
             const marginIn = 0.5;
@@ -310,7 +329,6 @@
             const printableWidth = paperWidthIn - (marginIn * 2);
             const printableHeight = paperHeightIn - (marginIn * 2);
 
-            // Se recalcula el espacio considerando el margen entre tarjetas
             const cols = Math.floor((printableWidth + GUTTER_IN) / (cardWidthIn + GUTTER_IN));
             const rows = Math.floor((printableHeight + GUTTER_IN) / (cardHeightIn + GUTTER_IN));
             const totalCards = cols * rows;
@@ -334,7 +352,6 @@
                     img.src = imageDataUrl;
                     img.style.width = `${cardWidthIn}in`;
                     img.style.height = `${cardHeightIn}in`;
-                    // Se aplica la mitad del margen a cada lado para crear la separación completa
                     img.style.margin = `${GUTTER_IN / 2}in`; 
                     printArea.appendChild(img);
                 }
