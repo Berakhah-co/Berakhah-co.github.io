@@ -47,7 +47,7 @@
         #image-canvas { background-color: var(--color-fondo); display: flex; justify-content: center; align-items: center; box-sizing: border-box; box-shadow: 0 5px 25px var(--color-sombra); position: relative; overflow: hidden; transition: all 0.4s ease-in-out; padding: 10%; }
         #text-container { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-sizing: border-box; z-index: 2; position: relative; }
         #title-display, #body-display { color: var(--color-texto); transition: color 0.4s ease; }
-        #title-display { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
+        #title-display { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.2; /* Añadido para controlar el espacio entre líneas del título */ }
         #body-display { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.6; white-space: pre-wrap; }
         .text-on-dark { color: #FFFFFF !important; }
         #watermark-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logoblanco.jpg'); background-position: center; background-repeat: no-repeat; background-size: 60%; opacity: 0; z-index: 1; transition: opacity 0.5s ease, background-image 0.1s; }
@@ -231,7 +231,21 @@
         }
 
         function updatePreview() {
-            titleDisplay.innerText = titleInput.value;
+            // --- INICIO DE LA LÓGICA DEL TÍTULO MODIFICADA ---
+            const fullTitle = titleInput.value;
+            const words = fullTitle.trim().split(/\s+/); // Divide por espacios, manejando múltiples espacios
+
+            if (words.length > 2) { // Aplicar solo si hay más de dos palabras para evitar saltos extraños
+                const lastWord = words.pop();
+                const secondLastWord = words.pop();
+                const mainPart = words.join(' ');
+                // Unimos la penúltima y última palabra para códigos como "B 19"
+                titleDisplay.innerHTML = `${mainPart}<br>${secondLastWord} ${lastWord}`;
+            } else {
+                titleDisplay.innerHTML = fullTitle;
+            }
+            // --- FIN DE LA LÓGICA DEL TÍTULO ---
+
             bodyDisplay.innerText = bodyInput.value;
             bodyDisplay.style.fontSize = `${fontSizeSlider.value}px`;
             updatePreviewSize();
@@ -277,7 +291,6 @@
             const cardHeightCm = parseFloat(cardHeightInput.value) || 10;
             const CM_TO_INCH = 2.54;
 
-            // Convertir cm a pulgadas para el cálculo
             const cardWidthIn = cardWidthCm / CM_TO_INCH;
             const cardHeightIn = cardHeightCm / CM_TO_INCH;
             
