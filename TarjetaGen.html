@@ -3,257 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudio de Diseño de Tarjetas Avanzado</title>
+    <title>Estudio de Diseño de Tarjetas v2.0</title>
     
+    <!-- FUENTES DE GOOGLE -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Dancing+Script:wght@700&family=Lato:ital,wght@0,400;1,400&family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
+    <!-- LIBRERÍAS EXTERNAS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- ICONOS (FONT AWESOME) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root { 
-            --color-oro: #BFA17A; 
-            --color-oro-claro: #D1BBA3;
-            --color-fondo: #F9F5EF;
-            --color-texto: #4B4B4B; 
-            --color-sombra: rgba(0, 0, 0, 0.07); 
+            --dark-bg: #1A202C;
+            --dark-panel: #2D3748;
+            --dark-text: #E2E8F0;
+            --dark-text-secondary: #A0AEC0;
+            --accent-color: #D69E2E;
+            --accent-hover: #ECC94B;
+            --light-bg: #F7FAFC;
+            --border-color: #4A5568;
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f2ef; margin: 0; padding: 2rem; color: var(--color-texto); display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box; }
-        .studio-container { display: grid; grid-template-columns: 380px 1fr; gap: 2.5rem; max-width: 1300px; width: 100%; background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 10px 40px var(--color-sombra); }
-        .controls-panel { padding-right: 1.5rem; max-height: 85vh; overflow-y: auto; padding-left: 5px;}
-        .controls-panel h1 { font-family: 'Playfair Display', serif; color: #333; margin-top: 0; font-size: 2.2rem; }
-        
-        details { border: 1px solid #e0e0e0; border-radius: 8px; margin-bottom: 1rem; }
-        summary { font-weight: bold; cursor: pointer; padding: 0.75rem; background-color: #f9f9f9; border-radius: 8px; color: var(--color-oro); }
-        details[open] summary { border-bottom: 1px solid #e0e0e0; }
-        .details-content { padding: 1rem; }
 
-        .control-group { margin-bottom: 1.5rem; position: relative; }
-        .control-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: #555; }
-        input[type="text"], input[type="number"], textarea, select { width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s, box-shadow 0.3s; background: #fff; }
+        /* --- ESTRUCTURA GENERAL --- */
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--light-bg); margin: 0; padding: 1rem; color: var(--dark-text); display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box; }
+        .studio-container { display: grid; grid-template-columns: 400px 1fr; gap: 2rem; width: 100%; max-width: 1400px; height: 90vh; }
         
-        .size-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        /* --- PANEL DE CONTROLES (IZQUIERDA) --- */
+        .controls-panel { background-color: var(--dark-bg); padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow-y: auto; }
+        .controls-panel h1 { font-family: 'Playfair Display', serif; color: white; margin-top: 0; font-size: 2.5rem; text-align: center; }
+        .controls-panel h2 { color: var(--accent-color); font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); }
+        .control-group { margin-bottom: 1.5rem; }
+        .control-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.8rem; color: var(--dark-text-secondary); text-transform: uppercase; }
+
+        /* Estilos de Inputs para tema oscuro */
+        input[type="text"], input[type="number"], textarea, select {
+            width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);
+            background-color: var(--dark-panel); color: var(--dark-text); font-size: 1rem;
+            box-sizing: border-box; transition: all 0.2s ease;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 3px rgba(214, 158, 46, 0.3);
+        }
         textarea { height: 80px; resize: vertical; }
-        .style-selector { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .style-selector button, .format-buttons button { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; border: 1px solid #ddd; padding: 0.6rem 1rem; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; }
-        .style-selector button.active, .format-buttons button.active { background-color: var(--color-oro); color: white; border-color: var(--color-oro); font-weight: 600; }
+
+        /* Selectores de estilo rediseñados */
+        .style-selector { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.5rem; }
+        .style-selector button {
+            background: var(--dark-panel); color: var(--dark-text-secondary); border: 1px solid var(--border-color);
+            padding: 0.75rem; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;
+        }
+        .style-selector button.active { background-color: var(--accent-color); color: var(--dark-bg); font-weight: bold; border-color: var(--accent-color); }
+
+        /* Controles de tipografía */
+        .typography-card { background-color: var(--dark-panel); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; }
         .format-controls { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; }
-        .format-buttons { display: flex; gap: 0.5rem; }
-        .format-buttons button { padding: 0.5rem; width: 38px; text-align: center; font-weight: bold; }
-        input[type="color"] { width: 38px; height: 38px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; padding: 2px; }
-        
-        .action-buttons { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
-        .action-buttons button { flex: 1 1 100%; color: white; border: none; padding: 1rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
-        #downloadBtn { background-image: linear-gradient(45deg, #28a745, #248a38); }
-        #printBtn { background-image: linear-gradient(45deg, #007bff, #0056b3); }
-        #pdfBtn { background-image: linear-gradient(45deg, #dc3545, #b02a37); }
-        .utility-buttons button { flex-basis: 45%; background-color: #6c757d; }
+        .format-buttons { display: flex; gap: 0.5rem; background-color: var(--dark-bg); padding: 5px; border-radius: 8px; }
+        .format-buttons button { background: transparent; border: none; color: var(--dark-text-secondary); width: 35px; height: 35px; border-radius: 6px; cursor: pointer; transition: all 0.2s ease; font-size: 1rem; }
+        .format-buttons button:hover { background-color: #4A5568; }
+        .format-buttons button.active { background-color: var(--accent-color); color: var(--dark-bg); }
+        input[type="color"] { width: 45px; height: 45px; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; padding: 3px; background-color: var(--dark-panel); }
 
-        #search-results { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); max-height: 200px; overflow-y: auto; z-index: 100; }
-        .search-result-item { display: flex; align-items: center; padding: 0.75rem; cursor: pointer; border-bottom: 1px solid #f0f0f0; }
-        .result-image { width: 40px; height: 40px; object-fit: cover; border-radius: 4px; margin-right: 0.75rem; }
-        .result-text { font-size: 0.9rem; font-family: 'Segoe UI', sans-serif; }
+        /* Sliders Rediseñados */
+        input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; background: var(--dark-panel); border-radius: 5px; outline: none; margin-top: 0.5rem; }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; background: var(--accent-color); border-radius: 50%; cursor: pointer; transition: background 0.2s; }
+        input[type="range"]::-webkit-slider-thumb:hover { background: var(--accent-hover); }
 
-        .preview-panel { display: flex; justify-content: center; align-items: center; background-color: #f0f0f0; border-radius: 10px; padding: 2rem; }
-        #image-canvas { background-color: var(--color-fondo); box-shadow: 0 5px 25px var(--color-sombra); position: relative; overflow: hidden; transition: all 0.4s ease-in-out; background-size: cover; background-position: center; }
+        /* Botones de Acción */
+        .action-buttons button, .utility-buttons button {
+            color: var(--dark-bg); background: var(--accent-color); border: none; padding: 1rem;
+            border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer;
+            transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+        }
+        .action-buttons button:hover, .utility-buttons button:hover { background: var(--accent-hover); }
+        .utility-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+        #pdfBtn { background-color: #C53030; color: white; } #pdfBtn:hover { background-color: #E53E3E; }
+        #resetStylesBtn { background-color: #718096; color: white; } #resetStylesBtn:hover { background-color: #A0AEC0; }
         
+        /* --- PANEL DE PREVISUALIZACIÓN (DERECHA) --- */
+        .preview-area { background-color: var(--dark-bg); border-radius: 15px; padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .preview-area h3 { color: var(--dark-text-secondary); text-transform: uppercase; letter-spacing: 1px; margin: 0 0 2rem 0; }
+        #image-canvas { position: relative; overflow: hidden; background-size: cover; background-position: center; transition: all 0.4s ease-in-out; }
         #text-container { position: absolute; top: 50%; left: 50%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-sizing: border-box; z-index: 2; transition: all 0.3s ease; }
         #title-display, #body-display { transition: all 0.3s ease; }
-        #title-display { margin-bottom: 1rem; line-height: 1.2; }
-        #body-display { line-height: 1.6; white-space: pre-wrap; margin: 0 auto; }
+        #title-display { margin-bottom: 1rem; line-height: 1.2; font-family: 'Playfair Display', serif; }
+        #body-display { line-height: 1.6; white-space: pre-wrap; margin: 0 auto; font-family: 'Lato', sans-serif; }
         #watermark-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logoblanco.jpg'); background-position: center; background-repeat: no-repeat; z-index: 1; transition: all 0.5s ease; }
         
-        .frame-clasico { background-color: var(--color-fondo); border: 1px solid var(--color-oro-claro); padding: 5%;}
-        .frame-clasico::before { content: ''; position: absolute; top: 25px; left: 25px; right: 25px; bottom: 25px; border: 2px solid var(--color-oro); z-index: 0; background: transparent; }
-        .frame-artistico { background-color: var(--color-fondo); border: 1px solid var(--color-oro-claro); padding: 5%;}
-        .frame-artistico::before, .frame-artistico::after { content: ''; position: absolute; width: 60px; height: 60px; border-color: var(--color-oro); border-style: solid; z-index: 0; background: transparent; }
+        /* Estilos de los marcos */
+        .frame-clasico { background-color: #F9F5EF; border: 1px solid #D1BBA3; padding: 5%; }
+        .frame-clasico::before { content: ''; position: absolute; top: 25px; left: 25px; right: 25px; bottom: 25px; border: 2px solid #BFA17A; z-index: 0; }
+        .frame-artistico { background-color: #F9F5EF; border: 1px solid #D1BBA3; padding: 5%; }
+        .frame-artistico::before, .frame-artistico::after { content: ''; position: absolute; width: 60px; height: 60px; border-color: #BFA17A; border-style: solid; z-index: 0; }
         .frame-artistico::before { top: 30px; left: 30px; border-width: 3px 0 0 3px; }
         .frame-artistico::after { bottom: 30px; right: 30px; border-width: 0 3px 3px 0; }
         .frame-negro { background-color: white; border: none; }
-        .frame-negro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('images/marco.png'); background-size: cover; background-position: center; background-repeat: no-repeat; z-index: 0; }
-        
-        /* CORRECCIÓN DE COLOR y SOMBRA PARA MARCO NEGRO */
-        .frame-negro #title-display,
-        .frame-negro #body-display {
-            color: #FFFFFF;
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        /* NUEVO ESTILO FLORAL DORADO */
-        .frame-floral-dorado {
-            background-color: white;
-            border: 5px solid;
-            border-image-slice: 1;
-            border-image-source: url('images/glitter-border.png'); /* Asegúrate de tener esta imagen */
-            padding: 5%;
-        }
-        .frame-floral-dorado::before, .frame-floral-dorado::after {
-            content: '';
-            position: absolute;
-            width: 25%; /* Ajusta el tamaño según tus imágenes */
-            height: 25%;
-            background-size: contain;
-            background-repeat: no-repeat;
-            z-index: 3;
-        }
-        .frame-floral-dorado::before {
-            top: 15px;
-            left: 15px;
-            background-image: url('images/floral-corner-top-left.png'); /* Asegúrate de tener esta imagen */
-        }
-        .frame-floral-dorado::after {
-            bottom: 15px;
-            right: 15px;
-            background-image: url('images/floral-corner-bottom-right.png'); /* Asegúrate de tener esta imagen */
-        }
-
+        .frame-negro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('images/marco.png'); background-size: cover; }
+        .frame-negro #title-display, .frame-negro #body-display { color: #FFFFFF; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+        .frame-floral-dorado { background-color: white; border: 5px solid; border-image-slice: 1; border-image-source: url('images/glitter-border.png'); padding: 5%; }
+        .frame-floral-dorado::before, .frame-floral-dorado::after { content: ''; position: absolute; width: 25%; height: 25%; background-size: contain; background-repeat: no-repeat; z-index: 3; }
+        .frame-floral-dorado::before { top: 15px; left: 15px; background-image: url('images/floral-corner-top-left.png'); }
+        .frame-floral-dorado::after { bottom: 15px; right: 15px; background-image: url('images/floral-corner-bottom-right.png'); }
 
         #print-area { display: none; }
-        @media print { /* Estilos de impresión... */ }
-        @media (max-width: 900px) { /* Estilos responsivos... */ }
     </style>
 </head>
 <body>
     <div class="studio-container">
         <div class="controls-panel">
-            <h1>Diseña tu Tarjeta</h1>
-            
-            <div class="action-buttons utility-buttons">
-                 <button id="saveBtn">💾 Guardar Diseño</button>
-                 <button id="loadBtn">📂 Cargar Diseño</button>
+            <h1>Estudio de Diseño</h1>
+            <div class="utility-buttons">
+                 <button id="saveBtn"><i class="fas fa-save"></i> Guardar</button>
+                 <button id="loadBtn"><i class="fas fa-folder-open"></i> Cargar</button>
             </div>
 
-            <details open>
-                <summary>1. Contenido y Estilo</summary>
-                <div class="details-content">
-                    <div class="control-group">
-                        <label for="product-search">Buscar Producto (Opcional)</label>
-                        <input type="text" id="product-search" placeholder="Cargando productos...">
-                        <div id="search-results"></div>
-                    </div>
-                    <div class="control-group">
-                        <label for="style-select">Elige un Estilo</label>
-                        <div class="style-selector" id="style-select">
-                            <button class="active" data-style="frame-clasico">Dorado Clásico</button>
-                            <button data-style="frame-artistico">Marco Artístico</button>
-                            <button data-style="frame-negro">Marco Negro</button>
-                            <button data-style="frame-floral-dorado">Floral Dorado</button>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                         <label for="bgImageUpload">Subir Fondo Personalizado</label>
-                         <input type="file" id="bgImageUpload" accept="image/*">
-                    </div>
-                     <div class="control-group">
-                        <label for="titleInput">Título</label>
-                        <input type="text" id="titleInput" placeholder="Un Regalo Especial">
-                    </div>
-                    <div class="control-group">
-                        <label for="bodyInput">Mensaje</label>
-                        <textarea id="bodyInput">Este producto fue preparado con especial cuidado para ti.</textarea>
+            <section>
+                <h2>1. Contenido y Plantillas</h2>
+                <div class="control-group">
+                    <label for="product-search">Buscar Producto</label>
+                    <input type="text" id="product-search" placeholder="Cargando...">
+                    <div id="search-results"></div>
+                </div>
+                 <div class="control-group">
+                    <label>Estilo de Fondo</label>
+                    <div class="style-selector" id="style-select">
+                        <button class="active" data-style="frame-clasico">Clásico</button>
+                        <button data-style="frame-artistico">Artístico</button>
+                        <button data-style="frame-negro">Negro</button>
+                        <button data-style="frame-floral-dorado">Floral</button>
                     </div>
                 </div>
-            </details>
+                <div class="control-group">
+                     <label for="bgImageUpload">Fondo Personalizado</label>
+                     <input type="file" id="bgImageUpload" accept="image/*" style="padding: 0.5rem; font-size: 0.9rem;">
+                </div>
+                <div class="control-group">
+                    <label for="titleInput">Título</label>
+                    <input type="text" id="titleInput" placeholder="Un Regalo Especial">
+                </div>
+                <div class="control-group">
+                    <label for="bodyInput">Mensaje</label>
+                    <textarea id="bodyInput">Este producto fue preparado con especial cuidado para ti.</textarea>
+                </div>
+            </section>
 
-            <details>
-                <summary>2. Ajustes de Texto Avanzados</summary>
-                 <div class="details-content">
-                    <div class="control-group">
-                         <label>Fuente del Título</label>
-                         <select id="titleFont">
-                            <option value="'Playfair Display', serif">Playfair Display</option>
-                            <option value="'Montserrat', sans-serif">Montserrat</option>
-                            <option value="'Lato', sans-serif">Lato</option>
-                            <option value="'Cormorant Garamond', serif">Cormorant Garamond</option>
-                            <option value="'Dancing Script', cursive">Dancing Script</option>
-                         </select>
-                         <label style="margin-top: 0.5rem;">Formato</label>
-                         <div class="format-controls">
-                            <div class="format-buttons" id="title-format">
-                                <button data-style="textAlign" data-value="left">L</button>
-                                <button data-style="textAlign" data-value="center" class="active">C</button>
-                                <button data-style="textAlign" data-value="right">R</button>
-                                <button data-style="fontWeight" data-value="bold"><b>B</b></button>
-                                <button data-style="fontStyle" data-value="italic"><i>I</i></button>
-                            </div>
-                            <input type="color" id="titleColor" value="#4B4B4B">
-                         </div>
-                         <label for="titleFontSizeSlider">Tamaño</label>
-                         <input type="range" id="titleFontSizeSlider" min="20" max="80" value="32">
-                    </div>
-                     <hr>
-                    <div class="control-group">
-                         <label>Fuente del Mensaje</label>
-                         <select id="bodyFont">
-                             <option value="'Cormorant Garamond', serif">Cormorant Garamond</option>
-                             <option value="'Lato', sans-serif">Lato</option>
-                             <option value="'Montserrat', sans-serif">Montserrat</option>
-                             <option value="'Playfair Display', serif">Playfair Display</option>
-                             <option value="'Dancing Script', cursive">Dancing Script</option>
-                         </select>
-                         <label style="margin-top: 0.5rem;">Formato</label>
-                         <div class="format-controls">
-                             <div class="format-buttons" id="body-format">
-                                <button data-style="textAlign" data-value="left">L</button>
-                                <button data-style="textAlign" data-value="center" class="active">C</button>
-                                <button data-style="textAlign" data-value="right">R</button>
-                                <button data-style="fontWeight" data-value="bold"><b>B</b></button>
-                                <button data-style="fontStyle" data-value="italic"><i>I</i></button>
-                             </div>
-                             <input type="color" id="bodyColor" value="#4B4B4B">
-                         </div>
-                         <label for="bodyFontSizeSlider">Tamaño</label>
-                         <input type="range" id="bodyFontSizeSlider" min="14" max="50" value="22">
-                    </div>
-                     <hr>
-                    <div class="control-group">
-                        <label for="textPosSlider">Posición Vertical</label>
-                        <input type="range" id="textPosSlider" min="-50" max="50" value="0">
-                        
-                        <label for="textWidthSlider" style="margin-top: 1rem;">Ancho del Bloque de Texto</label>
-                        <input type="range" id="textWidthSlider" min="80" max="120" value="100">
-                    </div>
-                     <div class="action-buttons utility-buttons">
-                        <button id="resetStylesBtn">🔄 Restablecer Estilos</button>
-                     </div>
-                 </div>
-            </details>
-            
-            <details>
-                <summary>3. Salida y Exportación</summary>
-                <div class="details-content">
-                    <div class="control-group">
-                        <label>Tamaño de la Tarjeta (cm)</label>
-                        <div class="size-inputs">
-                            <input type="number" id="cardWidth" value="10" min="1">
-                            <input type="number" id="cardHeight" value="10" min="1">
+            <section>
+                <h2>2. Tipografía y Estilo de Texto</h2>
+                <div class="typography-card">
+                    <label>Título</label>
+                    <select id="titleFont">
+                        <option value="'Playfair Display', serif">Playfair Display</option>
+                        <option value="'Montserrat', sans-serif">Montserrat</option>
+                        <option value="'Lato', sans-serif">Lato</option>
+                        <option value="'Cormorant Garamond', serif">Cormorant Garamond</option>
+                        <option value="'Dancing Script', cursive">Dancing Script</option>
+                    </select>
+                    <div class="format-controls" style="margin-top:1rem;">
+                        <div class="format-buttons" id="title-format">
+                            <button data-style="textAlign" data-value="left" title="Alinear Izquierda"><i class="fas fa-align-left"></i></button>
+                            <button data-style="textAlign" data-value="center" class="active" title="Centrar"><i class="fas fa-align-center"></i></button>
+                            <button data-style="textAlign" data-value="right" title="Alinear Derecha"><i class="fas fa-align-right"></i></button>
+                            <button data-style="fontWeight" data-value="bold" title="Negrita"><i class="fas fa-bold"></i></button>
+                            <button data-style="fontStyle" data-value="italic" title="Itálica"><i class="fas fa-italic"></i></button>
                         </div>
+                        <input type="color" id="titleColor" value="#4B4B4B">
                     </div>
-                     <div class="control-group">
-                        <label for="paperSize">Tamaño de Papel</label>
-                        <select id="paperSize">
-                            <option value="letter">Carta (8.5 x 11 in)</option>
-                            <option value="a4">A4 (210 x 297 mm)</option>
-                        </select>
+                    <label style="margin-top:1rem;">Tamaño</label>
+                    <input type="range" id="titleFontSizeSlider" min="20" max="100" value="40">
+                </div>
+
+                <div class="typography-card">
+                    <label>Mensaje</label>
+                    <select id="bodyFont">
+                         <option value="'Lato', sans-serif">Lato</option>
+                         <option value="'Cormorant Garamond', serif">Cormorant Garamond</option>
+                         <option value="'Montserrat', sans-serif">Montserrat</option>
+                         <option value="'Playfair Display', serif">Playfair Display</option>
+                         <option value="'Dancing Script', cursive">Dancing Script</option>
+                    </select>
+                    <div class="format-controls" style="margin-top:1rem;">
+                         <div class="format-buttons" id="body-format">
+                            <button data-style="textAlign" data-value="left" title="Alinear Izquierda"><i class="fas fa-align-left"></i></button>
+                            <button data-style="textAlign" data-value="center" class="active" title="Centrar"><i class="fas fa-align-center"></i></button>
+                            <button data-style="textAlign" data-value="right" title="Alinear Derecha"><i class="fas fa-align-right"></i></button>
+                            <button data-style="fontWeight" data-value="bold" title="Negrita"><i class="fas fa-bold"></i></button>
+                            <button data-style="fontStyle" data-value="italic" title="Itálica"><i class="fas fa-italic"></i></button>
+                         </div>
+                         <input type="color" id="bodyColor" value="#4B4B4B">
                     </div>
-                    <div class="control-group">
-                        <label class="checkbox-label"><input type="checkbox" id="watermarkToggle" checked>Añadir logo</label>
-                        <label for="watermarkOpacitySlider">Opacidad del Logo</label>
-                        <input type="range" id="watermarkOpacitySlider" min="0" max="100" value="15">
-                        <label for="watermarkSizeSlider">Tamaño del Logo</label>
-                        <input type="range" id="watermarkSizeSlider" min="20" max="100" value="60">
-                    </div>
-                    <div class="action-buttons">
-                        <button id="downloadBtn">🖼️ Descargar PNG</button>
-                        <button id="pdfBtn">📄 Exportar PDF</button>
-                        <button id="printBtn">🖨️ Imprimir</button>
+                    <label style="margin-top:1rem;">Tamaño</label>
+                    <input type="range" id="bodyFontSizeSlider" min="14" max="60" value="22">
+                </div>
+
+                <div class="control-group">
+                    <label>Ajustes de Maquetación</label>
+                    <label for="textPosSlider">Posición Vertical</label>
+                    <input type="range" id="textPosSlider" min="-50" max="50" value="0">
+                    <label for="textWidthSlider" style="margin-top: 1rem;">Ancho del Texto</label>
+                    <input type="range" id="textWidthSlider" min="80" max="120" value="100">
+                </div>
+                <button id="resetStylesBtn" style="width:100%;"><i class="fas fa-undo"></i> Restablecer Estilos</button>
+            </section>
+            
+            <section>
+                <h2>3. Lienzo y Exportación</h2>
+                <div class="control-group">
+                    <label>Tamaño de Tarjeta (cm)</label>
+                    <div class="size-inputs">
+                        <input type="number" id="cardWidth" value="10" min="1">
+                        <input type="number" id="cardHeight" value="10" min="1">
                     </div>
                 </div>
-            </details>
+                 <div class="control-group">
+                    <label for="paperSize">Tamaño de Papel</label>
+                    <select id="paperSize">
+                        <option value="letter">Carta (8.5 x 11 in)</option>
+                        <option value="a4">A4 (210 x 297 mm)</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label><input type="checkbox" id="watermarkToggle" checked> Añadir logo</label>
+                    <label for="watermarkOpacitySlider">Opacidad del Logo</label>
+                    <input type="range" id="watermarkOpacitySlider" min="0" max="100" value="15">
+                    <label for="watermarkSizeSlider">Tamaño del Logo</label>
+                    <input type="range" id="watermarkSizeSlider" min="20" max="100" value="60">
+                </div>
+                <div class="action-buttons" style="flex-direction: column;">
+                    <button id="downloadBtn"><i class="fas fa-file-image"></i> Descargar PNG</button>
+                    <button id="pdfBtn"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+                    <button id="printBtn"><i class="fas fa-print"></i> Imprimir</button>
+                </div>
+            </section>
         </div>
-        <div class="preview-panel">
+        <div class="preview-area">
+            <h3>Previsualización en Vivo</h3>
             <div id="image-canvas" class="frame-clasico watermark-active">
                 <div id="watermark-logo"></div>
                 <div id="text-container">
@@ -313,8 +299,7 @@
             if (words.length > 2) { 
                 const lastWord = words.pop();
                 const secondLastWord = words.pop();
-                const mainPart = words.join(' ');
-                titleDisplay.innerHTML = `${mainPart}<br>${secondLastWord} ${lastWord}`;
+                titleDisplay.innerHTML = `${words.join(' ')}<br>${secondLastWord} ${lastWord}`;
             } else {
                 titleDisplay.innerHTML = fullTitle.replace(/\n/g, "<br>");
             }
@@ -335,7 +320,7 @@
 
         function updatePreviewSize() {
             const aspect = (parseFloat(cardWidthInput.value) || 10) / (parseFloat(cardHeightInput.value) || 10);
-            const maxWidth = 550;
+            const maxWidth = Math.min(document.querySelector('.preview-area').clientWidth - 64, 550);
             imageCanvas.style.width = `${maxWidth}px`;
             imageCanvas.style.height = `${maxWidth / aspect}px`;
         }
@@ -352,16 +337,13 @@
                 imageCanvas.classList.add(style);
                 if (watermarkToggle.checked) imageCanvas.classList.add('watermark-active');
                 
-                // YA NO SE NECESITA LA CLASE 'text-on-dark'. El CSS se encarga.
-                // PERO SÍ SE NECESITA CAMBIAR EL VALOR DEL COLOR PICKER.
                 if (style === 'frame-negro') {
                     titleColorPicker.value = LIGHT_TEXT_COLOR;
                     bodyColorPicker.value = LIGHT_TEXT_COLOR;
                 } else {
-                    titleColorPicker.value = DEFAULT_TEXT_COLOR;
-                    bodyColorPicker.value = DEFAULT_TEXT_COLOR;
+                    titleColorPicker.value = titleDisplay.style.color || DEFAULT_TEXT_COLOR;
+                    bodyColorPicker.value = bodyDisplay.style.color || DEFAULT_TEXT_COLOR;
                 }
-                
                 updatePreview();
             }
         });
@@ -414,12 +396,12 @@
                 watermarkOp: watermarkOpacitySlider.value,
                 watermarkSz: watermarkSizeSlider.value,
             };
-            localStorage.setItem('cardDesignerSettings', JSON.stringify(settings));
+            localStorage.setItem('cardDesignerSettingsV2', JSON.stringify(settings));
             alert('¡Diseño guardado!');
         });
 
         loadBtn.addEventListener('click', () => {
-            const settings = JSON.parse(localStorage.getItem('cardDesignerSettings'));
+            const settings = JSON.parse(localStorage.getItem('cardDesignerSettingsV2'));
             if (!settings) { alert('No hay ningún diseño guardado.'); return; }
             
             titleInput.value = settings.title; bodyInput.value = settings.body;
@@ -456,8 +438,8 @@
             const isDark = imageCanvas.classList.contains('frame-negro');
             titleColorPicker.value = isDark ? LIGHT_TEXT_COLOR : DEFAULT_TEXT_COLOR;
             bodyColorPicker.value = isDark ? LIGHT_TEXT_COLOR : DEFAULT_TEXT_COLOR;
-            titleFontSizeSlider.value = 32; bodyFontSizeSlider.value = 22;
-            titleFont.value = "'Playfair Display', serif"; bodyFont.value = "'Cormorant Garamond', serif";
+            titleFontSizeSlider.value = 40; bodyFontSizeSlider.value = 22;
+            titleFont.value = "'Playfair Display', serif"; bodyFont.value = "'Lato', sans-serif";
             textPosSlider.value = 0;
             textWidthSlider.value = 100;
 
@@ -498,7 +480,6 @@
 
         async function generateOutput(format = 'print') {
             const btn = format === 'pdf' ? pdfBtn : printBtn;
-            btn.textContent = 'Generando...';
             btn.disabled = true;
 
             const cardWidthCm = parseFloat(cardWidthInput.value) || 10;
@@ -518,7 +499,6 @@
             const rows = Math.floor(printableH / cardH_in);
             if (cols * rows === 0) {
                 alert("La tarjeta es demasiado grande para el papel seleccionado.");
-                btn.textContent = format === 'pdf' ? '📄 Exportar PDF' : '🖨️ Imprimir';
                 btn.disabled = false; return;
             }
 
@@ -552,22 +532,9 @@
                 }
                 pdf.save('tarjetas.pdf');
             } else {
-                const printArea = document.getElementById('print-area');
-                printArea.innerHTML = '';
-                printArea.style.width = `${paper.w}in`;
-                printArea.style.height = `${paper.h}in`;
-                printArea.style.padding = `${MARGIN_IN}in`;
-                
-                for(let i=0; i < (rows*cols); i++) {
-                     printArea.innerHTML += `
-                        <div class="print-card-wrapper" style="width: ${cardW_in - GUTTER_IN}in; height: ${cardH_in - GUTTER_IN}in; margin: ${GUTTER_IN/2}in;">
-                            <img src="${imageDataUrl}" style="width:100%; height:100%;" />
-                        </div>`;
-                }
                 window.print();
             }
             
-            btn.textContent = format === 'pdf' ? '📄 Exportar PDF' : '🖨️ Imprimir';
             btn.disabled = false;
         }
 
