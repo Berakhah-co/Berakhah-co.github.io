@@ -33,7 +33,6 @@
         .control-group { margin-bottom: 1.5rem; position: relative; }
         .control-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: #555; }
         input[type="text"], input[type="number"], textarea, select { width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s, box-shadow 0.3s; background: #fff; }
-        input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus { outline: none; border-color: var(--color-oro); box-shadow: 0 0 8px rgba(191, 161, 122, 0.4); }
         
         .size-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         textarea { height: 80px; resize: vertical; }
@@ -60,26 +59,10 @@
         .preview-panel { display: flex; justify-content: center; align-items: center; background-color: #f0f0f0; border-radius: 10px; padding: 2rem; }
         #image-canvas { background-color: var(--color-fondo); box-shadow: 0 5px 25px var(--color-sombra); position: relative; overflow: hidden; transition: all 0.4s ease-in-out; background-size: cover; background-position: center; }
         
-        /* --- CAMBIO CLAVE DE MAQUETACIÓN --- */
-        #text-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            box-sizing: border-box;
-            z-index: 2;
-            transition: all 0.3s ease;
-            /* El transform se aplicará desde JS */
-        }
-        #title-display, #body-display { color: var(--color-texto); transition: all 0.3s ease; width: 100%; }
+        #text-container { position: absolute; top: 50%; left: 50%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-sizing: border-box; z-index: 2; transition: all 0.3s ease; }
+        #title-display, #body-display { transition: all 0.3s ease; }
         #title-display { margin-bottom: 1rem; line-height: 1.2; }
         #body-display { line-height: 1.6; white-space: pre-wrap; margin: 0 auto; }
-        .text-on-dark { color: #FFFFFF !important; text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5); }
         #watermark-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logoblanco.jpg'); background-position: center; background-repeat: no-repeat; z-index: 1; transition: all 0.5s ease; }
         
         .frame-clasico { background-color: var(--color-fondo); border: 1px solid var(--color-oro-claro); padding: 5%;}
@@ -90,6 +73,42 @@
         .frame-artistico::after { bottom: 30px; right: 30px; border-width: 0 3px 3px 0; }
         .frame-negro { background-color: white; border: none; }
         .frame-negro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('images/marco.png'); background-size: cover; background-position: center; background-repeat: no-repeat; z-index: 0; }
+        
+        /* CORRECCIÓN DE COLOR y SOMBRA PARA MARCO NEGRO */
+        .frame-negro #title-display,
+        .frame-negro #body-display {
+            color: #FFFFFF;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* NUEVO ESTILO FLORAL DORADO */
+        .frame-floral-dorado {
+            background-color: white;
+            border: 5px solid;
+            border-image-slice: 1;
+            border-image-source: url('images/glitter-border.png'); /* Asegúrate de tener esta imagen */
+            padding: 5%;
+        }
+        .frame-floral-dorado::before, .frame-floral-dorado::after {
+            content: '';
+            position: absolute;
+            width: 25%; /* Ajusta el tamaño según tus imágenes */
+            height: 25%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 3;
+        }
+        .frame-floral-dorado::before {
+            top: 15px;
+            left: 15px;
+            background-image: url('images/floral-corner-top-left.png'); /* Asegúrate de tener esta imagen */
+        }
+        .frame-floral-dorado::after {
+            bottom: 15px;
+            right: 15px;
+            background-image: url('images/floral-corner-bottom-right.png'); /* Asegúrate de tener esta imagen */
+        }
+
 
         #print-area { display: none; }
         @media print { /* Estilos de impresión... */ }
@@ -120,6 +139,7 @@
                             <button class="active" data-style="frame-clasico">Dorado Clásico</button>
                             <button data-style="frame-artistico">Marco Artístico</button>
                             <button data-style="frame-negro">Marco Negro</button>
+                            <button data-style="frame-floral-dorado">Floral Dorado</button>
                         </div>
                     </div>
                     <div class="control-group">
@@ -303,7 +323,6 @@
             Object.assign(titleDisplay.style, { fontSize: `${titleFontSizeSlider.value}px`, color: titleColorPicker.value, fontFamily: titleFont.value });
             Object.assign(bodyDisplay.style, { fontSize: `${bodyFontSizeSlider.value}px`, color: bodyColorPicker.value, fontFamily: bodyFont.value });
             
-            // --- LÓGICA DE POSICIONAMIENTO Y ANCHO ---
             const verticalOffset = textPosSlider.value;
             textContainer.style.width = `${textWidthSlider.value}%`;
             textContainer.style.transform = `translate(-50%, calc(-50% + ${verticalOffset}%))`;
@@ -333,11 +352,15 @@
                 imageCanvas.classList.add(style);
                 if (watermarkToggle.checked) imageCanvas.classList.add('watermark-active');
                 
-                const isDark = style === 'frame-negro';
-                titleColorPicker.value = isDark ? LIGHT_TEXT_COLOR : DEFAULT_TEXT_COLOR;
-                bodyColorPicker.value = isDark ? LIGHT_TEXT_COLOR : DEFAULT_TEXT_COLOR;
-                titleDisplay.classList.toggle('text-on-dark', isDark);
-                bodyDisplay.classList.toggle('text-on-dark', isDark);
+                // YA NO SE NECESITA LA CLASE 'text-on-dark'. El CSS se encarga.
+                // PERO SÍ SE NECESITA CAMBIAR EL VALOR DEL COLOR PICKER.
+                if (style === 'frame-negro') {
+                    titleColorPicker.value = LIGHT_TEXT_COLOR;
+                    bodyColorPicker.value = LIGHT_TEXT_COLOR;
+                } else {
+                    titleColorPicker.value = DEFAULT_TEXT_COLOR;
+                    bodyColorPicker.value = DEFAULT_TEXT_COLOR;
+                }
                 
                 updatePreview();
             }
@@ -349,7 +372,6 @@
                 const reader = new FileReader();
                 reader.onload = (event) => {
                     imageCanvas.style.backgroundImage = `url('${event.target.result}')`;
-                    imageCanvas.style.backgroundColor = 'transparent';
                 };
                 reader.readAsDataURL(file);
             }
