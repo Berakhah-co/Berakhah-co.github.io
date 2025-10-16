@@ -53,7 +53,6 @@
         input[type="range"] { -webkit-appearance: none; width: 100%; height: 8px; background: var(--dark-panel); border-radius: 5px; outline: none; margin-top: 0.5rem; }
         input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; background: var(--accent-color); border-radius: 50%; cursor: pointer; }
 
-        /* ESTILOS PARA BÚSQUEDA RESTAURADOS Y ADAPTADOS */
         #search-results {
             display: none; position: absolute; top: 100%; left: 0; right: 0;
             background-color: var(--dark-panel); border: 1px solid var(--border-color);
@@ -65,11 +64,16 @@
         .result-image { width: 40px; height: 40px; object-fit: cover; border-radius: 4px; margin-right: 1rem; }
         .result-text { font-size: 0.9rem; }
         
-        #canvas-wrapper { position: relative; background-color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        /* --- CORRECCIÓN CLAVE --- */
+        #canvas-wrapper {
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            /* Se elimina el background-color: white; para que las clases de estilo funcionen */
+        }
         .element-wrapper { position: absolute; box-sizing: border-box; border: 2px dashed transparent; transition: border-color 0.2s; cursor: move; }
         .element-wrapper.selected { border-color: #3182CE; }
         .element-wrapper:hover { border-color: #63B3ED; }
-        .text-element { width: 100%; height: 100%; box-sizing: border-box; outline: none; white-space: pre-wrap; padding: 5px; }
+        .text-element { width: 100%; height: 100%; box-sizing: border-box; outline: none; white-space: pre-wrap; padding: 5px; overflow: hidden; }
         #title-display { font-family: 'Playfair Display', serif; }
         #body-display { font-family: 'Lato', sans-serif; }
         #watermark-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logoblanco.jpg'); background-position: center; background-repeat: no-repeat; z-index: 1; pointer-events: none; }
@@ -77,12 +81,24 @@
         .resize-handle { position: absolute; width: 10px; height: 10px; background: #3182CE; border: 1px solid white; border-radius: 50%; z-index: 10; display: none; }
         .element-wrapper.selected .resize-handle { display: block; }
         .resize-handle.bottom-right { bottom: -5px; right: -5px; cursor: se-resize; }
+        
+        /* Estilos de los marcos (ahora funcionan) */
+        .frame-clasico { background-color: #F9F5EF; border: 1px solid #D1BBA3; padding: 5%;}
+        .frame-clasico::before { content: ''; position: absolute; top: 25px; left: 25px; right: 25px; bottom: 25px; border: 2px solid #BFA17A; z-index: -1; }
+        .frame-artistico { background-color: #F9F5EF; border: 1px solid #D1BBA3; padding: 5%;}
+        .frame-artistico::before, .frame-artistico::after { content: ''; position: absolute; width: 60px; height: 60px; border-color: #BFA17A; border-style: solid; z-index: -1; }
+        .frame-artistico::before { top: 30px; left: 30px; border-width: 3px 0 0 3px; }
+        .frame-artistico::after { bottom: 30px; right: 30px; border-width: 0 3px 3px 0; }
+        .frame-negro { background-color: black; border: 10px solid #333; }
+        .frame-negro #title-display, .frame-negro #body-display { color: #FFFFFF; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+        .frame-floral-dorado { background-color: white; border: 5px solid; border-image-slice: 1; border-image-source: url('images/glitter-border.png'); padding: 5%; }
     </style>
 </head>
 <body>
     <div class="studio-container">
         
         <div class="left-toolbar">
+            <!-- Contenido del panel izquierdo sin cambios -->
             <h1>Berakhah Studio</h1>
             <div class="toolbar-section">
                 <h2>Acciones</h2>
@@ -122,6 +138,7 @@
         </main>
 
         <aside class="right-inspector">
+            <!-- Contenido del panel derecho sin cambios -->
             <div id="inspector-card" class="inspector-panel active">
                 <h2>Ajustes de la Tarjeta</h2>
                 <div class="control-group">
@@ -152,29 +169,17 @@
             <div id="inspector-title" class="inspector-panel">
                 <h2>Propiedades del Título</h2>
                 <div class="control-group">
-                    <label>Fuente</label>
-                    <select id="titleFont"></select>
-                    <label>Formato</label>
-                    <div class="format-controls">
-                        <div class="format-buttons" id="title-format"></div>
-                        <input type="color" id="titleColor">
-                    </div>
-                    <label>Tamaño</label>
-                    <input type="range" id="titleFontSizeSlider" min="20" max="120" value="40">
+                    <label>Fuente</label> <select id="titleFont"></select>
+                    <label>Formato</label> <div class="format-controls"> <div class="format-buttons" id="title-format"></div> <input type="color" id="titleColor"> </div>
+                    <label>Tamaño</label> <input type="range" id="titleFontSizeSlider" min="20" max="120" value="40">
                 </div>
             </div>
             <div id="inspector-body" class="inspector-panel">
                  <h2>Propiedades del Mensaje</h2>
                 <div class="control-group">
-                    <label>Fuente</label>
-                    <select id="bodyFont"></select>
-                    <label>Formato</label>
-                    <div class="format-controls">
-                        <div class="format-buttons" id="body-format"></div>
-                        <input type="color" id="bodyColor">
-                    </div>
-                    <label>Tamaño</label>
-                    <input type="range" id="bodyFontSizeSlider" min="12" max="60" value="18">
+                    <label>Fuente</label> <select id="bodyFont"></select>
+                    <label>Formato</label> <div class="format-controls"> <div class="format-buttons" id="body-format"></div> <input type="color" id="bodyColor"> </div>
+                    <label>Tamaño</label> <input type="range" id="bodyFontSizeSlider" min="12" max="60" value="18">
                 </div>
             </div>
         </aside>
@@ -269,7 +274,6 @@
 
             document.getElementById('inspector-card').addEventListener('input', updateCard);
 
-            // --- EVENTOS DE BÚSQUEDA ---
             productSearch.addEventListener('input', (e) => {
                 const searchTerm = e.target.value.toLowerCase();
                 if (!searchTerm) { searchResults.style.display = 'none'; return; }
@@ -284,6 +288,9 @@
                             elements.title.display.innerText = p.title;
                             elements.body.display.innerText = p.description;
                             searchResults.style.display = 'none';
+                            // --- LLAMADA A LA FUNCIÓN DE AUTO-AJUSTE ---
+                            autoFitElement('title');
+                            autoFitElement('body');
                         });
                         searchResults.appendChild(item);
                     });
@@ -293,6 +300,22 @@
                 }
             });
             document.addEventListener('click', e => { if (!productSearch.contains(e.target)) searchResults.style.display = 'none'; });
+        }
+        
+        // --- NUEVA FUNCIÓN DE AUTO-AJUSTE ---
+        function autoFitElement(elementId) {
+            const el = elements[elementId];
+            el.wrapper.style.height = 'auto'; // Permitir que el wrapper se encoja
+            el.display.style.height = 'auto'; // Permitir que el contenido mida su altura real
+
+            // Forzar un reflow para obtener la altura correcta
+            void el.display.offsetWidth; 
+            
+            const scrollHeight = el.display.scrollHeight;
+            const newHeight = scrollHeight + 10; // 10px de padding vertical
+            
+            el.wrapper.style.height = `${newHeight}px`; // Aplicar al wrapper
+            el.display.style.height = '100%'; // Volver a llenar el wrapper
         }
 
         function updateCard() {
@@ -352,7 +375,6 @@
             elements.body.wrapper.setAttribute('data-y', 20);
             selectElement('title');
 
-            // --- LÓGICA DE CARGA DE DATOS ---
             fetch('index.html')
                 .then(response => {
                     if (!response.ok) throw new Error('No se pudo cargar index.html');
