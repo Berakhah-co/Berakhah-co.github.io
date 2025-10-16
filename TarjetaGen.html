@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estudio de Diseño de Tarjetas (Versión Final)</title>
-
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Playfair+Display:wght@700&family=Lora:ital,wght@0,400..700;1,400..700&family=Great+Vibes&family=Merriweather:wght@400;700&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
 
     <style>
         :root { --color-oro: #BFA17A; --color-oro-claro: #D7C6B0; --color-fondo: #FDFBF7; --color-texto: #4B4B4B; --color-sombra: rgba(0, 0, 0, 0.07); }
@@ -19,7 +19,7 @@
         .control-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: #555; }
         input[type="text"], textarea, select { width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s, box-shadow 0.3s; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.1rem; }
         input[type="text"]:focus, textarea:focus, select:focus { outline: none; border-color: var(--color-oro); box-shadow: 0 0 8px rgba(191, 161, 122, 0.4); }
-        textarea { height: 120px; resize: vertical; }
+        textarea { height: 100px; resize: vertical; }
         .style-selector button { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; border: 1px solid #ddd; padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; margin-right: 0.5rem; transition: all 0.3s ease; }
         .style-selector button.active { background-color: var(--color-oro); color: white; border-color: var(--color-oro); font-weight: 600; }
         .checkbox-label { display: flex; align-items: center; font-size: 0.9rem; color: #555; cursor: pointer; }
@@ -38,15 +38,17 @@
         .result-text { font-size: 0.9rem; font-family: 'Segoe UI', sans-serif; }
         .preview-panel { display: flex; justify-content: center; align-items: center; background-color: #f8f8f8; border-radius: 10px; }
         #image-canvas { width: 550px; height: 550px; background-color: var(--color-fondo); display: flex; justify-content: center; align-items: center; box-sizing: border-box; box-shadow: 0 5px 25px var(--color-sombra); position: relative; overflow: hidden; transition: all 0.4s ease-in-out; padding: 40px; }
-        #text-container { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-between; text-align: center; box-sizing: border-box; z-index: 2; position: relative; }
-        #title-display, #body-display, #product-id-display { color: var(--color-texto); transition: color 0.4s ease; word-wrap: break-word; }
-        #title-display { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; text-align: center; align-self: center; }
-        #body-display { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.6; white-space: pre-wrap; flex-grow: 1; display: flex; justify-content: center; align-items: center; font-size: 22px; }
-        #product-id-display { font-family: 'Segoe UI', sans-serif; font-size: 0.9rem; font-weight: 600; color: #888; text-align: right; align-self: flex-end; }
+        #text-container { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-between; text-align: center; box-sizing: border-box; z-index: 2; position: relative; padding: 10px 0; }
+        #title-display-container { flex-shrink: 0; }
+        #body-display-container { flex-grow: 1; display: flex; justify-content: center; align-items: center; min-height: 50px; }
+        #title-display, #body-display, #product-id-display { color: var(--color-texto); transition: color 0.4s ease; word-wrap: break-word; overflow-wrap: break-word; }
+        #title-display { font-size: 2.5rem; font-weight: 700; line-height: 1.2; }
+        #body-display { line-height: 1.5; white-space: pre-wrap; }
+        #product-id-display { font-family: 'Segoe UI', sans-serif; font-size: 0.9rem; font-weight: 600; color: #888; text-align: right; align-self: flex-end; flex-shrink: 0; }
         .text-on-dark { color: #FFFFFF !important; }
         #watermark-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logoblanco.jpg'); background-position: center; background-repeat: no-repeat; background-size: 60%; opacity: 0; z-index: 1; transition: opacity 0.5s ease, background-image 0.1s; }
         #image-canvas.watermark-active #watermark-logo { opacity: 0.06; }
-
+        
         /* MARCOS CSS */
         .frame-clasico { background-color: var(--color-fondo); border: 1px solid var(--color-oro-claro); }
         .frame-clasico::before { content: ''; position: absolute; top: 25px; left: 25px; right: 25px; bottom: 25px; border: 2px solid var(--color-oro); z-index: 0; background: transparent; }
@@ -54,16 +56,11 @@
         .frame-artistico::before, .frame-artistico::after { content: ''; position: absolute; width: 60px; height: 60px; border-color: var(--color-oro); border-style: solid; z-index: 0; background: transparent; }
         .frame-artistico::before { top: 30px; left: 30px; border-width: 3px 0 0 3px; }
         .frame-artistico::after { bottom: 30px; right: 30px; border-width: 0 3px 3px 0; }
-        .frame-negro { background-color: white; border: none; }
+        .frame-negro { background-color: white; border: none; } /* Fondo blanco para este marco */
         .frame-negro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('images/marco.png'); background-size: cover; background-position: center; background-repeat: no-repeat; z-index: 0; }
-
+        
         #print-area { display: none; }
-        @media print {
-            body > *:not(#print-area) { display: none !important; }
-            #print-area { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; width: 100%; height: 100%; padding: 0.25in; box-sizing: border-box; }
-            .print-card { width: 10cm; height: 10cm; margin: 0.5cm; page-break-inside: avoid; }
-            @page { size: letter; margin: 0.5in; }
-        }
+        @media print { body > *:not(#print-area) { display: none !important; } #print-area { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; width: 100%; height: 100%; padding: 0.25in; box-sizing: border-box; } .print-card { width: 10cm; height: 10cm; margin: 0.5cm; page-break-inside: avoid; } @page { size: letter; margin: 0.5in; } }
     </style>
 </head>
 <body>
@@ -71,27 +68,41 @@
         <div class="controls-panel">
             <h1>Diseña tu Tarjeta</h1>
             <div class="control-group">
-                <label for="product-search">1. Buscar y Cargar Producto</label>
+                <label for="product-search">1. Buscar Producto</label>
                 <input type="text" id="product-search" placeholder="Escribe un código o nombre...">
                 <div id="search-results"></div>
             </div>
             <div class="control-group">
-                <label for="style-select">2. Elige un Estilo</label>
+                <label for="style-select">2. Elegir Estilo de Marco</label>
                 <div class="style-selector" id="style-select">
                     <button class="active" data-style="frame-clasico">Dorado Clásico</button>
                     <button data-style="frame-artistico">Marco Artístico</button>
                     <button data-style="frame-negro">Marco Negro</button>
                 </div>
             </div>
+             <div class="control-group">
+                <label for="font-select">3. Elegir Tipografía</label>
+                <select id="font-select">
+                    <option value="'Playfair Display', serif">Clásica (Playfair Display)</option>
+                    <option value="'Lora', serif">Moderna (Lora)</option>
+                    <option value="'Merriweather', serif">Seria (Merriweather)</option>
+                    <option value="'Great Vibes', cursive">Elegante (Great Vibes)</option>
+                    <option value="'Dancing Script', cursive">Manuscrita (Dancing Script)</option>
+                </select>
+            </div>
             <div class="control-group">
-                <label for="titleInput">3. Título</label>
+                <label for="titleInput">4. Título</label>
                 <input type="text" id="titleInput" placeholder="Un Regalo Especial">
             </div>
             <div class="control-group">
-                <label for="bodyInput">4. Mensaje Principal</label>
+                <label for="bodyInput">5. Mensaje</label>
                 <textarea id="bodyInput">Este producto fue preparado con especial cuidado para ti. Esperamos que lo disfrutes.</textarea>
             </div>
              <div class="control-group">
+                <label for="fontSizeSlider">6. Tamaño del Mensaje</label>
+                <input type="range" id="fontSizeSlider" min="16" max="48" value="28" style="width: 100%;">
+            </div>
+            <div class="control-group">
                 <label class="checkbox-label"><input type="checkbox" id="watermarkToggle" checked>Añadir logo como marca de agua</label>
             </div>
             <div class="action-buttons">
@@ -103,8 +114,8 @@
             <div id="image-canvas" class="frame-clasico watermark-active">
                 <div id="watermark-logo"></div>
                 <div id="text-container">
-                    <div id="title-display"></div>
-                    <div id="body-display"></div>
+                    <div id="title-display-container"><div id="title-display"></div></div>
+                    <div id="body-display-container"><div id="body-display"></div></div>
                     <div id="product-id-display"></div>
                 </div>
             </div>
@@ -114,29 +125,35 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
-        let productosData = [];
-        const productSearch = document.getElementById('product-search');
-        const searchResults = document.getElementById('search-results');
-        const imageCanvas = document.getElementById('image-canvas');
-        const titleDisplay = document.getElementById('title-display');
-        const bodyDisplay = document.getElementById('body-display');
-        const productIdDisplay = document.getElementById('product-id-display');
-
         document.addEventListener('DOMContentLoaded', () => {
-             fetch('index.html')
-                .then(response => {
-                    if (!response.ok) throw new Error('No se pudo cargar index.html.');
-                    return response.text();
-                })
+            let productosData = [];
+            const productSearch = document.getElementById('product-search');
+            const searchResults = document.getElementById('search-results');
+            const imageCanvas = document.getElementById('image-canvas');
+            const titleDisplay = document.getElementById('title-display');
+            const bodyDisplay = document.getElementById('body-display');
+            const productIdDisplay = document.getElementById('product-id-display');
+            const titleInput = document.getElementById('titleInput');
+            const bodyInput = document.getElementById('bodyInput');
+            const styleSelector = document.getElementById('style-select');
+            const fontSelect = document.getElementById('font-select');
+            const fontSizeSlider = document.getElementById('fontSizeSlider');
+            const watermarkToggle = document.getElementById('watermarkToggle');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const printBtn = document.getElementById('printBtn');
+            const titleContainer = document.getElementById('title-display-container');
+            const bodyContainer = document.getElementById('body-display-container');
+            
+            fetch('index.html')
+                .then(response => { if (!response.ok) throw new Error('No se pudo cargar index.html.'); return response.text(); })
                 .then(htmlString => {
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(htmlString, 'text/html');
                     const productElements = doc.querySelectorAll('.producto');
-
+                    
                     productElements.forEach(prodElement => {
                         const titleElement = prodElement.querySelector('h3.titulo-producto');
                         const imageElement = prodElement.querySelector('.carousel-images img');
-
                         if (titleElement && imageElement) {
                             const title = titleElement.textContent.trim();
                             let descriptionParts = [];
@@ -145,141 +162,127 @@
                                 if (currentElement.tagName === 'P' && !currentElement.classList.contains('precio')) {
                                     descriptionParts.push(currentElement.textContent.trim());
                                 }
-                                if (currentElement.classList.contains('precio') || currentElement.tagName === 'DIV') {
-                                    break;
-                                }
+                                if (currentElement.classList.contains('precio') || currentElement.tagName === 'DIV') break;
                                 currentElement = currentElement.nextElementSibling;
                             }
                             const description = descriptionParts.join('\n\n');
                             const idMatch = title.match(/B-\d+|BA-\d+/);
                             const id = idMatch ? idMatch[0] : title.split(' ').pop();
                             const imageUrl = imageElement.getAttribute('src').replace(/\\/g, '/');
-
-                            if(description) {
-                                productosData.push({ id, title, description, imageUrl });
-                            }
+                            
+                            if(description) productosData.push({ id, title, description, imageUrl });
                         }
                     });
                     productSearch.placeholder = "Busca entre " + productosData.length + " productos...";
-                })
-                .catch(error => {
+                }).catch(error => {
                     console.error('Error fatal al analizar el catálogo:', error);
                     productSearch.placeholder = "Error al cargar productos.";
                 });
-        });
 
-        productSearch.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            if (!searchTerm) { searchResults.style.display = 'none'; return; }
-            const filteredProducts = productosData.filter(p => p.id.toLowerCase().includes(searchTerm) || p.title.toLowerCase().includes(searchTerm));
-            searchResults.innerHTML = '';
-            if (filteredProducts.length > 0) {
-                filteredProducts.forEach(producto => {
-                    const item = document.createElement('div');
-                    item.className = 'search-result-item';
-                    item.innerHTML = `<img src="${producto.imageUrl}" class="result-image"><span class="result-text">${producto.title}</span>`;
-                    item.addEventListener('click', () => {
-                        titleInput.value = producto.title.replace(/B-\d+|BA-\d+/g, '').trim();
-                        bodyInput.value = producto.description;
-                        productSearch.value = producto.title;
-                        searchResults.style.display = 'none';
-                        updatePreview();
-                    });
-                    searchResults.appendChild(item);
-                });
-                searchResults.style.display = 'block';
-            } else { searchResults.style.display = 'none'; }
-        });
-
-        document.addEventListener('click', function(event) { if (!productSearch.contains(event.target)) { searchResults.style.display = 'none'; } });
-
-        const titleInput = document.getElementById('titleInput');
-        const bodyInput = document.getElementById('bodyInput');
-        const styleSelector = document.getElementById('style-select');
-        const watermarkToggle = document.getElementById('watermarkToggle');
-        const downloadBtn = document.getElementById('downloadBtn');
-        const printBtn = document.getElementById('printBtn');
-
-        function adjustTextSize(element, container) {
-            let fontSize = parseInt(window.getComputedStyle(element).fontSize);
-            element.style.fontSize = fontSize + 'px';
-            
-            while ((element.scrollHeight > container.clientHeight || element.scrollWidth > container.clientWidth) && fontSize > 10) {
-                fontSize--;
-                element.style.fontSize = fontSize + 'px';
-            }
-        }
-
-        function updatePreview() {
-            const fullTitle = productSearch.value || titleInput.value;
-            const idMatch = fullTitle.match(/B-\d+|BA-\d+/);
-            const id = idMatch ? idMatch[0] : '';
-            const mainTitle = titleInput.value;
-
-            titleDisplay.innerText = mainTitle;
-            bodyDisplay.innerText = bodyInput.value;
-            productIdDisplay.innerText = id;
-            
-            // Reset font sizes before adjusting
-            titleDisplay.style.fontSize = '2.5rem';
-            bodyDisplay.style.fontSize = '22px';
-
-            // Adjust font sizes to fit
-            adjustTextSize(titleDisplay, titleDisplay.parentElement);
-            adjustTextSize(bodyDisplay, bodyDisplay);
-        }
-
-        titleInput.addEventListener('input', updatePreview);
-        bodyInput.addEventListener('input', updatePreview);
-
-        styleSelector.addEventListener('click', function(e) {
-            if (e.target.tagName === 'BUTTON') {
-                styleSelector.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
-                e.target.classList.add('active');
-
-                const style = e.target.dataset.style;
-                const watermarkClass = imageCanvas.classList.contains('watermark-active') ? 'watermark-active' : '';
-                imageCanvas.className = `${style} ${watermarkClass}`;
-
-                titleDisplay.classList.remove('text-on-dark');
-                bodyDisplay.classList.remove('text-on-dark');
-            }
-        });
-
-        watermarkToggle.addEventListener('change', function() { imageCanvas.classList.toggle('watermark-active', this.checked); });
-
-        downloadBtn.addEventListener('click', function() {
-            html2canvas(imageCanvas, { useCORS: true, backgroundColor: null, scale: 4 })
-            .then(canvas => {
-                const link = document.createElement('a');
-                link.download = `tarjeta-${titleInput.value.replace(/\s/g, "_")}.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            });
-        });
-
-        printBtn.addEventListener('click', function() {
-            printBtn.textContent = 'Generando...';
-            html2canvas(imageCanvas, { useCORS: true, backgroundColor: null, scale: 3 })
-            .then(canvas => {
-                const imageDataUrl = canvas.toDataURL('image/png');
-                const printArea = document.getElementById('print-area');
-                printArea.innerHTML = '';
-                for (let i = 0; i < 2; i++) {
-                    const img = document.createElement('img');
-                    img.className = 'print-card';
-                    img.src = imageDataUrl;
-                    printArea.appendChild(img);
+            const adjustTextSize = (element, container, maxFontSize) => {
+                let currentSize = maxFontSize;
+                element.style.fontSize = currentSize + 'px';
+                while ((element.scrollHeight > container.clientHeight || element.scrollWidth > container.clientWidth) && currentSize > 10) {
+                    currentSize--;
+                    element.style.fontSize = currentSize + 'px';
                 }
-                setTimeout(() => {
-                    window.print();
-                    printBtn.textContent = 'Imprimir';
-                }, 100);
-            });
-        });
+            };
 
-        // Carga inicial
-        updatePreview();
+            const updatePreview = () => {
+                const fullTitle = productSearch.value || titleInput.value;
+                const idMatch = fullTitle.match(/B-\d+|BA-\d+/);
+                const id = idMatch ? idMatch[0] : '';
+                const mainTitle = titleInput.value;
+                const selectedFont = fontSelect.value;
+                
+                titleDisplay.innerText = mainTitle;
+                bodyDisplay.innerText = bodyInput.value;
+                productIdDisplay.innerText = id;
+                
+                titleDisplay.style.fontFamily = selectedFont;
+                bodyDisplay.style.fontFamily = selectedFont;
+                
+                adjustTextSize(titleDisplay, titleContainer, 60); // Max. 60px para el título
+                adjustTextSize(bodyDisplay, bodyContainer, parseInt(fontSizeSlider.value));
+            };
+
+            productSearch.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                if (!searchTerm) { searchResults.style.display = 'none'; return; }
+                const filteredProducts = productosData.filter(p => p.id.toLowerCase().includes(searchTerm) || p.title.toLowerCase().includes(searchTerm));
+                searchResults.innerHTML = '';
+                if (filteredProducts.length > 0) {
+                    filteredProducts.forEach(producto => {
+                        const item = document.createElement('div');
+                        item.className = 'search-result-item';
+                        item.innerHTML = `<img src="${producto.imageUrl}" class="result-image"><span class="result-text">${producto.title}</span>`;
+                        item.addEventListener('click', () => {
+                            titleInput.value = producto.title.replace(/B-\d+|BA-\d+/g, '').trim();
+                            bodyInput.value = producto.description;
+                            productSearch.value = producto.title;
+                            searchResults.style.display = 'none';
+                            updatePreview();
+                        });
+                        searchResults.appendChild(item);
+                    });
+                    searchResults.style.display = 'block';
+                } else { searchResults.style.display = 'none'; }
+            });
+
+            document.addEventListener('click', (event) => { if (!productSearch.contains(event.target)) searchResults.style.display = 'none'; });
+            
+            titleInput.addEventListener('input', updatePreview);
+            bodyInput.addEventListener('input', updatePreview);
+            fontSizeSlider.addEventListener('input', updatePreview);
+            fontSelect.addEventListener('change', updatePreview);
+
+            styleSelector.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    styleSelector.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    const style = e.target.dataset.style;
+                    const watermarkClass = imageCanvas.classList.contains('watermark-active') ? 'watermark-active' : '';
+                    imageCanvas.className = `${style} ${watermarkClass}`;
+                    titleDisplay.classList.remove('text-on-dark');
+                    bodyDisplay.classList.remove('text-on-dark');
+                }
+            });
+            
+            watermarkToggle.addEventListener('change', function() { imageCanvas.classList.toggle('watermark-active', this.checked); });
+
+            downloadBtn.addEventListener('click', () => {
+                html2canvas(imageCanvas, { useCORS: true, backgroundColor: null, scale: 4 })
+                .then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `tarjeta-${titleInput.value.replace(/\s/g, "_")}.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                });
+            });
+
+            printBtn.addEventListener('click', () => {
+                printBtn.textContent = 'Generando...';
+                html2canvas(imageCanvas, { useCORS: true, backgroundColor: null, scale: 3 })
+                .then(canvas => {
+                    const imageDataUrl = canvas.toDataURL('image/png');
+                    const printArea = document.getElementById('print-area');
+                    printArea.innerHTML = '';
+                    for (let i = 0; i < 2; i++) {
+                        const img = document.createElement('img');
+                        img.className = 'print-card';
+                        img.src = imageDataUrl;
+                        printArea.appendChild(img);
+                    }
+                    setTimeout(() => {
+                        window.print();
+                        printBtn.textContent = 'Imprimir';
+                    }, 100);
+                });
+            });
+
+            // Carga inicial de la vista previa
+            updatePreview();
+        });
     </script>
 </body>
-</html>```
+</html>
