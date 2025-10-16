@@ -24,14 +24,11 @@
         .style-selector button.active { background-color: var(--color-oro); color: white; border-color: var(--color-oro); font-weight: 600; }
         .checkbox-label { display: flex; align-items: center; font-size: 0.9rem; color: #555; cursor: pointer; }
         .checkbox-label input { width: auto; margin-right: 0.75rem; accent-color: var(--color-oro); }
-        .action-buttons { display: flex; flex-wrap: wrap; gap: 1rem; }
-        .action-buttons button { flex: 1; min-width: 120px; margin-top: 1rem; border: none; padding: 1rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; color: white; }
-        .action-buttons button:disabled { opacity: 0.6; cursor: not-allowed; }
-        #summarizeBtn { background-image: linear-gradient(45deg, #6f42c1, #563d7c); box-shadow: 0 4px 15px rgba(111, 66, 193, 0.2); flex-basis: 100%; }
-        #summarizeBtn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(111, 66, 193, 0.3); }
-        #downloadBtn { background-image: linear-gradient(45deg, #28a745, #248a38); box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2); }
+        .action-buttons { display: flex; gap: 1rem; }
+        .action-buttons button { flex: 1; margin-top: 1.5rem; }
+        #downloadBtn { background-image: linear-gradient(45deg, #28a745, #248a38); color: white; width: 100%; border: none; padding: 1rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2); }
         #downloadBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3); }
-        #printBtn { background-image: linear-gradient(45deg, #007bff, #0056b3); box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); }
+        #printBtn { background-image: linear-gradient(45deg, #007bff, #0056b3); color: white; width: 100%; border: none; padding: 1rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); }
         #printBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3); }
         #search-results { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); max-height: 300px; overflow-y: auto; z-index: 100; }
         .search-result-item { display: flex; align-items: center; padding: 0.75rem; cursor: pointer; border-bottom: 1px solid #f0f0f0; }
@@ -43,7 +40,7 @@
         #image-canvas { width: 550px; height: 550px; background-color: var(--color-fondo); display: flex; justify-content: center; align-items: center; box-sizing: border-box; box-shadow: 0 5px 25px var(--color-sombra); position: relative; overflow: hidden; transition: all 0.4s ease-in-out; padding: 40px; }
         #text-container { width: 100%; height: 100%; display: flex; flex-direction: column; text-align: center; box-sizing: border-box; z-index: 2; position: relative; padding: 1rem 0; }
         #title-display, #body-display, #product-id-display { word-wrap: break-word; overflow-wrap: break-word; transition: color 0.4s ease; }
-        #title-display { font-family: 'Playfair Display', serif; font-weight: 700; color: #333; flex-shrink: 0; margin-bottom: 1rem; line-height: 1.2; white-space: nowrap; overflow: hidden; }
+        #title-display { font-family: 'Playfair Display', serif; font-weight: 700; color: #333; flex-shrink: 0; margin-bottom: 1rem; line-height: 1.2; }
         #body-display { font-family: 'Cormorant Garamond', serif; font-weight: 600; color: var(--color-texto); line-height: 1.5; white-space: pre-wrap; flex-grow: 1; flex-shrink: 1; min-height: 0; display: flex; justify-content: center; align-items: center; }
         #product-id-display { font-family: 'Segoe UI', sans-serif; font-size: 0.9rem; font-weight: 600; color: #888; text-align: right; align-self: flex-end; flex-shrink: 0; margin-top: 1rem; }
         .text-on-dark { color: #FFFFFF !important; }
@@ -101,7 +98,6 @@
                 <label class="checkbox-label"><input type="checkbox" id="watermarkToggle" checked>Añadir logo como marca de agua</label>
             </div>
             <div class="action-buttons">
-                <button id="summarizeBtn">Resumir Descripción</button>
                 <button id="downloadBtn">Descargar</button>
                 <button id="printBtn">Imprimir</button>
             </div>
@@ -121,8 +117,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
-        const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzTmk9HuYGrUv_ntfVWlizOR8M1Ix_A2qAJSDU5TgVqrF4WZ_t7tthOqqPYX5UlK6V4/exec';
-
         let productosData = [];
         const productSearch = document.getElementById('product-search');
         const searchResults = document.getElementById('search-results');
@@ -202,7 +196,6 @@
         const bodyFontSizeSlider = document.getElementById('bodyFontSizeSlider');
         const styleSelector = document.getElementById('style-select');
         const watermarkToggle = document.getElementById('watermarkToggle');
-        const summarizeBtn = document.getElementById('summarizeBtn');
         const downloadBtn = document.getElementById('downloadBtn');
         const printBtn = document.getElementById('printBtn');
 
@@ -216,11 +209,14 @@
             bodyDisplay.innerText = bodyInput.value;
             productIdDisplay.innerText = id;
             
+            // 1. Aplicar los tamaños de fuente manuales de los sliders.
             let titleSize = parseFloat(titleFontSizeSlider.value);
             let bodySize = parseFloat(bodyFontSizeSlider.value);
             titleDisplay.style.fontSize = `${titleSize}px`;
             bodyDisplay.style.fontSize = `${bodySize}px`;
 
+            // 2. Ajustar automáticamente si el contenido se desborda.
+            // Reduce ambos tamaños proporcionalmente si la altura total es demasiada.
             while (textContainer.scrollHeight > textContainer.clientHeight && (titleSize > 12 || bodySize > 8)) {
                 if (titleSize > 12) { titleSize *= 0.98; }
                 if (bodySize > 8) { bodySize *= 0.98; }
@@ -228,10 +224,12 @@
                 bodyDisplay.style.fontSize = `${bodySize}px`;
             }
             
+            // 3. Ajuste final para desbordamiento horizontal en cada elemento individualmente.
             adjustHorizontal(titleDisplay);
             adjustHorizontal(bodyDisplay);
         }
 
+        // Función auxiliar para corregir el desbordamiento horizontal de un elemento.
         function adjustHorizontal(element) {
             let fontSize = parseFloat(element.style.fontSize);
             while (element.scrollWidth > element.clientWidth && fontSize > 8) {
@@ -239,46 +237,6 @@
                 element.style.fontSize = `${fontSize}px`;
             }
         }
-
-        summarizeBtn.addEventListener('click', function() {
-            const currentDescription = bodyInput.value;
-            if (!currentDescription.trim()) {
-                alert("La descripción está vacía.");
-                return;
-            }
-            if (APPSCRIPT_URL === 'AQUÍ VA LA URL DE TU APPSCRIPT') {
-                alert("Por favor, configura la URL de Google Apps Script en el código.");
-                return;
-            }
-
-            summarizeBtn.textContent = 'Resumiendo...';
-            summarizeBtn.disabled = true;
-
-            fetch(APPSCRIPT_URL, {
-                method: 'POST',
-                mode: 'cors',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8', },
-                body: JSON.stringify({ description: currentDescription })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    throw new Error(data.error);
-                }
-                if (data.summary) {
-                    bodyInput.value = data.summary;
-                    updatePreview();
-                }
-            })
-            .catch(error => {
-                console.error('Error al resumir:', error);
-                alert("Hubo un error al intentar resumir la descripción: " + error.message);
-            })
-            .finally(() => {
-                summarizeBtn.textContent = 'Resumir Descripción';
-                summarizeBtn.disabled = false;
-            });
-        });
 
         titleInput.addEventListener('input', updatePreview);
         bodyInput.addEventListener('input', updatePreview);
@@ -329,6 +287,7 @@
             });
         });
 
+        // Carga inicial de la vista previa
         updatePreview();
     </script>
 
