@@ -20,16 +20,13 @@
             --dark-text-secondary: #A0AEC0; --accent-color: #D69E2E;
             --accent-hover: #ECC94B; --light-bg: #EDF2F7; --border-color: #4A5568;
         }
-
-        /* --- ESTRUCTURA GENERAL --- */
+        
         body { font-family: 'Montserrat', sans-serif; background-color: var(--light-bg); margin: 0; color: #333; box-sizing: border-box; }
         .studio-container { display: grid; grid-template-columns: 300px 1fr 350px; height: 100vh; }
 
-        /* --- PANELES PRINCIPALES --- */
         .left-toolbar, .right-inspector { background-color: var(--dark-bg); color: var(--dark-text); padding: 1.5rem; overflow-y: auto; }
         .main-canvas { background-color: #E2E8F0; display: flex; align-items: center; justify-content: center; position: relative; overflow: auto; padding: 2rem; }
 
-        /* --- PANEL IZQUIERDO: BARRA DE HERRAMIENTAS --- */
         .left-toolbar h1 { font-family: 'Playfair Display', serif; text-align: center; color: white; margin: 0 0 2rem 0; }
         .toolbar-section { margin-bottom: 2rem; }
         .toolbar-section h2 { color: var(--accent-color); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); }
@@ -41,11 +38,10 @@
         .utility-buttons button:hover, .export-buttons button:hover { background-color: var(--accent-color); color: var(--dark-bg); }
         .export-buttons { display: flex; flex-direction: column; gap: 1rem; }
 
-        /* --- PANEL DERECHO: INSPECTOR DE PROPIEDADES --- */
         .inspector-panel { display: none; }
         .inspector-panel.active { display: block; }
         .right-inspector h2 { font-family: 'Playfair Display', serif; color: white; border-bottom: 1px solid var(--accent-color); padding-bottom: 0.5rem; }
-        .control-group { margin-bottom: 1.5rem; }
+        .control-group { margin-bottom: 1.5rem; position: relative; }
         .control-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.8rem; color: var(--dark-text-secondary); text-transform: uppercase; }
         input, textarea, select {
             width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);
@@ -57,24 +53,28 @@
         input[type="range"] { -webkit-appearance: none; width: 100%; height: 8px; background: var(--dark-panel); border-radius: 5px; outline: none; margin-top: 0.5rem; }
         input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; background: var(--accent-color); border-radius: 50%; cursor: pointer; }
 
-        /* --- ÁREA CENTRAL: LIENZO --- */
-        #canvas-wrapper { position: relative; background-color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .element-wrapper {
-            position: absolute; box-sizing: border-box; border: 2px dashed transparent;
-            transition: border-color 0.2s; cursor: move;
+        /* ESTILOS PARA BÚSQUEDA RESTAURADOS Y ADAPTADOS */
+        #search-results {
+            display: none; position: absolute; top: 100%; left: 0; right: 0;
+            background-color: var(--dark-panel); border: 1px solid var(--border-color);
+            border-radius: 8px; max-height: 250px; overflow-y: auto; z-index: 1000;
         }
+        .search-result-item { display: flex; align-items: center; padding: 0.75rem; cursor: pointer; border-bottom: 1px solid var(--border-color); }
+        .search-result-item:last-child { border-bottom: none; }
+        .search-result-item:hover { background-color: var(--accent-color); color: var(--dark-bg); }
+        .result-image { width: 40px; height: 40px; object-fit: cover; border-radius: 4px; margin-right: 1rem; }
+        .result-text { font-size: 0.9rem; }
+        
+        #canvas-wrapper { position: relative; background-color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .element-wrapper { position: absolute; box-sizing: border-box; border: 2px dashed transparent; transition: border-color 0.2s; cursor: move; }
         .element-wrapper.selected { border-color: #3182CE; }
         .element-wrapper:hover { border-color: #63B3ED; }
-        .text-element { width: 100%; height: 100%; box-sizing: border-box; outline: none; white-space: pre-wrap; }
+        .text-element { width: 100%; height: 100%; box-sizing: border-box; outline: none; white-space: pre-wrap; padding: 5px; }
         #title-display { font-family: 'Playfair Display', serif; }
         #body-display { font-family: 'Lato', sans-serif; }
         #watermark-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logoblanco.jpg'); background-position: center; background-repeat: no-repeat; z-index: 1; pointer-events: none; }
         
-        .resize-handle {
-            position: absolute; width: 10px; height: 10px; background: #3182CE;
-            border: 1px solid white; border-radius: 50%; z-index: 10;
-            display: none;
-        }
+        .resize-handle { position: absolute; width: 10px; height: 10px; background: #3182CE; border: 1px solid white; border-radius: 50%; z-index: 10; display: none; }
         .element-wrapper.selected .resize-handle { display: block; }
         .resize-handle.bottom-right { bottom: -5px; right: -5px; cursor: se-resize; }
     </style>
@@ -82,7 +82,6 @@
 <body>
     <div class="studio-container">
         
-        <!-- PANEL IZQUIERDO: HERRAMIENTAS -->
         <div class="left-toolbar">
             <h1>Berakhah Studio</h1>
             <div class="toolbar-section">
@@ -108,25 +107,21 @@
             </div>
         </div>
 
-        <!-- ÁREA CENTRAL: LIENZO INTERACTIVO -->
         <main class="main-canvas">
             <div id="canvas-wrapper">
                 <div id="watermark-logo"></div>
-                <div id="title-wrapper" class="element-wrapper" data-element-id="title">
+                <div id="title-wrapper" class="element-wrapper" data-element-id="title" style="width: 250px; height: 50px;">
                     <div id="title-display" class="text-element" contenteditable="true">Título del Producto</div>
                     <div class="resize-handle bottom-right"></div>
                 </div>
-                <div id="body-wrapper" class="element-wrapper" data-element-id="body">
+                <div id="body-wrapper" class="element-wrapper" data-element-id="body" style="width: 300px; height: 150px;">
                     <div id="body-display" class="text-element" contenteditable="true">Descripción del producto...</div>
                     <div class="resize-handle bottom-right"></div>
                 </div>
             </div>
         </main>
 
-        <!-- PANEL DERECHO: INSPECTOR -->
         <aside class="right-inspector">
-            
-            <!-- Panel por defecto: Ajustes de Tarjeta -->
             <div id="inspector-card" class="inspector-panel active">
                 <h2>Ajustes de la Tarjeta</h2>
                 <div class="control-group">
@@ -154,8 +149,6 @@
                     <input type="range" id="watermarkSizeSlider" min="20" max="100" value="60">
                 </div>
             </div>
-
-            <!-- Panel de Título -->
             <div id="inspector-title" class="inspector-panel">
                 <h2>Propiedades del Título</h2>
                 <div class="control-group">
@@ -170,8 +163,6 @@
                     <input type="range" id="titleFontSizeSlider" min="20" max="120" value="40">
                 </div>
             </div>
-
-            <!-- Panel de Mensaje -->
             <div id="inspector-body" class="inspector-panel">
                  <h2>Propiedades del Mensaje</h2>
                 <div class="control-group">
@@ -187,28 +178,13 @@
                 </div>
             </div>
         </aside>
-
     </div>
     
     <script>
-        const FONT_OPTIONS = [
-            { name: "Playfair Display", value: "'Playfair Display', serif" },
-            { name: "Montserrat", value: "'Montserrat', sans-serif" },
-            { name: "Lato", value: "'Lato', sans-serif" },
-            { name: "Cormorant Garamond", value: "'Cormorant Garamond', serif" },
-            { name: "Dancing Script", value: "'Dancing Script', cursive" }
-        ];
-
-        const FORMAT_BUTTONS_HTML = `
-            <button data-style="textAlign" data-value="left" title="Alinear Izquierda"><i class="fas fa-align-left"></i></button>
-            <button data-style="textAlign" data-value="center" title="Centrar"><i class="fas fa-align-center"></i></button>
-            <button data-style="textAlign" data-value="right" title="Alinear Derecha"><i class="fas fa-align-right"></i></button>
-            <button data-style="fontWeight" data-value="bold" title="Negrita"><i class="fas fa-bold"></i></button>
-            <button data-style="fontStyle" data-value="italic" title="Itálica"><i class="fas fa-italic"></i></button>
-        `;
+        const FONT_OPTIONS = [ { name: "Playfair Display", value: "'Playfair Display', serif" }, { name: "Montserrat", value: "'Montserrat', sans-serif" }, { name: "Lato", value: "'Lato', sans-serif" }, { name: "Cormorant Garamond", value: "'Cormorant Garamond', serif" }, { name: "Dancing Script", value: "'Dancing Script', cursive" } ];
+        const FORMAT_BUTTONS_HTML = ` <button data-style="textAlign" data-value="left" title="Alinear Izquierda"><i class="fas fa-align-left"></i></button> <button data-style="textAlign" data-value="center" title="Centrar"><i class="fas fa-align-center"></i></button> <button data-style="textAlign" data-value="right" title="Alinear Derecha"><i class="fas fa-align-right"></i></button> <button data-style="fontWeight" data-value="bold" title="Negrita"><i class="fas fa-bold"></i></button> <button data-style="fontStyle" data-value="italic" title="Itálica"><i class="fas fa-italic"></i></button> `;
 
     (() => {
-        // --- DOM Elements ---
         const canvasWrapper = document.getElementById('canvas-wrapper');
         const elements = {
             title: { wrapper: document.getElementById('title-wrapper'), display: document.getElementById('title-display'), inspector: document.getElementById('inspector-title') },
@@ -216,36 +192,28 @@
         };
         const inspectorCard = document.getElementById('inspector-card');
         const watermarkLogo = document.getElementById('watermark-logo');
+        const productSearch = document.getElementById('product-search');
+        const searchResults = document.getElementById('search-results');
+        
         let selectedElementId = null;
+        let productosData = [];
 
-        // --- Initial State and Setup ---
         function initializeControls() {
-            // Populate font selectors
             const fontSelectors = { titleFont: elements.title.inspector.querySelector('#titleFont'), bodyFont: elements.body.inspector.querySelector('#bodyFont') };
-            Object.values(fontSelectors).forEach(selector => {
-                FONT_OPTIONS.forEach(font => selector.innerHTML += `<option value="${font.value}">${font.name}</option>`);
-            });
-
-            // Populate format buttons
+            Object.values(fontSelectors).forEach(selector => FONT_OPTIONS.forEach(font => selector.innerHTML += `<option value="${font.value}">${font.name}</option>`));
             elements.title.inspector.querySelector('#title-format').innerHTML = FORMAT_BUTTONS_HTML;
             elements.body.inspector.querySelector('#body-format').innerHTML = FORMAT_BUTTONS_HTML;
         }
 
-        // --- State and UI Management ---
         function selectElement(elementId) {
             if (selectedElementId === elementId) return;
-
-            // Deselect previous
             if (selectedElementId) {
                 elements[selectedElementId].wrapper.classList.remove('selected');
                 elements[selectedElementId].inspector.classList.remove('active');
             } else {
                 inspectorCard.classList.remove('active');
             }
-
             selectedElementId = elementId;
-
-            // Select new
             if (selectedElementId) {
                 elements[selectedElementId].wrapper.classList.add('selected');
                 elements[selectedElementId].inspector.classList.add('active');
@@ -258,81 +226,88 @@
         function syncInspector(elementId) {
             const el = elements[elementId];
             const computedStyle = getComputedStyle(el.display);
-
-            el.inspector.querySelector('select').value = computedStyle.fontFamily;
+            el.inspector.querySelector('select').value = computedStyle.fontFamily.replaceAll('"', "'");
             el.inspector.querySelector('input[type="range"]').value = parseFloat(computedStyle.fontSize);
             el.inspector.querySelector('input[type="color"]').value = rgbToHex(computedStyle.color);
-            
-            // Sync format buttons
             const formatButtons = el.inspector.querySelector('.format-buttons');
             formatButtons.querySelectorAll('button').forEach(btn => {
                 btn.classList.remove('active');
                 const { style, value } = btn.dataset;
-                if (style === 'textAlign' && computedStyle[style] === value) btn.classList.add('active');
-                if (style === 'fontWeight' && computedStyle[style] === value) btn.classList.add('active');
-                if (style === 'fontStyle' && computedStyle[style] === value) btn.classList.add('active');
+                if ( (style === 'fontWeight' && parseInt(computedStyle[style]) >= 700) || (computedStyle[style] === value) ) {
+                     btn.classList.add('active');
+                }
             });
         }
         
-        // --- Event Listeners ---
         function setupEventListeners() {
-            // Element selection
-            Object.values(elements).forEach(el => el.wrapper.addEventListener('click', () => selectElement(el.wrapper.dataset.elementId)));
-            canvasWrapper.addEventListener('click', e => { if (e.target === canvasWrapper) selectElement(null); });
-            document.querySelector('.main-canvas').addEventListener('click', e => { if (e.target.classList.contains('main-canvas')) selectElement(null); });
+            Object.values(elements).forEach(el => el.wrapper.addEventListener('mousedown', () => selectElement(el.wrapper.dataset.elementId)));
+            canvasWrapper.addEventListener('mousedown', e => { if (e.target === canvasWrapper) selectElement(null); });
+            document.querySelector('.main-canvas').addEventListener('mousedown', e => { if (e.target.classList.contains('main-canvas')) selectElement(null); });
             
-            // Inspector controls -> Update selected element
             document.querySelectorAll('.inspector-panel').forEach(panel => {
                 panel.addEventListener('input', e => {
-                    if (!selectedElementId) return; // Should not happen but good practice
+                    if (!selectedElementId) return;
                     const el = elements[selectedElementId];
                     if (e.target.matches('select')) el.display.style.fontFamily = e.target.value;
                     if (e.target.matches('input[type="range"]')) el.display.style.fontSize = e.target.value + 'px';
                     if (e.target.matches('input[type="color"]')) el.display.style.color = e.target.value;
                 });
-
                 panel.addEventListener('click', e => {
                     const btn = e.target.closest('button');
                     if (!btn || !selectedElementId) return;
                     const el = elements[selectedElementId];
                     const { style, value } = btn.dataset;
-                    
                     if (style === 'textAlign') {
-                        btn.parentElement.querySelector('.active[data-style="textAlign"]')?.classList.remove('active');
+                        btn.parentElement.querySelectorAll('.active[data-style="textAlign"]')?.classList.remove('active');
                         el.display.style[style] = value;
                     } else {
-                        el.display.style[style] = el.display.style[style] === value ? 'normal' : value;
+                        el.display.style[style] = (getComputedStyle(el.display)[style] === value || (style === 'fontWeight' && parseInt(getComputedStyle(el.display)[style]) >= 700)) ? 'normal' : value;
                     }
                     syncInspector(selectedElementId);
                 });
             });
 
-            // Card controls
             document.getElementById('inspector-card').addEventListener('input', updateCard);
+
+            // --- EVENTOS DE BÚSQUEDA ---
+            productSearch.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                if (!searchTerm) { searchResults.style.display = 'none'; return; }
+                const filtered = productosData.filter(p => p.title.toLowerCase().includes(searchTerm));
+                searchResults.innerHTML = '';
+                if(filtered.length > 0) {
+                    filtered.slice(0, 10).forEach(p => {
+                        const item = document.createElement('div');
+                        item.className = 'search-result-item';
+                        item.innerHTML = `<img src="${p.imageUrl}" class="result-image"><span>${p.title}</span>`;
+                        item.addEventListener('click', () => {
+                            elements.title.display.innerText = p.title;
+                            elements.body.display.innerText = p.description;
+                            searchResults.style.display = 'none';
+                        });
+                        searchResults.appendChild(item);
+                    });
+                    searchResults.style.display = 'block';
+                } else {
+                    searchResults.style.display = 'none';
+                }
+            });
+            document.addEventListener('click', e => { if (!productSearch.contains(e.target)) searchResults.style.display = 'none'; });
         }
 
         function updateCard() {
             const width = document.getElementById('cardWidth').value;
             const height = document.getElementById('cardHeight').value;
             const style = document.getElementById('style-select').value;
-            
-            // Update canvas size (DPI independent for screen)
             const DPI = 96;
-            const widthPx = (width / 2.54) * DPI;
-            const heightPx = (height / 2.54) * DPI;
-            canvasWrapper.style.width = `${widthPx}px`;
-            canvasWrapper.style.height = `${heightPx}px`;
-
-            // Update style
+            canvasWrapper.style.width = `${(width / 2.54) * DPI}px`;
+            canvasWrapper.style.height = `${(height / 2.54) * DPI}px`;
             canvasWrapper.className = style;
-
-            // Update watermark
             watermarkLogo.style.opacity = document.getElementById('watermarkOpacitySlider').value / 100;
             watermarkLogo.style.backgroundSize = `${document.getElementById('watermarkSizeSlider').value}%`;
             watermarkLogo.style.display = document.getElementById('watermarkToggle').checked ? 'block' : 'none';
         }
 
-        // --- Drag and Resize Logic (Interact.js) ---
         function setupInteractions() {
             interact('.element-wrapper')
                 .draggable({
@@ -346,47 +321,72 @@
                             target.setAttribute('data-y', y);
                         }
                     },
-                    modifiers: [
-                        interact.modifiers.restrictRect({
-                            restriction: 'parent'
-                        })
-                    ]
+                    modifiers: [ interact.modifiers.restrictRect({ restriction: 'parent' }) ]
                 })
                 .resizable({
-                    edges: { right: true, bottom: true },
+                    edges: { bottom: true, right: true },
                     listeners: {
                         move: function (event) {
-                            let { x, y } = event.target.dataset;
-                            x = (parseFloat(x) || 0);
-                            y = (parseFloat(y) || 0);
-                            Object.assign(event.target.style, {
-                                width: `${event.rect.width}px`,
-                                height: `${event.rect.height}px`,
-                            });
+                            Object.assign(event.target.style, { width: `${event.rect.width}px`, height: `${event.rect.height}px` });
                         }
-                    }
+                    },
+                     modifiers: [ interact.modifiers.restrictSize({ min: { width: 50, height: 30 } })]
                 });
         }
         
-        // --- Helper ---
         function rgbToHex(rgb) {
             if (!rgb || !rgb.startsWith('rgb')) return '#000000';
             let [r, g, b] = rgb.match(/\d+/g).map(Number);
             return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
         }
 
-        // --- Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
             initializeControls();
             setupEventListeners();
             setupInteractions();
             updateCard();
-            // Default selection
-            elements.title.wrapper.style.transform = 'translate(0px, -50px)';
-            elements.title.wrapper.setAttribute('data-y', -50);
-            elements.body.wrapper.style.transform = 'translate(0px, 50px)';
-            elements.body.wrapper.setAttribute('data-y', 50);
+            
+            elements.title.wrapper.style.transform = 'translate(0px, -80px)';
+            elements.title.wrapper.setAttribute('data-y', -80);
+            elements.body.wrapper.style.transform = 'translate(0px, 20px)';
+            elements.body.wrapper.setAttribute('data-y', 20);
             selectElement('title');
+
+            // --- LÓGICA DE CARGA DE DATOS ---
+            fetch('index.html')
+                .then(response => {
+                    if (!response.ok) throw new Error('No se pudo cargar index.html');
+                    return response.text();
+                })
+                .then(htmlString => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(htmlString, 'text/html');
+                    doc.querySelectorAll('.producto').forEach(prodElement => {
+                        const titleEl = prodElement.querySelector('h3.titulo-producto');
+                        const imgEl = prodElement.querySelector('.carousel-images img');
+                        if (titleEl && imgEl) {
+                            let descParts = [];
+                            let nextEl = titleEl.nextElementSibling;
+                            while(nextEl) {
+                                if (nextEl.tagName === 'P' && !nextEl.classList.contains('precio')) descParts.push(nextEl.textContent.trim());
+                                if (nextEl.classList.contains('precio') || nextEl.tagName === 'DIV') break;
+                                nextEl = nextEl.nextElementSibling;
+                            }
+                            if (descParts.length > 0) {
+                                productosData.push({
+                                    title: titleEl.textContent.trim(),
+                                    description: descParts.join('\n\n'),
+                                    imageUrl: imgEl.getAttribute('src').replace(/\\/g, '/')
+                                });
+                            }
+                        }
+                    });
+                    productSearch.placeholder = `Busca entre ${productosData.length} productos...`;
+                })
+                .catch(error => {
+                    console.error('Error al cargar productos:', error);
+                    productSearch.placeholder = "Error al cargar.";
+                });
         });
         
     })();
