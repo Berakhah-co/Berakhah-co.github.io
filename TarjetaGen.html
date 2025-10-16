@@ -3,415 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudio de Diseño Interactivo</title>
+    <title>Estudio de Diseño de Tarjetas (Versión Final)</title>
     
-    <!-- FUENTES Y LIBRERÍAS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Dancing+Script:wght@700&family=Lato:ital,wght@0,400;1,400&family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
     <style>
-        :root { 
-            --dark-bg: #1A202C; --dark-panel: #2D3748; --dark-text: #E2E8F0;
-            --dark-text-secondary: #A0AEC0; --accent-color: #D69E2E;
-            --accent-hover: #ECC94B; --light-bg: #EDF2F7; --border-color: #4A5568;
-        }
-        
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--light-bg); margin: 0; color: #333; box-sizing: border-box; }
-        .studio-container { display: grid; grid-template-columns: 300px 1fr 350px; height: 100vh; }
-
-        .left-toolbar, .right-inspector { background-color: var(--dark-bg); color: var(--dark-text); padding: 1.5rem; overflow-y: auto; }
-        .main-canvas { background-color: #E2E8F0; display: flex; align-items: center; justify-content: center; position: relative; overflow: auto; padding: 2rem; }
-
-        .left-toolbar h1 { font-family: 'Playfair Display', serif; text-align: center; color: white; margin: 0 0 2rem 0; }
-        .toolbar-section { margin-bottom: 2rem; }
-        .toolbar-section h2 { color: var(--accent-color); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); }
-        .utility-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .utility-buttons button, .export-buttons button {
-            background: var(--dark-panel); color: var(--dark-text); border: 1px solid var(--border-color); padding: 0.75rem;
-            border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s ease;
-        }
-        .utility-buttons button:hover, .export-buttons button:hover { background-color: var(--accent-color); color: var(--dark-bg); }
-        .export-buttons { display: flex; flex-direction: column; gap: 1rem; }
-
-        .inspector-panel { display: none; }
-        .inspector-panel.active { display: block; }
-        .right-inspector h2 { font-family: 'Playfair Display', serif; color: white; border-bottom: 1px solid var(--accent-color); padding-bottom: 0.5rem; }
+        :root { --color-oro: #BFA17A; --color-oro-claro: #D7C6B0; --color-fondo: #FDFBF7; --color-texto: #4B4B4B; --color-sombra: rgba(0, 0, 0, 0.07); }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f2ef; margin: 0; padding: 2rem; color: var(--color-texto); display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box; }
+        .studio-container { display: grid; grid-template-columns: 360px 1fr; gap: 2.5rem; max-width: 1250px; width: 100%; background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 10px 40px var(--color-sombra); }
+        .controls-panel { padding-right: 2.5rem; border-right: 1px solid #e9e9e9; }
+        .controls-panel h1 { font-family: 'Playfair Display', serif; color: #333; margin-top: 0; font-size: 2.2rem; }
         .control-group { margin-bottom: 1.5rem; position: relative; }
-        .control-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.8rem; color: var(--dark-text-secondary); text-transform: uppercase; }
-        input, textarea, select {
-            width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);
-            background-color: var(--dark-panel); color: var(--dark-text); font-size: 1rem; box-sizing: border-box;
-        }
-        .format-buttons { display: flex; gap: 0.5rem; background-color: var(--dark-bg); padding: 5px; border-radius: 8px; }
-        .format-buttons button { background: transparent; border: none; color: var(--dark-text-secondary); width: 35px; height: 35px; border-radius: 6px; cursor: pointer; font-size: 1rem; }
-        .format-buttons button.active { background-color: var(--accent-color); color: var(--dark-bg); }
-        input[type="range"] { -webkit-appearance: none; width: 100%; height: 8px; background: var(--dark-panel); border-radius: 5px; outline: none; margin-top: 0.5rem; }
-        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; background: var(--accent-color); border-radius: 50%; cursor: pointer; }
-
-        #search-results {
-            display: none; position: absolute; top: 100%; left: 0; right: 0;
-            background-color: var(--dark-panel); border: 1px solid var(--border-color);
-            border-radius: 8px; max-height: 250px; overflow-y: auto; z-index: 1000;
-        }
-        .search-result-item { display: flex; align-items: center; padding: 0.75rem; cursor: pointer; border-bottom: 1px solid var(--border-color); }
+        .control-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: #555; }
+        input[type="text"], textarea, select { width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s, box-shadow 0.3s; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.1rem; }
+        input[type="text"]:focus, textarea:focus, select:focus { outline: none; border-color: var(--color-oro); box-shadow: 0 0 8px rgba(191, 161, 122, 0.4); }
+        textarea { height: 120px; resize: vertical; }
+        .style-selector button { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; border: 1px solid #ddd; padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; margin-right: 0.5rem; transition: all 0.3s ease; }
+        .style-selector button.active { background-color: var(--color-oro); color: white; border-color: var(--color-oro); font-weight: 600; }
+        .checkbox-label { display: flex; align-items: center; font-size: 0.9rem; color: #555; cursor: pointer; }
+        .checkbox-label input { width: auto; margin-right: 0.75rem; accent-color: var(--color-oro); }
+        .action-buttons { display: flex; gap: 1rem; }
+        .action-buttons button { flex: 1; margin-top: 1.5rem; }
+        #downloadBtn { background-image: linear-gradient(45deg, #28a745, #248a38); color: white; width: 100%; border: none; padding: 1rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2); }
+        #downloadBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3); }
+        #printBtn { background-image: linear-gradient(45deg, #007bff, #0056b3); color: white; width: 100%; border: none; padding: 1rem; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); }
+        #printBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3); }
+        #search-results { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); max-height: 300px; overflow-y: auto; z-index: 100; }
+        .search-result-item { display: flex; align-items: center; padding: 0.75rem; cursor: pointer; border-bottom: 1px solid #f0f0f0; }
         .search-result-item:last-child { border-bottom: none; }
-        .search-result-item:hover { background-color: var(--accent-color); color: var(--dark-bg); }
-        .result-image { width: 40px; height: 40px; object-fit: cover; border-radius: 4px; margin-right: 1rem; }
-        .result-text { font-size: 0.9rem; }
+        .search-result-item:hover { background-color: #f7f7f7; }
+        .result-image { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 1rem; }
+        .result-text { font-size: 0.9rem; font-family: 'Segoe UI', sans-serif; }
+        .preview-panel { display: flex; justify-content: center; align-items: center; background-color: #f8f8f8; border-radius: 10px; }
+        #image-canvas { width: 550px; height: 550px; background-color: var(--color-fondo); display: flex; justify-content: center; align-items: center; box-sizing: border-box; box-shadow: 0 5px 25px var(--color-sombra); position: relative; overflow: hidden; transition: all 0.4s ease-in-out; padding: 55px; }
+        #text-container { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-sizing: border-box; z-index: 2; position: relative; }
+        #title-display, #body-display { color: var(--color-texto); transition: color 0.4s ease; }
+        #title-display { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
+        #body-display { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.6; white-space: pre-wrap; }
+        .text-on-dark { color: #FFFFFF !important; }
+        #watermark-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logoblanco.jpg'); background-position: center; background-repeat: no-repeat; background-size: 60%; opacity: 0; z-index: 1; transition: opacity 0.5s ease, background-image 0.1s; }
+        #image-canvas.watermark-active #watermark-logo { opacity: 0.06; }
         
-        /* --- CORRECCIÓN CLAVE --- */
-        #canvas-wrapper {
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            /* Se elimina el background-color: white; para que las clases de estilo funcionen */
-        }
-        .element-wrapper { position: absolute; box-sizing: border-box; border: 2px dashed transparent; transition: border-color 0.2s; cursor: move; }
-        .element-wrapper.selected { border-color: #3182CE; }
-        .element-wrapper:hover { border-color: #63B3ED; }
-        .text-element { width: 100%; height: 100%; box-sizing: border-box; outline: none; white-space: pre-wrap; padding: 5px; overflow: hidden; }
-        #title-display { font-family: 'Playfair Display', serif; }
-        #body-display { font-family: 'Lato', sans-serif; }
-        #watermark-logo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logoblanco.jpg'); background-position: center; background-repeat: no-repeat; z-index: 1; pointer-events: none; }
-        
-        .resize-handle { position: absolute; width: 10px; height: 10px; background: #3182CE; border: 1px solid white; border-radius: 50%; z-index: 10; display: none; }
-        .element-wrapper.selected .resize-handle { display: block; }
-        .resize-handle.bottom-right { bottom: -5px; right: -5px; cursor: se-resize; }
-        
-        /* Estilos de los marcos (ahora funcionan) */
-        .frame-clasico { background-color: #F9F5EF; border: 1px solid #D1BBA3; padding: 5%;}
-        .frame-clasico::before { content: ''; position: absolute; top: 25px; left: 25px; right: 25px; bottom: 25px; border: 2px solid #BFA17A; z-index: -1; }
-        .frame-artistico { background-color: #F9F5EF; border: 1px solid #D1BBA3; padding: 5%;}
-        .frame-artistico::before, .frame-artistico::after { content: ''; position: absolute; width: 60px; height: 60px; border-color: #BFA17A; border-style: solid; z-index: -1; }
+        /* MARCOS CSS */
+        .frame-clasico { background-color: var(--color-fondo); border: 1px solid var(--color-oro-claro); }
+        .frame-clasico::before { content: ''; position: absolute; top: 25px; left: 25px; right: 25px; bottom: 25px; border: 2px solid var(--color-oro); z-index: 0; background: transparent; }
+        .frame-artistico { background-color: var(--color-fondo); border: 1px solid var(--color-oro-claro); }
+        .frame-artistico::before, .frame-artistico::after { content: ''; position: absolute; width: 60px; height: 60px; border-color: var(--color-oro); border-style: solid; z-index: 0; background: transparent; }
         .frame-artistico::before { top: 30px; left: 30px; border-width: 3px 0 0 3px; }
         .frame-artistico::after { bottom: 30px; right: 30px; border-width: 0 3px 3px 0; }
-        .frame-negro { background-color: black; border: 10px solid #333; }
-        .frame-negro #title-display, .frame-negro #body-display { color: #FFFFFF; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
-        .frame-floral-dorado { background-color: white; border: 5px solid; border-image-slice: 1; border-image-source: url('images/glitter-border.png'); padding: 5%; }
+        .frame-negro { background-color: white; border: none; } /* Fondo blanco para este marco */
+        .frame-negro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('images/marco.png'); background-size: cover; background-position: center; background-repeat: no-repeat; z-index: 0; }
+        
+        #print-area { display: none; }
+        @media print { body > *:not(#print-area) { display: none !important; } #print-area { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; width: 100%; height: 100%; } .print-card { width: 3in; height: 3in; margin: 0.2in; page-break-inside: avoid; } @page { size: letter; margin: 0.5in; } }
     </style>
 </head>
 <body>
     <div class="studio-container">
-        
-        <div class="left-toolbar">
-            <!-- Contenido del panel izquierdo sin cambios -->
-            <h1>Berakhah Studio</h1>
-            <div class="toolbar-section">
-                <h2>Acciones</h2>
-                <div class="utility-buttons">
-                     <button id="saveBtn"><i class="fas fa-save"></i> Guardar</button>
-                     <button id="loadBtn"><i class="fas fa-folder-open"></i> Cargar</button>
+        <div class="controls-panel">
+            <h1>Diseña tu Tarjeta</h1>
+            <div class="control-group">
+                <label for="product-search">1. Buscar y Cargar Producto</label>
+                <input type="text" id="product-search" placeholder="Escribe un código o nombre...">
+                <div id="search-results"></div>
+            </div>
+            <div class="control-group">
+                <label for="style-select">2. Elige un Estilo</label>
+                <div class="style-selector" id="style-select">
+                    <button class="active" data-style="frame-clasico">Dorado Clásico</button>
+                    <button data-style="frame-artistico">Marco Artístico</button>
+                    <button data-style="frame-negro">Marco Negro</button>
                 </div>
             </div>
-            <div class="toolbar-section">
-                <h2>Contenido</h2>
-                <div class="control-group">
-                    <label for="product-search">Buscar Producto</label>
-                    <input type="text" id="product-search" placeholder="Cargando...">
-                    <div id="search-results"></div>
-                </div>
+            <div class="control-group">
+                <label for="titleInput">3. Título</label>
+                <input type="text" id="titleInput" placeholder="Un Regalo Especial">
             </div>
-            <div class="toolbar-section export-buttons">
-                <h2>Exportar</h2>
-                <button id="downloadBtn"><i class="fas fa-file-image"></i> Descargar PNG</button>
-                <button id="pdfBtn"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
-                <button id="printBtn"><i class="fas fa-print"></i> Imprimir</button>
+            <div class="control-group">
+                <label for="bodyInput">4. Mensaje Principal</label>
+                <textarea id="bodyInput">Este producto fue preparado con especial cuidado para ti. Esperamos que lo disfrutes.</textarea>
+            </div>
+            <div class="control-group">
+                <label for="fontSizeSlider">5. Tamaño del Mensaje</label>
+                <input type="range" id="fontSizeSlider" min="16" max="32" value="22" style="width: 100%;">
+            </div>
+            <div class="control-group">
+                <label class="checkbox-label"><input type="checkbox" id="watermarkToggle" checked>Añadir logo como marca de agua</label>
+            </div>
+            <div class="action-buttons">
+                <button id="downloadBtn">Descargar</button>
+                <button id="printBtn">Imprimir</button>
             </div>
         </div>
-
-        <main class="main-canvas">
-            <div id="canvas-wrapper">
+        <div class="preview-panel">
+            <div id="image-canvas" class="frame-clasico watermark-active">
                 <div id="watermark-logo"></div>
-                <div id="title-wrapper" class="element-wrapper" data-element-id="title" style="width: 250px; height: 50px;">
-                    <div id="title-display" class="text-element" contenteditable="true">Título del Producto</div>
-                    <div class="resize-handle bottom-right"></div>
-                </div>
-                <div id="body-wrapper" class="element-wrapper" data-element-id="body" style="width: 300px; height: 150px;">
-                    <div id="body-display" class="text-element" contenteditable="true">Descripción del producto...</div>
-                    <div class="resize-handle bottom-right"></div>
+                <div id="text-container">
+                    <div id="title-display"></div>
+                    <div id="body-display"></div>
                 </div>
             </div>
-        </main>
-
-        <aside class="right-inspector">
-            <!-- Contenido del panel derecho sin cambios -->
-            <div id="inspector-card" class="inspector-panel active">
-                <h2>Ajustes de la Tarjeta</h2>
-                <div class="control-group">
-                    <label>Tamaño de Tarjeta (cm)</label>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-                        <input type="number" id="cardWidth" value="10" min="1">
-                        <input type="number" id="cardHeight" value="10" min="1">
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label>Estilo de Fondo</label>
-                    <select id="style-select">
-                        <option value="frame-clasico">Dorado Clásico</option>
-                        <option value="frame-artistico">Marco Artístico</option>
-                        <option value="frame-negro">Marco Negro</option>
-                        <option value="frame-floral-dorado">Floral Dorado</option>
-                    </select>
-                </div>
-                <div class="control-group">
-                    <label>Marca de Agua</label>
-                    <label><input type="checkbox" id="watermarkToggle" checked> Mostrar logo</label>
-                    <label>Opacidad</label>
-                    <input type="range" id="watermarkOpacitySlider" min="0" max="100" value="15">
-                    <label>Tamaño</label>
-                    <input type="range" id="watermarkSizeSlider" min="20" max="100" value="60">
-                </div>
-            </div>
-            <div id="inspector-title" class="inspector-panel">
-                <h2>Propiedades del Título</h2>
-                <div class="control-group">
-                    <label>Fuente</label> <select id="titleFont"></select>
-                    <label>Formato</label> <div class="format-controls"> <div class="format-buttons" id="title-format"></div> <input type="color" id="titleColor"> </div>
-                    <label>Tamaño</label> <input type="range" id="titleFontSizeSlider" min="20" max="120" value="40">
-                </div>
-            </div>
-            <div id="inspector-body" class="inspector-panel">
-                 <h2>Propiedades del Mensaje</h2>
-                <div class="control-group">
-                    <label>Fuente</label> <select id="bodyFont"></select>
-                    <label>Formato</label> <div class="format-controls"> <div class="format-buttons" id="body-format"></div> <input type="color" id="bodyColor"> </div>
-                    <label>Tamaño</label> <input type="range" id="bodyFontSizeSlider" min="12" max="60" value="18">
-                </div>
-            </div>
-        </aside>
+        </div>
     </div>
-    
-    <script>
-        const FONT_OPTIONS = [ { name: "Playfair Display", value: "'Playfair Display', serif" }, { name: "Montserrat", value: "'Montserrat', sans-serif" }, { name: "Lato", value: "'Lato', sans-serif" }, { name: "Cormorant Garamond", value: "'Cormorant Garamond', serif" }, { name: "Dancing Script", value: "'Dancing Script', cursive" } ];
-        const FORMAT_BUTTONS_HTML = ` <button data-style="textAlign" data-value="left" title="Alinear Izquierda"><i class="fas fa-align-left"></i></button> <button data-style="textAlign" data-value="center" title="Centrar"><i class="fas fa-align-center"></i></button> <button data-style="textAlign" data-value="right" title="Alinear Derecha"><i class="fas fa-align-right"></i></button> <button data-style="fontWeight" data-value="bold" title="Negrita"><i class="fas fa-bold"></i></button> <button data-style="fontStyle" data-value="italic" title="Itálica"><i class="fas fa-italic"></i></button> `;
+    <div id="print-area"></div>
 
-    (() => {
-        const canvasWrapper = document.getElementById('canvas-wrapper');
-        const elements = {
-            title: { wrapper: document.getElementById('title-wrapper'), display: document.getElementById('title-display'), inspector: document.getElementById('inspector-title') },
-            body: { wrapper: document.getElementById('body-wrapper'), display: document.getElementById('body-display'), inspector: document.getElementById('inspector-body') }
-        };
-        const inspectorCard = document.getElementById('inspector-card');
-        const watermarkLogo = document.getElementById('watermark-logo');
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        let productosData = [];
         const productSearch = document.getElementById('product-search');
         const searchResults = document.getElementById('search-results');
-        
-        let selectedElementId = null;
-        let productosData = [];
+        const imageCanvas = document.getElementById('image-canvas');
+        const titleDisplay = document.getElementById('title-display');
+        const bodyDisplay = document.getElementById('body-display');
 
-        function initializeControls() {
-            const fontSelectors = { titleFont: elements.title.inspector.querySelector('#titleFont'), bodyFont: elements.body.inspector.querySelector('#bodyFont') };
-            Object.values(fontSelectors).forEach(selector => FONT_OPTIONS.forEach(font => selector.innerHTML += `<option value="${font.value}">${font.name}</option>`));
-            elements.title.inspector.querySelector('#title-format').innerHTML = FORMAT_BUTTONS_HTML;
-            elements.body.inspector.querySelector('#body-format').innerHTML = FORMAT_BUTTONS_HTML;
-        }
-
-        function selectElement(elementId) {
-            if (selectedElementId === elementId) return;
-            if (selectedElementId) {
-                elements[selectedElementId].wrapper.classList.remove('selected');
-                elements[selectedElementId].inspector.classList.remove('active');
-            } else {
-                inspectorCard.classList.remove('active');
-            }
-            selectedElementId = elementId;
-            if (selectedElementId) {
-                elements[selectedElementId].wrapper.classList.add('selected');
-                elements[selectedElementId].inspector.classList.add('active');
-                syncInspector(selectedElementId);
-            } else {
-                inspectorCard.classList.add('active');
-            }
-        }
-
-        function syncInspector(elementId) {
-            const el = elements[elementId];
-            const computedStyle = getComputedStyle(el.display);
-            el.inspector.querySelector('select').value = computedStyle.fontFamily.replaceAll('"', "'");
-            el.inspector.querySelector('input[type="range"]').value = parseFloat(computedStyle.fontSize);
-            el.inspector.querySelector('input[type="color"]').value = rgbToHex(computedStyle.color);
-            const formatButtons = el.inspector.querySelector('.format-buttons');
-            formatButtons.querySelectorAll('button').forEach(btn => {
-                btn.classList.remove('active');
-                const { style, value } = btn.dataset;
-                if ( (style === 'fontWeight' && parseInt(computedStyle[style]) >= 700) || (computedStyle[style] === value) ) {
-                     btn.classList.add('active');
-                }
-            });
-        }
-        
-        function setupEventListeners() {
-            Object.values(elements).forEach(el => el.wrapper.addEventListener('mousedown', () => selectElement(el.wrapper.dataset.elementId)));
-            canvasWrapper.addEventListener('mousedown', e => { if (e.target === canvasWrapper) selectElement(null); });
-            document.querySelector('.main-canvas').addEventListener('mousedown', e => { if (e.target.classList.contains('main-canvas')) selectElement(null); });
-            
-            document.querySelectorAll('.inspector-panel').forEach(panel => {
-                panel.addEventListener('input', e => {
-                    if (!selectedElementId) return;
-                    const el = elements[selectedElementId];
-                    if (e.target.matches('select')) el.display.style.fontFamily = e.target.value;
-                    if (e.target.matches('input[type="range"]')) el.display.style.fontSize = e.target.value + 'px';
-                    if (e.target.matches('input[type="color"]')) el.display.style.color = e.target.value;
-                });
-                panel.addEventListener('click', e => {
-                    const btn = e.target.closest('button');
-                    if (!btn || !selectedElementId) return;
-                    const el = elements[selectedElementId];
-                    const { style, value } = btn.dataset;
-                    if (style === 'textAlign') {
-                        btn.parentElement.querySelectorAll('.active[data-style="textAlign"]')?.classList.remove('active');
-                        el.display.style[style] = value;
-                    } else {
-                        el.display.style[style] = (getComputedStyle(el.display)[style] === value || (style === 'fontWeight' && parseInt(getComputedStyle(el.display)[style]) >= 700)) ? 'normal' : value;
-                    }
-                    syncInspector(selectedElementId);
-                });
-            });
-
-            document.getElementById('inspector-card').addEventListener('input', updateCard);
-
-            productSearch.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                if (!searchTerm) { searchResults.style.display = 'none'; return; }
-                const filtered = productosData.filter(p => p.title.toLowerCase().includes(searchTerm));
-                searchResults.innerHTML = '';
-                if(filtered.length > 0) {
-                    filtered.slice(0, 10).forEach(p => {
-                        const item = document.createElement('div');
-                        item.className = 'search-result-item';
-                        item.innerHTML = `<img src="${p.imageUrl}" class="result-image"><span>${p.title}</span>`;
-                        item.addEventListener('click', () => {
-                            elements.title.display.innerText = p.title;
-                            elements.body.display.innerText = p.description;
-                            searchResults.style.display = 'none';
-                            // --- LLAMADA A LA FUNCIÓN DE AUTO-AJUSTE ---
-                            autoFitElement('title');
-                            autoFitElement('body');
-                        });
-                        searchResults.appendChild(item);
-                    });
-                    searchResults.style.display = 'block';
-                } else {
-                    searchResults.style.display = 'none';
-                }
-            });
-            document.addEventListener('click', e => { if (!productSearch.contains(e.target)) searchResults.style.display = 'none'; });
-        }
-        
-        // --- NUEVA FUNCIÓN DE AUTO-AJUSTE ---
-        function autoFitElement(elementId) {
-            const el = elements[elementId];
-            el.wrapper.style.height = 'auto'; // Permitir que el wrapper se encoja
-            el.display.style.height = 'auto'; // Permitir que el contenido mida su altura real
-
-            // Forzar un reflow para obtener la altura correcta
-            void el.display.offsetWidth; 
-            
-            const scrollHeight = el.display.scrollHeight;
-            const newHeight = scrollHeight + 10; // 10px de padding vertical
-            
-            el.wrapper.style.height = `${newHeight}px`; // Aplicar al wrapper
-            el.display.style.height = '100%'; // Volver a llenar el wrapper
-        }
-
-        function updateCard() {
-            const width = document.getElementById('cardWidth').value;
-            const height = document.getElementById('cardHeight').value;
-            const style = document.getElementById('style-select').value;
-            const DPI = 96;
-            canvasWrapper.style.width = `${(width / 2.54) * DPI}px`;
-            canvasWrapper.style.height = `${(height / 2.54) * DPI}px`;
-            canvasWrapper.className = style;
-            watermarkLogo.style.opacity = document.getElementById('watermarkOpacitySlider').value / 100;
-            watermarkLogo.style.backgroundSize = `${document.getElementById('watermarkSizeSlider').value}%`;
-            watermarkLogo.style.display = document.getElementById('watermarkToggle').checked ? 'block' : 'none';
-        }
-
-        function setupInteractions() {
-            interact('.element-wrapper')
-                .draggable({
-                    listeners: {
-                        move(event) {
-                            const target = event.target;
-                            const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
-                            const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-                            target.style.transform = `translate(${x}px, ${y}px)`;
-                            target.setAttribute('data-x', x);
-                            target.setAttribute('data-y', y);
-                        }
-                    },
-                    modifiers: [ interact.modifiers.restrictRect({ restriction: 'parent' }) ]
-                })
-                .resizable({
-                    edges: { bottom: true, right: true },
-                    listeners: {
-                        move: function (event) {
-                            Object.assign(event.target.style, { width: `${event.rect.width}px`, height: `${event.rect.height}px` });
-                        }
-                    },
-                     modifiers: [ interact.modifiers.restrictSize({ min: { width: 50, height: 30 } })]
-                });
-        }
-        
-        function rgbToHex(rgb) {
-            if (!rgb || !rgb.startsWith('rgb')) return '#000000';
-            let [r, g, b] = rgb.match(/\d+/g).map(Number);
-            return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-        }
-
+        // --- CÓDIGO CORREGIDO PARA LEER LA DESCRIPCIÓN ---
         document.addEventListener('DOMContentLoaded', () => {
-            initializeControls();
-            setupEventListeners();
-            setupInteractions();
-            updateCard();
-            
-            elements.title.wrapper.style.transform = 'translate(0px, -80px)';
-            elements.title.wrapper.setAttribute('data-y', -80);
-            elements.body.wrapper.style.transform = 'translate(0px, 20px)';
-            elements.body.wrapper.setAttribute('data-y', 20);
-            selectElement('title');
-
             fetch('index.html')
                 .then(response => {
-                    if (!response.ok) throw new Error('No se pudo cargar index.html');
+                    if (!response.ok) throw new Error('No se pudo cargar index.html.');
                     return response.text();
                 })
                 .then(htmlString => {
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(htmlString, 'text/html');
-                    doc.querySelectorAll('.producto').forEach(prodElement => {
-                        const titleEl = prodElement.querySelector('h3.titulo-producto');
-                        const imgEl = prodElement.querySelector('.carousel-images img');
-                        if (titleEl && imgEl) {
-                            let descParts = [];
-                            let nextEl = titleEl.nextElementSibling;
-                            while(nextEl) {
-                                if (nextEl.tagName === 'P' && !nextEl.classList.contains('precio')) descParts.push(nextEl.textContent.trim());
-                                if (nextEl.classList.contains('precio') || nextEl.tagName === 'DIV') break;
-                                nextEl = nextEl.nextElementSibling;
+                    const productElements = doc.querySelectorAll('.producto');
+                    
+                    productElements.forEach(prodElement => {
+                        const titleElement = prodElement.querySelector('h3.titulo-producto');
+                        const imageElement = prodElement.querySelector('.carousel-images img');
+                        
+                        if (titleElement && imageElement) {
+                            const title = titleElement.textContent.trim();
+                            
+                            let descriptionParts = [];
+                            let currentElement = titleElement.nextElementSibling;
+
+                            // Recorremos los elementos hermanos que siguen al título
+                            while (currentElement) {
+                                // Si es un párrafo y NO tiene la clase 'precio', lo añadimos a la descripción
+                                if (currentElement.tagName === 'P' && !currentElement.classList.contains('precio')) {
+                                    descriptionParts.push(currentElement.textContent.trim());
+                                }
+                                // Si encontramos un div o el precio, paramos de buscar
+                                if (currentElement.classList.contains('precio') || currentElement.tagName === 'DIV') {
+                                    break;
+                                }
+                                currentElement = currentElement.nextElementSibling;
                             }
-                            if (descParts.length > 0) {
-                                productosData.push({
-                                    title: titleEl.textContent.trim(),
-                                    description: descParts.join('\n\n'),
-                                    imageUrl: imgEl.getAttribute('src').replace(/\\/g, '/')
-                                });
+                            
+                            const description = descriptionParts.join('\n\n');
+
+                            const idMatch = title.match(/B-\d+|BA-\d+/);
+                            const id = idMatch ? idMatch[0] : title.split(' ').pop();
+                            const imageUrl = imageElement.getAttribute('src').replace(/\\/g, '/');
+                            
+                            // Nos aseguramos de no añadir productos sin descripción
+                            if(description) {
+                                productosData.push({ id, title, description, imageUrl });
                             }
                         }
                     });
-                    productSearch.placeholder = `Busca entre ${productosData.length} productos...`;
+                    productSearch.placeholder = "Busca entre " + productosData.length + " productos...";
                 })
                 .catch(error => {
-                    console.error('Error al cargar productos:', error);
-                    productSearch.placeholder = "Error al cargar.";
+                    console.error('Error fatal al analizar el catálogo:', error);
+                    productSearch.placeholder = "Error al cargar productos.";
                 });
         });
+
+        productSearch.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            if (!searchTerm) { searchResults.style.display = 'none'; return; }
+            const filteredProducts = productosData.filter(p => p.id.toLowerCase().includes(searchTerm) || p.title.toLowerCase().includes(searchTerm));
+            searchResults.innerHTML = '';
+            if (filteredProducts.length > 0) {
+                filteredProducts.forEach(producto => {
+                    const item = document.createElement('div');
+                    item.className = 'search-result-item';
+                    item.innerHTML = `<img src="${producto.imageUrl}" class="result-image"><span class="result-text">${producto.title}</span>`;
+                    item.addEventListener('click', () => {
+                        titleInput.value = producto.title;
+                        bodyInput.value = producto.description;
+                        productSearch.value = producto.title;
+                        searchResults.style.display = 'none';
+                        updatePreview();
+                    });
+                    searchResults.appendChild(item);
+                });
+                searchResults.style.display = 'block';
+            } else { searchResults.style.display = 'none'; }
+        });
+
+        document.addEventListener('click', function(event) { if (!productSearch.contains(event.target)) { searchResults.style.display = 'none'; } });
         
-    })();
+        const titleInput = document.getElementById('titleInput');
+        const bodyInput = document.getElementById('bodyInput');
+        const fontSizeSlider = document.getElementById('fontSizeSlider');
+        const styleSelector = document.getElementById('style-select');
+        const watermarkToggle = document.getElementById('watermarkToggle');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const printBtn = document.getElementById('printBtn');
+
+        function updatePreview() {
+            titleDisplay.innerText = titleInput.value;
+            bodyDisplay.innerText = bodyInput.value;
+            bodyDisplay.style.fontSize = `${fontSizeSlider.value}px`;
+        }
+
+        titleInput.addEventListener('input', updatePreview);
+        bodyInput.addEventListener('input', updatePreview);
+        fontSizeSlider.addEventListener('input', updatePreview);
+
+        styleSelector.addEventListener('click', function(e) {
+            if (e.target.tagName === 'BUTTON') {
+                styleSelector.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                const style = e.target.dataset.style;
+                const watermarkClass = imageCanvas.classList.contains('watermark-active') ? 'watermark-active' : '';
+                imageCanvas.className = `${style} ${watermarkClass}`;
+
+                // Reinicia el color del texto a su valor por defecto
+                titleDisplay.classList.remove('text-on-dark');
+                bodyDisplay.classList.remove('text-on-dark');
+            }
+        });
+        
+        watermarkToggle.addEventListener('change', function() { imageCanvas.classList.toggle('watermark-active', this.checked); });
+
+        downloadBtn.addEventListener('click', function() {
+            html2canvas(imageCanvas, { useCORS: true, backgroundColor: null, scale: 4 })
+            .then(canvas => {
+                const link = document.createElement('a');
+                link.download = `tarjeta-${titleInput.value.replace(/\s/g, "_")}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        });
+
+        printBtn.addEventListener('click', function() {
+            printBtn.textContent = 'Generando...';
+            html2canvas(imageCanvas, { useCORS: true, backgroundColor: null, scale: 2 })
+            .then(canvas => {
+                const imageDataUrl = canvas.toDataURL('image/png');
+                const printArea = document.getElementById('print-area');
+                printArea.innerHTML = '';
+                for (let i = 0; i < 6; i++) {
+                    const img = document.createElement('img');
+                    img.className = 'print-card';
+                    img.src = imageDataUrl;
+                    printArea.appendChild(img);
+                }
+                setTimeout(() => {
+                    window.print();
+                    printBtn.textContent = 'Imprimir';
+                }, 100);
+            });
+        });
+
+        // Carga inicial de la vista previa
+        updatePreview();
     </script>
+
 </body>
 </html>
