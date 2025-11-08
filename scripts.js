@@ -1,3 +1,33 @@
+// =======================================================================
+// === INICIO DE LA LÓGICA PARA LA PROMOCIÓN DEL 8 DE NOVIEMBRE ===
+// =======================================================================
+
+// Se ejecuta cuando el contenido de la página ha cargado.
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Obtener la fecha actual.
+    const hoy = new Date();
+    const dia = hoy.getDate();
+    const mes = hoy.getMonth(); // getMonth() devuelve 0 para enero, 1 para febrero, etc.
+
+    // 2. Comprobar si hoy es 8 de noviembre (el mes 10 en base cero).
+    if (dia === 8 && mes === 10) {
+        // 3. Si es la fecha de la promoción, mostrar un mensaje de bienvenida con SweetAlert2.
+        Swal.fire({
+            title: '¡Promoción Especial de Hoy!',
+            text: 'Todos los productos que agregues al carrito hoy, 8 de noviembre, tendrán un precio especial de $37.999.',
+            icon: 'info',
+            confirmButtonText: '¡Entendido!',
+            background: '#333333',
+            color: '#D4AF37'
+        });
+    }
+});
+
+// =======================================================================
+// === FIN DE LA LÓGICA DE PROMOCIÓN ===
+// =======================================================================
+
+
 // Obtener todos los productos al cargar la página en el orden original
 const productosOriginales = Array.from(document.querySelectorAll('.producto'));
 // Array que usaremos para aleatorizar en la categoría "Todos"
@@ -72,6 +102,7 @@ function mostrarCarrito() {
         let li = document.createElement('li');
         
         let nombreModificado = producto.nombre.replace(/Berakhah\s/, '');
+        // El formateo del precio se hace aquí, tomando el valor guardado en el carrito.
         let precioFormateado = parseFloat(producto.precio).toLocaleString(undefined, { minimumFractionDigits: 3 });
 
         li.innerHTML = `
@@ -133,37 +164,40 @@ function lanzarConfeti() {
 
 
 // =======================================================================
-// === FUNCIÓN CORREGIDA ===
+// === FUNCIÓN MODIFICADA PARA LA PROMOCIÓN ===
 // =======================================================================
 function agregarAlCarrito(nombre, precio) {
-    // 1. Encuentra el elemento de la imagen del producto en la página.
-    //    Usamos el atributo 'alt', que debe coincidir con el nombre del producto.
-    const imagenProducto = document.querySelector(`img[alt='${nombre}']`);
+    // 1. Definir el precio especial y verificar si la promoción está activa.
+    const precioEspecial = 37999;
+    const hoy = new Date();
+    const esDiaDePromocion = hoy.getDate() === 8 && hoy.getMonth() === 10; // 8 de Noviembre
 
-    // 2. Obtenemos la URL COMPLETA y CORRECTA directamente del atributo 'src'.
-    //    Si por alguna razón la imagen no se encuentra, usamos una cadena vacía como respaldo.
+    // 2. Determinar el precio final del producto.
+    // Si es día de promoción, usar el precio especial. Si no, usar el precio original.
+    const precioFinal = esDiaDePromocion ? precioEspecial : precio;
+
+    // 3. Encuentra el elemento de la imagen del producto.
+    const imagenProducto = document.querySelector(`img[alt='${nombre}']`);
     const urlCompletaImagen = imagenProducto ? imagenProducto.src : '';
 
-    // 3. Obtenemos el carrito actual desde el almacenamiento local.
+    // 4. Obtener el carrito actual.
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-    // 4. Agregamos el nuevo producto al carrito con la URL de imagen correcta.
-    carrito.push({ nombre, precio, imagen: urlCompletaImagen });
+    // 5. Agregar el nuevo producto al carrito con el PRECIO FINAL determinado.
+    carrito.push({ nombre, precio: precioFinal, imagen: urlCompletaImagen });
 
-    // 5. Guardamos el carrito actualizado de vuelta en el almacenamiento local.
+    // 6. Guardar el carrito actualizado.
     localStorage.setItem('carrito', JSON.stringify(carrito));
 
-    // 6. Actualizamos la vista del carrito en la página.
+    // 7. Actualizar la vista del carrito.
     mostrarCarrito();
 
-    // 7. Mostramos la notificación de éxito.
+    // 8. Mostrar la notificación y lanzar confeti.
     mostrarNotificacion(nombre);
-
-    // 8. Lanzamos el confeti.
     lanzarConfeti();
 }
 // =======================================================================
-// === FIN DE LA FUNCIÓN CORREGIDA ===
+// === FIN DE LA FUNCIÓN MODIFICADA ===
 // =======================================================================
 
 
