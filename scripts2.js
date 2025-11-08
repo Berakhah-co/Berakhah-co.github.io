@@ -587,3 +587,4 @@ if (btnVolverInicio) {
     });
 
 })(); // La función se auto-ejecuta para no contaminar otras variables.
+
