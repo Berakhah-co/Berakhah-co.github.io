@@ -1,4 +1,4 @@
-// Obtener todos los productos al cargar la página en el orden original
+// Obtener todos los productos al cargar la página en el orden original.
 const productosOriginales = Array.from(document.querySelectorAll('.producto'));
 // Array que usaremos para aleatorizar en la categoría "Todos"
 let productosAleatorios = [...productosOriginales];
