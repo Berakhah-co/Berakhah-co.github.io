@@ -2403,48 +2403,32 @@
   </main>
   <!-- Carrito de compras -->
   <div id="carrito" style="display: none;">
-   <button class="cerrar-carrito" id="cerrar-carrito">
-    X
-   </button>
-   <h2>
-    Tu carrito
-   </h2>
-   <ul id="lista-carrito">
-   </ul>
-   <p>
-    <span id="total-carrito">
-     0
-    </span>
-   </p>
-   <!-- Datos del cliente -->
-   <div id="datos-cliente">
-    <h3>
-     Informaci&oacute;n del Cliente
-    </h3>
-    <label for="nombre-cliente">
-     Nombre:
-    </label>
-    <input id="nombre-cliente" placeholder="Tu nombre" required type="text">
-    <label for="correo-cliente">
-     Correo Electr&oacute;nico:
-    </label>
-    <input id="correo-cliente" placeholder="Tu correo" required type="email">
-    <label for="direccion-cliente">
-     Direcci&oacute;n:
-    </label>
-    <input id="direccion-cliente" placeholder="Direccion en Medellin" required type="text">
-    <label for="telefono-cliente">
-     Tel&eacute;fono:
-    </label>
-    <input id="telefono-cliente" placeholder="Tu tel&eacute;fono" required type="tel">
-   </div>
-   <button class="button" id="btn-pedir">
-    Enviar pedido
-   </button>
-   <button class="button" id="btn-vaciar-carrito">
-    Vaciar Carrito
-   </button>
-  </div>
+  <!-- Este es el contenedor que se muestra cuando abres el carrito -->
+<div id="carrito-contenedor" class="carrito-modal-contenedor">
+    <div class="carrito-modal">
+        <button class="cerrar-modal">X</button>
+        <h2>Tu carrito</h2>
+        <p>Total: $0.000</p>
+        <hr>
+        <h3>Información del Cliente</h3>
+        <form>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" placeholder="Tu nombre">
+
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" id="correo" placeholder="Tu correo">
+
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" placeholder="Dirección en Medellín">
+
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" placeholder="Tu teléfono">
+
+            <button type="submit" class="btn-enviar">ENVIAR PEDIDO</button>
+            <button type="button" class="btn-vaciar">VACIAR CARRITO</button>
+        </form>
+    </div>
+</div>
   <!-- Contenedor de los íconos sociales y el carrito -->
   <div class="rrss-icons">
    <!-- Icono de Instagram -->
