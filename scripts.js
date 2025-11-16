@@ -45,12 +45,7 @@ function reorganizarProductos() {
         parrafoCompleto.style.display = 'none';
         contenedor.appendChild(parrafoCompleto);
         
-        // Aplicar estilos de truncado SÓLO si el texto es largo
-        if (textoCompleto.length > 150) {
-            contenedor.style.maxHeight = '70px';
-            contenedor.style.minHeight = '70px';
-            contenedor.style.overflow = 'hidden';
-        }
+        // (Inline truncation removed so CSS `.producto.expanded` controls expansion)
         
         // Remover los párrafos originales
         paragrafos.forEach(p => p.remove());
@@ -119,7 +114,6 @@ function mezclarArray(array) {
       // Re-ejecutar reorganización después de mostrar productos
       setTimeout(() => {
           reorganizarProductos();
-          inicializarExpandButtons();
       }, 50);
   }
   
@@ -132,6 +126,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnPedir) {
         btnPedir.addEventListener('click', enviarPedido);
     }
+
+    // ===============================================================
+    // === NUEVO: listener delegado para botones 'Ver más' en el catálogo ===
+    // ===============================================================
+    const catalogo = document.querySelector('.catalogo');
+    if (catalogo) {
+        catalogo.addEventListener('click', function(event) {
+            const target = event.target;
+            if (target && target.classList && target.classList.contains('expand-button')) {
+                toggleExpandText(target);
+            }
+        });
+    }
+    // ===============================================================
 });
 
 // Función para mostrar el carrito y actualizar el contador
@@ -611,58 +619,37 @@ function toggleExpandText(button) {
     producto.classList.toggle('expanded');
     
     if (producto.classList.contains('expanded')) {
-        // Mostrar texto completo
+        // Mostrar texto completo: eliminar restricciones inline para que CSS pueda expandir
         textoTruncado.style.display = 'none';
         textoCompleto.style.display = 'block';
+        // Quitar estilos inline de truncado para que el contenido pueda crecer
+        descripcion.style.maxHeight = 'none';
+        descripcion.style.minHeight = 'auto';
+        descripcion.style.overflow = 'visible';
         button.textContent = 'Ver menos';
         button.classList.add('expanded');
     } else {
-        // Mostrar texto truncado
+        // Mostrar texto truncado: restaurar estilos inline solo si el texto supera el umbral
         textoTruncado.style.display = 'block';
         textoCompleto.style.display = 'none';
+        // Sólo volver a aplicar el truncado si el contenido original es largo
+        const textoCompletoStr = descripcion.getAttribute('data-texto-completo') || (textoCompleto.textContent || '');
+        if (textoCompletoStr.length > 150) {
+            descripcion.style.maxHeight = '70px';
+            descripcion.style.minHeight = '70px';
+            descripcion.style.overflow = 'hidden';
+        } else {
+            // Si no es largo, limpiar cualquier estilo inline
+            descripcion.style.maxHeight = '';
+            descripcion.style.minHeight = '';
+            descripcion.style.overflow = '';
+        }
         button.textContent = 'Ver más';
         button.classList.remove('expanded');
     }
 }
 
-// Inicializar botones de expandir en productos
-function inicializarExpandButtons() {
-    const botones = document.querySelectorAll('.expand-button');
-    botones.forEach(btn => {
-        // Remover listeners previos para evitar duplicados
-        btn.replaceWith(btn.cloneNode(true));
-    });
-    
-    // Re-seleccionar después de reemplazar
-    document.querySelectorAll('.expand-button').forEach(btn => {
-        btn.addEventListener('click', function() {
-            toggleExpandText(this);
-        });
-    });
-}
-
-// Configurar observer para reinicializar botones cuando cambia el contenedor
-document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar después de mostrar productos
-    setTimeout(() => {
-        inicializarExpandButtons();
-    }, 50);
-    
-    // Re-inicializar cuando se cambie de categoría
-    const observer = new MutationObserver(() => {
-        setTimeout(() => {
-            inicializarExpandButtons();
-        }, 50);
-    });
-    
-    const catalogo = document.querySelector('.catalogo');
-    if (catalogo) {
-        observer.observe(catalogo, {
-            childList: true,
-            subtree: false
-        });
-    }
-});
+// NOTE: initialization of individual expand buttons removed in favor of a delegated listener
 
 
 // =======================================================================
