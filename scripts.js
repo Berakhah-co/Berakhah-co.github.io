@@ -1,5 +1,79 @@
 // Obtener todos los productos al cargar la página en el orden original.
 const productosOriginales = Array.from(document.querySelectorAll('.producto'));
+
+// =======================================================================
+// === Reorganizar estructura de productos para truncación de texto ===
+// =======================================================================
+
+function reorganizarProductos() {
+    const productos = document.querySelectorAll('.producto');
+    
+    productos.forEach(producto => {
+        // Verificar si ya ha sido reorganizado
+        if (producto.querySelector('.producto-descripcion')) {
+            return; // Ya está reorganizado, saltar
+        }
+        
+        // Obtener el título
+        const titulo = producto.querySelector('.titulo-producto');
+        if (!titulo) return;
+        
+        // Obtener todos los párrafos que no sean precio
+        const paragrafos = Array.from(producto.querySelectorAll('p')).filter(p => !p.classList.contains('precio'));
+        
+        // Combinar todo el texto de los párrafos
+        let textoCompleto = paragrafos.map(p => p.textContent).join(' ').trim();
+        
+        // Guardar el texto completo en un atributo de datos
+        const contenedor = document.createElement('div');
+        contenedor.className = 'producto-descripcion';
+        contenedor.setAttribute('data-texto-completo', textoCompleto);
+        
+        // Crear párrafo truncado a 400 caracteres
+        const parrafoTruncado = document.createElement('p');
+        parrafoTruncado.className = 'texto-truncado';
+        const textoMostrar = textoCompleto.length > 150 
+            ? textoCompleto.substring(0, 150) + '...' 
+            : textoCompleto;
+        parrafoTruncado.textContent = textoMostrar;
+        contenedor.appendChild(parrafoTruncado);
+        
+        // Crear párrafo con texto completo (oculto inicialmente)
+        const parrafoCompleto = document.createElement('p');
+        parrafoCompleto.className = 'texto-completo';
+        parrafoCompleto.textContent = textoCompleto;
+        parrafoCompleto.style.display = 'none';
+        contenedor.appendChild(parrafoCompleto);
+        
+        // Aplicar estilos de truncado SÓLO si el texto es largo
+        if (textoCompleto.length > 150) {
+            contenedor.style.maxHeight = '70px';
+            contenedor.style.minHeight = '70px';
+            contenedor.style.overflow = 'hidden';
+        }
+        
+        // Remover los párrafos originales
+        paragrafos.forEach(p => p.remove());
+        
+        // Crear botón de expandir
+        const expandButton = document.createElement('button');
+        expandButton.className = 'expand-button';
+        expandButton.setAttribute('data-truncated', 'true');
+        // Muestra "Ver más" si el texto es largo, sino, lo deja vacío.
+        expandButton.textContent = textoCompleto.length > 150 ? 'Ver más' : '';
+        expandButton.setAttribute('type', 'button');
+        
+        // Si el texto no es mayor a 400 caracteres, ocultar el botón
+        if (textoCompleto.length <= 150) {
+            expandButton.style.display = 'none';
+        }
+        
+        // Insertar la descripción y el botón después del título
+        titulo.insertAdjacentElement('afterend', contenedor);
+        contenedor.insertAdjacentElement('afterend', expandButton);
+    });
+}
+
 // Array que usaremos para aleatorizar en la categoría "Todos"
 let productosAleatorios = [...productosOriginales];
 
@@ -41,15 +115,17 @@ function mezclarArray(array) {
               producto.style.display = 'none';
           }
       });
+      
+      // Re-ejecutar reorganización después de mostrar productos
+      setTimeout(() => {
+          reorganizarProductos();
+          inicializarExpandButtons();
+      }, 50);
   }
   
-// Evento para cargar todos los productos al inicio en la categoría "Todos"
+// Evento para cargar todos los productos al inicio
 document.addEventListener('DOMContentLoaded', () => {
-    mostrarCategoria('todo');
-});
-
-// Mostrar todos los productos al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
+    reorganizarProductos();
     mostrarCategoria('todo');
     mostrarCarrito();
     const btnPedir = document.getElementById('btn-pedir');
@@ -515,6 +591,79 @@ if (btnVolverInicio) {
         });
     });
 }
+
+// =======================================================================
+// === Funcionalidad de Expandir/Contraer Texto en Tarjetas ===
+// =======================================================================
+
+function toggleExpandText(button) {
+    const producto = button.closest('.producto');
+    if (!producto) return;
+    
+    const descripcion = producto.querySelector('.producto-descripcion');
+    if (!descripcion) return;
+    
+    const textoTruncado = descripcion.querySelector('.texto-truncado');
+    const textoCompleto = descripcion.querySelector('.texto-completo');
+    
+    if (!textoTruncado || !textoCompleto) return;
+    
+    producto.classList.toggle('expanded');
+    
+    if (producto.classList.contains('expanded')) {
+        // Mostrar texto completo
+        textoTruncado.style.display = 'none';
+        textoCompleto.style.display = 'block';
+        button.textContent = 'Ver menos';
+        button.classList.add('expanded');
+    } else {
+        // Mostrar texto truncado
+        textoTruncado.style.display = 'block';
+        textoCompleto.style.display = 'none';
+        button.textContent = 'Ver más';
+        button.classList.remove('expanded');
+    }
+}
+
+// Inicializar botones de expandir en productos
+function inicializarExpandButtons() {
+    const botones = document.querySelectorAll('.expand-button');
+    botones.forEach(btn => {
+        // Remover listeners previos para evitar duplicados
+        btn.replaceWith(btn.cloneNode(true));
+    });
+    
+    // Re-seleccionar después de reemplazar
+    document.querySelectorAll('.expand-button').forEach(btn => {
+        btn.addEventListener('click', function() {
+            toggleExpandText(this);
+        });
+    });
+}
+
+// Configurar observer para reinicializar botones cuando cambia el contenedor
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicializar después de mostrar productos
+    setTimeout(() => {
+        inicializarExpandButtons();
+    }, 50);
+    
+    // Re-inicializar cuando se cambie de categoría
+    const observer = new MutationObserver(() => {
+        setTimeout(() => {
+            inicializarExpandButtons();
+        }, 50);
+    });
+    
+    const catalogo = document.querySelector('.catalogo');
+    if (catalogo) {
+        observer.observe(catalogo, {
+            childList: true,
+            subtree: false
+        });
+    }
+});
+
 
 // =======================================================================
 // === CÓDIGO PARA EL ACCESO DIRECTO SECRETO AL PANEL DE ADMINISTRACIÓN ===
