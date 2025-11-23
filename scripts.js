@@ -1,6 +1,61 @@
 // Obtener todos los productos al cargar la página en el orden original.
 const productosOriginales = Array.from(document.querySelectorAll('.producto'));
 
+/* =============================================================
+        === BLOQUE PROMO (AGRUPADO PARA FACIL REVERTIR) ==========
+
+        Qué contiene: funciones y llamadas que aplican la promoción
+        (cambiar visual y forzar precio en carrito).
+
+        Cómo revertir (3 opciones):
+         1) Comentar o eliminar TODO el bloque entre
+                 "=== INICIO BLOQUE PROMO ===" y
+                 "=== FIN BLOQUE PROMO ===" (inclusive).
+         2) O cambiar la constante `PROMO_ENABLED` a `false`.
+         3) Para eliminar solamente la lógica del carrito, comentar
+                 el bloque marcado dentro de `agregarAlCarrito` entre
+                 las marcas "/* PROMO-CARRITO START *\/" y
+                 "/* PROMO-CARRITO END *\/".
+
+        Nota: esto deja el código comentado o toggleable para revertir
+        fácilmente sin modificar `index.html`.
+    ============================================================= */
+
+// Toggle rápido: poner a `false` para desactivar la promo sin borrar código
+const PROMO_ENABLED = true;
+// Modo de la promoción:
+//  - 'fixed'   -> todos los productos por debajo del umbral costarán PROMO_PRICE
+//  - 'percent' -> se aplicará PROMO_DISCOUNT_PERCENT (%) de descuento
+const PROMO_MODE = 'fixed'; // 'fixed' or 'percent'
+// Valor fijo (moneda local sin separador de miles): ejemplo 38999
+const PROMO_PRICE = 38999;
+// Porcentaje de descuento cuando `PROMO_MODE === 'percent'` (ej: 20 = 20%)
+const PROMO_DISCOUNT_PERCENT = 20;
+// Umbral: solo se aplica la promoción a productos con precio ORIGINAL menor que este valor
+// Cambia a Infinity si quieres aplicarlo a todos los productos.
+const PROMO_THRESHOLD = 60000;
+
+// Helper: formatea un número entero en formato $xx.xxx
+function formatPrecioPts(n) {
+    if (isNaN(n)) return '$0';
+    return '$' + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+// ======= Configuración de la NOTIFICACIÓN DE INICIO (customizable) =======
+// Habilitar/deshabilitar solo la notificación (independiente de la promo)
+const PROMO_ANNOUNCE_ENABLED = true; // poner false para desactivar solo el modal
+// Si quieres reemplazar totalmente el contenido del modal, asigna HTML aquí.
+// Ejemplo: '<div><h2>Oferta</h2><p>Mensaje personalizado</p></div>'
+const PROMO_ANNOUNCE_CUSTOM_HTML = '';
+// Si no se usa custom HTML, se usa este título y texto pequeño
+const PROMO_ANNOUNCE_TITLE = '¡Promoción!';
+// Texto grande personalizable que aparece en el modal (si definido se usa tal cual)
+const PROMO_ANNOUNCE_LARGE_TEXT = 'Promoción especial disponible. ¡Consulta términos y condiciones!'; // Ej: 'Todos nuestros productos por debajo de $60.000 tendrán un precio especial de $38.999.'
+const PROMO_ANNOUNCE_SMALL_TEXT = 'aplican términos y condiciones';
+// ========================================================================
+
+/* === INICIO BLOQUE PROMO === */
+
 // =======================================================================
 // === Reorganizar estructura de productos para truncación de texto ===
 // =======================================================================
@@ -69,6 +124,97 @@ function reorganizarProductos() {
     });
 }
 
+// ================================
+// Promo: aplicar precio decembrino
+// ================================
+function aplicarPromocionPrecios() {
+    if (!PROMO_ENABLED) return; // No hacer nada si la promo está desactivada
+    const elementosPrecio = document.querySelectorAll('p.precio');
+    elementosPrecio.forEach(p => {
+        const texto = (p.textContent || '').trim();
+        // Extraer solo dígitos para obtener el número (ej. "$47.999" -> "47999")
+        const digitos = texto.replace(/\D/g, '');
+        const valor = parseInt(digitos, 10);
+        if (isNaN(valor)) return;
+        if (valor < PROMO_THRESHOLD) {
+            let nuevoPrecio;
+            if (PROMO_MODE === 'fixed') {
+                nuevoPrecio = PROMO_PRICE;
+            } else if (PROMO_MODE === 'percent') {
+                nuevoPrecio = Math.round(valor * (100 - PROMO_DISCOUNT_PERCENT) / 100);
+            } else {
+                // modo desconocido: no cambiar
+                return;
+            }
+            // Mostrar el precio promocional en la UI con el formato de miles con puntos
+            p.textContent = formatPrecioPts(nuevoPrecio);
+            p.setAttribute('data-promocion', 'true');
+            p.setAttribute('data-precio-original', String(valor));
+            p.setAttribute('data-precio-promocional', String(nuevoPrecio));
+        }
+    });
+}
+
+function mostrarAnuncioDecembrino() {
+    // No mostrar si la promo o la notificación están desactivadas
+    if (!PROMO_ENABLED || !PROMO_ANNOUNCE_ENABLED) return;
+    try {
+        // Mostrar solo una vez por sesión
+        if (sessionStorage.getItem('anuncioDecembrinoMostrado')) return;
+        // Si el usuario definió HTML personalizado, usarlo exactamente.
+        let html;
+        if (PROMO_ANNOUNCE_CUSTOM_HTML && PROMO_ANNOUNCE_CUSTOM_HTML.trim() !== '') {
+            html = PROMO_ANNOUNCE_CUSTOM_HTML;
+        } else {
+            // Si el usuario definió un texto grande personalizado, usarlo tal cual
+            if (PROMO_ANNOUNCE_LARGE_TEXT && PROMO_ANNOUNCE_LARGE_TEXT.trim() !== '') {
+                html = `
+                    <div style="text-align:center">
+                        <div style="font-size:18px; font-weight:700; color:#222">${PROMO_ANNOUNCE_TITLE}</div>
+                        <div style="margin-top:8px; font-size:20px; font-weight:800; color:#b12704">${PROMO_ANNOUNCE_LARGE_TEXT}</div>
+                        <div style="margin-top:6px; font-size:11px; color:#666">${PROMO_ANNOUNCE_SMALL_TEXT}</div>
+                    </div>
+                `;
+            } else {
+                // Construir contenido del anuncio según el modo configurado
+                let contenidoPromocion = '';
+                if (PROMO_MODE === 'fixed') {
+                    contenidoPromocion = `Todos nuestros productos por debajo de ${formatPrecioPts(PROMO_THRESHOLD)} tendrán un precio especial de <span style=\"font-size:24px\">${formatPrecioPts(PROMO_PRICE)}</span>`;
+                } else if (PROMO_MODE === 'percent') {
+                    contenidoPromocion = `¡${PROMO_DISCOUNT_PERCENT}% de descuento en productos por debajo de ${formatPrecioPts(PROMO_THRESHOLD)}!`;
+                } else {
+                    contenidoPromocion = '';
+                }
+
+                html = `
+                    <div style="text-align:center">
+                        <div style="font-size:18px; font-weight:700; color:#222">${PROMO_ANNOUNCE_TITLE}</div>
+                        <div style="margin-top:8px; font-size:20px; font-weight:800; color:#b12704">${contenidoPromocion}</div>
+                        <div style="margin-top:6px; font-size:11px; color:#666">${PROMO_ANNOUNCE_SMALL_TEXT}</div>
+                    </div>
+                `;
+            }
+        }
+
+        if (typeof Swal === 'function') {
+            Swal.fire({
+                title: '',
+                html: html,
+                icon: 'info',
+                confirmButtonText: '🎁 ¡Entendido! 🎁',
+                background: '#fff',
+                color: '#111'
+            });
+        } 
+
+        sessionStorage.setItem('anuncioDecembrinoMostrado', '1');
+    } catch (e) {
+        console.error('Error mostrando anuncio decembrino', e);
+    }
+}
+
+/* === FIN BLOQUE PROMO === */
+
 // Array que usaremos para aleatorizar en la categoría "Todos"
 let productosAleatorios = [...productosOriginales];
 
@@ -125,6 +271,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPedir = document.getElementById('btn-pedir');
     if (btnPedir) {
         btnPedir.addEventListener('click', enviarPedido);
+    }
+
+    // === BLOQUE PROMO: llamadas agrupadas ===
+    // Para revertir: comentar o eliminar este bloque (ver encabezado del bloque promocional arriba)
+    if (PROMO_ENABLED) {
+        aplicarPromocionPrecios();
+        mostrarAnuncioDecembrino();
     }
 
     // ===============================================================
@@ -220,6 +373,30 @@ function lanzarConfeti() {
 // === FUNCIÓN CORREGIDA ===
 // =======================================================================
 function agregarAlCarrito(nombre, precio) {
+     /* /* PROMO-CARRITO START: lógica de promoción en carrito
+         Para revertir: comentar o eliminar todo desde 'PROMO-CARRITO START' hasta
+         'PROMO-CARRITO END' (inclusive). Alternativamente ponga
+         `PROMO_ENABLED = false` arriba.
+     */
+    if (PROMO_ENABLED) {
+        // PROMO-CARRITO: aplicar la misma lógica configurable que la UI
+        let precioNum = Number(precio);
+        if (isNaN(precioNum)) {
+            // Intentar extraer dígitos si viene como string formateado
+            const dig = String(precio).replace(/\D/g, '');
+            precioNum = dig ? parseInt(dig, 10) : 0;
+        }
+        if (!isNaN(precioNum) && precioNum < PROMO_THRESHOLD) {
+            if (PROMO_MODE === 'fixed') {
+                precioNum = PROMO_PRICE;
+            } else if (PROMO_MODE === 'percent') {
+                precioNum = Math.round(precioNum * (100 - PROMO_DISCOUNT_PERCENT) / 100);
+            }
+        }
+        precio = precioNum;
+    }
+    /* PROMO-CARRITO END */
+
     // 1. Encuentra el elemento de la imagen del producto en la página.
     //    Usamos el atributo 'alt', que debe coincidir con el nombre del producto.
     const imagenProducto = document.querySelector(`img[alt='${nombre}']`);
