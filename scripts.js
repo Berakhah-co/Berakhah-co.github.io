@@ -26,11 +26,11 @@ const PROMO_ENABLED = true;
 // Modo de la promoción:
 //  - 'fixed'   -> todos los productos por debajo del umbral costarán PROMO_PRICE
 //  - 'percent' -> se aplicará PROMO_DISCOUNT_PERCENT (%) de descuento
-const PROMO_MODE = 'percent'; // 'fixed' or 'percent'
+const PROMO_MODE = 'fixed'; // 'fixed' or 'percent'
 // Valor fijo (moneda local sin separador de miles): ejemplo 38999
 const PROMO_PRICE = 38999;
 // Porcentaje de descuento cuando `PROMO_MODE === 'percent'` (ej: 20 = 20%)
-const PROMO_DISCOUNT_PERCENT = 50;
+const PROMO_DISCOUNT_PERCENT = 10;
 // Habilitar/deshabilitar tipos de promoción por separado
 // - `PROMO_FIXED_ENABLED`: activa la promoción que fija un precio (modo 'fixed')
 // - `PROMO_PERCENT_ENABLED`: activa la promoción por porcentaje (modo 'percent')
@@ -93,7 +93,7 @@ const PROMO_ANNOUNCE_CUSTOM_HTML = '';
 // Si no se usa custom HTML, se usa este título y texto pequeño
 const PROMO_ANNOUNCE_TITLE = '¡Promoción!';
 // Texto grande personalizable que aparece en el modal (si definido se usa tal cual)
-const PROMO_ANNOUNCE_LARGE_TEXT = 'Promoción especial disponible. ¡Consulta términos y condiciones!'; // Ej: 'Todos nuestros productos por debajo de $60.000 tendrán un precio especial de $38.999.'
+const PROMO_ANNOUNCE_LARGE_TEXT = 'Todos nuestros productos tendrán un precio especial de $38.999!'; // Ej: 'Todos nuestros productos por debajo de $60.000 tendrán un precio especial de $38.999.'
 const PROMO_ANNOUNCE_SMALL_TEXT = 'aplican términos y condiciones';
 // ========================================================================
 
