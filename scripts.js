@@ -26,11 +26,16 @@ const PROMO_ENABLED = true;
 // Modo de la promoción:
 //  - 'fixed'   -> todos los productos por debajo del umbral costarán PROMO_PRICE
 //  - 'percent' -> se aplicará PROMO_DISCOUNT_PERCENT (%) de descuento
-const PROMO_MODE = 'fixed'; // 'fixed' or 'percent'
+const PROMO_MODE = 'percent'; // 'fixed' or 'percent'
 // Valor fijo (moneda local sin separador de miles): ejemplo 38999
 const PROMO_PRICE = 38999;
 // Porcentaje de descuento cuando `PROMO_MODE === 'percent'` (ej: 20 = 20%)
-const PROMO_DISCOUNT_PERCENT = 20;
+const PROMO_DISCOUNT_PERCENT = 50;
+// Habilitar/deshabilitar tipos de promoción por separado
+// - `PROMO_FIXED_ENABLED`: activa la promoción que fija un precio (modo 'fixed')
+// - `PROMO_PERCENT_ENABLED`: activa la promoción por porcentaje (modo 'percent')
+const PROMO_FIXED_ENABLED = false; // poner false para desactivar la promoción fija
+const PROMO_PERCENT_ENABLED = true; // poner false para desactivar la promoción por %
 // Umbral: solo se aplica la promoción a productos con precio ORIGINAL menor que este valor
 // Cambia a Infinity si quieres aplicarlo a todos los productos.
 const PROMO_THRESHOLD = 60000;
@@ -39,6 +44,44 @@ const PROMO_THRESHOLD = 60000;
 function formatPrecioPts(n) {
     if (isNaN(n)) return '$0';
     return '$' + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+// Helper: parsea un texto de precio mostrado en la UI a un número en unidades
+// Maneja formatos comunes como "$47.999,000", "$47.999" o "$47,999.000"
+function parsePrecioTexto(text) {
+    if (!text) return NaN;
+    // Quitar caracteres distintos de dígitos, punto y coma/coma
+    let s = String(text).trim();
+    // Eliminar símbolo de moneda y espacios
+    s = s.replace(/[^0-9.,-]/g, '');
+    if (s === '') return NaN;
+
+    // Si contiene tanto '.' como ',', decidir cuál es decimal.
+    if (s.indexOf('.') !== -1 && s.indexOf(',') !== -1) {
+        // Asumir formato español: '.' miles, ',' decimales -> eliminar puntos y convertir coma a punto
+        s = s.replace(/\./g, '');
+        s = s.replace(/,/g, '.');
+    } else if (s.indexOf(',') !== -1 && s.indexOf('.') === -1) {
+        // Solo coma: podría ser separator de miles o decimales. Si tiene 3 dígitos después de la coma,
+        // probablemente sean decimales mostrados a 3 cifras; convertimos coma a punto.
+        if (/,[0-9]{3}$/.test(s)) {
+            s = s.replace(/,/g, '.');
+        } else {
+            // Sino, asumimos coma como separador de miles -> eliminar
+            s = s.replace(/,/g, '');
+        }
+    } else {
+        // Solo puntos presentes. Si termina en '.000' probablemente son decimales mostrados; convertir a punto decimal
+        if (/\.\d{3}$/.test(s)) {
+            // mantener como está (ej. 47999.000)
+        } else {
+            // Sino, asumir puntos como separador de miles y removerlos
+            s = s.replace(/\./g, '');
+        }
+    }
+
+    const num = parseFloat(s);
+    return isNaN(num) ? NaN : num;
 }
 
 // ======= Configuración de la NOTIFICACIÓN DE INICIO (customizable) =======
@@ -132,25 +175,26 @@ function aplicarPromocionPrecios() {
     const elementosPrecio = document.querySelectorAll('p.precio');
     elementosPrecio.forEach(p => {
         const texto = (p.textContent || '').trim();
-        // Extraer solo dígitos para obtener el número (ej. "$47.999" -> "47999")
-        const digitos = texto.replace(/\D/g, '');
-        const valor = parseInt(digitos, 10);
+        // Parsear el texto mostrado a número en unidades (considera puntos y comas)
+        const valorParsed = parsePrecioTexto(texto);
+        const valor = isNaN(valorParsed) ? NaN : Math.round(valorParsed);
         if (isNaN(valor)) return;
         if (valor < PROMO_THRESHOLD) {
-            let nuevoPrecio;
-            if (PROMO_MODE === 'fixed') {
-                nuevoPrecio = PROMO_PRICE;
-            } else if (PROMO_MODE === 'percent') {
-                nuevoPrecio = Math.round(valor * (100 - PROMO_DISCOUNT_PERCENT) / 100);
-            } else {
-                // modo desconocido: no cambiar
-                return;
-            }
-            // Mostrar el precio promocional en la UI con el formato de miles con puntos
-            p.textContent = formatPrecioPts(nuevoPrecio);
-            p.setAttribute('data-promocion', 'true');
+            // Guardar siempre el precio original en el DOM para uso del carrito
             p.setAttribute('data-precio-original', String(valor));
-            p.setAttribute('data-precio-promocional', String(nuevoPrecio));
+
+            // Si el modo es 'fixed' y está habilitado, mostrar el precio fijo en la UI
+            if (PROMO_MODE === 'fixed' && PROMO_FIXED_ENABLED) {
+                const nuevoPrecio = PROMO_PRICE;
+                p.textContent = formatPrecioPts(nuevoPrecio);
+                p.setAttribute('data-promocion', 'true');
+                p.setAttribute('data-precio-promocional', String(nuevoPrecio));
+            } else if (PROMO_MODE === 'percent' && PROMO_PERCENT_ENABLED) {
+                // En modo 'percent' NO cambiamos el precio mostrado por producto.
+                // El descuento por porcentaje se aplica únicamente en el cálculo del carrito.
+                // Solo guardamos los atributos para referencia
+                p.removeAttribute('data-precio-promocional');
+            }
         }
     });
 }
@@ -299,32 +343,58 @@ document.addEventListener('DOMContentLoaded', () => {
 function mostrarCarrito() {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     let listaCarrito = document.getElementById('lista-carrito');
-    let totalCarrito = 0;
+    let subtotal = 0;
+    let eligibleSubtotal = 0; // suma de artículos elegibles para descuento porcentual
     if (!listaCarrito) return; // Salir si el elemento no existe
     
     listaCarrito.innerHTML = '';
-
     carrito.forEach((producto, index) => {
-        totalCarrito += parseFloat(producto.precio);
+        const unitPrice = !isNaN(parseFloat(producto.precio)) ? parseFloat(producto.precio) : 0;
+        subtotal += unitPrice;
+
+        // Determinar precio original para evaluar elegibilidad al descuento porcentual
+        const orig = (!isNaN(parseFloat(producto.precio_original)) ? parseFloat(producto.precio_original) : unitPrice);
+        if (PROMO_ENABLED && PROMO_MODE === 'percent' && PROMO_PERCENT_ENABLED && orig < PROMO_THRESHOLD) {
+            eligibleSubtotal += orig;
+        }
+
         let li = document.createElement('li');
-        
         let nombreModificado = producto.nombre.replace(/Berakhah\s/, '');
-        let precioFormateado = parseFloat(producto.precio).toLocaleString(undefined, { minimumFractionDigits: 3 });
+        // Mostrar el precio de la unidad tal como se guardó en el carrito (precio_final o original)
+        let precioFormateado = formatPrecioPts(Math.round(unitPrice));
 
         li.innerHTML = `
             <img src="${producto.imagen}" alt="${nombreModificado}" style="width: 50px; height: 50px; margin-right: 10px;" onclick="abrirImagenEnNuevaVentana('${producto.imagen}')">
-            ${nombreModificado} - $${precioFormateado}
+            ${nombreModificado} - ${precioFormateado}
             <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
         `;
         listaCarrito.appendChild(li);
     });
 
-    let totalCarritoFormateado = totalCarrito.toLocaleString(undefined, { minimumFractionDigits: 3 });
+    // Calcular descuento y total
+    let descuento = 0;
+    if (PROMO_ENABLED && PROMO_MODE === 'percent' && PROMO_PERCENT_ENABLED) {
+        descuento = Math.round(eligibleSubtotal * PROMO_DISCOUNT_PERCENT / 100);
+    }
+    const total = Math.round(subtotal - descuento);
+
+    const subtotalFmt = formatPrecioPts(Math.round(subtotal));
+    const descuentoFmt = formatPrecioPts(Math.round(descuento));
+    const totalFmt = formatPrecioPts(Math.round(total));
 
     const totalCarritoElemento = document.getElementById('total-carrito');
     if (totalCarritoElemento) {
-        totalCarritoElemento.innerHTML = `
-            <p class="total"><strong>Total: $${totalCarritoFormateado}</strong></p>`;
+        // Mostrar desglose (Subtotal / Descuento / Total) solo cuando la promoción
+        // por porcentaje esté habilitada. En caso contrario, mostrar únicamente el Total.
+        if (PROMO_ENABLED && PROMO_MODE === 'percent' && PROMO_PERCENT_ENABLED) {
+            totalCarritoElemento.innerHTML = `
+                <p class="subtotal">Subtotal: <strong>${subtotalFmt}</strong></p>
+                <p class="descuento">Descuento (${PROMO_DISCOUNT_PERCENT}%): <strong>- ${descuentoFmt}</strong></p>
+                <p class="total"><strong>Total: ${totalFmt}</strong></p>`;
+        } else {
+            totalCarritoElemento.innerHTML = `
+                <p class="total"><strong>Total: ${totalFmt}</strong></p>`;
+        }
     }
     
     actualizarContadorCarrito();
@@ -378,38 +448,75 @@ function agregarAlCarrito(nombre, precio) {
          'PROMO-CARRITO END' (inclusive). Alternativamente ponga
          `PROMO_ENABLED = false` arriba.
      */
-    if (PROMO_ENABLED) {
-        // PROMO-CARRITO: aplicar la misma lógica configurable que la UI
-        let precioNum = Number(precio);
-        if (isNaN(precioNum)) {
-            // Intentar extraer dígitos si viene como string formateado
-            const dig = String(precio).replace(/\D/g, '');
-            precioNum = dig ? parseInt(dig, 10) : 0;
-        }
-        if (!isNaN(precioNum) && precioNum < PROMO_THRESHOLD) {
-            if (PROMO_MODE === 'fixed') {
-                precioNum = PROMO_PRICE;
-            } else if (PROMO_MODE === 'percent') {
-                precioNum = Math.round(precioNum * (100 - PROMO_DISCOUNT_PERCENT) / 100);
-            }
-        }
-        precio = precioNum;
+    // Nota: no aplicamos descuento porcentual al almacenar el producto.
+    // El descuento por porcentaje se calcula a nivel de carrito (subtotal -> descuento -> total).
+    // Aquí solo normalizamos y permitimos sobreescribir por la promo FIXED si aplica.
+    let precioNum = Number(precio);
+    if (isNaN(precioNum)) {
+        const dig = String(precio).replace(/\D/g, '');
+        precioNum = dig ? parseInt(dig, 10) : NaN;
     }
+    // Si PROMO FIXED aplica y está habilitada, la usaremos más abajo para almacenar el precio final.
     /* PROMO-CARRITO END */
 
     // 1. Encuentra el elemento de la imagen del producto en la página.
     //    Usamos el atributo 'alt', que debe coincidir con el nombre del producto.
     const imagenProducto = document.querySelector(`img[alt='${nombre}']`);
-
     // 2. Obtenemos la URL COMPLETA y CORRECTA directamente del atributo 'src'.
     //    Si por alguna razón la imagen no se encuentra, usamos una cadena vacía como respaldo.
     const urlCompletaImagen = imagenProducto ? imagenProducto.src : '';
 
-    // 3. Obtenemos el carrito actual desde el almacenamiento local.
+    // 2b. Intentar obtener el precio ya calculado/mostrado en la tarjeta del producto.
+    // Si la UI ya aplicó la promoción (por ejemplo modo 'percent'), la tarjeta
+    // contendrá `data-precio-promocional` y lo preferimos para asegurar que el
+    // carrito y el total coincidan con lo que ve el usuario.
+    try {
+        const productoElemento = imagenProducto ? imagenProducto.closest('.producto') : null;
+        if (productoElemento) {
+            const precioEl = productoElemento.querySelector('p.precio');
+            if (precioEl) {
+                // Si la promoción es FIXED y está habilitada, preferimos el precio promocional mostrado
+                if (PROMO_MODE === 'fixed' && PROMO_FIXED_ENABLED) {
+                    const promoAttr = precioEl.getAttribute('data-precio-promocional') || precioEl.dataset.precioPromocional;
+                    if (promoAttr && !isNaN(Number(promoAttr))) {
+                        precio = Number(promoAttr);
+                    }
+                }
+
+                // Si no tomamos precio promocional (o no existe), usar siempre el precio original mostrado
+                if ((precio === undefined || precio === null || isNaN(precio)) && precioEl) {
+                    const origAttr = precioEl.getAttribute('data-precio-original') || precioEl.dataset.precioOriginal;
+                    if (origAttr && !isNaN(Number(origAttr))) {
+                        precio = Number(origAttr);
+                    } else {
+                        const txt = (precioEl.textContent || '').trim();
+                        const parsed = parsePrecioTexto(txt);
+                        if (!isNaN(parsed)) precio = Math.round(parsed);
+                    }
+                }
+            }
+        }
+    } catch (e) {
+        // No interrumpir el flujo si algo falla al leer el DOM del producto
+        console.warn('No se pudo leer precio desde la tarjeta del producto:', e);
+    }
+
+    // 3. Determinar precio_original y precio_final a almacenar
+    let precio_original = !isNaN(precioNum) ? precioNum : (isNaN(Number(precio)) ? NaN : Number(precio));
+    // Si no logramos leer precio_original aún, intentar usar 'precio' variable
+    if (isNaN(precio_original) && !isNaN(Number(precio))) precio_original = Number(precio);
+
+    // Precio final por unidad que se guarda en el carrito:
+    let precio_final = precio_original;
+    if (PROMO_ENABLED && PROMO_MODE === 'fixed' && PROMO_FIXED_ENABLED && !isNaN(precio_original) && precio_original < PROMO_THRESHOLD) {
+        precio_final = PROMO_PRICE;
+    }
+
+    // 4. Obtenemos el carrito actual desde el almacenamiento local.
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-    // 4. Agregamos el nuevo producto al carrito con la URL de imagen correcta.
-    carrito.push({ nombre, precio, imagen: urlCompletaImagen });
+    // 5. Agregamos el nuevo producto al carrito con la URL de imagen correcta y precios explícitos.
+    carrito.push({ nombre, precio: precio_final, precio_original: precio_original, imagen: urlCompletaImagen });
 
     // 5. Guardamos el carrito actualizado de vuelta en el almacenamiento local.
     localStorage.setItem('carrito', JSON.stringify(carrito));
