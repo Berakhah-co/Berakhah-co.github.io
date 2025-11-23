@@ -808,9 +808,19 @@ function changeImage(step, carouselId) {
     let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
     
     if (currentIndex !== -1) {
-        images[currentIndex].classList.remove('active');
+        // Remover clases de animación y active de la imagen actual
+        images[currentIndex].classList.remove('active', 'slide-left', 'slide-right');
+        
         currentIndex = (currentIndex + step + images.length) % images.length;
-        images[currentIndex].classList.add('active');
+        
+        // Agregar clase de animación según la dirección
+        const animationClass = step > 0 ? 'slide-right' : 'slide-left';
+        images[currentIndex].classList.add('active', animationClass);
+        
+        // Limpiar la clase de animación después de que termine
+        setTimeout(() => {
+            images[currentIndex].classList.remove('slide-left', 'slide-right');
+        }, 500);
     }
 }
 
@@ -827,9 +837,18 @@ document.addEventListener('DOMContentLoaded', function () {
         let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
 
         if (currentIndex !== -1) {
-            images[currentIndex].classList.remove('active');
+            // Remover clases de animación y active de la imagen actual
+            images[currentIndex].classList.remove('active', 'slide-left', 'slide-right');
+            
             currentIndex = (currentIndex + 1) % images.length;
-            images[currentIndex].classList.add('active');
+            
+            // Agregar animación de deslizamiento a la derecha para auto-play
+            images[currentIndex].classList.add('active', 'slide-right');
+            
+            // Limpiar la clase de animación después de que termine
+            setTimeout(() => {
+                images[currentIndex].classList.remove('slide-left', 'slide-right');
+            }, 500);
         }
     }
 
