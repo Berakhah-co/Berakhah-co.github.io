@@ -23,22 +23,18 @@ const productosOriginales = Array.from(document.querySelectorAll('.producto'));
 
 // Toggle rápido: poner a `false` para desactivar la promo sin borrar código
 const PROMO_ENABLED = true;
-// Modo de la promoción:
-//  - 'fixed'   -> todos los productos por debajo del umbral costarán PROMO_PRICE
-//  - 'percent' -> se aplicará PROMO_DISCOUNT_PERCENT (%) de descuento
-const PROMO_MODE = 'fixed'; // 'fixed' or 'percent'
 // Valor fijo (moneda local sin separador de miles): ejemplo 38999
 const PROMO_PRICE = 38999;
-// Porcentaje de descuento cuando `PROMO_MODE === 'percent'` (ej: 20 = 20%)
+// Porcentaje de descuento para la promoción porcentual (ej: 10 = 10%)
 const PROMO_DISCOUNT_PERCENT = 10;
 // Habilitar/deshabilitar tipos de promoción por separado
-// - `PROMO_FIXED_ENABLED`: activa la promoción que fija un precio (modo 'fixed')
-// - `PROMO_PERCENT_ENABLED`: activa la promoción por porcentaje (modo 'percent')
-const PROMO_FIXED_ENABLED = false; // poner false para desactivar la promoción fija
-const PROMO_PERCENT_ENABLED = true; // poner false para desactivar la promoción por %
+// - `PROMO_FIXED_ENABLED`: activa la promoción que fija un precio en PROMO_PRICE
+// - `PROMO_PERCENT_ENABLED`: activa la promoción por porcentaje (PROMO_DISCOUNT_PERCENT%)
+const PROMO_FIXED_ENABLED = true; // poner false para desactivar la promoción fija
+const PROMO_PERCENT_ENABLED = false; // poner false para desactivar la promoción por %
 // Umbral: solo se aplica la promoción a productos con precio ORIGINAL menor que este valor
 // Cambia a Infinity si quieres aplicarlo a todos los productos.
-const PROMO_THRESHOLD = 60000;
+const PROMO_THRESHOLD = 80000;
 
 // Helper: formatea un número entero en formato $xx.xxx
 function formatPrecioPts(n) {
@@ -183,14 +179,14 @@ function aplicarPromocionPrecios() {
             // Guardar siempre el precio original en el DOM para uso del carrito
             p.setAttribute('data-precio-original', String(valor));
 
-            // Si el modo es 'fixed' y está habilitado, mostrar el precio fijo en la UI
-            if (PROMO_MODE === 'fixed' && PROMO_FIXED_ENABLED) {
+            // Si la promoción fija está habilitada, mostrar el precio fijo en la UI
+            if (PROMO_FIXED_ENABLED) {
                 const nuevoPrecio = PROMO_PRICE;
                 p.textContent = formatPrecioPts(nuevoPrecio);
                 p.setAttribute('data-promocion', 'true');
                 p.setAttribute('data-precio-promocional', String(nuevoPrecio));
-            } else if (PROMO_MODE === 'percent' && PROMO_PERCENT_ENABLED) {
-                // En modo 'percent' NO cambiamos el precio mostrado por producto.
+            } else if (PROMO_PERCENT_ENABLED) {
+                // En promoción porcentual NO cambiamos el precio mostrado por producto.
                 // El descuento por porcentaje se aplica únicamente en el cálculo del carrito.
                 // Solo guardamos los atributos para referencia
                 p.removeAttribute('data-precio-promocional');
@@ -220,11 +216,11 @@ function mostrarAnuncioDecembrino() {
                     </div>
                 `;
             } else {
-                // Construir contenido del anuncio según el modo configurado
+                // Construir contenido del anuncio según las promociones habilitadas
                 let contenidoPromocion = '';
-                if (PROMO_MODE === 'fixed') {
+                if (PROMO_FIXED_ENABLED) {
                     contenidoPromocion = `Todos nuestros productos por debajo de ${formatPrecioPts(PROMO_THRESHOLD)} tendrán un precio especial de <span style=\"font-size:24px\">${formatPrecioPts(PROMO_PRICE)}</span>`;
-                } else if (PROMO_MODE === 'percent') {
+                } else if (PROMO_PERCENT_ENABLED) {
                     contenidoPromocion = `¡${PROMO_DISCOUNT_PERCENT}% de descuento en productos por debajo de ${formatPrecioPts(PROMO_THRESHOLD)}!`;
                 } else {
                     contenidoPromocion = '';
@@ -354,7 +350,7 @@ function mostrarCarrito() {
 
         // Determinar precio original para evaluar elegibilidad al descuento porcentual
         const orig = (!isNaN(parseFloat(producto.precio_original)) ? parseFloat(producto.precio_original) : unitPrice);
-        if (PROMO_ENABLED && PROMO_MODE === 'percent' && PROMO_PERCENT_ENABLED && orig < PROMO_THRESHOLD) {
+        if (PROMO_ENABLED && PROMO_PERCENT_ENABLED && orig < PROMO_THRESHOLD) {
             eligibleSubtotal += orig;
         }
 
@@ -373,7 +369,7 @@ function mostrarCarrito() {
 
     // Calcular descuento y total
     let descuento = 0;
-    if (PROMO_ENABLED && PROMO_MODE === 'percent' && PROMO_PERCENT_ENABLED) {
+    if (PROMO_ENABLED && PROMO_PERCENT_ENABLED) {
         descuento = Math.round(eligibleSubtotal * PROMO_DISCOUNT_PERCENT / 100);
     }
     const total = Math.round(subtotal - descuento);
@@ -386,7 +382,7 @@ function mostrarCarrito() {
     if (totalCarritoElemento) {
         // Mostrar desglose (Subtotal / Descuento / Total) solo cuando la promoción
         // por porcentaje esté habilitada. En caso contrario, mostrar únicamente el Total.
-        if (PROMO_ENABLED && PROMO_MODE === 'percent' && PROMO_PERCENT_ENABLED) {
+        if (PROMO_ENABLED && PROMO_PERCENT_ENABLED) {
             totalCarritoElemento.innerHTML = `
                 <p class="subtotal">Subtotal: <strong>${subtotalFmt}</strong></p>
                 <p class="descuento">Descuento (${PROMO_DISCOUNT_PERCENT}%): <strong>- ${descuentoFmt}</strong></p>
@@ -475,8 +471,8 @@ function agregarAlCarrito(nombre, precio) {
         if (productoElemento) {
             const precioEl = productoElemento.querySelector('p.precio');
             if (precioEl) {
-                // Si la promoción es FIXED y está habilitada, preferimos el precio promocional mostrado
-                if (PROMO_MODE === 'fixed' && PROMO_FIXED_ENABLED) {
+                // Si la promoción fija está habilitada, preferimos el precio promocional mostrado
+                if (PROMO_FIXED_ENABLED) {
                     const promoAttr = precioEl.getAttribute('data-precio-promocional') || precioEl.dataset.precioPromocional;
                     if (promoAttr && !isNaN(Number(promoAttr))) {
                         precio = Number(promoAttr);
@@ -508,7 +504,7 @@ function agregarAlCarrito(nombre, precio) {
 
     // Precio final por unidad que se guarda en el carrito:
     let precio_final = precio_original;
-    if (PROMO_ENABLED && PROMO_MODE === 'fixed' && PROMO_FIXED_ENABLED && !isNaN(precio_original) && precio_original < PROMO_THRESHOLD) {
+    if (PROMO_ENABLED && PROMO_FIXED_ENABLED && !isNaN(precio_original) && precio_original < PROMO_THRESHOLD) {
         precio_final = PROMO_PRICE;
     }
 
