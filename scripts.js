@@ -820,55 +820,8 @@ function changeImage(step, carouselId) {
     }
 }
 
-// Movimiento automático en el carrusel
-document.addEventListener('DOMContentLoaded', function () {
-    const carousels = document.querySelectorAll('.carousel-images');
-    let intervalTime = 15000; // Tiempo en milisegundos (15 segundos)
-    let intervalID; // Variable para almacenar el ID del intervalo
-
-    // Función para mostrar la siguiente imagen en cada carousel
-    function showNextImage(carousel) {
-        const images = carousel.querySelectorAll('img');
-        if (images.length === 0) return;
-        let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
-
-        if (currentIndex !== -1) {
-            // Remover clases de animación y active de la imagen actual
-            images[currentIndex].classList.remove('active', 'slide-left', 'slide-right');
-            
-            currentIndex = (currentIndex + 1) % images.length;
-            
-            // Agregar animación de deslizamiento a la derecha para auto-play
-            images[currentIndex].classList.add('active', 'slide-right');
-            
-            // Limpiar la clase de animación después de que termine
-            setTimeout(() => {
-                images[currentIndex].classList.remove('slide-left', 'slide-right');
-            }, 500);
-        }
-    }
-
-    function startCarousel() {
-        stopCarousel(); // Asegurarse de que no haya intervalos duplicados
-        intervalID = setInterval(() => {
-            carousels.forEach(carousel => showNextImage(carousel));
-        }, intervalTime);
-    }
-
-    function stopCarousel() {
-        clearInterval(intervalID);
-    }
-
-    startCarousel();
-
-    carousels.forEach(carousel => {
-        const prevButton = carousel.parentElement.querySelector('.carousel-button.prev');
-        const nextButton = carousel.parentElement.querySelector('.carousel-button.next');
-        if(prevButton) prevButton.addEventListener('click', stopCarousel);
-        if(nextButton) nextButton.addEventListener('click', stopCarousel);
-        carousel.addEventListener('touchstart', stopCarousel);
-    });
-});
+// Movimiento automático en el carrusel - DESACTIVADO
+// El carrusel ahora solo funciona con controles manuales (botones prev/next)
 
 document.addEventListener('DOMContentLoaded', function () {
     const productos = document.querySelectorAll('.producto');
