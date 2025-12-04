@@ -34,7 +34,7 @@ const PROMO_FIXED_ENABLED = true; // poner false para desactivar la promoción f
 const PROMO_PERCENT_ENABLED = false; // poner false para desactivar la promoción por %
 // Umbral: solo se aplica la promoción a productos con precio ORIGINAL menor que este valor
 // Cambia a Infinity si quieres aplicarlo a todos los productos.
-const PROMO_THRESHOLD = 80000;
+const PROMO_THRESHOLD = 56000;
 
 // Helper: formatea un número entero en formato $xx.xxx
 function formatPrecioPts(n) {
