@@ -87,9 +87,9 @@ const PROMO_ANNOUNCE_ENABLED = false; // poner false para desactivar solo el mod
 // Ejemplo: '<div><h2>Oferta</h2><p>Mensaje personalizado</p></div>'
 const PROMO_ANNOUNCE_CUSTOM_HTML = '';
 // Si no se usa custom HTML, se usa este título y texto pequeño
-const PROMO_ANNOUNCE_TITLE = '¡Promoción!';
+const PROMO_ANNOUNCE_TITLE = 'En esta Navidad regala Amor';
 // Texto grande personalizable que aparece en el modal (si definido se usa tal cual)
-const PROMO_ANNOUNCE_LARGE_TEXT = '¡Todos nuestros zarcillos tienen un precio especial de $27.999!'; // Ej: 'Todos nuestros productos por debajo de $60.000 tendrán un precio especial de $38.999.'
+const PROMO_ANNOUNCE_LARGE_TEXT = '¡Regala Berakhah!'; // Ej: 'Todos nuestros productos por debajo de $60.000 tendrán un precio especial de $38.999.'
 const PROMO_ANNOUNCE_SMALL_TEXT = '';
 // ========================================================================
 
