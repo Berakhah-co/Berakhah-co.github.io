@@ -22,7 +22,7 @@ const productosOriginales = Array.from(document.querySelectorAll('.producto'));
     ============================================================= */
 
 // Toggle rápido: poner a `false` para desactivar la promo sin borrar código
-const PROMO_ENABLED = true;
+const PROMO_ENABLED = false;
 // Valor fijo (moneda local sin separador de miles): ejemplo 38999
 const PROMO_PRICE = 37999;
 // Porcentaje de descuento para la promoción porcentual (ej: 10 = 10%)
@@ -31,7 +31,7 @@ const PROMO_DISCOUNT_PERCENT = 0;
 // - `PROMO_FIXED_ENABLED`: activa la promoción que fija un precio en PROMO_PRICE
 // - `PROMO_PERCENT_ENABLED`: activa la promoción por porcentaje (PROMO_DISCOUNT_PERCENT%)
 const PROMO_FIXED_ENABLED = false; // poner false para desactivar la promoción fija
-const PROMO_PERCENT_ENABLED = true; // poner false para desactivar la promoción por %
+const PROMO_PERCENT_ENABLED = false; // poner false para desactivar la promoción por %
 // Umbral: solo se aplica la promoción a productos con precio ORIGINAL menor que este valor
 // Cambia a Infinity si quieres aplicarlo a todos los productos.
 const PROMO_THRESHOLD = 56000;
@@ -82,7 +82,7 @@ function parsePrecioTexto(text) {
 
 // ======= Configuración de la NOTIFICACIÓN DE INICIO (customizable) =======
 // Habilitar/deshabilitar solo la notificación (independiente de la promo)
-const PROMO_ANNOUNCE_ENABLED = false; // poner false para desactivar solo el modal
+const PROMO_ANNOUNCE_ENABLED = true; // poner false para desactivar solo el modal
 // Si quieres reemplazar totalmente el contenido del modal, asigna HTML aquí.
 // Ejemplo: '<div><h2>Oferta</h2><p>Mensaje personalizado</p></div>'
 const PROMO_ANNOUNCE_CUSTOM_HTML = '';
