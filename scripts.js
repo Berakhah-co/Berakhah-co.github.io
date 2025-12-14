@@ -26,12 +26,12 @@ const PROMO_ENABLED = true;
 // Valor fijo (moneda local sin separador de miles): ejemplo 38999
 const PROMO_PRICE = 37999;
 // Porcentaje de descuento para la promoción porcentual (ej: 10 = 10%)
-const PROMO_DISCOUNT_PERCENT = 10;
+const PROMO_DISCOUNT_PERCENT = 0;
 // Habilitar/deshabilitar tipos de promoción por separado
 // - `PROMO_FIXED_ENABLED`: activa la promoción que fija un precio en PROMO_PRICE
 // - `PROMO_PERCENT_ENABLED`: activa la promoción por porcentaje (PROMO_DISCOUNT_PERCENT%)
 const PROMO_FIXED_ENABLED = false; // poner false para desactivar la promoción fija
-const PROMO_PERCENT_ENABLED = false; // poner false para desactivar la promoción por %
+const PROMO_PERCENT_ENABLED = true; // poner false para desactivar la promoción por %
 // Umbral: solo se aplica la promoción a productos con precio ORIGINAL menor que este valor
 // Cambia a Infinity si quieres aplicarlo a todos los productos.
 const PROMO_THRESHOLD = 56000;
