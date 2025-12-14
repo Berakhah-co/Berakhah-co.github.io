@@ -22,7 +22,7 @@ const productosOriginales = Array.from(document.querySelectorAll('.producto'));
     ============================================================= */
 
 // Toggle rápido: poner a `false` para desactivar la promo sin borrar código
-const PROMO_ENABLED = false;
+const PROMO_ENABLED = true;
 // Valor fijo (moneda local sin separador de miles): ejemplo 38999
 const PROMO_PRICE = 37999;
 // Porcentaje de descuento para la promoción porcentual (ej: 10 = 10%)
