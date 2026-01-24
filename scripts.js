@@ -241,7 +241,7 @@ function mostrarAnuncioDecembrino() {
                 title: '',
                 html: html,
                 icon: 'info',
-                confirmButtonText: '🎁 ¡Entendido! 🎁',
+                confirmButtonText: 'Ver Catalogo',
                 background: '#fff',
                 color: '#111'
             });
