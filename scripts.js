@@ -240,10 +240,21 @@ function mostrarAnuncioDecembrino() {
             Swal.fire({
                 title: '',
                 html: html,
-                icon: 'info',
-                confirmButtonText: 'Ver Catalogo',
-                background: '#fff',
-                color: '#111'
+                icon: 'none',
+                confirmButtonText: 'Ver Catálogo',
+                background: '#f8f5f1',
+                color: '#1a2332',
+                confirmButtonColor: '#c9a961',
+                customClass: {
+                    popup: 'modal-promo-custom',
+                    title: 'modal-promo-title',
+                    htmlContainer: 'modal-promo-content'
+                },
+                width: '480px',
+                padding: '2rem',
+                borderRadius: '16px',
+                backdrop: 'rgba(26, 35, 50, 0.5)',
+                showCloseButton: true
             });
         } 
 

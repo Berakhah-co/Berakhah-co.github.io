@@ -1085,6 +1085,46 @@ img {
     background-color: var(--color-accent) !important;
 }
 
+/* --- Estilos personalizados para modal de promoción --- */
+.modal-promo-custom {
+    background: linear-gradient(135deg, #f8f5f1 0%, #faf8f5 100%) !important;
+    border: 2px solid var(--color-accent-light) !important;
+    box-shadow: 0 20px 60px rgba(26, 35, 50, 0.25) !important;
+}
+
+.modal-promo-custom .swal2-close {
+    color: var(--color-accent) !important;
+}
+
+.modal-promo-custom .swal2-close:hover,
+.modal-promo-custom .swal2-close:focus {
+    color: var(--color-accent-dark) !important;
+}
+
+.modal-promo-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-promo-content > div:first-child {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #1a2332 !important;
+}
+
+.modal-promo-content > div:nth-child(2) {
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    color: #b12704 !important;
+    line-height: 1.4;
+}
+
+.modal-promo-content > div:last-child {
+    font-size: 13px !important;
+    color: #666 !important;
+}
+
 
 /* --- Product Card Text Truncation & Expand --- */
 .producto-descripcion {
