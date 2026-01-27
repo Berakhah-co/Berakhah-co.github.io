@@ -1,0 +1,1739 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&family=Roboto+Slab:wght@400;700&display=swap');
+
+/* --- CSS Variables --- */
+:root {
+    --font-primary: 'Open Sans', sans-serif;
+    --font-headings: 'Playfair Display', serif; /* Elegant serif for headings */
+    --font-special: 'Roboto Slab', serif; /* For specific elements if needed */
+
+    --color-text: #2c3e50;
+    --color-text-light: #5a6c7d;
+    --color-background: #f5f7fa; /* Subtle light blue-grey */
+    --color-surface: #FFFFFF; /* Pure white for cards, pop-ups */
+    --color-primary: #1a2332; /* Darker, more sophisticated charcoal */
+    --color-accent: #c9a961; /* Warmer, richer gold */
+    --color-accent-dark: #a68545; /* Darker gold for hover states */
+    --color-accent-light: #e8d9c3; /* Light gold for subtle backgrounds */
+    --color-border: #d8dce5; /* Subtle lavender-grey border */
+    --color-danger: #e74c3c;
+    --color-success: #27ae60;
+
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-md: 0 6px 16px rgba(0,0,0,0.12);
+    --shadow-lg: 0 12px 32px rgba(0,0,0,0.15);
+    --shadow-xl: 0 16px 48px rgba(0,0,0,0.18);
+
+    --border-radius: 12px;
+    --transition-speed: 0.35s;
+}
+
+/* --- Global Resets & Base Styles --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base font size */
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-headings);
+    color: var(--color-primary);
+    margin-bottom: 0.75em;
+    line-height: 1.2;
+}
+
+p {
+    margin-bottom: 1em;
+    color: var(--color-text-light);
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+    color: var(--color-accent-dark);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- Banner --- */
+.banner {
+    background: linear-gradient(135deg, #1a2332 0%, #2c3e50 100%);
+    color: var(--color-surface);
+    padding: 12px 0;
+    text-align: center;
+    position: relative;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: auto;
+}
+
+.banner-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+}
+
+.banner .logo {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    margin: 0;
+    flex-shrink: 0;
+    border: 3px solid var(--color-accent);
+    box-shadow: 0 0 0 5px rgba(201, 169, 97, 0.12), 0 6px 16px rgba(0,0,0,0.2);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+    animation: flotarLogo 3s ease-in-out infinite, brillarLogo 4s ease-in-out infinite;
+}
+
+.banner .logo:hover {
+    transform: scale(1.06) rotateZ(360deg);
+    box-shadow: 0 0 20px 8px rgba(201, 169, 97, 0.3), 0 8px 20px rgba(0,0,0,0.3);
+    animation: none;
+}
+
+.banner-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    animation: deslizarTexto 0.8s ease-out;
+}
+
+.banner-text p {
+    font-size: 0.95rem;
+    color: #e8eef5;
+    margin-bottom: 0;
+    font-family: var(--font-primary);
+    line-height: 1.4;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+}
+
+/* Search in Banner */
+.buscador {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    width: auto;
+    animation: deslizarBuscador 0.8s ease-out;
+}
+
+.buscador input[type="text"] {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    border: 2px solid var(--color-border);
+    border-radius: var(--border-radius);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    width: 200px;
+    transition: all var(--transition-speed) cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+}
+
+.buscador input[type="text"]::placeholder {
+    color: #a0a8b8;
+}
+
+.buscador input[type="text"]:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.15), inset 0 2px 4px rgba(201, 169, 97, 0.05);
+    transform: translateY(-2px);
+}
+
+.buscador button {
+    padding: 10px 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+    color: var(--color-surface);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all var(--transition-speed) cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 12px rgba(201, 169, 97, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.buscador button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.4s ease;
+}
+
+.buscador button:hover {
+    background: linear-gradient(135deg, var(--color-accent-dark) 0%, var(--color-accent) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(201, 169, 97, 0.3);
+}
+
+.buscador button:hover::before {
+    left: 100%;
+}
+
+/* --- Responsive Design para el banner (ajustes específicos) --- */
+@media (max-width: 1024px) {
+    .banner {
+        padding: 12px 0;
+    }
+    .banner-content {
+        gap: 15px;
+        flex-direction: column;
+        text-align: center;
+    }
+    .banner .logo {
+        width: 70px;
+        height: 70px;
+    }
+    .banner-text {
+        align-items: center;
+        text-align: center;
+    }
+    
+    .buscador {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 575px) { /* Extra small devices (portrait phones) */
+    .banner {
+        padding: 8px 0;
+    }
+    .banner-content {
+        flex-direction: column;
+        gap: 8px;
+        padding: 0 12px;
+    }
+    .banner .logo {
+        width: 60px;
+        height: 60px;
+        border: 2px solid var(--color-accent);
+        box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.12), 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .banner-text p {
+        font-size: 0.75rem;
+        line-height: 1.3;
+        margin-bottom: 0;
+    }
+    .buscador {
+        flex-direction: column;
+        gap: 6px;
+        width: 100%;
+    }
+    .buscador input[type="text"],
+    .buscador button {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 0.75rem;
+    }
+}
+
+/* --- Categories --- */
+.categorias {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 4px 30px;
+    background: linear-gradient(135deg, var(--color-surface) 0%, #f8fafb 100%);
+    border-bottom: 1px solid var(--color-accent-light);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    animation: slideDownCategories 0.6s ease-out;
+}
+
+.categorias button {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    background-color: transparent;
+    color: var(--color-text-light);
+    padding: 8px 16px;
+    border: 2px solid var(--color-border);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all var(--transition-speed) cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.categorias button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(201, 169, 97, 0.15);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.categorias button:hover {
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+    color: var(--color-surface);
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(201, 169, 97, 0.2);
+}
+
+.categorias button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.categorias button.active {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #2c3e50 100%);
+    color: var(--color-surface);
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 12px rgba(26, 35, 50, 0.25);
+}
+
+@media (max-width: 767px) {
+    .categorias {
+        padding: 14px 15px;
+        gap: 8px;
+    }
+    
+    .categorias button {
+        padding: 7px 12px;
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .categorias {
+        padding: 12px 10px;
+        gap: 6px;
+    }
+    
+    .categorias button {
+        padding: 6px 10px;
+        font-size: 0.65rem;
+        letter-spacing: 0.3px;
+    }
+}
+
+
+/* --- Catalog --- */
+.catalogo {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 28px;
+    padding: 50px 28px;
+    margin: 0 auto;
+    max-width: 100%;
+    background: linear-gradient(to bottom, #ffffff 0%, #f8fafb 100%);
+}
+
+/* Refinements for specific screen sizes */
+@media (min-width: 1600px) { /* Ultra-wide screens */
+    .catalogo {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 24px;
+        padding: 50px 40px;
+    }
+}
+
+@media (max-width: 1599px) and (min-width: 1200px) { /* Large desktops */
+    .catalogo {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 28px;
+    }
+}
+
+@media (max-width: 1199px) and (min-width: 992px) { /* Desktops */
+    .catalogo {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 26px;
+    }
+}
+
+@media (max-width: 991px) { /* Tablets and larger phones */
+    .catalogo {
+        /* Aims for ~2-3 columns */
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 22px;
+    }
+}
+
+@media (max-width: 767px) { /* Phones */
+    .catalogo {
+        /* Aims for ~1-2 columns */
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 18px;
+        padding: 30px 12px;
+    }
+}
+
+@media (max-width: 480px) { /* Smaller phones */
+    .catalogo {
+        grid-template-columns: 1fr; /* Always single column */
+        gap: 16px;
+        padding: 20px 10px;
+    }
+}
+
+
+/* --- Product Card --- */
+.producto {
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: all var(--transition-speed) cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 2px solid transparent;
+    opacity: 0;
+    transform: translateY(20px);
+    position: relative;
+    overflow: hidden;
+}
+
+.producto::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(201, 169, 97, 0.1), transparent);
+    transition: left 0.6s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.producto:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--color-accent);
+    background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 100%);
+}
+
+.producto:hover::before {
+    left: 100%;
+}
+
+.producto.visible { /* For Intersection Observer */
+    opacity: 1;
+    transform: translateY(0);
+    animation: floatIn 0.6s ease-out;
+}
+
+@keyframes floatIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.producto .carousel {
+    margin-bottom: 18px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+.producto:hover .carousel {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.producto .carousel-images img {
+    border-radius: var(--border-radius);
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.titulo-producto {
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    margin-top: 0;
+    margin-bottom: 10px;
+    min-height: 2.4em;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    line-height: 1.2;
+}
+
+/* Targets the div containing description paragraphs */
+.producto .titulo-producto + div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Keeps description paragraphs stacked at the top */
+    align-items: center; /* Centers paragraphs horizontally within the description div */
+    padding: 0 5px; /* Small horizontal padding for text, optional */
+}
+
+.producto .titulo-producto + div p { /* Targets paragraphs within the description div */
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin-bottom: 0.5em; /* Small spacing between paragraphs */
+}
+
+.producto .titulo-producto + div p:last-child {
+    margin-bottom: 0; /* Ensures no extra margin after the last paragraph in description */
+}
+
+
+.precio {
+    font-family: var(--font-headings);
+    font-size: 1.55rem !important;
+    font-weight: 700 !important;
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-top: auto;
+    margin-bottom: 14px;
+    letter-spacing: -0.5px;
+}
+
+/* --- General Button Style (e.g., Add to Cart) --- */
+.button {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+    color: var(--color-surface);
+    border: none;
+    padding: 10px 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all var(--transition-speed) cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.6px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(201, 169, 97, 0.25);
+}
+
+.button:hover {
+    background: linear-gradient(135deg, var(--color-accent-dark) 0%, var(--color-accent) 100%);
+    color: var(--color-surface);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(201, 169, 97, 0.4);
+}
+
+.button:active {
+    transform: translateY(-1px);
+}
+
+/* --- Shopping Cart --- */
+#carrito {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+    border: 2px solid var(--color-border);
+    padding: 28px;
+    border-radius: var(--border-radius);
+    width: 370px;
+    box-shadow: var(--shadow-xl);
+    z-index: 1001;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: none;
+}
+
+#carrito h2 {
+    font-size: 1.6rem;
+    text-align: center;
+    margin-bottom: 24px;
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 15px;
+    font-weight: 700;
+}
+
+.cerrar-carrito {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--color-text-light);
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+}
+
+.cerrar-carrito:hover {
+    color: var(--color-accent);
+    transform: rotate(90deg);
+}
+
+#lista-carrito {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+#lista-carrito li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.9rem;
+}
+
+#lista-carrito li:last-child {
+    border-bottom: none;
+}
+
+#lista-carrito img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+#lista-carrito button { /* Delete button in cart item */
+    background-color: transparent;
+    color: var(--color-danger);
+    border: 1px solid var(--color-danger);
+    padding: 5px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all var(--transition-speed) ease;
+}
+
+#lista-carrito button:hover {
+    background-color: var(--color-danger);
+    color: var(--color-surface);
+}
+
+#total-carrito {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: right;
+    display: block;
+    margin-bottom: 20px;
+}
+#total-carrito .total strong {
+    color: var(--color-accent);
+}
+
+
+/* Customer Info in Cart */
+#datos-cliente {
+    margin-bottom: 20px;
+}
+
+#datos-cliente h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: var(--color-primary);
+}
+
+#datos-cliente label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--color-text-light);
+}
+
+#datos-cliente input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid var(--color-border);
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    transition: all var(--transition-speed) ease;
+}
+
+#datos-cliente input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 4px rgba(201, 169, 97, 0.1);
+}
+
+/* Botón Enviar Pedido */
+#btn-pedir {
+    width: 100%;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #2c3e50 100%);
+    color: #FFFFFF;
+    padding: 13px;
+    border: 2px solid var(--color-primary);
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    margin-top: 8px;
+    transition: all var(--transition-speed) cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#btn-pedir:hover {
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+    border-color: var(--color-accent);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Botón Vaciar Carrito */
+#btn-vaciar-carrito {
+    width: 100%;
+    background-color: #e74c3c;
+    color: #FFFFFF;
+    padding: 13px;
+    border: 2px solid #e74c3c;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    margin-top: 8px;
+    transition: all var(--transition-speed) cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#btn-vaciar-carrito:hover {
+    background-color: #c0392b;
+    border-color: #c0392b;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+
+/* --- Floating Social Icons & Cart Button --- */
+.rrss-icons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 1000;
+}
+
+.rrss-icons a,
+.boton-flotante {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #2c3e50 100%);
+    color: var(--color-surface);
+    border-radius: 50%;
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-speed) cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: none;
+    cursor: pointer;
+}
+
+.rrss-icons a:hover,
+.boton-flotante:hover {
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+    transform: scale(1.15) translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.rrss-icons a img {
+    width: 24px;
+    height: 24px;
+    /* REMOVED FILTER: brightness(0) invert(1); to ensure visibility */
+}
+.boton-flotante {
+    font-size: 1.5rem; /* Cart icon size */
+}
+
+
+@keyframes inflarDesinflar {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.boton-flotante {
+    animation: inflarDesinflar 2.5s ease-in-out infinite;
+    position: relative; /* For counter positioning */
+}
+
+#contador-carrito {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--color-danger);
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    line-height: 1;
+    min-width: 18px; /* Ensure it's circular even with single digit */
+    text-align: center;
+}
+
+/* --- Carousel --- */
+.carousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-images {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-images img {
+    min-width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-images img.active {
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+    z-index: 2;
+    position: relative;
+}
+
+.carousel-images img:not(.active) {
+    display: block;
+    opacity: 0;
+    transform: scale(0.95);
+    z-index: 1;
+}
+
+/* Animación de entrada desde la derecha */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+/* Animación de entrada desde la izquierda */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+.carousel-images img.active.slide-right {
+    animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.carousel-images img.active.slide-left {
+    animation: slideInLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.6) 100%);
+    color: var(--color-surface);
+    border: none;
+    cursor: pointer;
+    padding: 10px 14px;
+    font-size: 1.4rem;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-speed) cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 10;
+    font-weight: 600;
+}
+
+.carousel-button:hover {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+/* --- Back to Top Button (Placeholder from old CSS, assuming you have it in HTML) --- */
+.volver-inicio {
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+    color: var(--color-surface);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    z-index: 999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-speed) cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-weight: 700;
+}
+
+.volver-inicio.show {
+    display: flex;
+}
+.volver-inicio:hover {
+    background: linear-gradient(135deg, var(--color-accent-dark) 0%, #8c6d41 100%);
+    transform: scale(1.15) translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* --- Loading Bar --- */
+#barra-carga {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: transparent; /* No background for the container */
+    z-index: 9999;
+}
+
+#barra-carga .carga {
+    width: 0;
+    height: 100%;
+    background-color: var(--color-accent);
+    animation: cargar 2s ease-out forwards; /* Adjust timing */
+    border-radius: 0 2px 2px 0; /* Slight rounding on the end */
+}
+
+@keyframes cargar {
+    0% { width: 0; }
+    100% { width: 100%; }
+}
+
+/* --- Animaciones del Logo y Banner --- */
+@keyframes rotarLogo {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+@keyframes flotarLogo {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes brillarLogo {
+    0%, 100% {
+        box-shadow: 0 0 0 5px rgba(201, 169, 97, 0.12), 0 6px 16px rgba(0,0,0,0.2);
+    }
+    50% {
+        box-shadow: 0 0 20px 8px rgba(201, 169, 97, 0.25), 0 6px 20px rgba(0,0,0,0.25);
+    }
+}
+
+@keyframes deslizarTexto {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes deslizarBuscador {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideDownCategories {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* --- SweetAlert2 Customizations (Optional, if you want to theme them) --- */
+.swal2-popup {
+    font-family: var(--font-primary) !important;
+    border-radius: var(--border-radius) !important;
+    background-color: var(--color-surface) !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+.swal2-title {
+    font-family: var(--font-headings) !important;
+    color: var(--color-primary) !important;
+}
+.swal2-html-container {
+    color: var(--color-text-light) !important;
+}
+.swal2-confirm, .swal2-cancel, .swal2-deny {
+    border-radius: var(--border-radius) !important;
+    padding: 10px 20px !important;
+    font-weight: 600 !important;
+    transition: background-color var(--transition-speed) ease !important;
+}
+.swal2-confirm {
+    background-color: var(--color-accent) !important;
+    color: var(--color-surface) !important;
+}
+.swal2-confirm:hover {
+    background-color: var(--color-accent-dark) !important;
+}
+.swal2-cancel {
+    background-color: var(--color-border) !important;
+    color: var(--color-text) !important;
+}
+.swal2-icon.swal2-success .swal2-success-ring {
+    border-color: var(--color-accent) !important;
+}
+.swal2-icon.swal2-success [class^=swal2-success-line] {
+    background-color: var(--color-accent) !important;
+}
+
+/* --- Estilos personalizados para modal de promoción --- */
+.modal-promo-custom {
+    background: linear-gradient(135deg, #f8f5f1 0%, #faf8f5 100%) !important;
+    border: 2px solid var(--color-accent-light) !important;
+    box-shadow: 0 20px 60px rgba(26, 35, 50, 0.25) !important;
+}
+
+.modal-promo-custom .swal2-close {
+    color: var(--color-accent) !important;
+}
+
+.modal-promo-custom .swal2-close:hover,
+.modal-promo-custom .swal2-close:focus {
+    color: var(--color-accent-dark) !important;
+}
+
+.modal-promo-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-promo-content > div:first-child {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #1a2332 !important;
+}
+
+.modal-promo-content > div:nth-child(2) {
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    color: #b12704 !important;
+    line-height: 1.4;
+}
+
+.modal-promo-content > div:last-child {
+    font-size: 13px !important;
+    color: #666 !important;
+}
+
+
+/* --- Product Card Text Truncation & Expand --- */
+.producto-descripcion {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    /* VOLVEMOS A AÑADIR LA ALTURA FIJA PARA UNIFORMIDAD */
+    min-height: 70px;
+    max-height: 70px;
+    overflow: hidden;
+    transition: max-height 0.4s ease, min-height 0.4s ease;
+}
+
+.producto-descripcion p {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    margin-bottom: 6px;
+    line-height: 1.4;
+    word-break: break-word;
+    white-space: normal;
+}
+
+.producto-descripcion .texto-truncado {
+    display: block;
+}
+
+.producto-descripcion .texto-completo {
+    display: none;
+}
+
+.producto-descripcion p:last-child {
+    margin-bottom: 0;
+}
+
+/* Estado expandido */
+.producto.expanded .producto-descripcion {
+    min-height: auto;
+    max-height: none;
+    overflow: visible;
+}
+
+.expand-button {
+    align-self: center;
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.1) 0%, rgba(201, 169, 97, 0.05) 100%);
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 8px 14px;
+    margin-bottom: 12px;
+    transition: all var(--transition-speed) cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-decoration: none;
+    font-family: var(--font-primary);
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.expand-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(201, 169, 97, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+    z-index: -1;
+}
+
+.expand-button:hover {
+    color: var(--color-surface);
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+    border-color: var(--color-accent);
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 4px 12px rgba(201, 169, 97, 0.25);
+}
+
+.expand-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.expand-button.expanded {
+    background: linear-gradient(135deg, rgba(166, 133, 69, 0.15) 0%, rgba(166, 133, 69, 0.08) 100%);
+    color: var(--color-accent-dark);
+    border-color: var(--color-accent-dark);
+}
+
+
+/* --- Responsive Design (Optimized for all devices) --- */
+
+@media (max-width: 1024px) { /* Small laptops and large tablets */
+    .catalogo {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 24px;
+        padding: 40px 20px;
+    }
+    
+    .banner {
+        min-height: 180px;
+    }
+    
+    .banner-content {
+        max-width: 90%;
+    }
+    
+    .buscador input[type="text"] {
+        width: 200px;
+    }
+    
+    #carrito {
+        width: 360px;
+    }
+}
+
+@media (max-width: 891px) { /* Tablets y computadoras pequeñas */
+    .catalogo {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+        padding: 35px 18px;
+    }
+    
+    .banner {
+        min-height: 170px;
+        padding: 30px 0;
+    }
+    
+    .banner .logo {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .banner-text p {
+        font-size: 0.95rem;
+    }
+    
+    .buscador {
+        gap: 8px;
+    }
+    
+    .buscador input[type="text"] {
+        width: 180px;
+        padding: 11px 14px;
+    }
+    
+    .buscador button {
+        padding: 11px 22px;
+        font-size: 0.9rem;
+    }
+    
+    .categorias {
+        padding: 25px 15px;
+        gap: 10px;
+    }
+    
+    .categorias button {
+        padding: 10px 18px;
+        font-size: 0.8rem;
+    }
+    
+    .producto {
+        padding: 18px;
+    }
+    
+    .titulo-producto {
+        font-size: 1.2rem;
+        min-height: 2.4em;
+    }
+    
+    .precio {
+        font-size: 1.6rem !important;
+    }
+    
+    #carrito {
+        width: 340px;
+        padding: 24px;
+    }
+    
+    .rrss-icons a, .boton-flotante {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .rrss-icons a img {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .boton-flotante {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 767px) { /* Small devices (landscape phones, large portrait phones) */
+    .catalogo {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+        padding: 30px 12px;
+    }
+    
+    .banner {
+        padding: 25px 0;
+        min-height: 160px;
+    }
+    
+    .banner .logo {
+        width: 110px;
+        height: 110px;
+        border: 3px solid var(--color-accent);
+    }
+    
+    .banner-text p {
+        font-size: 0.95rem;
+        letter-spacing: 0.2px;
+    }
+    
+    .buscador {
+        gap: 6px;
+        margin-top: 12px;
+    }
+    
+    .buscador input[type="text"] {
+        width: 170px;
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        border: 2px solid var(--color-border);
+    }
+    
+    .buscador button {
+        padding: 10px 18px;
+        font-size: 0.85rem;
+    }
+    
+    .categorias {
+        padding: 20px 10px;
+        gap: 8px;
+        overflow-x: auto;
+    }
+    
+    .categorias button {
+        padding: 9px 14px;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    .producto {
+        padding: 14px;
+    }
+    
+    .titulo-producto {
+        font-size: 1.1rem;
+        min-height: 2.2em;
+        margin-bottom: 8px;
+    }
+    
+    .producto .carousel {
+        margin-bottom: 12px;
+    }
+    
+    .precio {
+        font-size: 1.5rem !important;
+        margin-bottom: 12px;
+    }
+    
+    #carrito {
+        width: 85%;
+        max-width: 300px;
+        right: 7.5%;
+        left: 7.5%;
+        top: 10px;
+        padding: 20px;
+        border-radius: 12px;
+    }
+    
+    #carrito h2 {
+        font-size: 1.4rem;
+        margin-bottom: 18px;
+    }
+    
+    #lista-carrito li {
+        font-size: 0.85rem;
+        padding: 8px 0;
+    }
+    
+    .rrss-icons {
+        bottom: 15px;
+        right: 12px;
+        gap: 12px;
+    }
+    
+    .rrss-icons a, .boton-flotante {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .rrss-icons a img {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .boton-flotante {
+        font-size: 1.3rem;
+    }
+    
+    .carousel-button {
+        width: 40px;
+        height: 40px;
+        padding: 8px 10px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 575px) { /* Extra small devices (portrait phones) */
+    html {
+        font-size: 15px;
+    }
+    
+    body {
+        overflow-x: hidden;
+    }
+    
+    .banner {
+        padding: 20px 0 28px;
+        min-height: 150px;
+    }
+    
+    .banner-content {
+        max-width: 95%;
+        gap: 10px;
+    }
+    
+    .banner .logo {
+        width: 95px;
+        height: 95px;
+        border: 3px solid var(--color-accent);
+        box-shadow: 0 0 0 5px rgba(201, 169, 97, 0.15), 0 6px 16px rgba(0,0,0,0.15);
+    }
+    
+    .banner-text p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin: 0;
+    }
+    
+    .buscador {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 0 15px;
+        width: 90%;
+        margin-top: 12px;
+    }
+    
+    .buscador input[type="text"] {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        border: 2px solid var(--color-border);
+    }
+    
+    .buscador button {
+        width: 100%;
+        padding: 11px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .categorias {
+        padding: 18px 10px;
+        gap: 6px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    
+    .categorias button {
+        padding: 8px 12px;
+        font-size: 0.7rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+        border: 2px solid var(--color-border);
+    }
+    
+    .catalogo {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 20px 10px;
+        max-width: 100%;
+    }
+    
+    .producto {
+        padding: 12px;
+        border-radius: 10px;
+    }
+    
+    .producto .carousel {
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+    
+    .titulo-producto {
+        font-size: 1rem;
+        min-height: auto;
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+    
+    .producto .titulo-producto + div p {
+        font-size: 0.8rem;
+        margin-bottom: 0.4em;
+        line-height: 1.4;
+    }
+    
+    .precio {
+        font-size: 1.4rem !important;
+        margin-bottom: 10px;
+        margin-top: 8px;
+    }
+    
+    #carrito {
+        /* Full-screen cart on small phones for better layout */
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100vh;
+        max-width: none;
+        padding: 20px;
+        border-radius: 0;
+        max-height: none;
+        overflow-y: auto;
+        z-index: 1100;
+    }
+    
+    #carrito h2 {
+        font-size: 1.3rem;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+    }
+    
+    .cerrar-carrito {
+        top: 12px;
+        right: 12px;
+        font-size: 1.8rem;
+    }
+    
+    #lista-carrito {
+        margin-bottom: 16px;
+    }
+    
+    #lista-carrito li {
+        font-size: 0.8rem;
+        padding: 6px 0;
+        gap: 6px;
+    }
+    
+    #lista-carrito img {
+        width: 36px;
+        height: 36px;
+        margin-right: 6px;
+    }
+    
+    #lista-carrito button {
+        padding: 4px 6px;
+        font-size: 0.7rem;
+    }
+    
+    #total-carrito {
+        font-size: 1rem;
+        margin-bottom: 16px;
+    }
+    
+    #datos-cliente {
+        margin-bottom: 14px;
+    }
+    
+    #datos-cliente h3 {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+    
+    #datos-cliente label {
+        font-size: 0.8rem;
+        margin-bottom: 4px;
+    }
+    
+    #datos-cliente input {
+        padding: 9px 10px;
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+    }
+    
+    #btn-pedir, #btn-vaciar-carrito {
+        padding: 10px;
+        font-size: 0.8rem;
+        margin-top: 6px;
+    }
+    
+    .rrss-icons {
+        bottom: 12px;
+        right: 10px;
+        gap: 10px;
+    }
+    
+    .rrss-icons a, .boton-flotante {
+        width: 46px;
+        height: 46px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    
+    .rrss-icons a img {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .boton-flotante {
+        font-size: 1.2rem;
+    }
+    
+    .volver-inicio {
+        bottom: 75px;
+        right: 10px;
+        width: 46px;
+        height: 46px;
+        font-size: 1.4rem;
+    }
+    
+    .carousel-button {
+        width: 36px;
+        height: 36px;
+        padding: 6px 8px;
+        font-size: 1.1rem;
+    }
+    
+    .carousel-button.prev {
+        left: 6px;
+    }
+    
+    .carousel-button.next {
+        right: 6px;
+    }
+}
+
+@media (max-width: 360px) { /* Very small phones */
+    html {
+        font-size: 14px;
+    }
+    
+    .banner .logo {
+        width: 85px;
+        height: 85px;
+        border: 2px solid var(--color-accent);
+    }
+    
+    .banner-text p {
+        font-size: 0.85rem;
+    }
+    
+    .buscador input[type="text"] {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+    
+    .categorias {
+        padding: 14px 8px;
+    }
+    
+    .categorias button {
+        padding: 6px 10px;
+        font-size: 0.65rem;
+    }
+    
+    .catalogo {
+        padding: 15px 8px;
+        gap: 12px;
+    }
+    
+    .producto {
+        padding: 10px;
+    }
+    
+    .titulo-producto {
+        font-size: 0.95rem;
+    }
+    
+    .precio {
+        font-size: 1.3rem !important;
+    }
+    
+    #carrito {
+        max-width: 260px;
+        padding: 14px;
+    }
+    
+    #carrito h2 {
+        font-size: 1.2rem;
+    }
+    
+    .rrss-icons a, .boton-flotante {
+        width: 42px;
+        height: 42px;
+    }
+}
