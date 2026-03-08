@@ -72,11 +72,40 @@
   </head>
   <body>
     <iframe
+      id="berakhah-iframe"
       src="https://berakhahmedellin.pythonanywhere.com/"
       title="Berakhah Medellín Store"
       allow="fullscreen; geolocation; microphone; camera; midi; encrypted-media"
       loading="eager"
     >
     </iframe>
+
+    <script>
+      const BACKEND_URL = 'https://berakhahmedellin.pythonanywhere.com';
+      const iframe = document.getElementById('berakhah-iframe');
+
+      // 1. Initial Load: Check for 'p' param to load a deep link
+      const params = new URLSearchParams(window.location.search);
+      const initialPath = params.get('p') || window.location.hash.replace('#', '');
+      
+      if (initialPath && initialPath.startsWith('/')) {
+        iframe.src = BACKEND_URL + initialPath;
+      }
+
+      // 2. Listen for 'NAV' message from PythonAnywhere site to update URL bar
+      window.addEventListener('message', (event) => {
+        if (event.origin !== BACKEND_URL) return;
+        
+        if (event.data && event.data.type === 'NAV') {
+          const newPath = event.data.path;
+          const currentUrl = new URL(window.location.href);
+          
+          if (newUrl.searchParams.get('p') !== newPath) {
+            newUrl.searchParams.set('p', newPath);
+            window.history.replaceState({ path: newPath }, '', newUrl.toString());
+          }
+        }
+      });
+    </script>
   </body>
 </html>
