@@ -90,19 +90,21 @@
       
       if (initialPath && initialPath.startsWith('/')) {
         iframe.src = BACKEND_URL + initialPath;
+        // Limpiamos la URL visible para que no se vea el ?p=
+        window.history.replaceState(null, '', initialPath);
       }
 
-      // 2. Listen for 'NAV' message from PythonAnywhere site to update URL bar
+      // 2. Escuchar cambios de navegación desde el iframe
       window.addEventListener('message', (event) => {
         if (event.origin !== BACKEND_URL) return;
         
         if (event.data && event.data.type === 'NAV') {
           const newPath = event.data.path;
-          const currentUrl = new URL(window.location.href);
           
-          if (newUrl.searchParams.get('p') !== newPath) {
-            newUrl.searchParams.set('p', newPath);
-            window.history.replaceState({ path: newPath }, '', newUrl.toString());
+          // Si la ruta cambió y no somos la misma página
+          if (window.location.pathname !== newPath) {
+            // Actualizamos la URL a la versión "limpia" (ej: /producto/anillo)
+            window.history.replaceState({ path: newPath }, '', newPath);
           }
         }
       });
