@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Berakhah - Redirigiendo...</title>
+    <!-- 
+      Hack para GitHub Pages Single Page Apps.
+      Si un usuario entra directamente a berakmedellin.shop/producto/anillo,
+      GitHub Pages lanza un 404 (porque no existe la carpeta producto/anillo).
+      Esta página atrapa ese error y lo pasa al index como: /?p=/producto/anillo
+      Luego, index.html procesa la rula, carga el iframe y restaura la URL visualmente a /producto/anillo
+    -->
+    <script type="text/javascript">
+      var path = window.location.pathname;
+      window.location.replace('/?p=' + encodeURIComponent(path));
+    </script>
+  </head>
+  <body style="background: black; color: white;">
+    Redirigiendo a tu producto...
+  </body>
+</html>
