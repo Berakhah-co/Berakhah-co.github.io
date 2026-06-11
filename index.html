@@ -119,6 +119,8 @@
             // Actualizamos la URL a la versión "limpia" (ej: /producto/anillo)
             window.history.replaceState({ path: newPath }, '', newPath);
           }
+        } else if (event.data && event.data.type === 'WHATSAPP_REDIRECT') {
+            window.location.href = event.data.url;
         }
       });
     </script>
