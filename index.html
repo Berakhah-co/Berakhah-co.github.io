@@ -49,6 +49,9 @@
     <link rel="icon" href="static/iconos/Logo.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="static/Logo.jpg" />
 
+    <!-- Google Fonts for Premium Branding -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
+
     <style>
       body,
       html {
@@ -58,7 +61,70 @@
         height: 100%;
         width: 100%;
         overflow: hidden;
-        background-color: #000;
+        background-color: #080808;
+      }
+      
+      /* Loader Estilo Premium Berakhah */
+      .loader-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #080808;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s;
+      }
+      .loader-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+      }
+      .elegant-spinner {
+        width: 48px;
+        height: 48px;
+        border: 2px solid rgba(212, 175, 55, 0.1);
+        border-top: 2px solid #d4af37;
+        border-radius: 50%;
+        animation: spin 1s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+      }
+      .loader-text {
+        font-family: 'Playfair Display', 'Didot', 'Georgia', serif;
+        color: #d4af37;
+        font-size: 1.8rem;
+        font-weight: 300;
+        letter-spacing: 8px;
+        text-transform: uppercase;
+        animation: pulse 2s ease-in-out infinite;
+        margin-right: -8px; /* Offset the letter-spacing of the last character */
+      }
+      .loader-subtext {
+        font-family: 'Outfit', sans-serif;
+        color: #8a8a8a;
+        font-size: 0.75rem;
+        font-weight: 300;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        margin-top: -0.5rem;
+        margin-right: -5px;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
+      }
+      .loader-wrapper.fade-out {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
       }
       /* El contenedor que manejará el scroll si el iframe crece en iOS */
       /* Contenedor fluido envolvente nativo para iOS */
@@ -82,6 +148,15 @@
     </style>
   </head>
   <body>
+    <!-- Loader Premium Berakhah -->
+    <div id="loader" class="loader-wrapper">
+      <div class="loader-content">
+        <div class="elegant-spinner"></div>
+        <div class="loader-text">Berakhah</div>
+        <div class="loader-subtext">Maison de Joaillerie</div>
+      </div>
+    </div>
+
     <div class="iframe-container">
       <iframe
         id="berakhah-iframe"
@@ -96,6 +171,19 @@
     <script>
       const BACKEND_URL = 'https://berakhahmedellin.pythonanywhere.com';
       const iframe = document.getElementById('berakhah-iframe');
+
+      // Ocultar loader cuando el iframe termine de cargar
+      const hideLoader = () => {
+        const loader = document.getElementById('loader');
+        if (loader) {
+          loader.classList.add('fade-out');
+        }
+      };
+
+      iframe.addEventListener('load', hideLoader);
+
+      // Ocultar loader por seguridad después de 12 segundos si hay fallos o lentitud extrema
+      setTimeout(hideLoader, 12000);
 
       // 1. Initial Load: Check for 'p' param to load a deep link
       const params = new URLSearchParams(window.location.search);
