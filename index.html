@@ -63,7 +63,7 @@
         overflow: hidden;
         background-color: #080808;
       }
-      
+
       /* Loader Estilo Premium Berakhah con Joya/Diamante */
       .loader-wrapper {
         position: fixed;
@@ -86,7 +86,7 @@
         align-items: center;
         gap: 1.8rem;
       }
-      
+
       /* Icono de Diamante Premium Animado */
       .elegant-diamond-container {
         position: relative;
@@ -243,6 +243,8 @@
 
     <script>
       const BACKEND_URL = 'https://berakhahmedellin.pythonanywhere.com/';
+      // event.origin nunca trae barra final: se compara contra el origen normalizado
+      const BACKEND_ORIGIN = new URL(BACKEND_URL).origin;
       const iframe = document.getElementById('berakhah-iframe');
 
       // Ocultar loader cuando el iframe termine de cargar
@@ -261,27 +263,38 @@
       // 1. Initial Load: Check for 'p' param to load a deep link
       const params = new URLSearchParams(window.location.search);
       const initialPath = params.get('p') || window.location.hash.replace('#', '');
-      
+
       if (initialPath && initialPath.startsWith('/')) {
-        iframe.src = BACKEND_URL + initialPath;
+        iframe.src = BACKEND_ORIGIN + initialPath;
         // Limpiamos la URL visible para que no se vea el ?p=
         window.history.replaceState(null, '', initialPath);
       }
 
-      // 2. Escuchar cambios de navegación desde el iframe
+      // 2. Escuchar mensajes del iframe (navegación, WhatsApp y Rappi)
       window.addEventListener('message', (event) => {
-        if (event.origin !== BACKEND_URL) return;
-        
+        if (event.origin !== BACKEND_ORIGIN) return;
+
         if (event.data && event.data.type === 'NAV') {
           const newPath = event.data.path;
-          
+
           // Si la ruta cambió y no somos la misma página
           if (window.location.pathname !== newPath) {
             // Actualizamos la URL a la versión "limpia" (ej: /producto/anillo)
             window.history.replaceState({ path: newPath }, '', newPath);
           }
         } else if (event.data && event.data.type === 'WHATSAPP_REDIRECT') {
-            window.location.href = event.data.url;
+          const url = String(event.data.url || '');
+          if (/^https:\/\/(wa\.me|api\.whatsapp\.com)\//.test(url)) {
+            window.location.href = url;
+          }
+        } else if (event.data && event.data.type === 'RAPPI_OPEN') {
+          // Chrome Android no deja que el iframe (otro dominio) abra la app de Rappi:
+          // la navegación se hace desde esta página, que hereda el toque del usuario.
+          const url = String(event.data.url || '');
+          if (/^(intent:\/\/com\.grability\.rappi|gbrappi:\/\/|https:\/\/www\.rappi\.com\.co\/)/.test(url)) {
+            event.source.postMessage({ type: 'RAPPI_OPEN_ACK' }, event.origin);
+            window.location.href = url;
+          }
         }
       });
     </script>
