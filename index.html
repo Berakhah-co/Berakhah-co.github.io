@@ -229,6 +229,25 @@
         overflow-y: scroll; /* Delega el scroll fluido al wrapper exterior */
         overflow-x: hidden;
       }
+      /* Aviso discreto cuando la tienda se carga desde un origen distinto al principal */
+      .origen-aviso {
+        position: fixed;
+        left: 50%;
+        bottom: 16px;
+        transform: translateX(-50%);
+        z-index: 10000;
+        max-width: calc(100vw - 32px);
+        padding: 8px 14px;
+        border-radius: 20px;
+        background: rgba(20, 18, 15, 0.88);
+        color: #f1d37a;
+        font: 500 12px 'Outfit', sans-serif;
+        text-align: center;
+        pointer-events: none;
+      }
+      .origen-aviso[hidden] {
+        display: none;
+      }
       iframe {
         width: 1px;
         min-width: 100%;
@@ -262,7 +281,6 @@
     <div class="iframe-container">
       <iframe
         id="berakhah-iframe"
-        src="https://berakhahmedellin.pythonanywhere.com/"
         title="Berakhah Medellín Store"
         allow="fullscreen; geolocation; microphone; camera; midi; encrypted-media"
         loading="eager"
@@ -270,43 +288,85 @@
       </iframe>
     </div>
 
+    <div id="origen-aviso" class="origen-aviso" hidden></div>
+
     <script>
-      const BACKEND_URL = 'https://berakhahmedellin.pythonanywhere.com/';
-      // event.origin nunca trae barra final: se compara contra el origen normalizado
-      const BACKEND_ORIGIN = new URL(BACKEND_URL).origin;
-      const iframe = document.getElementById('berakhah-iframe');
-
-      // Ocultar loader cuando el iframe termine de cargar
-      const hideLoader = () => {
-        const loader = document.getElementById('loader');
-        if (loader) {
-          loader.classList.add('fade-out');
-        }
+      // ── Origen de la tienda ──────────────────────────────────────────────
+      // PRINCIPAL: la tienda que ven todos los clientes. Para mudarse a Render basta cambiar 'pa' por 'render'.
+      // Si la principal no responde a tiempo, se carga sola la otra (respaldo).
+      // Para probar en tu navegador sin afectar a nadie:  ?origen=render  ·  ?origen=pa  ·  ?origen=auto (volver a lo normal)
+      const SERVIDORES = {
+        pa: { nombre: 'PythonAnywhere', url: 'https://berakhahmedellin.pythonanywhere.com', espera: 12000 },
+        render: { nombre: 'Render', url: 'https://berakahhshop.onrender.com', espera: 70000 } // Render gratis tarda ~1 min si estaba dormido
       };
+      const PRINCIPAL = 'pa';
 
-      iframe.addEventListener('load', hideLoader);
-
-      // Ocultar loader por seguridad después de 12 segundos si hay fallos o lentitud extrema
-      setTimeout(hideLoader, 12000);
-
-      // 1. Initial Load: Check for 'p' param to load a deep link
       const params = new URLSearchParams(window.location.search);
-      const initialPath = params.get('p') || window.location.hash.replace('#', '');
+      const leer = () => { try { return localStorage.getItem('berakhah_origen'); } catch (e) { return null; } };
+      const guardar = (v) => { try { v ? localStorage.setItem('berakhah_origen', v) : localStorage.removeItem('berakhah_origen'); } catch (e) {} };
 
-      if (initialPath && initialPath.startsWith('/')) {
-        iframe.src = BACKEND_ORIGIN + initialPath;
-        // Limpiamos la URL visible para que no se vea el ?p=
-        window.history.replaceState(null, '', initialPath);
+      const pedido = (params.get('origen') || '').toLowerCase();
+      if (pedido === 'auto') guardar(null);
+      else if (SERVIDORES[pedido]) guardar(pedido);
+      const forzado = SERVIDORES[leer()] ? leer() : null; // elegido a mano en este navegador
+      let actual = forzado || PRINCIPAL;
+      let origenActual = new URL(SERVIDORES[actual].url).origin; // event.origin nunca trae barra final
+      let respondio = false;
+      let temporizador = null;
+
+      const iframe = document.getElementById('berakhah-iframe');
+      const loader = document.getElementById('loader');
+      const hideLoader = () => loader && loader.classList.add('fade-out');
+
+      // Ruta a abrir: ?p=/producto/x (enlaces compartidos) o #/ruta
+      const initialPath = params.get('p') || window.location.hash.replace('#', '');
+      let rutaActual = initialPath && initialPath.startsWith('/') ? initialPath : '/';
+      // URL visible limpia (sin ?p= ni ?origen=)
+      if (params.has('p') || params.has('origen')) window.history.replaceState(null, '', rutaActual);
+
+      function mostrarAviso() {
+        const aviso = document.getElementById('origen-aviso');
+        if (!forzado && actual === PRINCIPAL) { aviso.hidden = true; return; }
+        aviso.textContent = forzado
+          ? `Tienda desde ${SERVIDORES[actual].nombre} (solo en este navegador · ?origen=auto para volver)`
+          : `Tienda de respaldo: ${SERVIDORES[actual].nombre}`;
+        aviso.hidden = false;
+        setTimeout(() => { aviso.hidden = true; }, 8000);
       }
 
-      // 2. Escuchar mensajes del iframe (navegación, WhatsApp y Rappi)
+      function cargar(clave) {
+        actual = clave;
+        origenActual = new URL(SERVIDORES[clave].url).origin;
+        respondio = false;
+        iframe.src = origenActual + rutaActual;
+        mostrarAviso();
+        clearTimeout(temporizador);
+        // Respaldo automático: si la tienda no avisa que cargó, se intenta con la otra (solo sin origen forzado)
+        temporizador = setTimeout(() => {
+          if (respondio) return;
+          const otra = clave === 'pa' ? 'render' : 'pa';
+          if (!forzado && clave === PRINCIPAL) {
+            console.warn(`[Berakhah] ${SERVIDORES[clave].nombre} no respondió; cargando ${SERVIDORES[otra].nombre}.`);
+            cargar(otra);
+          } else {
+            hideLoader(); // sin más opciones: se muestra lo que haya
+          }
+        }, SERVIDORES[clave].espera);
+      }
+
+      cargar(actual);
+
+      // Escuchar mensajes del iframe (navegación, WhatsApp y Rappi)
       window.addEventListener('message', (event) => {
-        if (event.origin !== BACKEND_ORIGIN) return;
+        if (event.origin !== origenActual) return;
 
         if (event.data && event.data.type === 'NAV') {
-          const newPath = event.data.path;
-
-          // Si la ruta cambió y no somos la misma página
+          // La tienda cargó de verdad (no una página de error del hosting)
+          respondio = true;
+          clearTimeout(temporizador);
+          hideLoader();
+          const newPath = String(event.data.path || '/');
+          rutaActual = newPath;
           if (window.location.pathname !== newPath) {
             // Actualizamos la URL a la versión "limpia" (ej: /producto/anillo)
             window.history.replaceState({ path: newPath }, '', newPath);
