@@ -4,7 +4,8 @@
  * La tienda real corre en PythonAnywhere o en Render y se muestra dentro de un iframe.
  *   PRINCIPAL: la que ven todos los clientes. Para mudarse a Render basta cambiar 'pa' por 'render'.
  *   Respaldo:  si la principal no avisa que cargó a tiempo, se carga sola la otra.
- *   Pruebas:   ?origen=render · ?origen=pa · ?origen=auto (volver a lo normal). Queda guardado solo en ese navegador.
+ *   Pruebas:   ?origen=render · ?origen=pa · ?origen=auto (volver a lo normal). Queda guardado solo en ese navegador
+ *              y no se muestra en la página: el servidor elegido se ve en la consola (F12).
  */
 window.BerakhahTienda = (function () {
   'use strict';
@@ -28,20 +29,9 @@ window.BerakhahTienda = (function () {
   else if (SERVIDORES[pedido]) guardar(pedido);
   var forzado = SERVIDORES[leer()] ? leer() : null;
 
+  // El cliente nunca ve desde qué servidor carga la tienda: solo queda en la consola del navegador (F12)
   function aviso(texto) {
-    var el = document.getElementById('origen-aviso');
-    if (!el) {
-      el = document.createElement('div');
-      el.id = 'origen-aviso';
-      el.style.cssText = 'position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:10000;' +
-        'max-width:calc(100vw - 32px);padding:8px 14px;border-radius:20px;background:rgba(20,18,15,.88);' +
-        "color:#f1d37a;font:500 12px 'Outfit',sans-serif;text-align:center;pointer-events:none;";
-      document.body.appendChild(el);
-    }
-    el.textContent = texto;
-    el.hidden = false;
-    clearTimeout(aviso.t);
-    aviso.t = setTimeout(function () { el.hidden = true; }, 8000);
+    if (window.console) console.info('[Berakhah] ' + texto);
   }
 
   /**
