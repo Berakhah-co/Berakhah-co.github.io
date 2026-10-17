@@ -22,6 +22,7 @@
     <link rel="canonical" href="https://berakhahmedellin.shop/" />
     <meta name="geo.region" content="CO-ANT" />
     <meta name="geo.placename" content="Medellín" />
+    <meta name="theme-color" content="#0c0b0a" />
 
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
@@ -33,7 +34,10 @@
       property="og:description"
       content="Collares, anillos, aretes y pulseras con significado. Empaque de regalo y entrega rápida en Medellín, también por Rappi."
     />
-    <meta property="og:image" content="https://berakhahmedellin.pythonanywhere.com/static/Logo.jpg" />
+    <meta property="og:image" content="https://berakhahmedellin.shop/static/Logo.jpg" />
+    <meta property="og:image:width" content="500" />
+    <meta property="og:image:height" content="500" />
+    <meta property="og:image:alt" content="Logo de Berakhah, joyería con propósito en Medellín" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -43,34 +47,46 @@
       property="twitter:description"
       content="Collares, anillos, aretes y pulseras con significado. Empaque de regalo y entrega rápida en Medellín."
     />
-    <meta property="twitter:image" content="https://berakhahmedellin.pythonanywhere.com/static/Logo.jpg" />
+    <meta property="twitter:image" content="https://berakhahmedellin.shop/static/Logo.jpg" />
 
     <!-- Datos del negocio para Google (joyería en Medellín) -->
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "JewelryStore",
-        "name": "Berakhah",
-        "alternateName": "Berakhah Medellín",
-        "description": "Joyería con propósito: collares, anillos, aretes y pulseras con significado, diseñados desde Medellín.",
-        "url": "https://berakhahmedellin.shop/",
-        "logo": "https://berakhahmedellin.pythonanywhere.com/static/Logo.jpg",
-        "image": "https://berakhahmedellin.pythonanywhere.com/static/Logo.jpg",
-        "telephone": "+573017517177",
-        "priceRange": "$$",
-        "address": { "@type": "PostalAddress", "addressLocality": "Medellín", "addressRegion": "Antioquia", "addressCountry": "CO" },
-        "areaServed": ["Medellín", "Envigado", "Itagüí", "Sabaneta", "Bello", "La Estrella", "Colombia"],
-        "sameAs": [
-          "https://www.instagram.com/berakhah_co/",
-          "https://www.tiktok.com/@berakhahmedellin",
-          "https://www.rappi.com.co/tiendas/900419085-berakhah-mt-enc"
-        ]
-      }
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "JewelryStore",
+          "@id": "https://berakhahmedellin.shop/#tienda",
+          "name": "Berakhah",
+          "alternateName": "Berakhah Medellín",
+          "description": "Joyería con propósito: collares, anillos, aretes y pulseras con significado, diseñados desde Medellín.",
+          "url": "https://berakhahmedellin.shop/",
+          "logo": "https://berakhahmedellin.shop/static/Logo.jpg",
+          "image": "https://berakhahmedellin.shop/static/Logo.jpg",
+          "telephone": "+573017517177",
+          "priceRange": "$$",
+          "currenciesAccepted": "COP",
+          "address": { "@type": "PostalAddress", "addressLocality": "Medellín", "addressRegion": "Antioquia", "addressCountry": "CO" },
+          "areaServed": ["Medellín", "Envigado", "Itagüí", "Sabaneta", "Bello", "La Estrella", "Colombia"],
+          "sameAs": [
+            "https://www.instagram.com/berakhah_co/",
+            "https://www.tiktok.com/@berakhahmedellin",
+            "https://www.rappi.com.co/tiendas/900419085-berakhah-mt-enc"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Berakhah",
+          "url": "https://berakhahmedellin.shop/",
+          "inLanguage": "es-CO",
+          "publisher": { "@id": "https://berakhahmedellin.shop/#tienda" }
+        }
+      ]
     </script>
 
     <!-- Icono -->
-    <link rel="icon" href="static/iconos/Logo.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="static/Logo.jpg" />
+    <link rel="icon" href="/static/iconos/Logo.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/static/Logo.jpg" />
 
     <!-- Google Fonts for Premium Branding -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
@@ -229,24 +245,16 @@
         overflow-y: scroll; /* Delega el scroll fluido al wrapper exterior */
         overflow-x: hidden;
       }
-      /* Aviso discreto cuando la tienda se carga desde un origen distinto al principal */
-      .origen-aviso {
-        position: fixed;
-        left: 50%;
-        bottom: 16px;
-        transform: translateX(-50%);
-        z-index: 10000;
-        max-width: calc(100vw - 32px);
-        padding: 8px 14px;
-        border-radius: 20px;
-        background: rgba(20, 18, 15, 0.88);
-        color: #f1d37a;
-        font: 500 12px 'Outfit', sans-serif;
-        text-align: center;
-        pointer-events: none;
+      /* Catálogo para buscadores: queda detrás de la tienda (el iframe lo cubre) y lo genera tools/generar_paginas_seo.py */
+      .seo-home {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 32px 16px;
+        color: #e8e2d6;
+        font-family: 'Outfit', sans-serif;
       }
-      .origen-aviso[hidden] {
-        display: none;
+      .seo-home a {
+        color: #d4af37;
       }
       iframe {
         width: 1px;
@@ -288,102 +296,222 @@
       </iframe>
     </div>
 
-    <div id="origen-aviso" class="origen-aviso" hidden></div>
+    <!-- CATALOGO-SEO:INICIO -->
+    <main class="seo-home">
+      <h1>Berakhah — Joyería con propósito en Medellín</h1>
+      <p>Collares, anillos ajustables, aretes, candongas y pulseras con significado. Empaque de regalo incluido, entrega rápida en Medellín y el Valle de Aburrá y envíos a toda Colombia.</p>
+      <section>
+        <h2>Collares</h2>
+        <ul>
+          <li><a href="/producto/B-98/">Collar Corazón De Paz B-98</a> · $74.900</li>
+          <li><a href="/producto/B-96/">Collar Esperanza B-96</a> · $54.900</li>
+          <li><a href="/producto/B-95/">Collar Fuerza Y Dignidad B-95</a> · $64.900</li>
+          <li><a href="/producto/B-97/">Collar Mensaje De Esperanza B-97</a> · $54.900</li>
+          <li><a href="/producto/B-94/">Collar Luz Del Cielo B-94</a> · $72.900</li>
+          <li><a href="/producto/B-93/">Collar Destino Propósito B-93</a> · $52.900</li>
+          <li><a href="/producto/B-100/">Collar, Pulsera Y Aretes De Topitos Para Mamá B-100</a> · $99.000</li>
+          <li><a href="/producto/B-92/">Collar Vuelo De Fe B-92</a> · $72.400</li>
+          <li><a href="/producto/B-30/">Collar Corazón Puro B-30</a> · $74.900</li>
+          <li><a href="/producto/B-79/">Colección Mariposas Radiante B-79</a> · $66.900</li>
+          <li><a href="/producto/B-68/">Mariposa De Acero B-68</a> · $76.900</li>
+          <li><a href="/producto/B-83/">Collar Brillo De Medianoche B-83</a> · $64.900</li>
+          <li><a href="/producto/B-44/">Collar Tesoro Del Mar B-44</a> · $64.900</li>
+          <li><a href="/producto/B-37/">Collar Rosa De Gracia B-37</a> · $82.400</li>
+          <li><a href="/producto/B-81/">Collar Astronauta B-81</a> · $62.900</li>
+          <li><a href="/producto/B-31/">Collar Perla De Gran Precio B-31</a> · $74.900</li>
+          <li><a href="/producto/B-82/">Collar Astronauta En La Luna B-82</a> · $59.900</li>
+          <li><a href="/producto/B-29/">Collar Brillo Sutil B-29</a> · $59.900</li>
+          <li><a href="/producto/B-75/">Cadena Corazón Minimalista De Acero B-75</a> · $62.900</li>
+          <li><a href="/producto/B-46/">Collar Alas De Fe B-46</a> · $54.900</li>
+          <li><a href="/producto/B-61/">Collar Alas De Protección B-61</a> · $52.900</li>
+          <li><a href="/producto/B-47/">Collar Amor Eterno B-47</a> · $52.900</li>
+          <li><a href="/producto/B-71/">Collar Cerezas En Acero B-71</a> · $69.900</li>
+          <li><a href="/producto/B-42/">Collar Confianza Inquebrantable B-42</a> · $64.900</li>
+          <li><a href="/producto/B-76/">Collar Corazones De Victoria B-76</a> · $64.900</li>
+          <li><a href="/producto/B-43/">Conjunto Amor Eterno B-43</a> · $69.900</li>
+          <li><a href="/producto/B-06/">Collar Corazón De Convicción B-06</a> · $54.900</li>
+          <li><a href="/producto/B-65/">Collar Corazón Minimalista De Acero B-65</a> · $62.900</li>
+          <li><a href="/producto/B-84/">Collar Corazón Perla Radiante B-84</a> · $64.900</li>
+          <li><a href="/producto/B-11/">Collar Cruz De Salvación B-11</a> · $52.900</li>
+          <li><a href="/producto/B-13/">Collar Cuidado Del Corazón B-13</a> · $65.890</li>
+          <li><a href="/producto/B-33/">Collar De Perlas B-33</a> · $64.900</li>
+          <li><a href="/producto/B-69/">Collar Delicado En Acero B-69</a> · $59.900</li>
+          <li><a href="/producto/B-26/">Collar Fe De Viva B-26</a> · $59.900</li>
+          <li><a href="/producto/B-72/">Collar Fe Viva B-72</a> · $62.900</li>
+          <li><a href="/producto/B-22/">Collar Flores De Confianza B-22</a> · $54.900</li>
+          <li><a href="/producto/B-91/">Collar Latido De Fe B-91</a> · $78.900</li>
+          <li><a href="/producto/B-59/">Collar Llave De Fe B-59</a> · $54.900</li>
+          <li><a href="/producto/B-50/">Collar Luz Del Día Y Noche B-50</a> · $72.900</li>
+          <li><a href="/producto/B-62/">Collar Luz Divina B-62</a> · $52.900</li>
+          <li><a href="/producto/B-25/">Collar Mano Que Sostiene B-25</a> · $47.999</li>
+          <li><a href="/producto/B-19/">Collar Melodía Celestial B-19</a> · $42.999</li>
+          <li><a href="/producto/B-38/">Collar Reflejo Celestial B-38</a> · $64.900</li>
+          <li><a href="/producto/B-18/">Collar Refugio Del Alma B-18</a> · $52.900</li>
+          <li><a href="/producto/B-10/">Collar Serenidad Divina B-10</a> · $59.999</li>
+          <li><a href="/producto/B-16/">Collar Vuelo Divino B-16</a> · $52.900</li>
+          <li><a href="/producto/B-39/">Collar Y Pulsera Fe Que Brilla B-39</a> · $86.900</li>
+          <li><a href="/producto/B-24/">Collar Y Pulsera Fortaleza Divina B-24</a> · $64.900</li>
+          <li><a href="/producto/B-02/">Collar amor Incondicional</a> · $48.900</li>
+          <li><a href="/producto/B-73/">Gargantilla Delicadeza Roja B-73</a> · $69.900</li>
+          <li><a href="/producto/B-53/">Juego &quot;fe Inquebrantable&quot;</a> · $69.900</li>
+          <li><a href="/producto/B-60/">Collar Luz A Las Naciones B-60</a> · $74.900</li>
+          <li><a href="/producto/B-45/">Collar Corazón De Unidad B-45</a> · $64.900</li>
+          <li><a href="/producto/B-70/">Collar Corazones De Acero B-70</a> · $69.190</li>
+          <li><a href="/producto/B-101/">Collar Hogar De Gracia ✨ B-101</a> · $76.900</li>
+          <li><a href="/producto/B-103/">Collar Nuevo Latido B-103</a> · $76.900</li>
+          <li><a href="/producto/B-102/">Juego Amor Pleno B-102</a> · $84.900</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Anillos</h2>
+        <ul>
+          <li><a href="/producto/BA-22/">Anillo Rama De Vida BA-22</a> · $64.900</li>
+          <li><a href="/producto/BA-13/">Par De Anillos Siempre Juntas  BA-13</a> · $132.900</li>
+          <li><a href="/producto/BA-25/">Anillo Amor Infinito BA-25</a> · $64.900</li>
+          <li><a href="/producto/BA-12/">Anillo Alas De Luz BA-12</a> · $64.900</li>
+          <li><a href="/producto/BA-01/">Anillo Amor Inquebrantable BA-01</a> · $61.900</li>
+          <li><a href="/producto/BA-09/">Anillo Brillo De Amor Rosa BA-09</a> · $64.900</li>
+          <li><a href="/producto/BA-06/">Anillo Camino A La Vida BA-06</a> · $64.900</li>
+          <li><a href="/producto/BA-15/">Anillo Corazón De Destellos BA-15</a> · $64.900</li>
+          <li><a href="/producto/BA-27/">Anillo Corazón De Luz BA-27</a> · $64.900</li>
+          <li><a href="/producto/BA-19/">Anillo Corazón Nacarado BA-19</a> · $64.900</li>
+          <li><a href="/producto/BA-04/">Anillo Cruces De Gracia BA-04</a> · $64.900</li>
+          <li><a href="/producto/BA-20/">Anillo Delicadeza Celestial BA-20</a> · $64.900</li>
+          <li><a href="/producto/BA-34/">Anillo Destello De Gracia BA-34</a> · $64.900</li>
+          <li><a href="/producto/BA-11/">Anillo Destellos De Gloria BA-11</a> · $64.900</li>
+          <li><a href="/producto/BA-16/">Anillo Elegancia Eterna BA-16</a> · $64.900</li>
+          <li><a href="/producto/BA-08/">Anillo Esencia Esmeralda BA-08</a> · $64.900</li>
+          <li><a href="/producto/BA-21/">Anillo Esmeralda Real ✨ BA-21</a> · $64.900</li>
+          <li><a href="/producto/BA-30/">Anillo Falange Minimalista Avión BA-30</a> · $44.900</li>
+          <li><a href="/producto/BA-32/">Anillo Falange Minimalista Carita Feliz BA-32</a> · $44.900</li>
+          <li><a href="/producto/BA-29/">Anillo Falange Minimalista Flor BA-29</a> · $44.900</li>
+          <li><a href="/producto/BA-31/">Anillo Falange Minimalista Hoja BA-31</a> · $44.900</li>
+          <li><a href="/producto/BA-28/">Anillo Falange Minimalista Lazo BA-28</a> · $44.900</li>
+          <li><a href="/producto/BA-38/">Anillo Fiel Provisión BA-38</a> · $64.900</li>
+          <li><a href="/producto/BA-03/">Anillo Fortaleza En Dios BA-03</a> · $64.900</li>
+          <li><a href="/producto/BA-02/">Anillo Lazo De Amor BA-02</a> · $64.900</li>
+          <li><a href="/producto/BA-26/">Anillo Lazo De Gracia BA-26</a> · $64.900</li>
+          <li><a href="/producto/BA-07/">Anillo Mirada Interior BA-07</a> · $64.900</li>
+          <li><a href="/producto/BA-35/">Anillo Pacto Eterno BA-35</a> · $64.900</li>
+          <li><a href="/producto/BA-33/">Anillo Pescador De Personas BA-33</a> · $64.900</li>
+          <li><a href="/producto/BA-36/">Anillo Refugio Firme BA-36</a> · $64.900</li>
+          <li><a href="/producto/BA-05/">Anillo Roca De Salvación BA-05</a> · $64.900</li>
+          <li><a href="/producto/BA-18/">Anillo Rosa De Elegancia BA-18</a> · $64.900</li>
+          <li><a href="/producto/BA-10/">Anillo Sagrada Pureza BA-10</a> · $64.900</li>
+          <li><a href="/producto/BA-37/">Anillo Siempre Verde BA-37</a> · $64.900</li>
+          <li><a href="/producto/BA-24/">Anillo Vuelo De Propósito BA-24</a> · $64.900</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Pulseras</h2>
+        <ul>
+          <li><a href="/producto/B-99/">Pulsera Medellín En El Corazón B-99</a> · $64.900</li>
+          <li><a href="/producto/B-88/">Pulsera Mamá B-88</a> · $54.900</li>
+          <li><a href="/producto/B-86/">Pulsera Balón Selección Colombia 2026 B-86</a> · $67.900</li>
+          <li><a href="/producto/B-87/">Pulsera Mapa Tricolor - Selección Mundial 2026 B-87</a> · $67.900</li>
+          <li><a href="/producto/B-85/">Pulsera Bandera De Colombia Mundial 2026 B-85</a> · $67.900</li>
+          <li><a href="/producto/B-34/">Pulsera Estrella De Luz B-34</a> · $62.900</li>
+          <li><a href="/producto/B-67/">Pulsera Dios Tiene El Control B-67</a> · $64.900</li>
+          <li><a href="/producto/B-21/">Pulsera Infinito Divino B-21</a> · $48.900</li>
+          <li><a href="/producto/B-66/">7 Pulseras De Corazón B-66</a> · $52.900</li>
+          <li><a href="/producto/B-17/">Pulsera Alas De Redención B-17</a> · $52.900</li>
+          <li><a href="/producto/B-05/">Pulsera Camino De Fe B-05</a> · $38.900</li>
+          <li><a href="/producto/B-35/">Pulsera Corazón De Pureza B-35</a> · $62.900</li>
+          <li><a href="/producto/B-03/">Pulsera Corazón Puro B-03</a> · $52.900</li>
+          <li><a href="/producto/B-08/">Pulsera Corazón Radiante B-08</a> · $52.900</li>
+          <li><a href="/producto/B-32/">Pulsera Cruz De Esperanza Dorada B-32</a> · $58.900</li>
+          <li><a href="/producto/B-09/">Pulsera Cruz De Salvación Radiante B-09</a> · $52.900</li>
+          <li><a href="/producto/B-04/">Pulsera Eternidad Sagrada B-04</a> · $52.900</li>
+          <li><a href="/producto/B-07/">Pulsera Fe Creciente B-07</a> · $54.900</li>
+          <li><a href="/producto/B-40/">Pulsera Herencia Celestial B-40</a> · $42.900</li>
+          <li><a href="/producto/B-41/">Pulsera Herencia Celestial B-41</a> · $59.900</li>
+          <li><a href="/producto/B-12/">Pulsera Misión De Fe B-12</a> · $58.900</li>
+          <li><a href="/producto/B-36/">Pulsera Noche De Promesa B-36</a> · $62.900</li>
+          <li><a href="/producto/B-80/">Pulsera Perlas De Gracia B-80</a> · $64.900</li>
+          <li><a href="/producto/B-23/">Pulsera Pulsera Luz De Salvación B-23</a> · $48.900</li>
+          <li><a href="/producto/B-55/">Pulsera Raíces De Fe B-55</a> · $58.900</li>
+          <li><a href="/producto/B-104/">Pulsera Dorada Esferas Tesoro Eterno - Ajustable B-104</a> · $84.990</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Zarcillos</h2>
+        <ul>
+          <li><a href="/producto/B-77/">Aretes De Amor B-77</a> · $62.900</li>
+          <li><a href="/producto/B-56/">Aretes Mariposa Acero B-56</a> · $62.900</li>
+          <li><a href="/producto/B-201/">Aretes Noche Elegante B-201</a> · $64.900</li>
+          <li><a href="/producto/B-204/">Aretes Rosa De Luz B-204</a> · $64.900</li>
+          <li><a href="/producto/B-009/">Tres Pares De Aretes De Corazón B-009</a> · $49.900</li>
+          <li><a href="/producto/B-010/">Tres Pares De Aretes De Corazón B-010</a> · $49.900</li>
+          <li><a href="/producto/B-011/">Tres Pares De Aretes De Corazón B-011</a> · $49.900</li>
+          <li><a href="/producto/B-012/">Tres Pares De Aretes De Corazón B-012</a> · $49.900</li>
+          <li><a href="/producto/B-013/">Tres Pares De Aretes De Corazón B-013</a> · $49.900</li>
+          <li><a href="/producto/B-206/">Zarcillos Corazón Rosa Luz B-206</a> · $64.900</li>
+          <li><a href="/producto/B-20/">Zarcillos Reflejo Del Corazón B-20</a> · $59.900</li>
+          <li><a href="/producto/B-205/">Zarcillos Corazón Esmeralda B-205</a> · $62.900</li>
+          <li><a href="/producto/B-015/">Argollas (1 Cm De Ancho) B-015</a> · $62.900</li>
+          <li><a href="/producto/B-016/">Argollas (1.5 Cm De Ancho) B-016</a> · $62.900</li>
+          <li><a href="/producto/B-017/">Argollas (1.8 Cm De Ancho) B-017</a> · $62.900</li>
+          <li><a href="/producto/B-018/">Argollas (2.3 Cm De Ancho) B-018</a> · $62.900</li>
+          <li><a href="/producto/B-019/">Argollas (2.7 Cm De Ancho) B-019</a> · $62.900</li>
+          <li><a href="/producto/B-020/">Argollas (3.5 Cm De Ancho) B-020</a> · $62.900</li>
+          <li><a href="/producto/B-021/">Argollas (4.7 Cm De Ancho) B-021</a> · $62.900</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Caballeros</h2>
+        <ul>
+          <li><a href="/producto/B-74/">Cadena De Balón De Futbol Dorada B-74</a> · $64.900</li>
+          <li><a href="/producto/B-48/">Collar Cruz De Amor B-48</a> · $64.900</li>
+          <li><a href="/producto/B-49/">Collar Ancla De Fe Y Salvación B-49</a> · $62.900</li>
+          <li><a href="/producto/B-51/">Collar Cruz De Sanidad B-51</a> · $64.900</li>
+          <li><a href="/producto/B-14/">Collar Cruz De Vida Eterna B-14</a> · $42.900</li>
+          <li><a href="/producto/B-52/">Collar Firmeza En La Tormenta B-52</a> · $64.900</li>
+          <li><a href="/producto/B-105/">Cadena Camino Y Verdad B-105</a> · $78.990</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Tobilleras</h2>
+        <ul>
+          <li><a href="/producto/B-58/">Tobillera Alas Doradas B-58</a> · $64.900</li>
+          <li><a href="/producto/B-57/">Tobillera Perlas De Esperanza B-57</a> · $64.900</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Llaveros</h2>
+        <ul>
+          <li><a href="/producto/B-64/">Llavero Tiempo Perfecto B-64</a> · $62.900</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Relojes</h2>
+        <ul>
+          <li><a href="/producto/B-90/">Reloj Tiempo Perfecto B-90</a> · $64.900</li>
+        </ul>
+      </section>
+    </main>
+    <!-- CATALOGO-SEO:FIN -->
 
+    <!-- Origen de la tienda (PythonAnywhere / Render, con respaldo automático): ver tienda-origen.js -->
+    <script src="/tienda-origen.js"></script>
     <script>
-      // ── Origen de la tienda ──────────────────────────────────────────────
-      // PRINCIPAL: la tienda que ven todos los clientes. Para mudarse a Render basta cambiar 'pa' por 'render'.
-      // Si la principal no responde a tiempo, se carga sola la otra (respaldo).
-      // Para probar en tu navegador sin afectar a nadie:  ?origen=render  ·  ?origen=pa  ·  ?origen=auto (volver a lo normal)
-      const SERVIDORES = {
-        pa: { nombre: 'PythonAnywhere', url: 'https://berakhahmedellin.pythonanywhere.com', espera: 12000 },
-        render: { nombre: 'Render', url: 'https://berakahhshop.onrender.com', espera: 70000 } // Render gratis tarda ~1 min si estaba dormido
-      };
-      const PRINCIPAL = 'pa';
-
-      const params = new URLSearchParams(window.location.search);
-      const leer = () => { try { return localStorage.getItem('berakhah_origen'); } catch (e) { return null; } };
-      const guardar = (v) => { try { v ? localStorage.setItem('berakhah_origen', v) : localStorage.removeItem('berakhah_origen'); } catch (e) {} };
-
-      const pedido = (params.get('origen') || '').toLowerCase();
-      if (pedido === 'auto') guardar(null);
-      else if (SERVIDORES[pedido]) guardar(pedido);
-      const forzado = SERVIDORES[leer()] ? leer() : null; // elegido a mano en este navegador
-      let actual = forzado || PRINCIPAL;
-      let origenActual = new URL(SERVIDORES[actual].url).origin; // event.origin nunca trae barra final
-      let respondio = false;
-      let temporizador = null;
-
       const iframe = document.getElementById('berakhah-iframe');
       const loader = document.getElementById('loader');
       const hideLoader = () => loader && loader.classList.add('fade-out');
 
-      // Ruta a abrir: ?p=/producto/x (enlaces compartidos) o #/ruta
+      // Ruta a abrir: ?p=/producto/x (enlaces compartidos y 404.html) o #/ruta
+      const params = new URLSearchParams(window.location.search);
       const initialPath = params.get('p') || window.location.hash.replace('#', '');
-      let rutaActual = initialPath && initialPath.startsWith('/') ? initialPath : '/';
+      const ruta = initialPath && initialPath.startsWith('/') ? initialPath : '/';
       // URL visible limpia (sin ?p= ni ?origen=)
-      if (params.has('p') || params.has('origen')) window.history.replaceState(null, '', rutaActual);
+      if (params.has('p') || params.has('origen')) window.history.replaceState(null, '', ruta);
 
-      function mostrarAviso() {
-        const aviso = document.getElementById('origen-aviso');
-        if (!forzado && actual === PRINCIPAL) { aviso.hidden = true; return; }
-        aviso.textContent = forzado
-          ? `Tienda desde ${SERVIDORES[actual].nombre} (solo en este navegador · ?origen=auto para volver)`
-          : `Tienda de respaldo: ${SERVIDORES[actual].nombre}`;
-        aviso.hidden = false;
-        setTimeout(() => { aviso.hidden = true; }, 8000);
-      }
-
-      function cargar(clave) {
-        actual = clave;
-        origenActual = new URL(SERVIDORES[clave].url).origin;
-        respondio = false;
-        iframe.src = origenActual + rutaActual;
-        mostrarAviso();
-        clearTimeout(temporizador);
-        // Respaldo automático: si la tienda no avisa que cargó, se intenta con la otra (solo sin origen forzado)
-        temporizador = setTimeout(() => {
-          if (respondio) return;
-          const otra = clave === 'pa' ? 'render' : 'pa';
-          if (!forzado && clave === PRINCIPAL) {
-            console.warn(`[Berakhah] ${SERVIDORES[clave].nombre} no respondió; cargando ${SERVIDORES[otra].nombre}.`);
-            cargar(otra);
-          } else {
-            hideLoader(); // sin más opciones: se muestra lo que haya
-          }
-        }, SERVIDORES[clave].espera);
-      }
-
-      cargar(actual);
-
-      // Escuchar mensajes del iframe (navegación, WhatsApp y Rappi)
-      window.addEventListener('message', (event) => {
-        if (event.origin !== origenActual) return;
-
-        if (event.data && event.data.type === 'NAV') {
-          // La tienda cargó de verdad (no una página de error del hosting)
-          respondio = true;
-          clearTimeout(temporizador);
-          hideLoader();
-          const newPath = String(event.data.path || '/');
-          rutaActual = newPath;
-          if (window.location.pathname !== newPath) {
-            // Actualizamos la URL a la versión "limpia" (ej: /producto/anillo)
-            window.history.replaceState({ path: newPath }, '', newPath);
-          }
-        } else if (event.data && event.data.type === 'WHATSAPP_REDIRECT') {
-          const url = String(event.data.url || '');
-          if (/^https:\/\/(wa\.me|api\.whatsapp\.com)\//.test(url)) {
-            window.location.href = url;
-          }
-        } else if (event.data && event.data.type === 'RAPPI_OPEN') {
-          // Chrome Android no deja que el iframe (otro dominio) abra la app de Rappi:
-          // la navegación se hace desde esta página, que hereda el toque del usuario.
-          const url = String(event.data.url || '');
-          if (/^(intent:\/\/com\.grability\.rappi|gbrappi:\/\/|https:\/\/www\.rappi\.com\.co\/)/.test(url)) {
-            event.source.postMessage({ type: 'RAPPI_OPEN_ACK' }, event.origin);
-            window.location.href = url;
-          }
+      BerakhahTienda.iniciar({
+        iframe,
+        ruta,
+        alCargar: hideLoader,
+        alNavegar: (path) => {
+          // Actualizamos la URL a la versión "limpia" (ej: /producto/anillo)
+          if (window.location.pathname !== path) window.history.replaceState({ path }, '', path);
         }
       });
     </script>
