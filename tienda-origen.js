@@ -15,6 +15,9 @@ window.BerakhahTienda = (function () {
   };
   var PRINCIPAL = 'pa';
   var CLAVE = 'berakhah_origen';
+  // Páginas de un pedido: el pedido solo existe en la tienda principal, así que no se cambia de servidor
+  // (en la otra saldría "pedido no encontrado"). Se muestran apenas cargan.
+  var SIN_RESPALDO = /^\/(seguimiento|pagar)(\/|\?|$)/;
 
   function leer() { try { return localStorage.getItem(CLAVE); } catch (e) { return null; } }
   function guardar(v) { try { if (v) localStorage.setItem(CLAVE, v); else localStorage.removeItem(CLAVE); } catch (e) {} }
@@ -43,7 +46,7 @@ window.BerakhahTienda = (function () {
 
   /**
    * iniciar({ iframe, ruta, alCargar, alNavegar })
-   *   ruta:      ruta de la tienda a abrir (ej. '/producto/B-98')
+   *   ruta:      ruta de la tienda a abrir, con sus datos (ej. '/producto/B-98' o '/seguimiento?pedido=1&tel=4567')
    *   alCargar:  la tienda respondió de verdad (no una página de error del hosting)
    *   alNavegar: la clienta cambió de página dentro de la tienda (recibe la ruta)
    */
@@ -63,6 +66,14 @@ window.BerakhahTienda = (function () {
       if (forzado) aviso('Tienda desde ' + SERVIDORES[clave].nombre + ' (solo en este navegador · ?origen=auto para volver)');
       else if (clave !== PRINCIPAL) aviso('Tienda de respaldo: ' + SERVIDORES[clave].nombre);
       clearTimeout(temporizador);
+      if (SIN_RESPALDO.test(ruta)) {
+        iframe.addEventListener('load', function listo() {
+          iframe.removeEventListener('load', listo);
+          respondio = true;
+          if (op.alCargar) op.alCargar();
+        });
+        return;
+      }
       temporizador = setTimeout(function () {
         if (respondio) return;
         if (!forzado && clave === PRINCIPAL) {

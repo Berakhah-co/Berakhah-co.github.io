@@ -12,7 +12,8 @@
       Luego, index.html procesa la rula, carga el iframe y restaura la URL visualmente a /producto/anillo
     -->
     <script type="text/javascript">
-      var path = window.location.pathname;
+      // Se conserva todo el enlace: ruta, datos (?pedido=...&tel=...) y #ancla
+      var path = window.location.pathname + window.location.search + window.location.hash;
       window.location.replace('/?p=' + encodeURIComponent(path));
     </script>
   </head>
