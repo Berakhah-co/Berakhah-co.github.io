@@ -14,7 +14,14 @@
     <script type="text/javascript">
       // Se conserva todo el enlace: ruta, datos (?pedido=...&tel=...) y #ancla
       var path = window.location.pathname + window.location.search + window.location.hash;
-      window.location.replace('/?p=' + encodeURIComponent(path));
+      // El panel de administración se abre directo en el servidor de la tienda (dentro del iframe no funciona)
+      if (/^\/(admin|login)(\/|\?|#|$)/.test(window.location.pathname)) {
+        window.location.replace('https://berakhahmedellin.pythonanywhere.com' + path);
+      } else {
+        // Se pasa el referido (Google, Instagram…): al redirigir, el navegador lo pierde
+        var ref = document.referrer && document.referrer.indexOf(location.origin) !== 0 ? '&ref=' + encodeURIComponent(document.referrer) : '';
+        window.location.replace('/?p=' + encodeURIComponent(path) + ref);
+      }
     </script>
   </head>
   <body style="background: black; color: white;">

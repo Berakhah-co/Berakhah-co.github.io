@@ -314,6 +314,7 @@
           <li><a href="/producto/B-100/">Collar, Pulsera Y Aretes De Topitos Para Mamá B-100</a> · $99.000</li>
           <li><a href="/producto/B-92/">Collar Vuelo De Fe B-92</a> · $72.400</li>
           <li><a href="/producto/B-30/">Collar Corazón Puro B-30</a> · $74.900</li>
+          <li><a href="/producto/B-27/">Collar Belleza Del Corazón B-27</a> · $78.900</li>
           <li><a href="/producto/B-79/">Colección Mariposas Radiante B-79</a> · $66.900</li>
           <li><a href="/producto/B-68/">Mariposa De Acero B-68</a> · $76.900</li>
           <li><a href="/producto/B-83/">Collar Brillo De Medianoche B-83</a> · $64.900</li>
@@ -361,7 +362,6 @@
           <li><a href="/producto/B-70/">Collar Corazones De Acero B-70</a> · $69.190</li>
           <li><a href="/producto/B-101/">Collar Hogar De Gracia ✨ B-101</a> · $76.900</li>
           <li><a href="/producto/B-103/">Collar Nuevo Latido B-103</a> · $76.900</li>
-          <li><a href="/producto/B-102/">Juego Amor Pleno B-102</a> · $84.900</li>
         </ul>
       </section>
       <section>
@@ -377,10 +377,12 @@
           <li><a href="/producto/BA-15/">Anillo Corazón De Destellos BA-15</a> · $64.900</li>
           <li><a href="/producto/BA-27/">Anillo Corazón De Luz BA-27</a> · $64.900</li>
           <li><a href="/producto/BA-19/">Anillo Corazón Nacarado BA-19</a> · $64.900</li>
+          <li><a href="/producto/BA-14/">Anillo Corazón Radiante BA-14</a> · $64.900</li>
           <li><a href="/producto/BA-04/">Anillo Cruces De Gracia BA-04</a> · $64.900</li>
           <li><a href="/producto/BA-20/">Anillo Delicadeza Celestial BA-20</a> · $64.900</li>
           <li><a href="/producto/BA-34/">Anillo Destello De Gracia BA-34</a> · $64.900</li>
           <li><a href="/producto/BA-11/">Anillo Destellos De Gloria BA-11</a> · $64.900</li>
+          <li><a href="/producto/BA-23/">Anillo Doble Encanto BA-23</a> · $64.900</li>
           <li><a href="/producto/BA-16/">Anillo Elegancia Eterna BA-16</a> · $64.900</li>
           <li><a href="/producto/BA-08/">Anillo Esencia Esmeralda BA-08</a> · $64.900</li>
           <li><a href="/producto/BA-21/">Anillo Esmeralda Real ✨ BA-21</a> · $64.900</li>
@@ -427,19 +429,23 @@
           <li><a href="/producto/B-07/">Pulsera Fe Creciente B-07</a> · $54.900</li>
           <li><a href="/producto/B-40/">Pulsera Herencia Celestial B-40</a> · $42.900</li>
           <li><a href="/producto/B-41/">Pulsera Herencia Celestial B-41</a> · $59.900</li>
+          <li><a href="/producto/B-28/">Pulsera Huellas De Amor B-28</a> · $59.900</li>
           <li><a href="/producto/B-12/">Pulsera Misión De Fe B-12</a> · $58.900</li>
           <li><a href="/producto/B-36/">Pulsera Noche De Promesa B-36</a> · $62.900</li>
           <li><a href="/producto/B-80/">Pulsera Perlas De Gracia B-80</a> · $64.900</li>
           <li><a href="/producto/B-23/">Pulsera Pulsera Luz De Salvación B-23</a> · $48.900</li>
           <li><a href="/producto/B-55/">Pulsera Raíces De Fe B-55</a> · $58.900</li>
-          <li><a href="/producto/B-104/">Pulsera Dorada Esferas Tesoro Eterno - Ajustable B-104</a> · $84.990</li>
+          <li><a href="/producto/B-104/">Pulsera Tesoro Eterno B-104</a> · $64.900</li>
         </ul>
       </section>
       <section>
         <h2>Zarcillos</h2>
         <ul>
+          <li><a href="/producto/B-014/">Aretes Amor En Cadena B-014</a> · $54.900</li>
           <li><a href="/producto/B-77/">Aretes De Amor B-77</a> · $62.900</li>
           <li><a href="/producto/B-56/">Aretes Mariposa Acero B-56</a> · $62.900</li>
+          <li><a href="/producto/B-008/">Zarcillos Rosado Elegante B-008</a> · $64.900</li>
+          <li><a href="/producto/B-200/">Aretes Corazón Destello Dorado B-200</a> · $62.900</li>
           <li><a href="/producto/B-201/">Aretes Noche Elegante B-201</a> · $64.900</li>
           <li><a href="/producto/B-204/">Aretes Rosa De Luz B-204</a> · $64.900</li>
           <li><a href="/producto/B-009/">Tres Pares De Aretes De Corazón B-009</a> · $49.900</li>
@@ -501,6 +507,9 @@
        * La tienda real corre en PythonAnywhere o en Render y se muestra dentro de un iframe.
        *   PRINCIPAL: la que ven todos los clientes. Para mudarse a Render basta cambiar 'pa' por 'render'.
        *   Respaldo:  si la principal no avisa que cargó a tiempo, se carga sola la otra.
+       *   Visitas:   la tienda pregunta (ORIGEN_VISITA?) de dónde llegó la persona; aquí se guarda el referido y los
+       *              parámetros de llegada (utm_*, fbclid, gclid) antes de que la dirección visible se limpie.
+       *              ?no_contar=1 deja de contar las visitas de este navegador (dueños); ?no_contar=0 lo revierte.
        *   Pruebas:   ?origen=render · ?origen=pa · ?origen=auto (volver a lo normal). Queda guardado solo en ese navegador
        *              y no se muestra en la página: el servidor elegido se ve en la consola (F12).
        */
@@ -525,6 +534,18 @@
         if (pedido === 'auto') guardar(null);
         else if (SERVIDORES[pedido]) guardar(pedido);
         var forzado = SERVIDORES[leer()] ? leer() : null;
+
+        // Origen real de la visita (se lee al cargar, antes de que index.html limpie la dirección)
+        var LLEGADA_RE = /^(utm_|fbclid$|gclid$|ttclid$|igshid$)/;
+        var llegada = new URLSearchParams();
+        params.forEach(function (valor, clave) { if (LLEGADA_RE.test(clave)) llegada.append(clave, valor); });
+        try {
+          if (params.get('no_contar') === '1') localStorage.setItem('bk_no_contar', '1');
+          if (params.get('no_contar') === '0') localStorage.removeItem('bk_no_contar');
+        } catch (e) {}
+        function noContar() { try { return localStorage.getItem('bk_no_contar') === '1'; } catch (e) { return false; } }
+        // Si se llegó por 404.html, el referido original viene en ?ref=
+        var ORIGEN_VISITA = { type: 'ORIGEN_VISITA', referrer: params.get('ref') || document.referrer || '', llegada: llegada.toString() };
 
         // El cliente nunca ve desde qué servidor carga la tienda: solo queda en la consola del navegador (F12)
         function aviso(texto) {
@@ -577,6 +598,12 @@
             if (event.origin !== origen || !event.data) return;
             var url = String(event.data.url || '');
 
+            if (event.data.type === 'ORIGEN_VISITA?') {
+              ORIGEN_VISITA.no_contar = noContar();
+              event.source.postMessage(ORIGEN_VISITA, event.origin);
+              return;
+            }
+
             if (event.data.type === 'NAV') {
               if (!respondio) {
                 respondio = true;
@@ -614,14 +641,23 @@
       const initialPath = params.get('p') || window.location.hash.replace('#', '');
       let ruta = initialPath && initialPath.startsWith('/') ? initialPath : '/';
       // Enlaces sin codificar (/?p=/seguimiento?pedido=1&tel=4567): "tel" llega como otro parámetro y se devuelve a la ruta
-      const sobrantes = [...params].filter(([k]) => k !== 'p' && k !== 'origen');
+      const sobrantes = [...params].filter(([k]) => !['p', 'origen', 'ref', 'no_contar'].includes(k));
       if (params.has('p') && sobrantes.length) {
         ruta += (ruta.includes('?') ? '&' : '?') + new URLSearchParams(sobrantes).toString();
       }
+      // Panel de administración: no funciona dentro del iframe (el navegador bloquea su sesión), se abre directo
+      const panel = /^\/(admin|login)(\/|\?|#|$)/.test(ruta);
+      if (panel) {
+        const servidor = window.BerakhahTienda ? BerakhahTienda.SERVIDORES[BerakhahTienda.PRINCIPAL].url
+                                                : 'https://berakhahmedellin.pythonanywhere.com';
+        window.location.replace(servidor + ruta);
+      }
       // URL visible limpia (sin ?p= ni ?origen=), conservando los datos de la página (ej. el número de pedido)
-      if (params.has('p') || params.has('origen')) window.history.replaceState(null, '', ruta);
+      else if (params.has('p') || params.has('origen')) window.history.replaceState(null, '', ruta);
 
-      if (!window.BerakhahTienda) {
+      if (panel) {
+        // ya se está abriendo el panel
+      } else if (!window.BerakhahTienda) {
         iframe.src = 'https://berakhahmedellin.pythonanywhere.com' + ruta;
         iframe.addEventListener('load', hideLoader);
       } else BerakhahTienda.iniciar({

@@ -4,6 +4,9 @@
  * La tienda real corre en PythonAnywhere o en Render y se muestra dentro de un iframe.
  *   PRINCIPAL: la que ven todos los clientes. Para mudarse a Render basta cambiar 'pa' por 'render'.
  *   Respaldo:  si la principal no avisa que cargó a tiempo, se carga sola la otra.
+ *   Visitas:   la tienda pregunta (ORIGEN_VISITA?) de dónde llegó la persona; aquí se guarda el referido y los
+ *              parámetros de llegada (utm_*, fbclid, gclid) antes de que la dirección visible se limpie.
+ *              ?no_contar=1 deja de contar las visitas de este navegador (dueños); ?no_contar=0 lo revierte.
  *   Pruebas:   ?origen=render · ?origen=pa · ?origen=auto (volver a lo normal). Queda guardado solo en ese navegador
  *              y no se muestra en la página: el servidor elegido se ve en la consola (F12).
  */
@@ -28,6 +31,18 @@ window.BerakhahTienda = (function () {
   if (pedido === 'auto') guardar(null);
   else if (SERVIDORES[pedido]) guardar(pedido);
   var forzado = SERVIDORES[leer()] ? leer() : null;
+
+  // Origen real de la visita (se lee al cargar, antes de que index.html limpie la dirección)
+  var LLEGADA_RE = /^(utm_|fbclid$|gclid$|ttclid$|igshid$)/;
+  var llegada = new URLSearchParams();
+  params.forEach(function (valor, clave) { if (LLEGADA_RE.test(clave)) llegada.append(clave, valor); });
+  try {
+    if (params.get('no_contar') === '1') localStorage.setItem('bk_no_contar', '1');
+    if (params.get('no_contar') === '0') localStorage.removeItem('bk_no_contar');
+  } catch (e) {}
+  function noContar() { try { return localStorage.getItem('bk_no_contar') === '1'; } catch (e) { return false; } }
+  // Si se llegó por 404.html, el referido original viene en ?ref=
+  var ORIGEN_VISITA = { type: 'ORIGEN_VISITA', referrer: params.get('ref') || document.referrer || '', llegada: llegada.toString() };
 
   // El cliente nunca ve desde qué servidor carga la tienda: solo queda en la consola del navegador (F12)
   function aviso(texto) {
@@ -79,6 +94,12 @@ window.BerakhahTienda = (function () {
     window.addEventListener('message', function (event) {
       if (event.origin !== origen || !event.data) return;
       var url = String(event.data.url || '');
+
+      if (event.data.type === 'ORIGEN_VISITA?') {
+        ORIGEN_VISITA.no_contar = noContar();
+        event.source.postMessage(ORIGEN_VISITA, event.origin);
+        return;
+      }
 
       if (event.data.type === 'NAV') {
         if (!respondio) {
