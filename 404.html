@@ -14,8 +14,9 @@
     <script type="text/javascript">
       // Se conserva todo el enlace: ruta, datos (?pedido=...&tel=...) y #ancla
       var path = window.location.pathname + window.location.search + window.location.hash;
-      // El panel de administración se abre directo en el servidor de la tienda (dentro del iframe no funciona)
-      if (/^\/(admin|login)(\/|\?|#|$)/.test(window.location.pathname)) {
+      // El panel de administración y el enlace de anuncios /pedir-rappi se abren directo en el servidor de la
+      // tienda (dentro del iframe no funcionan: el panel pierde la sesión y un iframe no puede abrir la app de Rappi)
+      if (/^\/(admin|login|pedir-rappi)(\/|\?|#|$)/.test(window.location.pathname)) {
         window.location.replace('https://berakhahmedellin.pythonanywhere.com' + path);
       } else {
         // Se pasa el referido (Google, Instagram…): al redirigir, el navegador lo pierde
