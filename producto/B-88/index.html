@@ -28,7 +28,9 @@
         .seo .price { font-size: 1.3rem; font-weight: 700; color: #8a7553; }
         .seo p { line-height: 1.6; white-space: pre-line; }
         .seo a { color: #8a7553; font-weight: 600; }
-        #tienda { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; background: #fff; }
+        /* El iframe aparece cuando la tienda cargó: mientras tanto se ve la ficha (foto, nombre y precio) */
+        #tienda { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; background: #fff; opacity: 0; transition: opacity .3s ease; }
+        #tienda.lista { opacity: 1; }
     </style>
 </head>
 <body>
@@ -50,6 +52,7 @@ Hermosa y delicada pulsera con la palabra &quot;Mamá&quot; en letra cursiva. El
         BerakhahTienda.iniciar({
             iframe: document.getElementById('tienda'),
             ruta: '/producto/B-88',
+            alCargar: function () { document.getElementById('tienda').classList.add('lista'); },
             alNavegar: function (path) {
                 if (path !== '/producto/B-88') window.history.replaceState(null, '', path);
             }
