@@ -9,6 +9,7 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/static/iconos/favicon-32.png" type="image/png" sizes="32x32">
     <link rel="apple-touch-icon" href="/static/iconos/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.webmanifest">
     <meta name="theme-color" content="#0c0b0a">
     <meta property="og:type" content="product">
     <meta property="og:site_name" content="Berakhah Medellín">
@@ -48,6 +49,7 @@ Un dije circular blanco y dorado, tan elegante como personal. Diseñado para lle
     <!-- La ficha real de la tienda va en el iframe (PythonAnywhere o Render, con respaldo): ver /tienda-origen.js -->
     <script src="/tienda-origen.js"></script>
     <script>
+        if ('serviceWorker' in navigator) navigator.serviceWorker.register('/app-sw.js').catch(function () {});
         BerakhahTienda.iniciar({
             iframe: document.getElementById('tienda'),
             ruta: '/producto/B-151',

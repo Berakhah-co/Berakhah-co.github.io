@@ -90,6 +90,13 @@
     <link rel="icon" href="/static/iconos/icon-192.png" type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/static/iconos/apple-touch-icon.png" />
 
+    <!-- App instalable (PWA): manifest.webmanifest + app-sw.js, publicados con tools/sitio/generar_paginas_seo.py -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Berakhah" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
     <!-- Google Fonts for Premium Branding -->
     <!-- Sin bloquear la primera pintura: la fuente llega después y la pantalla de carga se ve al instante -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -675,6 +682,70 @@
           if (window.location.pathname + window.location.search !== path) window.history.replaceState({ path }, '', path);
         }
       });
+    </script>
+    <!-- App instalable: aviso «Instalar la app» en celulares (Android con el botón; iPhone con los pasos) -->
+    <style>
+      #instalar-app { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 2147483000;
+        max-width: 520px; margin: 0 auto; display: none; align-items: center; gap: 12px; padding: 12px 12px 12px 14px;
+        background: rgba(16, 14, 10, .97); border: 1px solid #3a3320; border-radius: 16px; box-shadow: 0 12px 32px rgba(0, 0, 0, .45);
+        color: #f3ead7; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; transform: translateY(20px); opacity: 0;
+        transition: transform .35s ease, opacity .35s ease; }
+      #instalar-app.visible { display: flex; }
+      #instalar-app.entra { transform: none; opacity: 1; }
+      #instalar-app img { width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0; }
+      #instalar-app .textos { flex: 1; min-width: 0; }
+      #instalar-app .titulo { font-weight: 700; font-size: 15px; }
+      #instalar-app .sub { font-size: 12.5px; color: #bfb399; line-height: 1.35; margin-top: 2px; }
+      #instalar-app .si { background: #d4af37; color: #111; border: 0; border-radius: 999px; padding: 9px 16px; font-weight: 700; font-size: 14px; }
+      #instalar-app .no { background: none; border: 0; color: #8d8471; font-size: 24px; line-height: 1; padding: 2px 4px; }
+    </style>
+    <div id="instalar-app" role="dialog" aria-label="Instalar la app de Berakhah">
+      <img src="/static/iconos/icon-192.png" alt="" />
+      <div class="textos">
+        <div class="titulo">Instala la app de Berakhah</div>
+        <div class="sub" id="instalar-texto">Abre la tienda desde tu pantalla de inicio, en un toque.</div>
+      </div>
+      <button type="button" class="si" id="instalar-si">Instalar</button>
+      <button type="button" class="no" id="instalar-no" aria-label="Ahora no">&times;</button>
+    </div>
+    <script>
+      (function () {
+        if ('serviceWorker' in navigator) navigator.serviceWorker.register('/app-sw.js').catch(function () {});
+        var caja = document.getElementById('instalar-app');
+        var ua = navigator.userAgent || '';
+        var instalada = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+        var CLAVE = 'berakhah_instalar_cerrado';
+        var cerrado = 0;
+        try { cerrado = Number(localStorage.getItem(CLAVE) || 0); } catch (e) {}
+        // Solo en celulares, si no está instalada y si no la cerró en las últimas 2 semanas
+        if (!caja || instalada || !/Android|iPhone|iPad|iPod/i.test(ua) || Date.now() - cerrado < 14 * 864e5) return;
+        var aviso = null;
+        var programado = false;
+        function guardar(ms) { try { localStorage.setItem(CLAVE, String(ms)); } catch (e) {} }
+        function ocultar() { caja.classList.remove('entra'); setTimeout(function () { caja.classList.remove('visible'); }, 350); }
+        function mostrar() {
+          if (programado) return;
+          programado = true;
+          setTimeout(function () { caja.classList.add('visible'); requestAnimationFrame(function () { caja.classList.add('entra'); }); }, 7000);
+        }
+        document.getElementById('instalar-no').onclick = function () { ocultar(); guardar(Date.now()); };
+        document.getElementById('instalar-si').onclick = function () {
+          if (aviso) {
+            aviso.prompt();
+            aviso.userChoice.then(function (r) { if (r && r.outcome === 'dismissed') guardar(Date.now()); }).catch(function () {});
+            aviso = null;
+            ocultar();
+          } else {
+            // iPhone: Safari no tiene botón de instalar; se explica cómo
+            document.getElementById('instalar-texto').innerHTML = 'Toca <b>Compartir</b> (el cuadrito con la flecha \u2191) y luego <b>Agregar a inicio</b>.';
+            this.style.display = 'none';
+          }
+        };
+        window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); aviso = e; mostrar(); });
+        window.addEventListener('appinstalled', function () { ocultar(); guardar(Date.now() + 3650 * 864e5); });
+        // iPhone/iPad en Safari (dentro de Instagram, Facebook o Chrome de iPhone no se puede agregar a inicio)
+        if (/iPhone|iPad|iPod/i.test(ua) && /Safari/i.test(ua) && !/CriOS|FxiOS|EdgiOS|Instagram|FBAN|FBAV|Line\//i.test(ua)) mostrar();
+      })();
     </script>
   </body>
 </html>
