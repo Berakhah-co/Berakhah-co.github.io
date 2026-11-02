@@ -97,6 +97,8 @@
     <meta name="apple-mobile-web-app-title" content="Berakhah" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
+    <link rel="preload" as="image" href="/static/iconos/logo-oro.webp" fetchpriority="high" />
+
     <!-- Google Fonts for Premium Branding -->
     <!-- Sin bloquear la primera pintura: la fuente llega después y la pantalla de carga se ve al instante -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -115,129 +117,107 @@
         background-color: #080808;
       }
 
-      /* Loader Estilo Premium Berakhah con Joya/Diamante */
+      /* Pantalla de carga: negro con resplandor dorado, ondas en las esquinas, partículas, el logo con un anillo
+         de luz que lo orbita, puntos de carga y «Cargando…» */
       .loader-wrapper {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #0c0b0a;
-        background-image: radial-gradient(circle at center, #1c1a17 0%, #0c0b0a 100%);
+        inset: 0;
+        background: #040302;
+        background-image:
+          radial-gradient(ellipse 60% 45% at 50% 42%, rgba(212, 175, 55, 0.13) 0%, rgba(212, 175, 55, 0.04) 45%, transparent 70%),
+          radial-gradient(circle at 50% 50%, #0d0a06 0%, #040302 75%);
         display: flex;
         justify-content: center;
         align-items: center;
+        overflow: hidden;
         z-index: 9999;
-        transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.5s;
+        transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.6s;
+      }
+      /* Ondas doradas en dos esquinas: tamaño fijo según la pantalla, se ven igual en celular y computador */
+      .loader-onda { position: absolute; width: max(46vw, 300px); height: auto; pointer-events: none; }
+      .loader-onda.arriba { top: 0; left: 0; }
+      .loader-onda.abajo { right: 0; bottom: 0; transform: rotate(180deg); }
+      .loader-onda path { stroke-linecap: round; }
+      .loader-onda path[stroke] { fill: none; }
+      .loader-onda .brillo { animation: ondaBrillo 4s ease-in-out infinite; }
+      .loader-onda .brillo.b2 { animation-delay: 2s; }
+      .loader-bokeh, .loader-particula { position: absolute; border-radius: 50%; pointer-events: none; }
+      .loader-bokeh {
+        background: radial-gradient(circle, rgba(232, 190, 90, 0.35) 0%, rgba(232, 190, 90, 0) 70%);
+        animation: bokeh 6s ease-in-out infinite;
+      }
+      .loader-particula {
+        width: 4px; height: 4px;
+        background: #ffe4a0;
+        box-shadow: 0 0 6px 1px rgba(255, 210, 110, 0.9);
+        opacity: 0;
+        animation: particula 7s linear infinite;
       }
       .loader-content {
+        position: relative;
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 1.8rem;
       }
-
-      /* Icono de Diamante Premium Animado */
-      .elegant-diamond-container {
+      .loader-logo {
         position: relative;
-        width: 70px;
-        height: 70px;
-        margin-bottom: 5px;
+        width: min(62vw, 46vh, 360px);
+        aspect-ratio: 1;
       }
-      .elegant-diamond {
-        width: 44px;
-        height: 44px;
-        background: transparent;
-        border: 2px solid #d4af37;
-        position: absolute;
-        top: 13px;
-        left: 13px;
-        transform: rotate(45deg);
-        box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-        animation: diamondPulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      .loader-logo img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        animation: logoBrillo 3.2s ease-in-out infinite;
       }
-      .elegant-diamond::after {
-        content: '';
-        position: absolute;
-        top: 4px;
-        left: 4px;
-        right: 4px;
-        bottom: 4px;
-        border: 1px solid rgba(212, 175, 55, 0.5);
+      .loader-orbita { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+      .loader-puntos {
+        position: relative;
+        width: 46px;
+        height: 46px;
+        margin-top: min(1.5vh, 14px);
       }
-      /* Destellos de luz sobre el diamante */
-      .sparkle {
+      .loader-puntos span {
         position: absolute;
-        background: #fff;
+        top: 50%; left: 50%;
+        width: 7px; height: 7px;
+        margin: -3.5px 0 0 -3.5px;
         border-radius: 50%;
-        box-shadow: 0 0 10px #fff, 0 0 20px #d4af37;
-        opacity: 0;
-        animation: sparkleAnim 3s ease-in-out infinite;
+        background: #e3bd5d;
+        box-shadow: 0 0 6px rgba(227, 189, 93, 0.6);
+        opacity: 0.2;
+        transform: rotate(calc(var(--i) * 36deg)) translateY(-19px);
+        animation: punto 1.2s linear infinite;
+        animation-delay: calc(var(--i) * 0.12s - 1.2s);
       }
-      .sparkle-1 {
-        width: 4px;
-        height: 4px;
-        top: 10px;
-        left: 35px;
-        animation-delay: 0.2s;
-      }
-      .sparkle-2 {
-        width: 6px;
-        height: 6px;
-        top: 35px;
-        right: 10px;
-        animation-delay: 0.8s;
-      }
-      .sparkle-3 {
-        width: 3px;
-        height: 3px;
-        bottom: 12px;
-        left: 20px;
-        animation-delay: 1.4s;
-      }
-
-      .loader-text {
+      .loader-texto {
         font-family: 'Playfair Display', 'Didot', 'Georgia', serif;
-        color: #d4af37;
-        font-size: 2rem;
-        font-weight: 300;
-        letter-spacing: 10px;
-        text-transform: uppercase;
-        text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-        animation: textPulse 2s ease-in-out infinite;
-        margin-right: -10px;
+        font-style: italic;
+        color: #e6c56f;
+        font-size: 1.15rem;
+        letter-spacing: 1px;
+        margin-top: 18px;
+        animation: textoCarga 2.4s ease-in-out infinite;
       }
-      .loader-subtext {
-        font-family: 'Outfit', sans-serif;
-        color: #a89f8d;
-        font-size: 0.8rem;
-        font-weight: 300;
-        letter-spacing: 6px;
-        text-transform: uppercase;
-        margin-top: -0.8rem;
-        margin-right: -6px;
-      }
+      .loader-adorno { width: min(70vw, 340px); height: 22px; margin-top: 10px; }
 
-      @keyframes diamondPulse {
-        0%, 100% {
-          transform: rotate(45deg) scale(0.9);
-          box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
-          border-color: #b39b6d;
-        }
-        50% {
-          transform: rotate(225deg) scale(1.05);
-          box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
-          border-color: #f1d37a;
-        }
+      @keyframes ondaBrillo { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+      @keyframes bokeh { 0%, 100% { opacity: 0.35; transform: scale(0.9); } 50% { opacity: 0.8; transform: scale(1.08); } }
+      @keyframes particula {
+        0% { opacity: 0; transform: translateY(0) scale(0.6); }
+        15% { opacity: 1; }
+        85% { opacity: 0.8; }
+        100% { opacity: 0; transform: translateY(-120px) scale(1); }
       }
-      @keyframes sparkleAnim {
-        0%, 100% { opacity: 0; transform: scale(0.5); }
-        50% { opacity: 1; transform: scale(1.2); }
+      @keyframes logoBrillo {
+        0%, 100% { filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.35)) brightness(1); }
+        50% { filter: drop-shadow(0 0 18px rgba(245, 205, 110, 0.7)) brightness(1.15); }
       }
-      @keyframes textPulse {
-        0%, 100% { opacity: 0.7; }
-        50% { opacity: 1; }
+      @keyframes punto { 0% { opacity: 1; } 100% { opacity: 0.15; } }
+      @keyframes textoCarga { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) {
+        .loader-wrapper *, .loader-wrapper *::before { animation: none !important; }
       }
 
       .loader-wrapper.fade-out {
@@ -278,18 +258,106 @@
     </style>
   </head>
   <body>
-    <!-- Loader Premium Berakhah con Diamante -->
-    <div id="loader" class="loader-wrapper">
+    <!-- Pantalla de carga Berakhah -->
+    <div id="loader" class="loader-wrapper" role="status" aria-label="Cargando la tienda Berakhah">
+      <svg class="loader-onda arriba" viewBox="-40 -40 740 520" aria-hidden="true">
+        <defs>
+          <linearGradient id="oro" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#7a5418" stop-opacity="0" />
+            <stop offset="0.45" stop-color="#f6d27a" />
+            <stop offset="1" stop-color="#8a6420" stop-opacity="0" />
+          </linearGradient>
+          <linearGradient id="cinta" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0" stop-color="#3a2508" stop-opacity="0" />
+            <stop offset="0.5" stop-color="#b8862c" stop-opacity="0.55" />
+            <stop offset="1" stop-color="#3a2508" stop-opacity="0" />
+          </linearGradient>
+          <filter id="resplandor" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="10" /></filter>
+        </defs>
+          <path d="M-60 360 C 150 250, 280 100, 560 -60 L 700 -60 C 400 120, 240 290, -60 470 Z" fill="url(#cinta)" opacity="0.5" />
+          <path d="M-40 330 C 140 230, 260 90, 520 -40" stroke="url(#oro)" stroke-width="34" filter="url(#resplandor)" opacity="0.4" />
+          <path class="brillo" d="M-40 330 C 140 230, 260 90, 520 -40" stroke="url(#oro)" stroke-width="5" />
+          <path class="brillo b2" d="M-40 450 C 190 320, 330 160, 690 -40" stroke="url(#oro)" stroke-width="3" />
+          <path d="M-40 390 C 160 280, 300 130, 610 -40" stroke="url(#oro)" stroke-width="1.5" opacity="0.8" />
+          <path d="M-40 250 C 90 180, 190 70, 380 -40" stroke="url(#oro)" stroke-width="1.2" opacity="0.6" />
+      </svg>
+      <svg class="loader-onda abajo" viewBox="-40 -40 740 520" aria-hidden="true">
+          <path d="M-60 360 C 150 250, 280 100, 560 -60 L 700 -60 C 400 120, 240 290, -60 470 Z" fill="url(#cinta)" opacity="0.5" />
+          <path d="M-40 330 C 140 230, 260 90, 520 -40" stroke="url(#oro)" stroke-width="34" filter="url(#resplandor)" opacity="0.4" />
+          <path class="brillo" d="M-40 330 C 140 230, 260 90, 520 -40" stroke="url(#oro)" stroke-width="5" />
+          <path class="brillo b2" d="M-40 450 C 190 320, 330 160, 690 -40" stroke="url(#oro)" stroke-width="3" />
+          <path d="M-40 390 C 160 280, 300 130, 610 -40" stroke="url(#oro)" stroke-width="1.5" opacity="0.8" />
+          <path d="M-40 250 C 90 180, 190 70, 380 -40" stroke="url(#oro)" stroke-width="1.2" opacity="0.6" />
+      </svg>
+      <span class="loader-bokeh" style="width:140px;height:140px;left:6%;top:28%"></span>
+      <span class="loader-bokeh" style="width:90px;height:90px;right:9%;top:16%;animation-delay:1.5s"></span>
+      <span class="loader-bokeh" style="width:110px;height:110px;right:14%;bottom:12%;animation-delay:3s"></span>
+      <span class="loader-bokeh" style="width:70px;height:70px;left:18%;bottom:18%;animation-delay:4.2s"></span>
+      <span class="loader-particula" style="left:12%;top:70%;animation-delay:0s"></span>
+      <span class="loader-particula" style="left:22%;top:55%;animation-delay:1.1s"></span>
+      <span class="loader-particula" style="left:35%;top:80%;animation-delay:2.3s"></span>
+      <span class="loader-particula" style="left:48%;top:66%;animation-delay:3.6s"></span>
+      <span class="loader-particula" style="left:61%;top:78%;animation-delay:0.6s"></span>
+      <span class="loader-particula" style="left:72%;top:58%;animation-delay:1.9s"></span>
+      <span class="loader-particula" style="left:84%;top:74%;animation-delay:3.1s"></span>
+      <span class="loader-particula" style="left:91%;top:48%;animation-delay:4.4s"></span>
+      <span class="loader-particula" style="left:8%;top:40%;animation-delay:5.2s"></span>
+      <span class="loader-particula" style="left:55%;top:30%;animation-delay:2.8s"></span>
+      <span class="loader-particula" style="left:5%;top:85%;animation-delay:0.4s"></span>
+      <span class="loader-particula" style="left:15%;top:30%;animation-delay:2.0s"></span>
+      <span class="loader-particula" style="left:28%;top:88%;animation-delay:3.3s"></span>
+      <span class="loader-particula" style="left:40%;top:45%;animation-delay:1.4s"></span>
+      <span class="loader-particula" style="left:66%;top:40%;animation-delay:4.8s"></span>
+      <span class="loader-particula" style="left:78%;top:88%;animation-delay:0.9s"></span>
+      <span class="loader-particula" style="left:88%;top:30%;animation-delay:2.6s"></span>
+      <span class="loader-particula" style="left:95%;top:66%;animation-delay:5.6s"></span>
+      <span class="loader-particula" style="left:3%;top:58%;animation-delay:3.9s"></span>
+      <span class="loader-particula" style="left:70%;top:22%;animation-delay:1.7s"></span>
       <div class="loader-content">
-        <div class="elegant-diamond-container">
-          <div class="elegant-diamond"></div>
-          <div class="sparkle sparkle-1"></div>
-          <div class="sparkle sparkle-2"></div>
-          <div class="sparkle sparkle-3"></div>
+        <div class="loader-logo">
+          <img src="/static/iconos/logo-oro.webp" alt="Berakhah · Valley of Blessing" width="640" height="640" fetchpriority="high" />
+          <!-- Anillo de luz alrededor del medallón (en el logo, centrado en 50 % · 41 %) -->
+          <svg class="loader-orbita" viewBox="0 0 100 100" aria-hidden="true">
+            <defs>
+              <linearGradient id="anillo" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#f6d27a" stop-opacity="0" />
+                <stop offset="0.5" stop-color="#ffe6a3" stop-opacity="0.95" />
+                <stop offset="1" stop-color="#f6d27a" stop-opacity="0" />
+              </linearGradient>
+              <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="0.9" /></filter>
+            </defs>
+            <g transform="rotate(-9 50 41)">
+              <ellipse cx="50" cy="41" rx="47" ry="12.5" fill="none" stroke="url(#anillo)" stroke-width="1.6" filter="url(#halo)" opacity="0.7" />
+              <ellipse cx="50" cy="41" rx="47" ry="12.5" fill="none" stroke="url(#anillo)" stroke-width="0.45" />
+              <circle r="1.4" fill="#fff6d6" filter="url(#halo)">
+                <animateMotion dur="3.2s" repeatCount="indefinite" path="M3 41 A47 12.5 0 1 1 97 41 A47 12.5 0 1 1 3 41" />
+              </circle>
+              <circle r="0.7" fill="#ffffff">
+                <animateMotion dur="3.2s" repeatCount="indefinite" path="M3 41 A47 12.5 0 1 1 97 41 A47 12.5 0 1 1 3 41" />
+              </circle>
+            </g>
+          </svg>
         </div>
-        <div class="loader-text">Berakhah</div>
-        <div class="loader-subtext">Valley of Blessing</div>
+        <div class="loader-puntos" aria-hidden="true">
+          <span style="--i:0"></span><span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span><span style="--i:4"></span>
+          <span style="--i:5"></span><span style="--i:6"></span><span style="--i:7"></span><span style="--i:8"></span><span style="--i:9"></span>
+        </div>
+        <div class="loader-texto">Cargando…</div>
+        <svg class="loader-adorno" viewBox="0 0 340 22" aria-hidden="true">
+          <defs>
+            <linearGradient id="linea" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="340" y2="0">
+              <stop offset="0" stop-color="#c9a24a" stop-opacity="0" />
+              <stop offset="0.5" stop-color="#e6c56f" />
+              <stop offset="1" stop-color="#c9a24a" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <line x1="10" y1="11" x2="150" y2="11" stroke="url(#linea)" stroke-width="1.2" />
+          <line x1="190" y1="11" x2="330" y2="11" stroke="url(#linea)" stroke-width="1.2" />
+          <path d="M170 3 L177 11 L170 19 L163 11 Z" fill="#e6c56f" />
+          <path d="M156 11 Q160 6 164 11 Q160 16 156 11 Z M184 11 Q180 6 176 11 Q180 16 184 11 Z" fill="#c9a24a" />
+        </svg>
       </div>
+    </div>
     </div>
 
     <noscript>
