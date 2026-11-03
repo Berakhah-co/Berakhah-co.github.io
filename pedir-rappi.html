@@ -14,14 +14,48 @@
     <meta property="og:url" content="https://berakhahmedellin.shop/pedir-rappi">
     <meta property="og:image" content="https://berakhahmedellin.shop/static/Logo.jpg">
     <link rel="icon" href="/favicon.ico" sizes="any">
-    <!-- Enlace de anuncios e Instagram: se publica con el dominio de la tienda. Esta página pasa al servidor, que
-         cuenta el clic y abre la app de Rappi directo en la tienda (dentro del marco del sitio no se puede). -->
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px 16px;
+               background: radial-gradient(ellipse at 50% 35%, #1c160b 0%, #060504 70%); color: #f3ead7; text-align: center;
+               font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+        .caja { max-width: 360px; width: 100%; display: none; }
+        .caja.listo { display: block; }
+        .logo { width: 150px; height: 150px; margin: 0 auto 8px; display: block; filter: drop-shadow(0 0 14px rgba(212, 175, 55, .35)); }
+        h1 { font: 600 1.3rem Georgia, serif; letter-spacing: 1px; color: #e6c56f; margin: 0 0 8px; }
+        p { margin: 0 0 22px; color: #bfb399; font-size: .96rem; line-height: 1.45; }
+        .boton { display: block; padding: 16px 20px; border-radius: 999px; background: #ff441f; color: #fff; text-decoration: none;
+                 font-weight: 700; font-size: 1.08rem; box-shadow: 0 10px 26px rgba(255, 68, 31, .3); }
+        .boton:active { transform: scale(.98); }
+        .web { display: inline-block; margin-top: 18px; color: #9a9080; font-size: .88rem; }
+    </style>
+    <!-- Enlace de anuncios, Instagram y estados de WhatsApp (berakhahmedellin.shop/pedir-rappi). Pasa al servidor, que cuenta el
+         clic y abre la app de Rappi directo en la tienda. En Android con Chrome el paso al servidor tiene que ser un
+         TOQUE de la persona (si no, Chrome bloquea abrir la app y cae en la web de Rappi): por eso ahí se muestra el
+         botón. En iPhone, en los navegadores de Instagram/Facebook/TikTok y en el computador, la página del servidor
+         se encarga y se pasa directo. -->
     <script>
-        location.replace('https://berakhahmedellin.pythonanywhere.com/pedir-rappi' + location.search);
+        (function () {
+            var destino = 'https://berakhahmedellin.pythonanywhere.com/pedir-rappi' + (location.search || '');
+            var ua = navigator.userAgent || '';
+            var android = /Android/i.test(ua);
+            var navegadorDeApp = /; wv\)|Instagram|FBAN|FBAV|FB_IAB|musical_ly|TikTok|BytedanceWebview/i.test(ua);
+            if (!(android && !navegadorDeApp)) { location.replace(destino); return; }
+            document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById('abrir').href = destino;
+                document.getElementById('caja').className = 'caja listo';
+            });
+        })();
     </script>
 </head>
-<body style="margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0c0b0a;color:#d4af37;font-family:Georgia,serif;letter-spacing:2px">
+<body>
+    <div class="caja" id="caja">
+        <img class="logo" src="/static/iconos/logo-oro.webp" alt="Berakhah" width="150" height="150">
+        <h1>Berakhah en Rappi</h1>
+        <p>Joyas con propósito. Pídelas en la app de Rappi y recíbelas hoy en Medellín y el Valle de Aburrá.</p>
+        <a class="boton" id="abrir" href="https://berakhahmedellin.pythonanywhere.com/pedir-rappi">Abrir en la app de Rappi</a>
+        <a class="web" href="https://www.rappi.com.co/tiendas/900419085-berakhah-mt-enc/s?term=berakhah">¿No tienes la app? Pide desde la web</a>
+    </div>
     <noscript><a href="https://berakhahmedellin.pythonanywhere.com/pedir-rappi" style="color:#d4af37">Abrir Berakhah en Rappi</a></noscript>
-    BERAKHAH · abriendo Rappi…
 </body>
 </html>
